@@ -3,9 +3,11 @@ import dotenv from "dotenv";
 dotenv.config({ path: './.env' });
 import express from "express";
 import cors from "cors";
+import cookiParser from "cookie-parser";
 import path from "path";
-import { checkError } from "./src/middlewares/errors.middleware.js";
-import { userSignupRouter } from "./src/routes/userSignup.route.js";
+import { checkError } from './src/middlewares/errors.middleware.js';
+import { userSignupRouter } from './src/routes/userSignup.route.js';
+import { userprofileRouter } from './src/routes/userProfile.route.js';
 import { conn } from './src/config/conncectdb.js';
 conn(process.env.MONGODB_URI);
 
@@ -18,6 +20,7 @@ app.use(cors({ origin: "*" }));
 app.use(express.static(path.join('./src/public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookiParser());
 
 
 // check the rest api 
@@ -26,7 +29,8 @@ app.get('/', (req, res) => {
 });
 
 // there are use all endpoints of middleware
-app.use('/usersignup/api', userSignupRouter);
+app.use('/user/signup/api', userSignupRouter);
+app.use('/user/profile/api', userprofileRouter);
 
 // there are use error middlewares 
 app.use(checkError);

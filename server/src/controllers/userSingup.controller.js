@@ -2,7 +2,8 @@
 import bcyptjs from "bcryptjs";
 import { userSignupModel } from '../models/userSignup.model.js';
 import { TryCatch } from '../helpers/try-catch.helper.js';
-import { errorHandler } from "../utils/utility.js";
+import { errorHandler } from '../utils/utility.js';
+import { sendToken, cookieOptions } from '../utils/features.js';
 
 // there are define user signup controllers
 
@@ -29,7 +30,7 @@ const userRegister = TryCatch(async (req, res, next) => {
 
         // check the condition user can be found or not
         if (existUser) {
-            return res.status(200).json({msg: "This Account has been already exist"});
+            return res.status(200).json({ msg: "This Account has been already exist" });
         }
         else {
 
@@ -42,7 +43,7 @@ const userRegister = TryCatch(async (req, res, next) => {
 
             let signupInfo = await userList.save();
 
-            return res.status(201).send({  msg:"Account has been create successfully" , data:signupInfo });
+            return res.status(201).send({ msg: "Account has been create successfully", data: signupInfo });
 
         }
 
@@ -52,6 +53,58 @@ const userRegister = TryCatch(async (req, res, next) => {
 });
 
 
+
+// user login controller
+const userLogin = TryCatch(async (req, res, next) => {
+
+    // there are declare payload
+    let { phone, password } = req.body;
+
+    // there was declare phone are valid for exist user
+    let existUser = await userSignupModel.findOne({
+        phone: phone
+    }).exec();
+
+    // condition are check user are valid or not
+    if (!existUser) {
+        return next(errorHandler("This is are not valid phone number", 400));
+    }
+    else {
+
+        // passwor synchronise compare
+        let userPassword = existUser.password;
+        let isMatchPassword = bcyptjs.compareSync(password, userPassword);
+
+        // check password with condition
+        if (!isMatchPassword) {
+            return next(errorHandler("Invalid password", 404));
+        }
+        else {
+            sendToken(res, existUser, 201, "Logged in Successfully")
+        }
+
+    }
+
+});
+
+
+
+// user logout controller
+const userLogout = TryCatch(async (req, res, next) => {
+
+    // declare the user
+    let userInfo = await userSignupModel.findById(req.user).exec();
+
+    if(!userInfo){
+        return next();
+    }
+    else{
+        return res.status(200).cookie('token','',{...cookieOptions, maxAge:0}).json({msg:'Logged out successfully'});
+    }
+
+});
+
+
 //  there export user signup controlle
-export { userRegister };
+export { userRegister, userLogin, userLogout };
 console.log('User signup controller is worked successfully');
