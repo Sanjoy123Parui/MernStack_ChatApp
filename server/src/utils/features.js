@@ -10,17 +10,29 @@ const cookieOptions = {
     secure: true
 };
 
-// define there sendToken features function
-const sendToken = (res, user, statusCode, message) => {
+// define there sendUserToken features function
+const sendUserToken = (res, user, statusCode, message) => {
 
     // there was verify token
     let verifiedToken = jwt.sign({ _id: user._id }, process.env.JWT_SCKEY);
 
-    return res.status(statusCode).cookie('token', verifiedToken, cookieOptions).json({message, data:user._id});
+    return res.status(statusCode).cookie('token', verifiedToken, cookieOptions).json({message});
+
+}
+
+
+
+// define there sendAdminToken features function
+const sendAdminToken = (res, admin, statusCode, message)=>{
+
+    // there was verified token
+    let verifiedToken = jwt.sign({_id:admin._id}, process.env.JWT_SCKEY);
+
+    return res.status(statusCode).cookie('token', verifiedToken, cookieOptions).json({message});
 
 }
 
 // export features
-export { sendToken, cookieOptions };
+export { sendUserToken, sendAdminToken, cookieOptions };
 
 console.log('Auth features is worked successfully');

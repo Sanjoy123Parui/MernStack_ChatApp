@@ -8,7 +8,10 @@ import path from "path";
 import { checkError } from './src/middlewares/errors.middleware.js';
 import { userSignupRouter } from './src/routes/userSignup.route.js';
 import { userprofileRouter } from './src/routes/userProfile.route.js';
+import { adminSignupRouter } from './src/routes/adiminSignup.route.js';
 import { conn } from './src/config/conncectdb.js';
+
+// there are connect database
 conn(process.env.MONGODB_URI);
 
 // there are declare port and middleware object
@@ -31,6 +34,7 @@ app.get('/', (req, res) => {
 // there are use all endpoints of middleware
 app.use('/user/signup/api', userSignupRouter);
 app.use('/user/profile/api', userprofileRouter);
+app.use('/admin/signup/api', adminSignupRouter);
 
 // there are use error middlewares 
 app.use(checkError);

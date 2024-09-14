@@ -3,7 +3,7 @@ import bcyptjs from "bcryptjs";
 import { userSignupModel } from '../models/userSignup.model.js';
 import { TryCatch } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
-import { sendToken, cookieOptions } from '../utils/features.js';
+import { sendUserToken, cookieOptions } from '../utils/features.js';
 
 // there are define user signup controllers
 
@@ -80,7 +80,7 @@ const userLogin = TryCatch(async (req, res, next) => {
             return next(errorHandler("Invalid password", 404));
         }
         else {
-            sendToken(res, existUser, 201, "Logged in Successfully")
+           return sendUserToken(res, existUser, 201, "Logged in Successfully");
         }
 
     }

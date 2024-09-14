@@ -36,7 +36,7 @@ const userNewprofile = TryCatch(async (req, res, next) => {
 
 
 
-// view profile data
+// view profile data controller
 const userProfileview = TryCatch(async (req, res, next) => {
 
     // declare payload of params
@@ -65,6 +65,37 @@ const userProfileview = TryCatch(async (req, res, next) => {
 });
 
 
+
+// update profile data controller
+const userProfileupdate = TryCatch(async (req, res, next) => {
+
+    // declare payload data of params and body
+    let { userprofile_id } = req.params;
+    let { user_name, dob, abouts } = req.body;
+
+    // there can be updated data of profile
+    let userProfiledata = await userProfileModel.updateOne({
+        _id:userprofile_id
+    },{
+        $set:{
+            user_name,
+            dob,
+            abouts
+        }
+    });
+
+    // check the condition for update data
+    if(!userProfiledata.matchedCount && userProfiledata.modifiedCount){
+        return next(errorHandler("Data can not be changed",404));
+    }
+    else{
+        return res.status(200).json({msg:"Profile was updated successfully"});
+    }
+});
+
+
+
+
 // export user profile all controllers
-export { userNewprofile, userProfileview };
+export { userNewprofile, userProfileview, userProfileupdate };
 console.log('User profile controller is worked successfully');

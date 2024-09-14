@@ -22,6 +22,25 @@ const userCheckAuth = TryCatch(async (req, res, next) => {
     }
 });
 
+
+// there are define admin authentication
+const adminCheckAuth = TryCatch(async (req, res, next) => {
+
+    // declare token into the cookie
+    let token = req.cookies['token'];
+
+    // check the ondition token can be expired or not
+    if(!token){
+        return next(errorHandler("Unauthorized token please login to access",401));
+    }
+    else{
+        // there are decoded data
+        let decodeData = jwt.verify(token, process.env.JWT_SCKEY);
+        req.admin = await decodeData._id;
+        next();
+    }
+});
+
 // export auth middleware
-export { userCheckAuth };
+export { userCheckAuth, adminCheckAuth };
 console.log('Auth middleware is worked successfully');
