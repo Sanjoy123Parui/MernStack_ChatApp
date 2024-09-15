@@ -9,6 +9,7 @@ import { checkError } from './src/middlewares/errors.middleware.js';
 import { userSignupRouter } from './src/routes/userSignup.route.js';
 import { userprofileRouter } from './src/routes/userProfile.route.js';
 import { adminSignupRouter } from './src/routes/adiminSignup.route.js';
+import { adminProfileRouter } from './src/routes/adminProfile.route.js';
 import { conn } from './src/config/conncectdb.js';
 
 // there are connect database
@@ -35,6 +36,7 @@ app.get('/', (req, res) => {
 app.use('/user/signup/api', userSignupRouter);
 app.use('/user/profile/api', userprofileRouter);
 app.use('/admin/signup/api', adminSignupRouter);
+app.use('/admin/profile/api', adminProfileRouter);
 
 // there are use error middlewares 
 app.use(checkError);

@@ -12,7 +12,7 @@ const userprofileRouter = express.Router();
 userprofileRouter.post('/creates', userCheckAuth, userNewprofile);
 
 // view user profile router with get
-userprofileRouter.get('/view/:userprofile_id', userCheckAuth, userProfileview);
+userprofileRouter.get('/read/:userprofile_id', userCheckAuth, userProfileview);
 
 // updated profile router with put
 userprofileRouter.put('/update/:userprofile_id', userCheckAuth, userProfileupdate);

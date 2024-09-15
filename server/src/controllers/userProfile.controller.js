@@ -29,7 +29,7 @@ const userNewprofile = TryCatch(async (req, res, next) => {
         return next(errorHandler("Wrong cridential", 400));
     }
     else {
-        return res.status(200).json({ msg: "Profile was created successfully" });
+        return res.status(201).send({ msg: "Profile was created successfully" });
     }
 
 });
@@ -44,7 +44,9 @@ const userProfileview = TryCatch(async (req, res, next) => {
 
     // there are user profile fetch
     let userProfiledata = await userProfileModel.findById(userprofile_id)
-        .populate({ 'path': 'usersignup_id' }).exec();
+        .populate({
+            'path': 'usersignup_id'
+        }).exec();
 
 
     // check the condition user data
@@ -75,9 +77,9 @@ const userProfileupdate = TryCatch(async (req, res, next) => {
 
     // there can be updated data of profile
     let userProfiledata = await userProfileModel.updateOne({
-        _id:userprofile_id
-    },{
-        $set:{
+        _id: userprofile_id
+    }, {
+        $set: {
             user_name,
             dob,
             abouts
@@ -85,11 +87,11 @@ const userProfileupdate = TryCatch(async (req, res, next) => {
     });
 
     // check the condition for update data
-    if(!userProfiledata.matchedCount && userProfiledata.modifiedCount){
-        return next(errorHandler("Data can not be changed",404));
+    if (!userProfiledata.matchedCount && userProfiledata.modifiedCount) {
+        return next(errorHandler("Data can not be changed", 404));
     }
-    else{
-        return res.status(200).json({msg:"Profile was updated successfully"});
+    else {
+        return res.status(200).json({ msg: "Profile was updated successfully" });
     }
 });
 

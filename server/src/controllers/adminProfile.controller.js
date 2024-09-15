@@ -1,0 +1,71 @@
+import { adminProfileModel } from '../models/adminProfile.model.js';
+import { TryCatch } from '../helpers/try-catch.helper.js';
+import { errorHandler } from '../utils/utility.js';
+
+
+// there are define all admin profile controllers here
+
+// admin profile create controller
+const adminNewprofile = TryCatch(async (req, res, next) => {
+
+    // there are declare payload of body
+    let adminsignup_id = req.admin;
+    let { admin_name, dob, abouts } = req.body;
+
+    // there are create profile and data can save into the database
+    let adminProfiledata = await adminProfileModel.findOneAndUpdate({
+        adminsignup_id
+    },{
+        admin_name,
+        dob,
+        abouts
+    },{
+        upsert:true,
+        new:true,
+        setDefaultsOnInsert:true
+    });
+
+    // check condition to check admin profile data are insert or not
+    if(!adminProfiledata){
+        return next(errorHandler("Admin profile are not created", 404));
+    }
+    else{
+        return res.status(201).send({msg:"Profile are created successfully"});
+    }
+
+});
+
+
+
+// there admin own profile read
+const adminViewprofile = TryCatch(async(req, res, next)=>{
+
+    // there are declare payload of params
+    let adminprofile_id = req.params.adminprofile_id;
+
+    // there can check findn the data
+    let existAdmin = await adminProfileModel.findById(adminprofile_id).populate({
+        'path':'adminsignup_id'
+    }).exec();
+
+    // there was check existAdmin
+    if(!existAdmin){
+        return next(errorHandler("Admin data are not found"));
+    }
+    else{
+        return res.status(200).json({data:{
+            'admin_name':existAdmin.admin_name,
+            'dob':existAdmin.dob,
+            'abouts':existAdmin.abouts,
+            'phone':existAdmin.adminsignup_id.phone
+        }});
+    }
+    
+
+
+});
+
+
+// export there admin profile all controllers operation
+export { adminNewprofile, adminViewprofile };
+console.log('Admin profile controller is worked successfully');
