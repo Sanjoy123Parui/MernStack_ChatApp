@@ -7,13 +7,13 @@ const userSignupRouter = express.Router();
 // there are define all user signup router endpoint
 
 // userRegister router with post
-userSignupRouter.post('/register', userRegister);
+userSignupRouter.route('/register').post(userRegister);
 
 // userLogin router with post
-userSignupRouter.post('/login', userLogin);
+userSignupRouter.route('/login').post(userLogin);
 
 // userLogout router with post
-userSignupRouter.post('/logout', userCheckAuth, userLogout);
+userSignupRouter.route('/logout').post(userCheckAuth, userLogout);
 
 // export user signup router
 export { userSignupRouter };

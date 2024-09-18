@@ -60,12 +60,23 @@ const adminViewprofile = TryCatch(async(req, res, next)=>{
             'phone':existAdmin.adminsignup_id.phone
         }});
     }
-    
 
+});
+
+
+// there view all admin data
+const viewAlladmin = TryCatch(async(req, res, next)=>{
+
+    // there was find all data
+    let adminProfiledata = await adminProfileModel.find({}).populate({
+        'path':'adminsignup_id'
+    }).exec();
+
+    return res.status(200).json({data:adminProfiledata});
 
 });
 
 
 // export there admin profile all controllers operation
-export { adminNewprofile, adminViewprofile };
+export { adminNewprofile, adminViewprofile, viewAlladmin };
 console.log('Admin profile controller is worked successfully');

@@ -1,6 +1,7 @@
 import express from "express";
-import { userNewprofile, userProfileview, userProfileupdate } from '../controllers/userProfile.controller.js';
+import { userNewProfile, userProfileview, userProfileupdate } from '../controllers/userProfile.controller.js';
 import { userCheckAuth } from '../middlewares/auth.middleware.js';
+import { uploadObj } from '../middlewares/fileuploads.middleware.js';
 
 // there are define userProfile router
 const userprofileRouter = express.Router();
@@ -9,14 +10,14 @@ const userprofileRouter = express.Router();
 
 
 // create new user profile router with post
-userprofileRouter.post('/creates', userCheckAuth, userNewprofile);
+userprofileRouter.route('/creates').post(userCheckAuth, uploadObj.single('avatar'), userNewProfile);
 
 // view user profile router with get
-userprofileRouter.get('/read/:userprofile_id', userCheckAuth, userProfileview);
+userprofileRouter.route('/read/:userprofile_id').get(userCheckAuth, userProfileview);
 
 // updated profile router with put
-userprofileRouter.put('/update/:userprofile_id', userCheckAuth, userProfileupdate);
+userprofileRouter.route('/update/:userprofile_id').put(userCheckAuth, userProfileupdate);
 
 // export there user profile router
-export {userprofileRouter};
+export { userprofileRouter };
 console.log('User profile routes is worked successfully');

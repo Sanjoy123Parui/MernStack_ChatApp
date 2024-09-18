@@ -1,39 +1,72 @@
 import { userProfileModel } from '../models/userProfile.model.js';
 import { TryCatch } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
+import { uploadFiles } from '../helpers/fileuploads.helper.js';
 
 // create user Profile all controllers operation perform
 
 // create new user profile
-const userNewprofile = TryCatch(async (req, res, next) => {
+const userNewProfile = TryCatch(async (req, res, next) => {
 
-    //declare data of payload
+    //there are declare payloads
     let usersignup_id = req.user;
     let { user_name, dob, abouts } = req.body;
+    let filePath = req.file.path;
 
-    // create new User profile and save
-
-    let userProfiledata = await userProfileModel.findOneAndUpdate({
-        usersignup_id
-    }, {
-        user_name,
-        dob,
-        abouts
-    }, {
-        upsert: true,
-        new: true,
-        setDefaultsOnInsert: true
-    });
-
-    if (!userProfiledata) {
+    if (!usersignup_id) {
         return next(errorHandler("Wrong cridential", 400));
     }
     else {
-        return res.status(201).send({ msg: "Profile was created successfully" });
+
+        // this data are find or not is check
+        let userInfo = await userProfileModel.findOne({usersignup_id}).exec();
+
+        // condition to check find user
+        if(userInfo){
+            return next(errorHandler("This user are already exist", 400));
+        }
+        else{
+            
+            // check file path
+            if(!filePath){
+                return next(errorHandler("File is required", 404));
+            }
+            else{
+
+                // there will upload file using with multer and cloudinary for generate path
+                let uploads = await uploadFiles(filePath);
+
+                if(!uploads){
+                    return next(errorHandler("File are not uploaded", 400));
+                }
+                else{
+
+                    // there are data will be create and save into the database
+                    let userProfiledata = await userProfileModel.create({
+                        usersignup_id,
+                        user_name,
+                        avatar:uploads.secure_url,
+                        dob,
+                        abouts
+                    });
+
+                    if(!userProfiledata){
+                        return next(errorHandler("Profile are not created", 404));
+                    }
+                    else{
+                        return res.status(201).send({msg:"Your profile can be created successfully"});
+                    }
+
+                }
+
+            }
+
+        }
+
     }
 
-});
 
+});
 
 
 // view profile data controller
@@ -54,9 +87,11 @@ const userProfileview = TryCatch(async (req, res, next) => {
         return next(errorHandler("Profile data are not find here"));
     }
     else {
+
         return res.status(200).json({
             data: {
                 'user_name': userProfiledata.user_name,
+                'avatar':userProfiledata.avatar,
                 'dob': userProfiledata.dob,
                 'abouts': userProfiledata.abouts,
                 'phone': userProfiledata.usersignup_id.phone
@@ -99,5 +134,5 @@ const userProfileupdate = TryCatch(async (req, res, next) => {
 
 
 // export user profile all controllers
-export { userNewprofile, userProfileview, userProfileupdate };
+export { userNewProfile, userProfileview, userProfileupdate };
 console.log('User profile controller is worked successfully');

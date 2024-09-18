@@ -33,15 +33,21 @@ const adminRegister = TryCatch(async (req, res, next) => {
         else {
 
             // there are insert the data and save
-            let adminInfo = new adminSignupModel({
-                country: country,
-                phone: phone,
+
+            let adminInfo = await adminSignupModel.create({
+                country,
+                phone,
                 password: hashPassword
             });
 
-            let adminData = await adminInfo.save();
+            // check condition
+            if (!adminInfo) {
+                return next(errorHandler("Unoccured Registered"));
+            }
+            else {
+                return res.status(201).send({ msg: "Account was created successfully" });
+            }
 
-            return res.status(201).send({ msg: "Account was created successfully", data: adminData });
         }
 
     }
@@ -58,23 +64,23 @@ const adminLogin = TryCatch(async (req, res, next) => {
 
     // there was check exist phone of user in payload
     let existAdmin = await adminSignupModel.findOne({
-        phone:phone
+        phone: phone
     }).exec();
 
     // condition can be check there phone number is correct or not
-    if(!existAdmin){
-        return next(errorHandler("This phone number is not valid",404));
+    if (!existAdmin) {
+        return next(errorHandler("This phone number is not valid", 404));
     }
-    else{
+    else {
 
         let comparePassword = existAdmin.password;
         let isMatchPassword = bcryptjs.compareSync(password, comparePassword);
 
         // check the comparison password
-        if(!isMatchPassword){
+        if (!isMatchPassword) {
             return next(errorHandler("Wrong password", 404));
         }
-        else{
+        else {
             sendAdminToken(res, existAdmin, 201, "Logged in Successfully");
         }
 
@@ -86,18 +92,18 @@ const adminLogin = TryCatch(async (req, res, next) => {
 
 
 // admin logout controller
-const adminLogout = TryCatch(async(req,res,next)=>{
+const adminLogout = TryCatch(async (req, res, next) => {
 
 
     // declare exist Admin
     let adminInfo = await adminSignupModel.findById(req.admin).exec();
-    
+
     // check condition
-    if(!adminInfo){
+    if (!adminInfo) {
         return next();
     }
-    else{
-        return res.status(200).cookie('token','',{...cookieOptions, maxAge:0}).json({msg:"Logged out successfully"});
+    else {
+        return res.status(200).cookie('token', '', { ...cookieOptions, maxAge: 0 }).json({ msg: "Logged out successfully" });
     }
 
 });

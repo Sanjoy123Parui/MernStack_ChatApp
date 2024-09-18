@@ -4,7 +4,6 @@ dotenv.config({ path: './.env' });
 import express from "express";
 import cors from "cors";
 import cookiParser from "cookie-parser";
-import path from "path";
 import { checkError } from './src/middlewares/errors.middleware.js';
 import { userSignupRouter } from './src/routes/userSignup.route.js';
 import { userprofileRouter } from './src/routes/userProfile.route.js';
@@ -21,7 +20,7 @@ const app = express();
 
 // there are use middlewares
 app.use(cors({ origin: "*" }));
-app.use(express.static(path.join('./src/public')));
+app.use(express.static('./src/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookiParser());
@@ -29,14 +28,14 @@ app.use(cookiParser());
 
 // check the rest api 
 app.get('/', (req, res) => {
-    res.sendFile(path.join('./src/public/index.html'));
+    res.sendFile('./src/public/index.html');
 });
 
 // there are use all endpoints of middleware
-app.use('/user/signup/api', userSignupRouter);
-app.use('/user/profile/api', userprofileRouter);
-app.use('/admin/signup/api', adminSignupRouter);
-app.use('/admin/profile/api', adminProfileRouter);
+app.use('/user/api/signup', userSignupRouter);
+app.use('/user/api/profile', userprofileRouter);
+app.use('/admin/api/signup', adminSignupRouter);
+app.use('/admin/api/profile', adminProfileRouter);
 
 // there are use error middlewares 
 app.use(checkError);

@@ -35,15 +35,20 @@ const userRegister = TryCatch(async (req, res, next) => {
         else {
 
             // there are data save into the database
-            let userList = new userSignupModel({
-                country: country,
-                phone: phone,
+
+            let userInfo = await userSignupModel.create({
+                country,
+                phone,
                 password: hashPassword
             });
 
-            let signupInfo = await userList.save();
-
-            return res.status(201).send({ msg: "Account has been create successfully", data: signupInfo });
+            // check condition
+            if (!userInfo) {
+                return next(errorHandler("Occured user registered", 404));
+            }
+            else {
+                return res.status(201).send({ msg: "Account has been create successfully"});
+            }
 
         }
 
@@ -80,7 +85,7 @@ const userLogin = TryCatch(async (req, res, next) => {
             return next(errorHandler("Invalid password", 404));
         }
         else {
-           return sendUserToken(res, existUser, 201, "Logged in Successfully");
+            return sendUserToken(res, existUser, 201, "Logged in Successfully");
         }
 
     }
@@ -95,11 +100,11 @@ const userLogout = TryCatch(async (req, res, next) => {
     // declare the user
     let userInfo = await userSignupModel.findById(req.user).exec();
 
-    if(!userInfo){
+    if (!userInfo) {
         return next();
     }
-    else{
-        return res.status(200).cookie('token','',{...cookieOptions, maxAge:0}).json({msg:'Logged out successfully'});
+    else {
+        return res.status(200).cookie('token', '', { ...cookieOptions, maxAge: 0 }).json({ msg: 'Logged out successfully' });
     }
 
 });
