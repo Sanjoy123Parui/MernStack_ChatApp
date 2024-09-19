@@ -103,7 +103,7 @@ const adminLogout = TryCatch(async (req, res, next) => {
         return next();
     }
     else {
-        return res.status(200).cookie('token', '', { ...cookieOptions, maxAge: 0 }).json({ msg: "Logged out successfully" });
+        return res.status(200).cookie('adminToken', '', { ...cookieOptions, maxAge: 0 }).json({ msg: "Logged out successfully" });
     }
 
 });

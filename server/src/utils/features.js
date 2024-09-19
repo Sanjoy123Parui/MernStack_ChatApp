@@ -14,9 +14,9 @@ const cookieOptions = {
 const sendUserToken = (res, user, statusCode, message) => {
 
     // there was verify token
-    let verifiedToken = jwt.sign({ _id: user._id }, process.env.JWT_SCKEY);
+    let verifiedUserToken = jwt.sign({ _id: user._id }, process.env.JWT_SCKEY);
 
-    return res.status(statusCode).cookie('token', verifiedToken, cookieOptions).json({message});
+    return res.status(statusCode).cookie('userToken', verifiedUserToken, cookieOptions).json({message});
 
 }
 
@@ -26,9 +26,9 @@ const sendUserToken = (res, user, statusCode, message) => {
 const sendAdminToken = (res, admin, statusCode, message)=>{
 
     // there was verified token
-    let verifiedToken = jwt.sign({_id:admin._id}, process.env.JWT_SCKEY);
+    let verifiedAdminToken = jwt.sign({_id:admin._id}, process.env.JWT_SCKEY);
 
-    return res.status(statusCode).cookie('token', verifiedToken, cookieOptions).json({message});
+    return res.status(statusCode).cookie('adminToken', verifiedAdminToken, cookieOptions).json({message});
 
 }
 

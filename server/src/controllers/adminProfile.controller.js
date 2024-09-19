@@ -72,7 +72,7 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
 const adminViewprofile = TryCatch(async (req, res, next) => {
 
     // there are declare payload of params
-    let adminprofile_id = req.params.adminprofile_id;
+    let { adminprofile_id } = req.params;
 
     // there can check findn the data
     let existAdmin = await adminProfileModel.findById(adminprofile_id).populate({
@@ -111,6 +111,137 @@ const viewAlladmin = TryCatch(async (req, res, next) => {
 });
 
 
+
+// admin profile image data update controller
+const adminProfileImageupdate = TryCatch(async (req, res, next) => {
+
+    // there declare payload
+    let { adminprofile_id } = req.params;
+    let filePath = req.file.path;
+
+    // there are declare existadmin data
+    let existAdmin = await adminProfileModel.findById(adminprofile_id).exec();
+
+    if (!existAdmin) {
+        return next(errorHandler("Admin are not found", 404));
+    }
+    else {
+
+        // check filepath
+        if (!filePath) {
+            return next(errorHandler("File ar not required", 400));
+        }
+        else {
+
+            // there upload admin profile image with coludinary and multer filepath
+            let uploads = await uploadFiles(filePath);
+
+            // check condition
+            if (!uploads) {
+                return next(errorHandler("File can not uploaded", 400));
+            }
+            else {
+
+                let adminProdfiledata = await adminProfileModel.updateOne({
+                    _id: adminprofile_id
+                }, {
+                    avatar: uploads.secure_url
+                });
+
+                if (!adminProdfiledata.acknowledged) {
+                    return next(errorHandler("Profile picture can't changed"));
+                }
+                else {
+                    return res.status(200).json({ msg: "Your profile picture are changed successfully" });
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+
+
+// admin profile delete data controller
+const adminProfiledelete = TryCatch(async (req, res, next) => {
+
+    // declare payloads
+    let { adminprofile_id } = req.params;
+
+    // there are declare admin profile data find
+    let existAdmin = await adminProfileModel.findById(adminprofile_id).exec();
+
+    if (!existAdmin) {
+        return next(errorHandler("Admin are not found", 404));
+    }
+    else {
+
+        // there declare deleted data into the database
+        let adminProdfiledata = await adminProfileModel.deleteOne({
+            _id: adminprofile_id
+        });
+
+        if(!adminProdfiledata.deletedCount){
+            return next(errorHandler("Your profile can not deleted",404));
+        }
+        else{
+            return res.status(200).json({msg:"Your profile has been deleted successfully"});
+        }
+    }
+
+});
+
+
+
+// admin profile update cotroller
+const adminProfileupdate = TryCatch(async (req, res, next) => {
+
+    // check condition for request
+    if (req.method === 'PUT' || req.method === 'PATCH') {
+
+        // there are declare payload
+        let { adminprofile_id } = req.params;
+        let { admin_name, dob, abouts } = req.body;
+
+        // existAdmin for are found or not
+        let existAdmin = await adminProfileModel.findById(adminprofile_id).exec();
+
+        if (!existAdmin) {
+            return next(errorHandler("Admin are not found", 404));
+        }
+        else {
+
+            // there update admin profile data into the database
+            let adminProfiledata = await adminProfileModel.updateOne({
+                _id: adminprofile_id
+            }, {
+                $set: {
+                    admin_name,
+                    dob,
+                    abouts
+                }
+            });
+
+            if (!adminProfiledata.matchedCount && adminProfiledata.modifiedCount) {
+                return next(errorHandler("Your profile are not updated"));
+            }
+            else {
+                return res.status(200).json({ msg: "Your profile has been updated successfully" });
+            }
+
+        }
+
+    }
+    else {
+        return next(errorHandler("Wrong Cridential", 400));
+    }
+
+});
+
+
 // export there admin profile all controllers operation
-export { adminNewprofile, adminViewprofile, viewAlladmin };
+export { adminNewprofile, adminViewprofile, viewAlladmin, adminProfileImageupdate, adminProfiledelete, adminProfileupdate };
 console.log('Admin profile controller is worked successfully');

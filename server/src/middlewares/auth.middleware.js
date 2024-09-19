@@ -7,15 +7,15 @@ import { errorHandler } from '../utils/utility.js';
 const userCheckAuth = TryCatch(async (req, res, next) => {
 
     // declare token
-    let token = req.cookies['token'];
+    let userToken = req.cookies['userToken'];
 
-    if (!token) {
+    if (!userToken) {
         return next(errorHandler("Unauthorized token please login to access", 401))
     }
     else {
 
         // declare decodeData
-        let decodeData = jwt.decode(token, process.env.JWT_SCKEY);
+        let decodeData = jwt.decode(userToken, process.env.JWT_SCKEY);
         req.user = await decodeData._id;
         next();
 
@@ -27,15 +27,15 @@ const userCheckAuth = TryCatch(async (req, res, next) => {
 const adminCheckAuth = TryCatch(async (req, res, next) => {
 
     // declare token into the cookie
-    let token = req.cookies['token'];
+    let adminToken = req.cookies['adminToken'];
 
     // check the ondition token can be expired or not
-    if(!token){
+    if(!adminToken){
         return next(errorHandler("Unauthorized token please login to access",401));
     }
     else{
         // there are decoded data
-        let decodeData = jwt.verify(token, process.env.JWT_SCKEY);
+        let decodeData = jwt.verify(adminToken, process.env.JWT_SCKEY);
         req.admin = await decodeData._id;
         next();
     }

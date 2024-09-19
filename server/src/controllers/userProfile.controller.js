@@ -69,6 +69,19 @@ const userNewProfile = TryCatch(async (req, res, next) => {
 });
 
 
+// admin view all user profile with controller
+const userProfileviewAll = TryCatch(async (req, res, next) => {
+
+    // there are view profile data of user into the database
+    let userProfiledata = await userProfileModel.find({}).populate({
+        'path':'usersigup_id'
+    }).exec();
+
+    return res.status(200).json({data:userProfiledata});
+
+});
+
+
 // view profile data controller
 const userProfileview = TryCatch(async (req, res, next) => {
 
@@ -103,7 +116,7 @@ const userProfileview = TryCatch(async (req, res, next) => {
 
 
 
-// update profile image
+// update profile image controller
 const userProfileImageupdate = TryCatch(async (req, res, next) => {
 
     // there declare payload
@@ -113,37 +126,37 @@ const userProfileImageupdate = TryCatch(async (req, res, next) => {
     // check exist user
     let existUser = await userProfileModel.findOne({ _id: userprofile_id }).exec();
 
-    if(!existUser){
+    if (!existUser) {
         return next(errorHandler("User are not found", 400));
     }
-    else{
+    else {
 
-        if(!filePath){
+        if (!filePath) {
             return next(errorHandler("File are required", 400));
         }
-        else{
+        else {
 
             // there upload image file with multer and cloudinary
             let uploads = await uploadFiles(filePath);
 
-            if(!uploads){
+            if (!uploads) {
                 return next(errorHandler("File can not upload", 404));
             }
-            else{
+            else {
 
                 let userProfiledata = await userProfileModel.updateOne({
-                    _id:userprofile_id
-                },{
-                    $set:{
-                        avatar:uploads.secure_url
+                    _id: userprofile_id
+                }, {
+                    $set: {
+                        avatar: uploads.secure_url
                     }
                 });
 
-                if(!userProfiledata.acknowledged){
+                if (!userProfiledata.acknowledged) {
                     return next(errorHandler("Profile image can not changed"));
                 }
-                else{
-                    return res.status(200).json({msg:"Your profile picture has been changed"});
+                else {
+                    return res.status(200).json({ msg: "Your profile picture has been changed" });
                 }
 
             }
@@ -152,6 +165,39 @@ const userProfileImageupdate = TryCatch(async (req, res, next) => {
 
     }
 
+
+});
+
+
+// delete user profile controller
+const userProfiledelete = TryCatch(async (req, res, next) => {
+
+    // declare payload
+    let { userprofile_id } = req.params;
+
+    // there will be declare user are exist or not
+    let existUser = await userProfileModel.findById(userprofile_id).exec();
+
+    // there check user are found or not with condition
+    if (!existUser) {
+        return next(errorHandler("Wrong cridential", 400));
+    }
+    else {
+
+        // there are deleted data
+        let userProfiledata = await userProfileModel.deleteOne({
+            _id: userprofile_id
+        });
+
+        // there check of condition data has been deleted or not
+        if (!userProfiledata) {
+            return next(errorHandler("This user are not found", 404));
+        }
+        else {
+            return res.status(200).json({ msg: "Profile are deleted successfully" });
+        }
+
+    }
 
 });
 
@@ -204,5 +250,5 @@ const userProfileupdate = TryCatch(async (req, res, next) => {
 
 
 // export user profile all controllers
-export { userNewProfile, userProfileview, userProfileImageupdate, userProfileupdate };
+export { userNewProfile, userProfileviewAll, userProfileview, userProfileImageupdate, userProfiledelete, userProfileupdate };
 console.log('User profile controller is worked successfully');
