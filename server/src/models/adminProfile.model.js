@@ -4,25 +4,30 @@ import { adminSignupModel } from './adminSignup.model.js';
 // create admin profile model schema
 const adminProfileSchema = new mongoose.Schema({
 
-    admin_name:{
-        type:String,
-        required:true
+    admin_name: {
+        type: String,
+        required: true
     },
 
-    dob:{
-        type:String,
-        required:true
+    avatar: {
+        type: String,
+        required: true
     },
 
-    abouts:{
-        type:String,
-        required:true
+    dob: {
+        type: String,
+        required: true
     },
 
-    adminsignup_id:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:adminSignupModel,
-        required:true
+    abouts: {
+        type: String,
+        required: true
+    },
+
+    adminsignup_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: adminSignupModel,
+        required: true
     }
 
 }, {
