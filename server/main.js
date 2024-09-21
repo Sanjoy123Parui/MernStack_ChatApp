@@ -32,10 +32,10 @@ app.get('/', (req, res) => {
 });
 
 // there are use all endpoints of middleware
-app.use('/user/api/signup', userSignupRouter);
-app.use('/user/api/profile', userprofileRouter);
-app.use('/admin/api/signup', adminSignupRouter);
-app.use('/admin/api/profile', adminProfileRouter);
+app.use('/user/api', userSignupRouter);
+app.use('/user/api', userprofileRouter);
+app.use('/admin/api', adminSignupRouter);
+app.use('/admin/api', adminProfileRouter);
 
 // there are use error middlewares 
 app.use(checkError);

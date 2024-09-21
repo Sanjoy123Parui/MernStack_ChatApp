@@ -14,23 +14,23 @@ userprofileRouter.route('/creates').post(userCheckAuth, uploadObj.single('avatar
 
 
 // admin view all user profile router with get
-userprofileRouter.route('/view/all').get(adminCheckAuth, userProfileviewAll);
+userprofileRouter.route('/profile/view/all').get(adminCheckAuth, userProfileviewAll);
 
 
 // view user profile router with get
-userprofileRouter.route('/read/:userprofile_id').get(userCheckAuth, userProfileview);
+userprofileRouter.route('/profile/read/:userprofile_id').get(userCheckAuth, userProfileview);
 
 
 // update  user profile image router with put
-userprofileRouter.route('/image/update/:userprofile_id').put(userCheckAuth, uploadObj.single('avatar'), userProfileImageupdate);
+userprofileRouter.route('/profile/image/update/:userprofile_id').put(userCheckAuth, uploadObj.single('avatar'), userProfileImageupdate);
 
 
 // delete user profile router with delete
-userprofileRouter.route('/remove/:userprofile_id').delete(userCheckAuth, userProfiledelete);
+userprofileRouter.route('/profile/remove/:userprofile_id').delete(userCheckAuth, userProfiledelete);
 
 
 // updated profile router with all
-userprofileRouter.route('/updates/:userprofile_id').all(userCheckAuth, userProfileupdate);
+userprofileRouter.route('/profile/updates/:userprofile_id').all(userCheckAuth, userProfileupdate);
 
 // export there user profile router
 export { userprofileRouter };

@@ -74,7 +74,7 @@ const userProfileviewAll = TryCatch(async (req, res, next) => {
 
     // there are view profile data of user into the database
     let userProfiledata = await userProfileModel.find({}).populate({
-        'path':'usersigup_id'
+        path:'usersigup_id'
     }).exec();
 
     return res.status(200).json({data:userProfiledata});
@@ -91,7 +91,7 @@ const userProfileview = TryCatch(async (req, res, next) => {
     // there are user profile fetch
     let userProfiledata = await userProfileModel.findById(userprofile_id)
         .populate({
-            'path': 'usersignup_id'
+            path: 'usersignup_id'
         }).exec();
 
 

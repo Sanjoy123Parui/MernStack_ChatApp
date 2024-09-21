@@ -9,13 +9,13 @@ const adminSignupRouter = express.Router();
 // there are declare admin signup all routes endpoint
 
 // admin Register router with post
-adminSignupRouter.route('/register').post(adminRegister);
+adminSignupRouter.route('/signup/register').post(adminRegister);
 
 // admin login router with post
-adminSignupRouter.route('/login').post(adminLogin);
+adminSignupRouter.route('/signup/login').post(adminLogin);
 
 // admin logout router with post
-adminSignupRouter.route('/logout').post(adminCheckAuth, adminLogout);
+adminSignupRouter.route('/signup/logout').post(adminCheckAuth, adminLogout);
 
 // export adminRegister router
 export { adminSignupRouter };

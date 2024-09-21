@@ -76,7 +76,7 @@ const adminViewprofile = TryCatch(async (req, res, next) => {
 
     // there can check findn the data
     let existAdmin = await adminProfileModel.findById(adminprofile_id).populate({
-        'path': 'adminsignup_id'
+        path: 'adminsignup_id'
     }).exec();
 
     // there was check existAdmin
@@ -103,7 +103,7 @@ const viewAlladmin = TryCatch(async (req, res, next) => {
 
     // there was find all data
     let adminProfiledata = await adminProfileModel.find({}).populate({
-        'path': 'adminsignup_id'
+        path: 'adminsignup_id'
     }).exec();
 
     return res.status(200).json({ data: adminProfiledata });
