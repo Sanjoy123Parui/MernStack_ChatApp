@@ -18,4 +18,4 @@ userSignupRouter.route('/signup/logout').post(userCheckAuth, userLogout);
 // export user signup router
 export { userSignupRouter };
 
-console.log('User signup routes is worked successfully');
+console.log('User signup route is worked successfully');

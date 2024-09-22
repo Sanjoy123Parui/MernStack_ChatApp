@@ -74,10 +74,10 @@ const userProfileviewAll = TryCatch(async (req, res, next) => {
 
     // there are view profile data of user into the database
     let userProfiledata = await userProfileModel.find({}).populate({
-        path:'usersigup_id'
+        path: 'usersigup_id'
     }).exec();
 
-    return res.status(200).json({data:userProfiledata});
+    return res.status(200).json({ data: userProfiledata });
 
 });
 
@@ -169,37 +169,7 @@ const userProfileImageupdate = TryCatch(async (req, res, next) => {
 });
 
 
-// delete user profile controller
-const userProfiledelete = TryCatch(async (req, res, next) => {
 
-    // declare payload
-    let { userprofile_id } = req.params;
-
-    // there will be declare user are exist or not
-    let existUser = await userProfileModel.findById(userprofile_id).exec();
-
-    // there check user are found or not with condition
-    if (!existUser) {
-        return next(errorHandler("Wrong cridential", 400));
-    }
-    else {
-
-        // there are deleted data
-        let userProfiledata = await userProfileModel.deleteOne({
-            _id: userprofile_id
-        });
-
-        // there check of condition data has been deleted or not
-        if (!userProfiledata) {
-            return next(errorHandler("This user are not found", 404));
-        }
-        else {
-            return res.status(200).json({ msg: "Profile are deleted successfully" });
-        }
-
-    }
-
-});
 
 
 
@@ -250,5 +220,5 @@ const userProfileupdate = TryCatch(async (req, res, next) => {
 
 
 // export user profile all controllers
-export { userNewProfile, userProfileviewAll, userProfileview, userProfileImageupdate, userProfiledelete, userProfileupdate };
+export { userNewProfile, userProfileviewAll, userProfileview, userProfileImageupdate, userProfileupdate };
 console.log('User profile controller is worked successfully');

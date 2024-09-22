@@ -1,5 +1,5 @@
 import express from "express";
-import { userNewProfile, userProfileviewAll, userProfileview, userProfileImageupdate, userProfiledelete, userProfileupdate } from '../controllers/userProfile.controller.js';
+import { userNewProfile, userProfileviewAll, userProfileview, userProfileImageupdate, userProfileupdate } from '../controllers/userProfile.controller.js';
 import { userCheckAuth, adminCheckAuth } from '../middlewares/auth.middleware.js';
 import { uploadObj } from '../middlewares/fileuploads.middleware.js';
 
@@ -25,13 +25,9 @@ userprofileRouter.route('/profile/read/:userprofile_id').get(userCheckAuth, user
 userprofileRouter.route('/profile/image/update/:userprofile_id').put(userCheckAuth, uploadObj.single('avatar'), userProfileImageupdate);
 
 
-// delete user profile router with delete
-userprofileRouter.route('/profile/remove/:userprofile_id').delete(userCheckAuth, userProfiledelete);
-
-
 // updated profile router with all
 userprofileRouter.route('/profile/updates/:userprofile_id').all(userCheckAuth, userProfileupdate);
 
 // export there user profile router
 export { userprofileRouter };
-console.log('User profile routes is worked successfully');
+console.log('User profile route is worked successfully');

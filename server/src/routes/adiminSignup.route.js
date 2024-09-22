@@ -19,4 +19,4 @@ adminSignupRouter.route('/signup/logout').post(adminCheckAuth, adminLogout);
 
 // export adminRegister router
 export { adminSignupRouter };
-console.log('Admin signup routes is worked successfully');
+console.log('Admin signup route is worked successfully');

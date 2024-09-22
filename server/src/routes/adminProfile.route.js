@@ -32,4 +32,4 @@ adminProfileRouter.route('/profile/update/:adminprofile_id').all(adminCheckAuth,
 
 // export admin profile router
 export { adminProfileRouter };
-console.log('Admin profile routes is worked successfully');
+console.log('Admin profile route is worked successfully');
