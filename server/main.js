@@ -9,7 +9,6 @@ import { userSignupRouter } from './src/routes/userSignup.route.js';
 import { userprofileRouter } from './src/routes/userProfile.route.js';
 import { adminSignupRouter } from './src/routes/adiminSignup.route.js';
 import { adminProfileRouter } from './src/routes/adminProfile.route.js';
-import { contactRouter } from './src/routes/contact.route.js';
 import { conn } from './src/config/conncectdb.js';
 
 // there are connect database
@@ -37,7 +36,6 @@ app.use('/user/api', userSignupRouter);
 app.use('/user/api', userprofileRouter);
 app.use('/admin/api', adminSignupRouter);
 app.use('/admin/api', adminProfileRouter);
-app.use('/contact/api', contactRouter);
 
 // there are use error middlewares 
 app.use(checkError);
