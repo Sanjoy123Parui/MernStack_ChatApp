@@ -10,7 +10,7 @@ const userprofileRouter = express.Router();
 
 
 // create new user profile router with post
-userprofileRouter.route('/creates').post(userCheckAuth, uploadObj.single('avatar'), userNewProfile);
+userprofileRouter.route('/profile/creates').post(userCheckAuth, uploadObj.single('avatar'), userNewProfile);
 
 
 // admin view all user profile router with get
