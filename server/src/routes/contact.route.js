@@ -1,5 +1,5 @@
 import express from "express";
-import { addContact } from '../controllers/contact.controller.js';
+import { addContact, viewContactAll, viewContactdetails, searchContact } from '../controllers/contact.controller.js';
 import { userCheckAuth } from '../middlewares/auth.middleware.js';
 
 // there are define object of contact router
@@ -11,6 +11,16 @@ const contactRouter = express.Router();
 
 // add contact router end-point with post
 contactRouter.route('/add').post(userCheckAuth, addContact);
+
+// view all contact for signle user router end-point with get
+contactRouter.route('/view/all').get(userCheckAuth, viewContactAll);
+
+// view contact full details router end-pont with get
+contactRouter.route('/view/details/:contact_id').get(userCheckAuth, viewContactdetails);
+
+// search user contact router end-point with get
+contactRouter.route('/search/user').get(userCheckAuth, searchContact);
+
 
 
 

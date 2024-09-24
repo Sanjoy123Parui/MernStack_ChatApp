@@ -86,7 +86,7 @@ const userProfileviewAll = TryCatch(async (req, res, next) => {
 const userProfileview = TryCatch(async (req, res, next) => {
 
     // declare payload of params
-    let userprofile_id = req.params.userprofile_id;
+    let { userprofile_id } = req.params;
 
     // there are user profile fetch
     let userProfiledata = await userProfileModel.findById(userprofile_id)
