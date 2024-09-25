@@ -100,7 +100,7 @@ const viewContactAll = TryCatch(async (req, res, next) => {
                 return ({
                     contact_name: ele.contact_name,
                     avatar: ele.userprofile_id.avatar,
-                    phone:ele.userprofile_id.usersignup_id.phone,
+                    phone: ele.userprofile_id.usersignup_id.phone,
                     my_phone: ele.usersignup_id.phone
                 });
             }
@@ -109,7 +109,7 @@ const viewContactAll = TryCatch(async (req, res, next) => {
                 return ({
                     contact_phone: ele.contact_phone,
                     avatar: ele.userprofile_id.avatar,
-                    phone:ele.userprofile_id.usersignup_id.phone,
+                    phone: ele.userprofile_id.usersignup_id.phone,
                     my_phone: ele.usersignup_id.phone
                 });
 
@@ -194,12 +194,12 @@ const searchContact = TryCatch(async (req, res, next) => {
         usersignup_id
     }).populate([
         {
-            path:'usersignup_id'
+            path: 'usersignup_id'
         },
         {
-            path:'userprofile_id',
-            populate:{
-                path:'usersignup_id'
+            path: 'userprofile_id',
+            populate: {
+                path: 'usersignup_id'
             }
         }
     ]).exec();
@@ -215,30 +215,34 @@ const searchContact = TryCatch(async (req, res, next) => {
             // here condition is comparison phone and name
             if (contact_phone === contact.contact_phone || contact_name === contact.contact_name) {
 
-                if(contact.contact_name&&contact.contact_phone){
+                if (contact.contact_name && contact.contact_phone) {
 
-                    return res.status(200).json({data:{
-                        contact_name:contact.contact_name,
-                        avatar:contact.userprofile_id.avatar,
-                        phone:contact.userprofile_id.usersignup_id.phone,
-                        my_phone:contact.usersignup_id.phone
-                    }});
+                    return res.status(200).json({
+                        data: {
+                            contact_name: contact.contact_name,
+                            avatar: contact.userprofile_id.avatar,
+                            phone: contact.userprofile_id.usersignup_id.phone,
+                            my_phone: contact.usersignup_id.phone
+                        }
+                    });
 
                 }
-                else{
+                else {
 
-                    return res.status(200).json({data:{
-                        contact_phone:contact.contact_phone,
-                        avatar:contact.userprofile_id.avatar,
-                        phone:contact.userprofile_id.usersignup_id.phone,
-                        my_phone:contact.usersignup_id.phone
-                    }});
+                    return res.status(200).json({
+                        data: {
+                            contact_phone: contact.contact_phone,
+                            avatar: contact.userprofile_id.avatar,
+                            phone: contact.userprofile_id.usersignup_id.phone,
+                            my_phone: contact.usersignup_id.phone
+                        }
+                    });
 
                 }
 
             }
             else {
-                return next(errorHandler("Wrong cridential",400));
+                return next(errorHandler("Wrong cridential", 400));
             }
 
         });
@@ -250,7 +254,81 @@ const searchContact = TryCatch(async (req, res, next) => {
 });
 
 
+// update contact data of controller
+const updateContact = TryCatch(async (req, res, next) => {
+
+    // declare payload 
+    let usersignup_id = req.user;
+    let { contact_id } = req.params;
+    let { contact_phone, contact_name } = req.body;
+
+    // check the condition payload was required or not
+    if (usersignup_id && contact_id && contact_phone && contact_name) {
+
+
+        // here contact data was update from database
+        let userContact = await contactModel.updateOne({
+            _id: contact_id,
+            usersignup_id,
+            contact_phone
+        }, {
+            $set: {
+                contact_name
+            }
+        }).exec();
+
+
+        // check data update or not with conditon into the database
+        if (!userContact.matchedCount && userContact.modifiedCount) {
+
+            return next(errorHandler("Contact can't changed", 404));
+        }
+        else {
+
+            return res.status(200).json({ msg: "Data was updated successfully" });
+        }
+
+
+    }
+    else {
+
+        return next(errorHandler("Contact is required", 400));
+    }
+
+});
+
+
+
+
+// delete contact controller
+const deleteContact = TryCatch(async (req, res, next) => {
+
+    let usersignup_id = req.user;
+    let { contact_id } = req.params;
+
+    if(!usersignup_id){
+        return next(errorHandler("No more user",400));
+    }
+    else{
+
+        // here is delete contact from database
+        let userContact = await contactModel.deleteOne({
+            _id:contact_id
+        });
+
+        // check the condition contact was delete or not
+        if(!userContact.deletedCount){
+            return next(errorHandler("Contact are not found", 404));
+        }
+        else{
+            return res.status(200).json({msg:"Contact was deleted successfully"});
+        }
+
+    }
+
+});
+
 
 // there export contact all controllers
-export { addContact, viewContactAll, viewContactdetails, searchContact };
+export { addContact, viewContactAll, viewContactdetails, searchContact, updateContact, deleteContact };
 console.log('Contact controller is worked successfully');
