@@ -1,4 +1,4 @@
-import { accessUserToken, refreshUserToken } from '../lib/generatedAuth.js';
+import { accessUserToken, refreshUserToken, accessAdminToken, refreshAdminToken } from '../lib/generatedAuth.js';
 
 
 // declare options of cookie expiration
@@ -22,7 +22,7 @@ const sendUserToken = async (res, user, statusCode, message) => {
         let access_userToken = accessUserToken(userId);
         let refresh_userToken = refreshUserToken(userId);
 
-        // there was save refresh token into the database
+        // there was save user refresh token into the database
         user.refresh_userToken = refresh_userToken;
         await user.save({ validateBeforeSave: false });
 
@@ -43,13 +43,34 @@ const sendUserToken = async (res, user, statusCode, message) => {
 
 
 // define there sendAdminToken features function
-const sendAdminToken = (res, admin, statusCode, message) => {
+const sendAdminToken = async (res, admin, statusCode, message) => {
 
-    // there was verified token
-    // let verifiedAdminToken = jwt.sign({ _id: admin._id }, process.env.JWT_SCKEY);
+    // user normal try-catch
+    try {
 
-    // return res.status(statusCode).cookie('adminToken', verifiedAdminToken, cookieOptions).json({ message });
+        // there declare admin_id
+        let adminId = admin._id;
 
+        // there was declare admin access token and refresh token
+        let access_adminToken = accessAdminToken(adminId);
+        let refresh_adminToken = refreshAdminToken(adminId);
+
+        // there was save admin refresh token into the database
+        admin.refresh_adminToken = refresh_adminToken;
+        await admin.save({ validateBeforeSave: false });
+
+        // admin token and refresh token access into the cookie
+        return res.status(statusCode)
+            .cookie('access_adminToken', access_adminToken, cookieOptions)
+            .cookie('refresh_adminToken', refresh_adminToken, cookieOptions)
+            .json({ message, access_adminToken, refresh_adminToken });
+
+    }
+    catch (error) {
+
+        return res.status(500).json({ error });
+
+    }
 }
 
 // export features

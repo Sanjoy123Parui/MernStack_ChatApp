@@ -99,43 +99,43 @@ const userLogin = TryCatch(async (req, res, next) => {
 // user refresh token to access token recover
 const userRecover = TryCatch(async (req, res, next) => {
 
-    // there generate refresh token from cookie and another
+    // there generate user refresh token from cookie and another
     let userRefresh = req.cookies.refresh_userToken || req.body.refresh_userToken;
 
     // there check verified token
-    if(!userRefresh){
-        return next(errorHandler("Unatuthorized please access the user", 401));
+    if (!userRefresh) {
+        return next(errorHandler("Unatuthorized user please access the user", 401));
     }
-    else{
+    else {
 
         // there decoded token verify from user
         let decodedData = jwt.verify(
-            userRefresh, 
+            userRefresh,
             process.env.JWT_REFRESH_SCKEY
         );
 
-        // there was retrive _id from database
+        // there was retrive user _id from database
         let user = await userSignupModel.findById(decodedData._id).exec();
 
         // there can check right user are authorized
-        if(!user){
-            return next(errorHandler("Invalid user", 401))
+        if (!user) {
+            return next(errorHandler("Invalid user", 401));
         }
-        else{
+        else {
 
-            // here condition will be check to the matched refresh token
-            if(userRefresh!==user.refresh_userToken){
+            // here condition will be check to the matched refresh token from user
+            if (userRefresh !== user.refresh_userToken) {
 
                 return next(errorHandler("Auth was expired or not used", 404));
 
-            }else{
+            } else {
 
                 return sendUserToken(res, user, 200, "User authenticated successfully");
 
             }
         }
-        
-        
+
+
     }
 
 

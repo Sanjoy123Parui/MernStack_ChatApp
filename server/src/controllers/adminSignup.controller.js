@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import { adminSignupModel } from '../models/adminSignup.model.js';
 import { TryCatch } from '../helpers/try-catch.helper.js';
@@ -69,7 +70,7 @@ const adminLogin = TryCatch(async (req, res, next) => {
 
     // condition can be check there phone number is correct or not
     if (!existAdmin) {
-        return next(errorHandler("This phone number is not valid", 404));
+        return next(errorHandler("This admin are not valid", 404));
     }
     else {
 
@@ -81,8 +82,59 @@ const adminLogin = TryCatch(async (req, res, next) => {
             return next(errorHandler("Wrong password", 404));
         }
         else {
-            sendAdminToken(res, existAdmin, 201, "Logged in Successfully");
+           return sendAdminToken(res, existAdmin, 201, "Logged in Successfully");
         }
+
+    }
+
+});
+
+
+
+
+// admin refresh token to access token recover
+const adminRecover = TryCatch(async (req, res, next) => {
+
+    // there generate admin refresh token from cookie and another
+    let adminRefresh = req.cookies.refresh_adminToken || req.body.refresh_adminToken;
+
+
+    // there check verified admin token
+    if (!adminRefresh) {
+
+        return next(errorHandler("Unatuthorized admin please access the user", 401))
+    }
+    else {
+
+        // there decoded token verify from user
+        let decodedData = jwt.verify(
+            adminRefresh,
+            process.env.JWT_REFRESH_SCKEY
+        );
+
+        // there was retrive admin _id from database
+        let admin = await adminSignupModel.findById(decodedData._id).exec();
+
+        // there can check right admin are authorized
+        if (!admin) {
+            return next(errorHandler("Invalid admin", 401));
+        }
+        else {
+
+            // here condition will be check to the matched refresh token from admin
+            if (adminRefresh !== admin.refresh_adminToken) {
+
+                return next(errorHandler("Auth was expired or not used", 404));
+
+            }
+            else{
+
+                return sendAdminToken(res, admin, 200, "Admin authenticated successfully");
+
+            }
+
+        }
+
 
     }
 
@@ -94,16 +146,30 @@ const adminLogin = TryCatch(async (req, res, next) => {
 // admin logout controller
 const adminLogout = TryCatch(async (req, res, next) => {
 
+    // here declare admin_id
+    let admin_Id = req.admin;
 
-    // declare exist Admin
-    let adminInfo = await adminSignupModel.findById(req.admin).exec();
 
-    // check condition
-    if (!adminInfo) {
-        return next();
+    // here is admin are exist or not into the database
+    let existAdmin = await adminSignupModel.findByIdAndUpdate(admin_Id, {
+        $set: {
+            refresh_adminToken: undefined
+        }
+    }, {
+        new: true
+    })
+
+    // check condition for admin are found or not then logout
+    if (!existAdmin) {
+        return next(errorHandler('Unauthorized admin', 404));
     }
     else {
-        return res.status(200).cookie('adminToken', '', { ...cookieOptions, maxAge: 0 }).json({ msg: "Logged out successfully" });
+
+        return res.status(200)
+            .clearCookie('access_adminToken', cookieOptions)
+            .clearCookie('refresh_adminToken', cookieOptions)
+            .json({ msg: "Logged out successfully" });
+
     }
 
 });
@@ -111,5 +177,5 @@ const adminLogout = TryCatch(async (req, res, next) => {
 
 
 // export there adminSignup controller
-export { adminRegister, adminLogin, adminLogout };
+export { adminRegister, adminLogin, adminRecover, adminLogout };
 console.log('Admin signup controller is worked successfully');

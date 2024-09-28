@@ -1,5 +1,5 @@
 import express from "express";
-import { adminRegister, adminLogin, adminLogout } from '../controllers/adminSignup.controller.js';
+import { adminRegister, adminLogin, adminRecover, adminLogout } from '../controllers/adminSignup.controller.js';
 import { adminCheckAuth } from '../middlewares/auth.middleware.js';
 
 // there define admin signup router
@@ -8,13 +8,19 @@ const adminSignupRouter = express.Router();
 
 // there are declare admin signup all routes endpoint
 
-// admin Register router with post
+// admin Register end-point router with post
 adminSignupRouter.route('/signup/register').post(adminRegister);
 
-// admin login router with post
+
+// admin login end-point router with post
 adminSignupRouter.route('/signup/login').post(adminLogin);
 
-// admin logout router with post
+
+// admin recover authorization end-point router with post
+adminSignupRouter.route('/signup/recover/admin').post(adminRecover);
+
+
+// admin logout end-point router with post
 adminSignupRouter.route('/signup/logout').post(adminCheckAuth, adminLogout);
 
 // export adminRegister router

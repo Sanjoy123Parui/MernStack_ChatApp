@@ -6,16 +6,16 @@ const userSignupRouter = express.Router();
 
 // there are define all user signup router endpoint
 
-// userRegister router with post
+// userRegister end-point router with post
 userSignupRouter.route('/signup/register').post(userRegister);
 
-// userLogin router with post
+// userLogin end-point router with post
 userSignupRouter.route('/signup/login').post(userLogin);
 
-// user recover authorization with post
+// user recover authorization end-point router with post
 userSignupRouter.route('/signup/recover/user').post(userRecover);
 
-// userLogout router with post
+// userLogout end-point router with post
 userSignupRouter.route('/signup/logout').post(userCheckAuth, userLogout);
 
 // export user signup router

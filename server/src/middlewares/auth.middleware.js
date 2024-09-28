@@ -27,8 +27,8 @@ const userCheckAuth = TryCatch(async (req, res, next) => {
 // there are define admin authentication
 const adminCheckAuth = TryCatch(async (req, res, next) => {
 
-    // declare token into the cookie
-    let adminToken = req.cookies['adminToken'];
+    // declare admin access token and refresh token are store cookie or headers
+    let adminToken = req.cookies?.access_adminToken || req.header("Authorization")?.replace("Bearer ", "");
 
     // check the ondition token can be expired or not
     if (!adminToken) {
@@ -36,11 +36,13 @@ const adminCheckAuth = TryCatch(async (req, res, next) => {
     }
     else {
         // there are decoded data
-        let decodeData = jwt.verify(adminToken, process.env.JWT_SCKEY);
+        let decodeData = jwt.verify(adminToken, process.env.JWT_ACCESS_SCKEY);
         req.admin = await decodeData._id;
         next();
     }
 });
+
+
 
 // export auth middleware
 export { userCheckAuth, adminCheckAuth };
