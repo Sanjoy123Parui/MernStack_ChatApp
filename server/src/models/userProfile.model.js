@@ -9,9 +9,8 @@ const userProfileSchema = new mongoose.Schema({
         required: true
     },
 
-    avatar: {
-        type: String,
-        required: true
+    user_profileimg: {
+        type: String
     },
 
     dob: {

@@ -1,34 +1,54 @@
-// there also import jwt library
-import jwt from "jsonwebtoken";
+import { accessUserToken, refreshUserToken } from '../lib/generatedAuth.js';
 
 
 // declare options of cookie expiration
 const cookieOptions = {
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-    sameSite: "none",
     httpOnly: true,
     secure: true
 };
 
+
+
 // define there sendUserToken features function
-const sendUserToken = (res, user, statusCode, message) => {
+const sendUserToken = async (res, user, statusCode, message) => {
 
-    // there was verify token
-    let verifiedUserToken = jwt.sign({ _id: user._id }, process.env.JWT_SCKEY);
+    // use normal try-catch
+    try {
 
-    return res.status(statusCode).cookie('userToken', verifiedUserToken, cookieOptions).json({message});
+        // there are declare user_id 
+        let userId = user._id;
+
+        // there was declare user access token and refresh token
+        let access_userToken = accessUserToken(userId);
+        let refresh_userToken = refreshUserToken(userId);
+
+        // there was save refresh token into the database
+        user.refresh_userToken = refresh_userToken;
+        await user.save({ validateBeforeSave: false });
+
+        return res.status(statusCode)
+            .cookie('access_userToken', access_userToken, cookieOptions)
+            .cookie('refresh_userToken', refresh_userToken, cookieOptions)
+            .json({ message, access_userToken, refresh_userToken });
+
+    }
+    catch (error) {
+
+        return res.status(500).json({ error });
+    }
+
 
 }
 
 
 
 // define there sendAdminToken features function
-const sendAdminToken = (res, admin, statusCode, message)=>{
+const sendAdminToken = (res, admin, statusCode, message) => {
 
     // there was verified token
-    let verifiedAdminToken = jwt.sign({_id:admin._id}, process.env.JWT_SCKEY);
+    // let verifiedAdminToken = jwt.sign({ _id: admin._id }, process.env.JWT_SCKEY);
 
-    return res.status(statusCode).cookie('adminToken', verifiedAdminToken, cookieOptions).json({message});
+    // return res.status(statusCode).cookie('adminToken', verifiedAdminToken, cookieOptions).json({ message });
 
 }
 

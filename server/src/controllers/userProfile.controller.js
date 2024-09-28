@@ -45,7 +45,7 @@ const userNewProfile = TryCatch(async (req, res, next) => {
                     let userProfiledata = await userProfileModel.create({
                         usersignup_id,
                         user_name,
-                        avatar: uploads.secure_url,
+                        user_profileimg: uploads.secure_url,
                         dob,
                         abouts
                     });
@@ -103,11 +103,11 @@ const userProfileview = TryCatch(async (req, res, next) => {
 
         return res.status(200).json({
             data: {
-                'user_name': userProfiledata.user_name,
-                'avatar': userProfiledata.avatar,
-                'dob': userProfiledata.dob,
-                'abouts': userProfiledata.abouts,
-                'phone': userProfiledata.usersignup_id.phone
+                user_name: userProfiledata.user_name,
+                user_profileimg: userProfiledata.user_profileimg,
+                dob: userProfiledata.dob,
+                abouts: userProfiledata.abouts,
+                phone: userProfiledata.usersignup_id.phone
             }
         });
     }
@@ -148,7 +148,7 @@ const userProfileImageupdate = TryCatch(async (req, res, next) => {
                     _id: userprofile_id
                 }, {
                     $set: {
-                        avatar: uploads.secure_url
+                        user_profileimg: uploads.secure_url
                     }
                 });
 

@@ -46,7 +46,7 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
                     let adminProfiledata = await adminProfileModel.create({
                         adminsignup_id,
                         admin_name,
-                        avatar: uploads.secure_url,
+                        admin_profileimg: uploads.secure_url,
                         dob,
                         abouts
                     });
@@ -86,27 +86,14 @@ const adminViewprofile = TryCatch(async (req, res, next) => {
     else {
         return res.status(200).json({
             data: {
-                'admin_name': existAdmin.admin_name,
-                'avatar': existAdmin.avatar,
-                'dob': existAdmin.dob,
-                'abouts': existAdmin.abouts,
-                'phone': existAdmin.adminsignup_id.phone
+                admin_name: existAdmin.admin_name,
+                admin_profileimg: existAdmin.admin_profileimg,
+                dob: existAdmin.dob,
+                abouts: existAdmin.abouts,
+                phone: existAdmin.adminsignup_id.phone
             }
         });
     }
-
-});
-
-
-// there view all admin data
-const viewAlladmin = TryCatch(async (req, res, next) => {
-
-    // there was find all data
-    let adminProfiledata = await adminProfileModel.find({}).populate({
-        path: 'adminsignup_id'
-    }).exec();
-
-    return res.status(200).json({ data: adminProfiledata });
 
 });
 
@@ -145,7 +132,7 @@ const adminProfileImageupdate = TryCatch(async (req, res, next) => {
                 let adminProdfiledata = await adminProfileModel.updateOne({
                     _id: adminprofile_id
                 }, {
-                    avatar: uploads.secure_url
+                    admin_profileimg: uploads.secure_url
                 });
 
                 if (!adminProdfiledata.acknowledged) {
@@ -159,37 +146,6 @@ const adminProfileImageupdate = TryCatch(async (req, res, next) => {
 
         }
 
-    }
-
-});
-
-
-
-// admin profile delete data controller
-const adminProfiledelete = TryCatch(async (req, res, next) => {
-
-    // declare payloads
-    let { adminprofile_id } = req.params;
-
-    // there are declare admin profile data find
-    let existAdmin = await adminProfileModel.findById(adminprofile_id).exec();
-
-    if (!existAdmin) {
-        return next(errorHandler("Admin are not found", 404));
-    }
-    else {
-
-        // there declare deleted data into the database
-        let adminProdfiledata = await adminProfileModel.deleteOne({
-            _id: adminprofile_id
-        });
-
-        if(!adminProdfiledata.deletedCount){
-            return next(errorHandler("Your profile can not deleted",404));
-        }
-        else{
-            return res.status(200).json({msg:"Your profile has been deleted successfully"});
-        }
     }
 
 });
@@ -243,5 +199,5 @@ const adminProfileupdate = TryCatch(async (req, res, next) => {
 
 
 // export there admin profile all controllers operation
-export { adminNewprofile, adminViewprofile, viewAlladmin, adminProfileImageupdate, adminProfiledelete, adminProfileupdate };
+export { adminNewprofile, adminViewprofile, adminProfileImageupdate, adminProfileupdate };
 console.log('Admin profile controller is worked successfully');

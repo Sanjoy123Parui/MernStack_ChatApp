@@ -1,4 +1,5 @@
-// there import bcryptjs libraries and modules
+// there import libraries and modules
+import jwt, { decode } from "jsonwebtoken"
 import bcyptjs from "bcryptjs";
 import { userSignupModel } from '../models/userSignup.model.js';
 import { TryCatch } from '../helpers/try-catch.helper.js';
@@ -47,7 +48,7 @@ const userRegister = TryCatch(async (req, res, next) => {
                 return next(errorHandler("Occured user registered", 404));
             }
             else {
-                return res.status(201).send({ msg: "Account has been create successfully"});
+                return res.status(201).send({ msg: "Account has been create successfully" });
             }
 
         }
@@ -72,7 +73,7 @@ const userLogin = TryCatch(async (req, res, next) => {
 
     // condition are check user are valid or not
     if (!existUser) {
-        return next(errorHandler("This is are not valid phone number", 400));
+        return next(errorHandler("This is user are not valid", 400));
     }
     else {
 
@@ -85,6 +86,7 @@ const userLogin = TryCatch(async (req, res, next) => {
             return next(errorHandler("Invalid password", 404));
         }
         else {
+
             return sendUserToken(res, existUser, 201, "Logged in Successfully");
         }
 
@@ -94,22 +96,83 @@ const userLogin = TryCatch(async (req, res, next) => {
 
 
 
+// user refresh token to access token recover
+const userRecover = TryCatch(async (req, res, next) => {
+
+    // there generate refresh token from cookie and another
+    let userRefresh = req.cookies.refresh_userToken || req.body.refresh_userToken;
+
+    // there check verified token
+    if(!userRefresh){
+        return next(errorHandler("Unatuthorized please access the user", 401));
+    }
+    else{
+
+        // there decoded token verify from user
+        let decodedData = jwt.verify(
+            userRefresh, 
+            process.env.JWT_REFRESH_SCKEY
+        );
+
+        // there was retrive _id from database
+        let user = await userSignupModel.findById(decodedData._id).exec();
+
+        // there can check right user are authorized
+        if(!user){
+            return next(errorHandler("Invalid user", 401))
+        }
+        else{
+
+            // here condition will be check to the matched refresh token
+            if(userRefresh!==user.refresh_userToken){
+
+                return next(errorHandler("Auth was expired or not used", 404));
+
+            }else{
+
+                return sendUserToken(res, user, 200, "User authenticated successfully");
+
+            }
+        }
+        
+        
+    }
+
+
+});
+
+
+
 // user logout controller
 const userLogout = TryCatch(async (req, res, next) => {
 
-    // declare the user
-    let userInfo = await userSignupModel.findById(req.user).exec();
+    // here is declare user_id
+    let user_Id = req.user;
 
-    if (!userInfo) {
-        return next();
+
+    // declare the user can check exist or not
+    let existUser = await userSignupModel.findByIdAndUpdate(user_Id, {
+        $set: {
+            refresh_userToken: undefined
+        }
+    }, {
+        new: true
+    });
+
+    if (!existUser) {
+        return next(errorHandler('Unauthorized user', 404));
     }
     else {
-        return res.status(200).cookie('userToken', '', { ...cookieOptions, maxAge: 0 }).json({ msg: 'Logged out successfully' });
+
+        return res.status(200)
+            .clearCookie('access_userToken', cookieOptions)
+            .clearCookie('refresh_userToken', cookieOptions)
+            .json({ msg: "Logged out successfully" });
     }
 
 });
 
 
 //  there export user signup controlle
-export { userRegister, userLogin, userLogout };
+export { userRegister, userLogin, userRecover, userLogout };
 console.log('User signup controller is worked successfully');

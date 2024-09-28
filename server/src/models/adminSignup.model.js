@@ -17,11 +17,17 @@ const adminSignupSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+
+    refresh_adminToken: {
+        type: String
     }
 
 }, {
+
     timestamps: true,
     versionKey: false
+    
 });
 
 const adminSignupModel = mongoose.model('adminsignups', adminSignupSchema);

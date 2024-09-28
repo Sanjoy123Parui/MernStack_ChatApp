@@ -3,24 +3,26 @@ import mongoose from "mongoose";
 // create user model schema
 const userSignupSchema = new mongoose.Schema({
 
-    // country
     country: {
         type: String,
         required: true
     },
 
-    // phone number
     phone: {
         type: String,
         unique: true,
         required: true
     },
 
-    // password
     password: {
         type: String,
         required: true
+    },
+
+    refresh_userToken:{
+        type:String
     }
+    
 
 }, {
     timestamps: true,

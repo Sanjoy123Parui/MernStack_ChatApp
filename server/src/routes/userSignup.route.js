@@ -1,5 +1,5 @@
 import express from "express";
-import { userRegister, userLogin, userLogout } from '../controllers/userSingup.controller.js';
+import { userRegister, userLogin, userRecover, userLogout } from '../controllers/userSingup.controller.js';
 import { userCheckAuth } from '../middlewares/auth.middleware.js';
 
 const userSignupRouter = express.Router();
@@ -11,6 +11,9 @@ userSignupRouter.route('/signup/register').post(userRegister);
 
 // userLogin router with post
 userSignupRouter.route('/signup/login').post(userLogin);
+
+// user recover authorization with post
+userSignupRouter.route('/signup/recover/user').post(userRecover);
 
 // userLogout router with post
 userSignupRouter.route('/signup/logout').post(userCheckAuth, userLogout);
