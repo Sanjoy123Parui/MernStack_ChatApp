@@ -10,7 +10,8 @@ const adminProfileSchema = new mongoose.Schema({
     },
 
     admin_profileimg: {
-        type: String
+        type: String,
+        required:true
     },
 
     dob: {
