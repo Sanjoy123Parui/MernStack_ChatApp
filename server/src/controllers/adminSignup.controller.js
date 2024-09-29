@@ -65,21 +65,22 @@ const adminLogin = TryCatch(async (req, res, next) => {
 
     // there was check exist phone of user in payload
     let existAdmin = await adminSignupModel.findOne({
-        phone: phone
+        phone
     }).exec();
+    
 
     // condition can be check there phone number is correct or not
     if (!existAdmin) {
-        return next(errorHandler("This admin are not valid", 404));
+        return next(errorHandler("Please required the correct admin", 400));
     }
     else {
 
-        let comparePassword = existAdmin.password;
-        let isMatchPassword = bcryptjs.compareSync(password, comparePassword);
+        // there was comparison of admin password with bcryptjs
+        let isMatchPassword = bcryptjs.compareSync(password, existAdmin.password);
 
         // check the comparison password
         if (!isMatchPassword) {
-            return next(errorHandler("Wrong password", 404));
+            return next(errorHandler("Invalid admin", 404));
         }
         else {
            return sendAdminToken(res, existAdmin, 201, "Logged in Successfully");

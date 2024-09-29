@@ -68,22 +68,23 @@ const userLogin = TryCatch(async (req, res, next) => {
 
     // there was declare phone are valid for exist user
     let existUser = await userSignupModel.findOne({
-        phone: phone
+        phone
     }).exec();
 
+    
     // condition are check user are valid or not
     if (!existUser) {
-        return next(errorHandler("This is user are not valid", 400));
+        return next(errorHandler("Please required the correct user", 400));
     }
     else {
 
+
         // passwor synchronise compare
-        let userPassword = existUser.password;
-        let isMatchPassword = bcyptjs.compareSync(password, userPassword);
+        let isMatchPassword = bcyptjs.compareSync(password, existUser.password);
 
         // check password with condition
         if (!isMatchPassword) {
-            return next(errorHandler("Invalid password", 404));
+            return next(errorHandler("Invalid user", 404));
         }
         else {
 
