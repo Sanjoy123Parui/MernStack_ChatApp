@@ -10,19 +10,37 @@ const adminProfileRouter = express.Router();
 
 
 // new admin profile create router with post
-adminProfileRouter.route('/profile/creates').post(adminCheckAuth, uploadObj.single('avatar'), adminNewprofile);
+adminProfileRouter.route('/profile/creates')
+.post(
+    adminCheckAuth, 
+    uploadObj.single('avatar'), 
+    adminNewprofile
+);
 
 
 // particular admin view own profile data router with get
-adminProfileRouter.route('/profile/read/:adminprofile_id').get(adminCheckAuth, adminViewprofile);
+adminProfileRouter.route('/profile/read/:adminprofile_id')
+.get(
+    adminCheckAuth, 
+    adminViewprofile
+);
 
 
 // admin profile image update router with put
-adminProfileRouter.route('/profile/change/:adminprofile_id').put(adminCheckAuth, uploadObj.single('avatar'), adminProfileImageupdate);
+adminProfileRouter.route('/profile/change/:adminprofile_id')
+.put(
+    adminCheckAuth, 
+    uploadObj.single('avatar'), 
+    adminProfileImageupdate
+);
 
 
 // admin profile data update router with all
-adminProfileRouter.route('/profile/update/:adminprofile_id').all(adminCheckAuth, adminProfileupdate);
+adminProfileRouter.route('/profile/update/:adminprofile_id')
+.all(
+    adminCheckAuth, 
+    adminProfileupdate
+);
 
 
 

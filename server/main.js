@@ -4,6 +4,7 @@ dotenv.config({ path: './.env' });
 import express from "express";
 import cors from "cors";
 import cookiParser from "cookie-parser";
+
 import { checkError } from './src/middlewares/errors.middleware.js';
 import { userSignupRouter } from './src/routes/userSignup.route.js';
 import { userprofileRouter } from './src/routes/userProfile.route.js';
