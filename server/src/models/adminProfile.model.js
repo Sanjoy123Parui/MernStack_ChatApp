@@ -14,6 +14,11 @@ const adminProfileSchema = new mongoose.Schema({
         required:true
     },
 
+    gender:{
+        type:String,
+        required:true
+    },
+
     dob: {
         type: String,
         required: true

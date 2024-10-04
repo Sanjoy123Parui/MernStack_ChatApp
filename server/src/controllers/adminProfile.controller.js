@@ -10,7 +10,7 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
 
     // there are declare payloads
     let adminsignup_id = req.admin;
-    let { admin_name, dob, abouts } = req.body;
+    let { admin_name, gender, dob, abouts } = req.body;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
 
@@ -52,6 +52,7 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
                         admin_name,
                         // admin_profileimg: uploads.secure_url,
                         admin_profileimg: uploads+'uploads/'+filePath,
+                        gender,
                         dob,
                         abouts
                     });
@@ -95,6 +96,7 @@ const adminViewprofile = TryCatch(async (req, res, next) => {
             data: {
                 admin_name: existAdmin.admin_name,
                 admin_profileimg: existAdmin.admin_profileimg,
+                gender:existAdmin.gender,
                 dob: existAdmin.dob,
                 abouts: existAdmin.abouts,
                 phone: existAdmin.adminsignup_id.phone
@@ -172,7 +174,7 @@ const adminProfileupdate = TryCatch(async (req, res, next) => {
 
         // there are declare payload
         let { adminprofile_id } = req.params;
-        let { admin_name, dob, abouts } = req.body;
+        let { admin_name, gender, dob, abouts } = req.body;
 
         // existAdmin for are found or not
         let existAdmin = await adminProfileModel.findById(adminprofile_id).exec();
@@ -188,6 +190,7 @@ const adminProfileupdate = TryCatch(async (req, res, next) => {
             }, {
                 $set: {
                     admin_name,
+                    gender,
                     dob,
                     abouts
                 }

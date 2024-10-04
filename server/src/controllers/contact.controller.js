@@ -99,7 +99,7 @@ const viewContactAll = TryCatch(async (req, res, next) => {
 
                 return ({
                     contact_name: ele.contact_name,
-                    avatar: ele.userprofile_id.avatar,
+                    user_profileimg: ele.userprofile_id.user_profileimg,
                     phone: ele.userprofile_id.usersignup_id.phone,
                     my_phone: ele.usersignup_id.phone
                 });
@@ -108,7 +108,7 @@ const viewContactAll = TryCatch(async (req, res, next) => {
 
                 return ({
                     contact_phone: ele.contact_phone,
-                    avatar: ele.userprofile_id.avatar,
+                    user_profileimg: ele.userprofile_id.user_profileimg,
                     phone: ele.userprofile_id.usersignup_id.phone,
                     my_phone: ele.usersignup_id.phone
                 });
@@ -153,7 +153,8 @@ const viewContactdetails = TryCatch(async (req, res, next) => {
             return res.status(200).json({
                 data: {
                     contact_name: userContact.contact_name,
-                    avatar: userContact.userprofile_id.avatar,
+                    user_profileimg: userContact.userprofile_id.user_profileimg,
+                    gender:userContact.userprofile_id.gender,
                     dob: userContact.userprofile_id.dob,
                     abouts: userContact.userprofile_id.abouts,
                     country: userContact.userprofile_id.usersignup_id.country,
@@ -166,7 +167,8 @@ const viewContactdetails = TryCatch(async (req, res, next) => {
             return res.status(200).json({
                 data: {
                     contact_phone: userContact.contact_phone,
-                    avatar: userContact.userprofile_id.avatar,
+                    user_profileimg: userContact.userprofile_id.user_profileimg,
+                    gender:userContact.userprofile_id.gender,
                     dob: userContact.userprofile_id.dob,
                     abouts: userContact.userprofile_id.abouts,
                     country: userContact.userprofile_id.usersignup_id.country,

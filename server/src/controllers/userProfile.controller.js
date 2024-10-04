@@ -10,7 +10,7 @@ const userNewProfile = TryCatch(async (req, res, next) => {
 
     //there are declare payloads
     let usersignup_id = req.user;
-    let { user_name, dob, abouts } = req.body;
+    let { user_name, gender, dob, abouts } = req.body;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
     
@@ -51,6 +51,7 @@ const userNewProfile = TryCatch(async (req, res, next) => {
                         user_name,
                         // user_profileimg: uploads.secure_url,
                         user_profileimg: uploads+'uploads/'+filePath,
+                        gender,
                         dob,
                         abouts
                     });
@@ -111,6 +112,7 @@ const userProfileview = TryCatch(async (req, res, next) => {
             data: {
                 user_name: userProfiledata.user_name,
                 user_profileimg: userProfiledata.user_profileimg,
+                gender:userProfiledata.gender,
                 dob: userProfiledata.dob,
                 abouts: userProfiledata.abouts,
                 phone: userProfiledata.usersignup_id.phone
@@ -191,7 +193,7 @@ const userProfileupdate = TryCatch(async (req, res, next) => {
     if (req.method === 'PUT' || req.method === 'PATCH') {
         // declare payload data of params and body
         let { userprofile_id } = req.params;
-        let { user_name, dob, abouts } = req.body;
+        let { user_name, gender, dob, abouts } = req.body;
 
         // there are declare userprofile_id was found or not
         let existUser = await userProfileModel.findOne({ _id: userprofile_id }).exec();
@@ -207,6 +209,7 @@ const userProfileupdate = TryCatch(async (req, res, next) => {
             }, {
                 $set: {
                     user_name,
+                    gender,
                     dob,
                     abouts
                 }

@@ -48,7 +48,7 @@ const userRegister = TryCatch(async (req, res, next) => {
                 return next(errorHandler("Occured user registered", 404));
             }
             else {
-                return res.status(201).send({ msg: "Account has been create successfully" });
+                return res.status(201).send({ msg: "Account has been created successfully" });
             }
 
         }
