@@ -74,7 +74,7 @@ const userLogin = TryCatch(async (req, res, next) => {
     
     // condition are check user are valid or not
     if (!existUser) {
-        return next(errorHandler("Please required the correct user", 400));
+        return next(errorHandler("Please required the correct phone", 400));
     }
     else {
 
@@ -84,7 +84,7 @@ const userLogin = TryCatch(async (req, res, next) => {
 
         // check password with condition
         if (!isMatchPassword) {
-            return next(errorHandler("Invalid user", 404));
+            return next(errorHandler("Invalid password", 404));
         }
         else {
 

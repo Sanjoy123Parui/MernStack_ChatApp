@@ -11,7 +11,8 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
     // there are declare payloads
     let adminsignup_id = req.admin;
     let { admin_name, dob, abouts } = req.body;
-    let filePath = req.file.path;
+    // let filePath = req.file.path;
+    let filePath = req.file.filename;
 
     if (!adminsignup_id) {
         return next(errorHandler("Wrong Cridential", 400));
@@ -35,7 +36,10 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
             else {
 
                 // there will be uploads admin preofile images with cloudinary and multer
-                let uploads = await uploadFiles(filePath);
+                // let uploads = await uploadFiles(filePath);
+
+                // there upload file in localserver
+                let uploads = await uploadFiles();
 
                 if (!uploads) {
                     return next(errorHandler("File are not uploaded", 404));
@@ -46,15 +50,18 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
                     let adminProfiledata = await adminProfileModel.create({
                         adminsignup_id,
                         admin_name,
-                        admin_profileimg: uploads.secure_url,
+                        // admin_profileimg: uploads.secure_url,
+                        admin_profileimg: uploads+'uploads/'+filePath,
                         dob,
                         abouts
                     });
+
 
                     if (!adminProfiledata) {
                         return next(errorHandler("Profile can not inserted"));
                     }
                     else {
+                        
                         return res.status(201).send({ msg: "Your profile was created successfully" });
                     }
                 }
@@ -104,7 +111,8 @@ const adminProfileImageupdate = TryCatch(async (req, res, next) => {
 
     // there declare payload
     let { adminprofile_id } = req.params;
-    let filePath = req.file.path;
+    // let filePath = req.file.path;
+    let filePath = req.file.filename;
 
     // there are declare existadmin data
     let existAdmin = await adminProfileModel.findById(adminprofile_id).exec();
@@ -121,7 +129,10 @@ const adminProfileImageupdate = TryCatch(async (req, res, next) => {
         else {
 
             // there upload admin profile image with coludinary and multer filepath
-            let uploads = await uploadFiles(filePath);
+            // let uploads = await uploadFiles(filePath);
+
+            // there upload file in localserver
+            let uploads = await uploadFiles();
 
             // check condition
             if (!uploads) {
@@ -132,7 +143,8 @@ const adminProfileImageupdate = TryCatch(async (req, res, next) => {
                 let adminProdfiledata = await adminProfileModel.updateOne({
                     _id: adminprofile_id
                 }, {
-                    admin_profileimg: uploads.secure_url
+                    // admin_profileimg: uploads.secure_url
+                    admin_profileimg: uploads+'uploads/'+filePath
                 });
 
                 if (!adminProdfiledata.acknowledged) {

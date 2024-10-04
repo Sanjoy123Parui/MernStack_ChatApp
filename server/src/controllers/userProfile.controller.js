@@ -11,8 +11,9 @@ const userNewProfile = TryCatch(async (req, res, next) => {
     //there are declare payloads
     let usersignup_id = req.user;
     let { user_name, dob, abouts } = req.body;
-    let filePath = req.file.path;
-
+    // let filePath = req.file.path;
+    let filePath = req.file.filename;
+    
     if (!usersignup_id) {
         return next(errorHandler("Wrong cridential", 400));
     }
@@ -34,7 +35,10 @@ const userNewProfile = TryCatch(async (req, res, next) => {
             else {
 
                 // there will upload file using with multer and cloudinary for generate path
-                let uploads = await uploadFiles(filePath);
+                // let uploads = await uploadFiles(filePath);
+
+                // there loaded filepath with localserver
+                let uploads = await uploadFiles();
 
                 if (!uploads) {
                     return next(errorHandler("File are not uploaded", 400));
@@ -45,16 +49,18 @@ const userNewProfile = TryCatch(async (req, res, next) => {
                     let userProfiledata = await userProfileModel.create({
                         usersignup_id,
                         user_name,
-                        user_profileimg: uploads.secure_url,
+                        // user_profileimg: uploads.secure_url,
+                        user_profileimg: uploads+'uploads/'+filePath,
                         dob,
                         abouts
                     });
-
+                    
                     if (!userProfiledata) {
                         return next(errorHandler("Profile are not created", 404));
                     }
                     else {
                         return res.status(201).send({ msg: "Your profile can be created successfully" });
+
                     }
 
                 }
@@ -121,7 +127,8 @@ const userProfileImageupdate = TryCatch(async (req, res, next) => {
 
     // there declare payload
     let { userprofile_id } = req.params;
-    let filePath = req.file.path;
+    // let filePath = req.file.path;
+    let filePath = req.file.filename;
 
     // check exist user
     let existUser = await userProfileModel.findOne({ _id: userprofile_id }).exec();
@@ -137,7 +144,10 @@ const userProfileImageupdate = TryCatch(async (req, res, next) => {
         else {
 
             // there upload image file with multer and cloudinary
-            let uploads = await uploadFiles(filePath);
+            // let uploads = await uploadFiles(filePath);
+
+            // there loaded filepath with localserver
+            let uploads = await uploadFiles();
 
             if (!uploads) {
                 return next(errorHandler("File can not upload", 404));
@@ -148,7 +158,8 @@ const userProfileImageupdate = TryCatch(async (req, res, next) => {
                     _id: userprofile_id
                 }, {
                     $set: {
-                        user_profileimg: uploads.secure_url
+                        // user_profileimg: uploads.secure_url
+                        user_profileimg: uploads + 'uploads/' + filePath
                     }
                 });
 
