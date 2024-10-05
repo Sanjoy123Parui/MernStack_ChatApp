@@ -9,29 +9,25 @@ const adminSignupRouter = express.Router();
 // there are declare admin signup all routes endpoint
 
 // admin Register end-point router with post
-adminSignupRouter.route('/signup/register')
-.post(
+adminSignupRouter.route('/signup/register').post(
     adminRegister
 );
 
 
 // admin login end-point router with post
-adminSignupRouter.route('/signup/login')
-.post(
+adminSignupRouter.route('/signup/login').post(
     adminLogin
 );
 
 
 // admin recover authorization end-point router with post
-adminSignupRouter.route('/signup/recover/admin')
-.post(
+adminSignupRouter.route('/signup/recover/admin').post(
     adminRecover
 );
 
 
 // admin logout end-point router with post
-adminSignupRouter.route('/signup/logout')
-.post(
+adminSignupRouter.route('/signup/logout').post(
     adminCheckAuth, 
     adminLogout
 );
