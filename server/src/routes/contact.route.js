@@ -8,11 +8,15 @@ const contactRouter = express.Router();
 
 // here define contact router endpoints with method
 
+
+
 // add contact router endpoint with post
 contactRouter.route('/add').post(
     userCheckAuth,
     addContact
 );
+
+
 
 // export contact router
 export { contactRouter };
