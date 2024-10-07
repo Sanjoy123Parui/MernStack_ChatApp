@@ -1,5 +1,12 @@
 import express from "express";
-import { userRegister, userLogin, userRecover, userLogout } from '../controllers/userSingup.controller.js';
+
+import { 
+    userRegister, 
+    userLogin, 
+    userRecover, 
+    userLogout 
+} from '../controllers/userSingup.controller.js';
+
 import { userCheckAuth } from '../middlewares/auth.middleware.js';
 
 

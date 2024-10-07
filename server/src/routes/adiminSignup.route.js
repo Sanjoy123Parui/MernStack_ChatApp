@@ -1,5 +1,12 @@
 import express from "express";
-import { adminRegister, adminLogin, adminRecover, adminLogout } from '../controllers/adminSignup.controller.js';
+
+import { 
+    adminRegister, 
+    adminLogin, 
+    adminRecover, 
+    adminLogout 
+} from '../controllers/adminSignup.controller.js';
+
 import { adminCheckAuth } from '../middlewares/auth.middleware.js';
 
 // there define admin signup router

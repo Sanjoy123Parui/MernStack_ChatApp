@@ -1,5 +1,13 @@
 import express from "express";
-import { userNewProfile, userProfileviewAll, userProfileview, userProfileImageupdate, userProfileupdate } from '../controllers/userProfile.controller.js';
+
+import { 
+    userNewProfile, 
+    userProfileviewAll, 
+    userProfileview, 
+    userProfileImageupdate, 
+    userProfileupdate 
+} from '../controllers/userProfile.controller.js';
+
 import { userCheckAuth, adminCheckAuth } from '../middlewares/auth.middleware.js';
 import { uploadObj } from '../middlewares/fileuploads.middleware.js';
 

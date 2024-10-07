@@ -1,5 +1,12 @@
 import express from "express";
-import { adminNewprofile, adminViewprofile, adminProfileImageupdate, adminProfileupdate } from '../controllers/adminProfile.controller.js';
+
+import { 
+    adminNewprofile, 
+    adminViewprofile, 
+    adminProfileImageupdate, 
+    adminProfileupdate 
+} from '../controllers/adminProfile.controller.js';
+
 import { adminCheckAuth } from '../middlewares/auth.middleware.js';
 import { uploadObj } from '../middlewares/fileuploads.middleware.js';
 

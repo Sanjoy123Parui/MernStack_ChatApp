@@ -29,7 +29,7 @@ const sendUserToken = async (res, user, statusCode, message) => {
         return res.status(statusCode)
             .cookie('access_userToken', access_userToken, cookieOptions)
             .cookie('refresh_userToken', refresh_userToken, cookieOptions)
-            .json({ message, access_userToken, refresh_userToken });
+            .json({ message, access_userToken, refresh_userToken, userId });
 
     }
     catch (error) {
