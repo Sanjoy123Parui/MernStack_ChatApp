@@ -13,9 +13,9 @@ const userNewProfile = TryCatch(async (req, res, next) => {
     let { user_name, gender, dob, abouts } = req.body;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
-    
+
     if (!usersignup_id) {
-        return next(errorHandler("Wrong cridential", 400));
+        return next(errorHandler("Please login login to access user", 400));
     }
     else {
 
@@ -50,12 +50,12 @@ const userNewProfile = TryCatch(async (req, res, next) => {
                         usersignup_id,
                         user_name,
                         // user_profileimg: uploads.secure_url,
-                        user_profileimg: uploads+'uploads/'+filePath,
+                        user_profileimg: uploads + 'uploads/' + filePath,
                         gender,
                         dob,
                         abouts
                     });
-                    
+
                     if (!userProfiledata) {
                         return next(errorHandler("Profile are not created", 404));
                     }
@@ -79,12 +79,40 @@ const userNewProfile = TryCatch(async (req, res, next) => {
 // admin view all user profile with controller
 const userProfileviewAll = TryCatch(async (req, res, next) => {
 
-    // there are view profile data of user into the database
-    let userProfiledata = await userProfileModel.find({}).populate({
-        path: 'usersigup_id'
-    }).exec();
+    // here declare payload
+    let adminsignup_id = req.admin;
 
-    return res.status(200).json({ data: userProfiledata });
+    // check codition admin was login or not
+    if (!adminsignup_id) {
+
+        return next(errorHandler("Please login to access admin", 400));
+
+    }
+    else {
+
+        // there are view profile data of user into the database
+        let userProfiledata = await userProfileModel.find({}).populate({
+            path: 'usersignup_id'
+        }).exec();
+
+        // here was exact data retrive in given array and return new array
+        let data = await userProfiledata.map((profile) => {
+
+            return ({
+                'user_name': profile.user_name,
+                'user_profileimg': profile.user_profileimg,
+                'gender': profile.gender,
+                'dob': profile.dob,
+                'abouts': profile.abouts,
+                'phone': profile.usersignup_id.phone,
+                'country': profile.usersignup_id.country
+            });
+
+        });
+
+        return res.status(200).json({ data });
+
+    }
 
 });
 
@@ -93,32 +121,44 @@ const userProfileviewAll = TryCatch(async (req, res, next) => {
 const userProfileview = TryCatch(async (req, res, next) => {
 
     // declare payload of params
+    let usersignup_id = req.user;
     let { userprofile_id } = req.params;
 
-    // there are user profile fetch
-    let userProfiledata = await userProfileModel.findById(userprofile_id)
-        .populate({
-            path: 'usersignup_id'
-        }).exec();
+    if (!usersignup_id) {
 
+        return next(errorHandler("Please login login to access user", 400));
 
-    // check the condition user data
-    if (!userProfiledata) {
-        return next(errorHandler("Profile data are not find here"));
     }
     else {
 
-        return res.status(200).json({
-            data: {
-                user_name: userProfiledata.user_name,
-                user_profileimg: userProfiledata.user_profileimg,
-                gender:userProfiledata.gender,
-                dob: userProfiledata.dob,
-                abouts: userProfiledata.abouts,
-                phone: userProfiledata.usersignup_id.phone
-            }
-        });
+        // there are user profile fetch
+        let userProfiledata = await userProfileModel.findById(userprofile_id)
+            .populate({
+                path: 'usersignup_id'
+            }).exec();
+
+
+        // check the condition user data
+        if (!userProfiledata) {
+            return next(errorHandler("Profile data are not find here"));
+        }
+        else {
+
+            return res.status(200).json({
+                data: {
+                    user_name: userProfiledata.user_name,
+                    user_profileimg: userProfiledata.user_profileimg,
+                    gender: userProfiledata.gender,
+                    dob: userProfiledata.dob,
+                    abouts: userProfiledata.abouts,
+                    phone: userProfiledata.usersignup_id.phone
+                }
+            });
+        }
+
     }
+
+
 
 });
 
@@ -128,56 +168,65 @@ const userProfileview = TryCatch(async (req, res, next) => {
 const userProfileImageupdate = TryCatch(async (req, res, next) => {
 
     // there declare payload
+    let usersignup_id = req.user;
     let { userprofile_id } = req.params;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
 
-    // check exist user
-    let existUser = await userProfileModel.findOne({ _id: userprofile_id }).exec();
+    // check condition for user can be access or not
+    if (!usersignup_id) {
 
-    if (!existUser) {
-        return next(errorHandler("User are not found", 400));
+        return next(errorHandler("Please login login to access user", 400));
+
     }
     else {
 
-        if (!filePath) {
-            return next(errorHandler("File are required", 400));
+        // check exist user
+        let existUser = await userProfileModel.findOne({ _id: userprofile_id }).exec();
+
+        if (!existUser) {
+            return next(errorHandler("User are not found", 400));
         }
         else {
 
-            // there upload image file with multer and cloudinary
-            // let uploads = await uploadFiles(filePath);
-
-            // there loaded filepath with localserver
-            let uploads = await uploadFiles();
-
-            if (!uploads) {
-                return next(errorHandler("File can not upload", 404));
+            if (!filePath) {
+                return next(errorHandler("File are required", 400));
             }
             else {
 
-                let userProfiledata = await userProfileModel.updateOne({
-                    _id: userprofile_id
-                }, {
-                    $set: {
-                        // user_profileimg: uploads.secure_url
-                        user_profileimg: uploads + 'uploads/' + filePath
-                    }
-                });
+                // there upload image file with multer and cloudinary
+                // let uploads = await uploadFiles(filePath);
 
-                if (!userProfiledata.acknowledged) {
-                    return next(errorHandler("Profile image can not changed"));
+                // there loaded filepath with localserver
+                let uploads = await uploadFiles();
+
+                if (!uploads) {
+                    return next(errorHandler("File can not upload", 404));
                 }
                 else {
-                    return res.status(200).json({ msg: "Your profile picture has been changed" });
+
+                    let userProfiledata = await userProfileModel.updateOne({
+                        _id: userprofile_id
+                    }, {
+                        $set: {
+                            // user_profileimg: uploads.secure_url
+                            user_profileimg: uploads + 'uploads/' + filePath
+                        }
+                    });
+
+                    if (!userProfiledata.acknowledged) {
+                        return next(errorHandler("Profile image can not changed"));
+                    }
+                    else {
+                        return res.status(200).json({ msg: "Your profile picture has been changed" });
+                    }
+
                 }
 
             }
 
         }
-
     }
-
 
 });
 
@@ -192,39 +241,52 @@ const userProfileupdate = TryCatch(async (req, res, next) => {
     // there have check the request method of condition
     if (req.method === 'PUT' || req.method === 'PATCH') {
         // declare payload data of params and body
+        let usersignup_id = req.user;
         let { userprofile_id } = req.params;
         let { user_name, gender, dob, abouts } = req.body;
 
-        // there are declare userprofile_id was found or not
-        let existUser = await userProfileModel.findOne({ _id: userprofile_id }).exec();
 
-        if (!existUser) {
-            return next(errorHandler("User are not found", 404));
+        // here check condition user can access or not
+        if (!usersignup_id) {
+
+            return next(errorHandler("Please login login to access user", 400));
+
         }
         else {
 
-            // there can be updated data of profile
-            let userProfiledata = await userProfileModel.updateOne({
-                _id: userprofile_id
-            }, {
-                $set: {
-                    user_name,
-                    gender,
-                    dob,
-                    abouts
-                }
-            });
+            // there are declare userprofile_id was found or not
+            let existUser = await userProfileModel.findOne({ _id: userprofile_id }).exec();
 
-            // check the condition for update data
-            if (!userProfiledata.matchedCount && userProfiledata.modifiedCount) {
-                return next(errorHandler("Data can not be changed", 404));
+            if (!existUser) {
+                return next(errorHandler("User are not found", 404));
             }
             else {
-                return res.status(200).json({ msg: "Profile was updated successfully" });
+
+                // there can be updated data of profile
+                let userProfiledata = await userProfileModel.updateOne({
+                    _id: userprofile_id
+                }, {
+                    $set: {
+                        user_name,
+                        gender,
+                        dob,
+                        abouts
+                    }
+                });
+
+                // check the condition for update data
+                if (!userProfiledata.matchedCount && userProfiledata.modifiedCount) {
+                    return next(errorHandler("Data can not be changed", 404));
+                }
+                else {
+                    return res.status(200).json({ msg: "Profile was updated successfully" });
+                }
+
             }
 
         }
     }
+
     else {
         return next(errorHandler("Wrong Cridential", 400));
     }

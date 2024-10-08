@@ -29,7 +29,7 @@ const sendUserToken = async (res, user, statusCode, message) => {
         return res.status(statusCode)
             .cookie('access_userToken', access_userToken, cookieOptions)
             .cookie('refresh_userToken', refresh_userToken, cookieOptions)
-            .json({ message, access_userToken, refresh_userToken, userId });
+            .json({ message, access_userToken, refresh_userToken, _id:userId });
 
     }
     catch (error) {
@@ -63,7 +63,7 @@ const sendAdminToken = async (res, admin, statusCode, message) => {
         return res.status(statusCode)
             .cookie('access_adminToken', access_adminToken, cookieOptions)
             .cookie('refresh_adminToken', refresh_adminToken, cookieOptions)
-            .json({ message, access_adminToken, refresh_adminToken });
+            .json({ message, access_adminToken, refresh_adminToken, _id:adminId });
 
     }
     catch (error) {

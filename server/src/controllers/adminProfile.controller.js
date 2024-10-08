@@ -15,7 +15,9 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
     let filePath = req.file.filename;
 
     if (!adminsignup_id) {
-        return next(errorHandler("Wrong Cridential", 400));
+
+        return next(errorHandler("Please Login to access admin", 400));
+
     }
     else {
 
@@ -51,7 +53,7 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
                         adminsignup_id,
                         admin_name,
                         // admin_profileimg: uploads.secure_url,
-                        admin_profileimg: uploads+'uploads/'+filePath,
+                        admin_profileimg: uploads + 'uploads/' + filePath,
                         gender,
                         dob,
                         abouts
@@ -62,7 +64,7 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
                         return next(errorHandler("Profile can not inserted"));
                     }
                     else {
-                        
+
                         return res.status(201).send({ msg: "Your profile was created successfully" });
                     }
                 }
@@ -80,30 +82,40 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
 const adminViewprofile = TryCatch(async (req, res, next) => {
 
     // there are declare payload of params
+    let adminsignup_id = req.admin;
     let { adminprofile_id } = req.params;
 
-    // there can check findn the data
-    let existAdmin = await adminProfileModel.findById(adminprofile_id).populate({
-        path: 'adminsignup_id'
-    }).exec();
 
-    // there was check existAdmin
-    if (!existAdmin) {
-        return next(errorHandler("Admin data are not found"));
+    // check condition for admin can be access or not
+    if (!adminsignup_id) {
+
+        return next(errorHandler("Please Login to access admin", 400));
+
     }
     else {
-        return res.status(200).json({
-            data: {
-                admin_name: existAdmin.admin_name,
-                admin_profileimg: existAdmin.admin_profileimg,
-                gender:existAdmin.gender,
-                dob: existAdmin.dob,
-                abouts: existAdmin.abouts,
-                phone: existAdmin.adminsignup_id.phone
-            }
-        });
-    }
 
+        // there can check findn the data
+        let existAdmin = await adminProfileModel.findById(adminprofile_id).populate({
+            path: 'adminsignup_id'
+        }).exec();
+
+        // there was check existAdmin
+        if (!existAdmin) {
+            return next(errorHandler("Admin data are not found"));
+        }
+        else {
+            return res.status(200).json({
+                data: {
+                    admin_name: existAdmin.admin_name,
+                    admin_profileimg: existAdmin.admin_profileimg,
+                    gender: existAdmin.gender,
+                    dob: existAdmin.dob,
+                    abouts: existAdmin.abouts,
+                    phone: existAdmin.adminsignup_id.phone
+                }
+            });
+        }
+    }
 });
 
 
@@ -112,54 +124,65 @@ const adminViewprofile = TryCatch(async (req, res, next) => {
 const adminProfileImageupdate = TryCatch(async (req, res, next) => {
 
     // there declare payload
+    let adminsignup_id = req.admin;
     let { adminprofile_id } = req.params;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
 
-    // there are declare existadmin data
-    let existAdmin = await adminProfileModel.findById(adminprofile_id).exec();
 
-    if (!existAdmin) {
-        return next(errorHandler("Admin are not found", 404));
+    // check condition for admin access
+    if (!adminsignup_id) {
+
+        return next(errorHandler("Please Login to access admin", 400));
+
     }
     else {
 
-        // check filepath
-        if (!filePath) {
-            return next(errorHandler("File ar not required", 400));
+        // there are declare existadmin data
+        let existAdmin = await adminProfileModel.findById(adminprofile_id).exec();
+
+        if (!existAdmin) {
+            return next(errorHandler("Admin are not found", 404));
         }
         else {
 
-            // there upload admin profile image with coludinary and multer filepath
-            // let uploads = await uploadFiles(filePath);
-
-            // there upload file in localserver
-            let uploads = await uploadFiles();
-
-            // check condition
-            if (!uploads) {
-                return next(errorHandler("File can not uploaded", 400));
+            // check filepath
+            if (!filePath) {
+                return next(errorHandler("File ar not required", 400));
             }
             else {
 
-                let adminProdfiledata = await adminProfileModel.updateOne({
-                    _id: adminprofile_id
-                }, {
-                    // admin_profileimg: uploads.secure_url
-                    admin_profileimg: uploads+'uploads/'+filePath
-                });
+                // there upload admin profile image with coludinary and multer filepath
+                // let uploads = await uploadFiles(filePath);
 
-                if (!adminProdfiledata.acknowledged) {
-                    return next(errorHandler("Profile picture can't changed"));
+                // there upload file in localserver
+                let uploads = await uploadFiles();
+
+                // check condition
+                if (!uploads) {
+                    return next(errorHandler("File can not uploaded", 400));
                 }
                 else {
-                    return res.status(200).json({ msg: "Your profile picture are changed successfully" });
+
+                    let adminProdfiledata = await adminProfileModel.updateOne({
+                        _id: adminprofile_id
+                    }, {
+                        // admin_profileimg: uploads.secure_url
+                        admin_profileimg: uploads + 'uploads/' + filePath
+                    });
+
+                    if (!adminProdfiledata.acknowledged) {
+                        return next(errorHandler("Profile picture can't changed"));
+                    }
+                    else {
+                        return res.status(200).json({ msg: "Your profile picture are changed successfully" });
+                    }
+
                 }
 
             }
 
         }
-
     }
 
 });
@@ -173,36 +196,50 @@ const adminProfileupdate = TryCatch(async (req, res, next) => {
     if (req.method === 'PUT' || req.method === 'PATCH') {
 
         // there are declare payload
+        let adminsignup_id = req.admin;
         let { adminprofile_id } = req.params;
         let { admin_name, gender, dob, abouts } = req.body;
 
-        // existAdmin for are found or not
-        let existAdmin = await adminProfileModel.findById(adminprofile_id).exec();
 
-        if (!existAdmin) {
-            return next(errorHandler("Admin are not found", 404));
+        // here check condition for admin can be access
+        if (!adminsignup_id) {
+
+            return next(errorHandler("Please Login to access admin", 400));
+
         }
+
         else {
 
-            // there update admin profile data into the database
-            let adminProfiledata = await adminProfileModel.updateOne({
-                _id: adminprofile_id
-            }, {
-                $set: {
-                    admin_name,
-                    gender,
-                    dob,
-                    abouts
-                }
-            });
 
-            if (!adminProfiledata.matchedCount && adminProfiledata.modifiedCount) {
-                return next(errorHandler("Your profile are not updated"));
+
+            // existAdmin for are found or not
+            let existAdmin = await adminProfileModel.findById(adminprofile_id).exec();
+
+            if (!existAdmin) {
+                return next(errorHandler("Admin are not found", 404));
             }
             else {
-                return res.status(200).json({ msg: "Your profile has been updated successfully" });
-            }
 
+                // there update admin profile data into the database
+                let adminProfiledata = await adminProfileModel.updateOne({
+                    _id: adminprofile_id
+                }, {
+                    $set: {
+                        admin_name,
+                        gender,
+                        dob,
+                        abouts
+                    }
+                });
+
+                if (!adminProfiledata.matchedCount && adminProfiledata.modifiedCount) {
+                    return next(errorHandler("Your profile are not updated"));
+                }
+                else {
+                    return res.status(200).json({ msg: "Your profile has been updated successfully" });
+                }
+
+            }
         }
 
     }
