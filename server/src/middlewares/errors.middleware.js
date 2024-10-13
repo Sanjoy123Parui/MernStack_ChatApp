@@ -14,11 +14,11 @@ const checkError = (err, req, res, next)=>{
     if(err.name === "CastError"){
         let errorPath = err.path
         err.message = `Invalid Format of ${errorPath}`;
-        err.code = 400;
+        err.statusCode = 400;
     }
 
     return res.status(err.statusCode).json({
-        message: process.env.NODE_ENV.trim() === "DEVELOPMENT" ? err : err.message
+        message: process.env.NODE_ENV.trim() === "DEVELOPMENT" ? err.message : err.message
     });
 }
 
