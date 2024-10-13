@@ -18,8 +18,9 @@ import { conn } from './src/config/conncectdb.js';
 // there are connect database
 conn(process.env.MONGODB_URI);
 
-// there are declare port and middleware object
+// there are declare port, server running for developement or production
 const port = process.env.PORT || 5000;
+const nodeENV = process.env.NODE_ENV.trim() || "PRODUCTION";
 
 // there are use middlewares
 app.use(cors({origin:"*"}));
@@ -47,6 +48,6 @@ app.use(checkError);
 // there was listen server and restart
 server.listen(port, ()=>{
 
-    console.log(`Server has been started at ${port}`);
+    console.log(`Server has been started at ${port} is ${nodeENV} mode`);
     
 });
