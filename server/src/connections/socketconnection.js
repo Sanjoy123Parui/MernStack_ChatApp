@@ -2,7 +2,12 @@
 import http from "http";
 import express from "express";
 import { Server } from "socket.io";
-import { CONNECTION, DISCONNECT } from '../constants/events.js';
+
+import {
+    CONNECTION,
+    DISCONNECT
+} from '../constants/events.js';
+
 
 // here define object of socket.io connection
 const app = express();
@@ -19,6 +24,7 @@ io.on(CONNECTION, (socket) => {
 
     console.log("User connected successfully");
 
+
     // disconnect of io connection
     socket.on(DISCONNECT, () => {
 
@@ -32,6 +38,3 @@ io.on(CONNECTION, (socket) => {
 // export socket.io connection
 export { app, io, server };
 console.log("Websocket are worked successfully");
-
-
-

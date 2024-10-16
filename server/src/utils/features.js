@@ -73,15 +73,6 @@ const sendAdminToken = async (res, admin, statusCode, message) => {
     }
 }
 
-
-// here define emitEvents function
-const emitEvents = (req, event, users, data)=>{
-
-    console.log('Emitting events');
-    
-}
-
 // export features
 export { sendUserToken, sendAdminToken, cookieOptions };
-
 console.log('Auth features is worked successfully');

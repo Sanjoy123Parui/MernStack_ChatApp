@@ -11,7 +11,7 @@ const userCheckAuth = TryCatch(async (req, res, next) => {
 
     // here check token are exist or not with condition
     if (!userToken) {
-        return next(errorHandler("Unauthorized token please login to access", 401))
+        return next(errorHandler("Unauthorized token please login to access", 401));
     }
     else {
 

@@ -1,4 +1,4 @@
-// here declare all events of socket.io
+// here define socket.io connecction events
 const CONNECTION = 'connection';
 const DISCONNECT = 'disconnect';
 

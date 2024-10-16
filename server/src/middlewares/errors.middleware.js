@@ -20,6 +20,8 @@ const checkError = (err, req, res, next)=>{
     return res.status(err.statusCode).json({
         message: process.env.NODE_ENV.trim() === "DEVELOPMENT" ? err.message : err.message
     });
+
+   
 }
 
 // export error middleware
