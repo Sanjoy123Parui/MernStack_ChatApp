@@ -1,4 +1,4 @@
-// import jwt library
+// import library and modules 
 import jwt from "jsonwebtoken";
 import { TryCatch } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';

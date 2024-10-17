@@ -19,6 +19,7 @@ const io = new Server(server, {
 });
 
 
+
 // here are define socket.io connections
 io.on(CONNECTION, (socket) => {
 
@@ -34,7 +35,6 @@ io.on(CONNECTION, (socket) => {
 
 });
 
-
 // export socket.io connection
-export { app, io, server };
+export { app, server };
 console.log("Websocket are worked successfully");
