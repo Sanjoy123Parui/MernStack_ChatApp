@@ -1,6 +1,4 @@
 // create error middleware
-
-// here define error middleware was http
 const checkError = (err, req, res, next) => {
 
     err.message ||= "Internal server error";
@@ -26,6 +24,7 @@ const checkError = (err, req, res, next) => {
 
 
 }
+
 
 
 // export error middleware

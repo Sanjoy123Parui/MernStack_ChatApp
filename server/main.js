@@ -3,7 +3,9 @@ import dotenv from "dotenv";
 dotenv.config({ path: './.env' });
 import express from "express";
 import cors from "cors";
-import cookiParser from "cookie-parser";
+import cookieParser from "cookie-parser";
+import { corsOption } from './src/lib/optionconfig.js';
+
 import { checkError } from './src/middlewares/errors.middleware.js';
 import { userSignupRouter } from './src/routes/userSignup.route.js';
 import { userprofileRouter } from './src/routes/userProfile.route.js';
@@ -11,8 +13,9 @@ import { contactRouter } from './src/routes/contact.route.js';
 import { adminSignupRouter } from './src/routes/adiminSignup.route.js';
 import { adminProfileRouter } from './src/routes/adminProfile.route.js';
 
-import { app, server } from './src/connections/socketconnection.js';
+import { app, io, server } from './src/connections/socketconnection.js';
 import { conn } from './src/config/conncectdb.js';
+
 
 // there are connect database
 conn(process.env.MONGODB_URI);
@@ -22,11 +25,11 @@ const port = process.env.PORT || 5000;
 const nodeENV = process.env.NODE_ENV.trim() || "PRODUCTION";
 
 // there are use middlewares
-app.use(cors({ origin: "*" }));
+app.use(cors(corsOption));
 app.use(express.static('./src/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cookiParser());
+app.use(cookieParser());
 
 
 // check the rest api
@@ -43,6 +46,9 @@ app.use('/admin/api', adminProfileRouter);
 
 // there are use error middlewares
 app.use(checkError);
+
+
+
 
 // there was listen server and restart
 server.listen(port, () => {

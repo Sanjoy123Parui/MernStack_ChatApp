@@ -1,6 +1,7 @@
 // here import all socket.io connection library packages
 import http from "http";
 import express from "express";
+import { corsOption } from '../lib/optionconfig.js';
 import { Server } from "socket.io";
 
 import {
@@ -13,28 +14,23 @@ import {
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
-    cors: {
-        origin: "*"
-    }
+    cors: corsOption
 });
 
-
-
-// here are define socket.io connections
+// here define connection with events
 io.on(CONNECTION, (socket) => {
 
-    console.log("User connected successfully");
+    console.log('User connected successfully', socket.id);
 
-
-    // disconnect of io connection
     socket.on(DISCONNECT, () => {
 
-        console.log("User disconnected");
+        console.log('User disconnected successfully');
 
     });
 
 });
 
+
 // export socket.io connection
-export { app, server };
+export { app, io, server };
 console.log("Websocket are worked successfully");

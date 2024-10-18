@@ -8,6 +8,7 @@ const errorHandler = (message, statusCode) => {
 }
 
 
+
 // export utility
 export { errorHandler };
 console.log('Error handler utility is worked successfully');
