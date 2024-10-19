@@ -4,8 +4,8 @@ dotenv.config({ path: './.env' });
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { corsOption } from './src/lib/optionconfig.js';
 
+import { corsOption } from './src/lib/optionconfig.js';
 import { checkError } from './src/middlewares/errors.middleware.js';
 import { userSignupRouter } from './src/routes/userSignup.route.js';
 import { userprofileRouter } from './src/routes/userProfile.route.js';
@@ -36,6 +36,7 @@ app.use(cookieParser());
 app.get('/', (req, res) => {
     res.sendFile('./src/public/index.html');
 });
+
 
 // there are use all endpoints of middleware
 app.use('/user/api', userSignupRouter);
