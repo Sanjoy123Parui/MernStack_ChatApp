@@ -4,11 +4,6 @@ import express from "express";
 import { corsOption } from '../lib/optionconfig.js';
 import { Server } from "socket.io";
 
-import {
-    CONNECTION,
-    DISCONNECT
-} from '../constants/events.js';
-
 
 // here define object of socket.io connection
 const app = express();
@@ -18,11 +13,11 @@ const io = new Server(server, {
 });
 
 // here define connection with events
-io.on(CONNECTION, (socket) => {
+io.on("connection", (socket) => {
 
     console.log('User connected successfully', socket.id);
 
-    socket.on(DISCONNECT, () => {
+    socket.on("disconnect", () => {
 
         console.log('User disconnected successfully');
 

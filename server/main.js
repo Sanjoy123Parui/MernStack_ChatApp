@@ -13,7 +13,7 @@ import { contactRouter } from './src/routes/contact.route.js';
 import { adminSignupRouter } from './src/routes/adiminSignup.route.js';
 import { adminProfileRouter } from './src/routes/adminProfile.route.js';
 
-import { app, io, server } from './src/connections/socketconnection.js';
+import { app, server } from './src/connections/socketconnection.js';
 import { conn } from './src/config/conncectdb.js';
 
 
@@ -44,6 +44,7 @@ app.use('/user/api', userprofileRouter);
 app.use('/contact/api', contactRouter);
 app.use('/admin/api', adminSignupRouter);
 app.use('/admin/api', adminProfileRouter);
+
 
 // there are use error middlewares
 app.use(checkError);
