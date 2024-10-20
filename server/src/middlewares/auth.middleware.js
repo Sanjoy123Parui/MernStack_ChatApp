@@ -1,7 +1,7 @@
 // import library and modules 
 import jwt from "jsonwebtoken";
-import { TryCatch } from '../helpers/try-catch.helper.js';
-import { errorHandler } from '../utils/utility.js';
+import { TryCatch, eventTryCatch } from '../helpers/try-catch.helper.js';
+import { errorHandler, eventErrorHandler } from '../utils/utility.js';
 
 // there are define user authentication
 const userCheckAuth = TryCatch(async (req, res, next) => {
@@ -43,7 +43,50 @@ const adminCheckAuth = TryCatch(async (req, res, next) => {
 });
 
 
+// here define socketIO authentication middleware
+const socketIoAuthenticator = eventTryCatch(async (err, socket, next) => {
+
+    if (err) {
+
+        return next(eventErrorHandler("Please login to access authentication"));
+
+    }
+    else {
+
+        // there define token from auhentication
+        // let userToken = socket.request.headers.cookie.split(';').find(c => c.trim().startsWith('access_userToken='))?.split('=')[1];
+        let userToken = socket.request.cookies.access_userToken;
+
+        // check token has been authenticate
+        if (!userToken) {
+            return next(eventErrorHandler("Unauthorized token please login to access"));
+        }
+        else {
+
+            // here decoded token 
+            let decodeData = jwt.verify(userToken, process.env.JWT_ACCESS_SCKEY);
+            let user = await decodeData._id;
+
+            // check user found or not
+            if(!user){
+                return next(eventErrorHandler("Please login to access authentication"));
+            }
+
+            else{
+
+                socket.user = user;
+                next();
+
+            }
+
+        }
+
+    }
+
+
+});
+
 
 // export auth middleware
-export { userCheckAuth, adminCheckAuth };
+export { userCheckAuth, adminCheckAuth, socketIoAuthenticator };
 console.log('Auth middleware is worked successfully');
