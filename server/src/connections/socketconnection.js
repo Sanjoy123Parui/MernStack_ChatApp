@@ -4,14 +4,11 @@ import express from "express";
 import { corsOption } from '../lib/optionconfig.js';
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
+import {
+    singleUserChat
+} from '../seeders/singlechat.js';
 import { socketIoAuthenticator } from '../middlewares/auth.middleware.js';
 import { checkEventsError } from '../middlewares/errors.middleware.js';
-import { eventErrorHandler } from '../utils/utility.js';
-import { eventTryCatch } from '../helpers/try-catch.helper.js';
-import {
-    CONNECTION,
-    DISCONNECT
-} from '../constants/eventsHandler.js';
 
 
 // here define object of socket.io connection
@@ -21,8 +18,6 @@ const io = new Server(server, {
     cors: corsOption
 });
 
-// here declare connected users
-const connectedUser = new Map();
 
 // here are use socket.io authentication of middleware
 io.use((socket, next) => {
@@ -33,34 +28,28 @@ io.use((socket, next) => {
         async (err) => await socketIoAuthenticator(err, socket, next)
     );
 
-    (err)=> checkEventsError(err, socket, next);
+})
+
+
+// here define all namespace
+singleUserChat();
+
+
+// here was use global error middleware
+io.use(async(socket, next)=>{
+
+    try {
+
+        next();
+        
+    } 
+    catch (err) {
+        await checkEventsError(err, socket, next);
+    }
 
 });
-
-// here define connection with events
-io.on(CONNECTION, (socket) => {
-
-    // user _id
-    let userId = socket.user;
-
-    let users = connectedUser.set(userId.toString(), socket.id);
-
-    console.log('User connected successfully', users);
-
-
-    // disconnect 
-    socket.on(DISCONNECT, () => {
-
-        console.log('User disconnected successfully');
-
-    });
-
-});
-
-
-
 
 
 // export socket.io connection
-export { express, cookieParser, app, server };
+export { express, cookieParser, io, app, server };
 console.log("Websocket are worked successfully");

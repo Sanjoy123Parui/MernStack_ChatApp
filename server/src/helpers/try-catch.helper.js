@@ -1,3 +1,4 @@
+
 // there are define tryCatch helper function
 const TryCatch = (paramsData) => async (req, res, next) => {
 
@@ -14,24 +15,6 @@ const TryCatch = (paramsData) => async (req, res, next) => {
 }
 
 
-
-const eventTryCatch = (eventsParamdata) => async (data, socket, next) => {
-
-    // use try-catch
-    try {
-
-        await eventsParamdata(data, socket, next);
-
-    }
-    catch (error) {
-
-        next(error)
-
-    }
-
-}
-
-
 // export trycatch helper
-export { TryCatch, eventTryCatch };
+export { TryCatch };
 console.log('Try-Catch helper is worked successfully');

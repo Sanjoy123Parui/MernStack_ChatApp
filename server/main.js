@@ -25,7 +25,7 @@ const nodeENV = process.env.NODE_ENV.trim() || "PRODUCTION";
 //  use middlewares
 app.use(cors(corsOption));
 app.use(express.static('./src/public'));
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -42,7 +42,6 @@ app.use('/user/api', userprofileRouter);
 app.use('/contact/api', contactRouter);
 app.use('/admin/api', adminSignupRouter);
 app.use('/admin/api', adminProfileRouter);
-
 
 // use error middlewares
 app.use(checkError);

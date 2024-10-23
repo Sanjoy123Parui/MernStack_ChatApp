@@ -1,7 +1,7 @@
 // import library and modules 
 import jwt from "jsonwebtoken";
-import { TryCatch, eventTryCatch } from '../helpers/try-catch.helper.js';
-import { errorHandler, eventErrorHandler } from '../utils/utility.js';
+import { TryCatch } from '../helpers/try-catch.helper.js';
+import { errorHandler } from '../utils/utility.js';
 
 // there are define user authentication
 const userCheckAuth = TryCatch(async (req, res, next) => {
@@ -43,36 +43,34 @@ const adminCheckAuth = TryCatch(async (req, res, next) => {
 });
 
 
-// here define socketIO authentication middleware
-const socketIoAuthenticator = eventTryCatch(async (err, socket, next) => {
+//there are define socketIo authenticator
+const socketIoAuthenticator = TryCatch(async (err, socket, next) => {
 
+    // check err
     if (err) {
-
-        return next(eventErrorHandler("Please login to access authentication"));
-
+        return next(err);
     }
     else {
 
-        // there define token from auhentication
-        // let userToken = socket.request.headers.cookie.split(';').find(c => c.trim().startsWith('access_userToken='))?.split('=')[1];
+        // here can userToken authenticate
         let userToken = socket.request.cookies.access_userToken;
 
-        // check token has been authenticate
         if (!userToken) {
-            return next(eventErrorHandler("Unauthorized token please login to access"));
+            return next(errorHandler("Unauthorized token please login to access", 401));
         }
         else {
 
-            // here decoded token 
+            // declare there decoded data verify
             let decodeData = jwt.verify(userToken, process.env.JWT_ACCESS_SCKEY);
+
+            // here decoded data _id
             let user = await decodeData._id;
 
-            // check user found or not
-            if(!user){
-                return next(eventErrorHandler("Please login to access authentication"));
+            // check user
+            if (!user) {
+                return next(errorHandler("Please login to access authentication", 401));
             }
-
-            else{
+            else {
 
                 socket.user = user;
                 next();
@@ -82,7 +80,6 @@ const socketIoAuthenticator = eventTryCatch(async (err, socket, next) => {
         }
 
     }
-
 
 });
 
