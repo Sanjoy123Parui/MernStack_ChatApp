@@ -4,9 +4,7 @@ import {
     CONNECTION,
     DISCONNECT,
 } from '../constants/eventsHandler.js';
-import {
-    sendChat
-} from '../events/chatEvent.js';
+
 import { socketIoAuthenticator } from '../middlewares/auth.middleware.js';
 
 
@@ -16,9 +14,6 @@ const chatSeeders = (() => {
 
     // here create chat namespace
     const chatNameSpace = io.of('/chat-NameSpace');
-
-    // here was declare user
-    const connectedUser = new Map();
 
     // here use authenticate middleware of chatNameSpace
     chatNameSpace.use((socket, next) => {
@@ -37,21 +32,19 @@ const chatSeeders = (() => {
         // declare userId
         let userId = socket.user;
 
+        // here was declare user socket ids
+        const socketUser = new Map();
+
         // authenticate user connected with socket.io
-        let userConnection = connectedUser.set(userId.toString(), socket.id);
+        let userConnection = socketUser.set(userId.toString(), socket.id);
 
         console.log('User connected successfully', userConnection);
-
-
-        // here call all chat events
-        sendChat(socket, userId, chatNameSpace);
-        
 
         // disconnect user of chat namespace
         socket.on(DISCONNECT, () => {
 
             // authenticate user disconnect with socket.io
-            let disconnectUser = connectedUser.delete(userId.toString(), socket.id);
+            let disconnectUser = socketUser.delete(userId.toString(), socket.id);
 
             console.log('User was disconnect', disconnectUser);
 
