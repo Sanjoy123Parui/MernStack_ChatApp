@@ -45,9 +45,9 @@ const checkEventsError = (err, socket, next) => {
     // here declare which server has running
     let errorServer = process.env.NODE_ENV.trim() === "DEVELOPMENT" ? err.message : err.message;
 
-    
+
     socket.emit('err', errorServer);
-    next();
+    // next();
 }
 
 

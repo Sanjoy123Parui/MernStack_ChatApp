@@ -8,5 +8,9 @@ const DISCONNECT = "disconnect";
 const SEND_CHAT = "SEND_CHAT";
 
 // here export all events
-export { CONNECTION, DISCONNECT, SEND_CHAT };
+export {
+    CONNECTION,
+    DISCONNECT,
+    SEND_CHAT
+};
 console.log('Events constant handler is worked successfully');

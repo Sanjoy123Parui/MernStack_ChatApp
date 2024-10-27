@@ -3,11 +3,11 @@ import { io, cookieParser } from '../connections/socketconnection.js';
 import {
     CONNECTION,
     DISCONNECT,
-    SEND_CHAT
 } from '../constants/eventsHandler.js';
+import {
+    sendChat
+} from '../events/chatEvent.js';
 import { socketIoAuthenticator } from '../middlewares/auth.middleware.js';
-import { checkEventsError } from '../middlewares/errors.middleware.js';
-
 
 
 
@@ -42,34 +42,10 @@ const chatSeeders = (() => {
 
         console.log('User connected successfully', userConnection);
 
-        // send message
-        socket.on(SEND_CHAT, async (data, next) => {
 
-            // use try-catch
-            try {
-
-                let msg = data;
-
-                // check userId
-                if (!userId) {
-                    next("Invalid User");
-                }
-                else {
-
-                    await msg;
-                    socket.emit(SEND_CHAT, msg);
-
-                }
-
-            }
-            catch (err) {
-
-                checkEventsError(err, socket, next);
-
-            }
-
-        });
-
+        // here call all chat events
+        sendChat(socket, userId, chatNameSpace);
+        
 
         // disconnect user of chat namespace
         socket.on(DISCONNECT, () => {
