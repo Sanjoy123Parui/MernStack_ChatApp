@@ -19,6 +19,9 @@ const io = new Server(server, {
 });
 
 
+// here was declare user socket ids
+const socketUser = new Map();
+
 
 // here are use socket.io authentication of middleware
 io.use((socket, next) => {
@@ -52,5 +55,5 @@ io.use(async (socket, next) => {
 
 
 // export socket.io connection
-export { express, cookieParser, io, app, server };
+export { express, cookieParser, io, socketUser, app, server };
 console.log("Websocket are worked successfully");

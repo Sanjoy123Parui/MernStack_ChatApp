@@ -1,12 +1,12 @@
 // import many packages of library and modules
-import { io, cookieParser } from '../connections/socketconnection.js';
+import { io, cookieParser, socketUser } from '../connections/socketconnection.js';
 import {
     CONNECTION,
     DISCONNECT,
+    SEND_CHAT
 } from '../constants/eventsHandler.js';
-
 import { socketIoAuthenticator } from '../middlewares/auth.middleware.js';
-
+import { checkEventsError } from '../middlewares/errors.middleware.js';
 
 
 // here define chat seeders namespace functionality
@@ -14,6 +14,7 @@ const chatSeeders = (() => {
 
     // here create chat namespace
     const chatNameSpace = io.of('/chat-NameSpace');
+
 
     // here use authenticate middleware of chatNameSpace
     chatNameSpace.use((socket, next) => {
@@ -32,13 +33,12 @@ const chatSeeders = (() => {
         // declare userId
         let userId = socket.user;
 
-        // here was declare user socket ids
-        const socketUser = new Map();
 
         // authenticate user connected with socket.io
         let userConnection = socketUser.set(userId.toString(), socket.id);
 
         console.log('User connected successfully', userConnection);
+
 
         // disconnect user of chat namespace
         socket.on(DISCONNECT, () => {
