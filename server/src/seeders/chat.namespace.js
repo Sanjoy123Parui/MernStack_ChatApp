@@ -3,7 +3,6 @@ import { io, cookieParser, socketUser } from '../connections/socketconnection.js
 import {
     CONNECTION,
     DISCONNECT,
-    SEND_CHAT
 } from '../constants/eventsHandler.js';
 import { socketIoAuthenticator } from '../middlewares/auth.middleware.js';
 import { checkEventsError } from '../middlewares/errors.middleware.js';
@@ -38,6 +37,7 @@ const chatSeeders = (() => {
         let userConnection = socketUser.set(userId.toString(), socket.id);
 
         console.log('User connected successfully', userConnection);
+      
 
 
         // disconnect user of chat namespace

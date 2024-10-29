@@ -4,10 +4,10 @@ import express from "express";
 import { corsOption } from '../lib/optionconfig.js';
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
-import { socketIoAuthenticator } from '../middlewares/auth.middleware.js';
 import {
     chatSeeders
 } from '../seeders/chat.namespace.js';
+import { socketIoAuthenticator } from '../middlewares/auth.middleware.js';
 import { checkEventsError } from '../middlewares/errors.middleware.js';
 
 
