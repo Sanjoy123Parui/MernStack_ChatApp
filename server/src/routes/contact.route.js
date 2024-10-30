@@ -17,8 +17,6 @@ const contactRouter = express.Router();
 
 // here define contact router end-points with method
 
-
-
 // add contact router end-point with post
 contactRouter.route('/add').post(
     userCheckAuth,
@@ -36,7 +34,7 @@ contactRouter.route('/view/all').get(
 
 
 // search contact router end-point with get
-contactRouter.route('/search/user').get(
+contactRouter.route('/search/user/:myprofile_id').get(
     userCheckAuth,
     searchContact
 );

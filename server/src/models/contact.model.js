@@ -1,13 +1,8 @@
 import mongoose from "mongoose";
 import { userProfileModel } from './userProfile.model.js';
-import { userSignupModel } from './userSignup.model.js';
 
 // here are define contact model schema
 const contactSchema = new mongoose.Schema({
-
-    contact_name: {
-        type: String,
-    },
 
     contact_phone: {
         type: String,
@@ -15,22 +10,30 @@ const contactSchema = new mongoose.Schema({
         required: true
     },
 
-    userprofile_id: {
+    contact_name: {
+        type: String,
+        required: true
+    },
+
+    contactprofile_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: userProfileModel,
         required: true
     },
 
-    usersignup_id: {
+    myprofile_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: userSignupModel,
+        ref: userProfileModel,
         required: true
     }
 
 }, {
+
     timestamps: true,
     versionKey: false
+
 });
+
 
 const contactModel = mongoose.model('contacts', contactSchema);
 
