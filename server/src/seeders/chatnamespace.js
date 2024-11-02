@@ -16,9 +16,6 @@ const chatSeeders = (() => {
         // retrieve the userid
         let userId = "v4v646fvf5356fevfv";
 
-
-
-
         // declare user connected with socket.io
         let connectedUser = userSocketIds.set(userId, socket.id);
 
