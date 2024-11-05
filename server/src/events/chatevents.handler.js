@@ -1,46 +1,37 @@
 // here import library packages and modules
 
 import {
-    CHAT_JOINROOM,
     SEND_CHAT
 } from '../constants/customevents.js';
+import { eventErrorHandler } from '../utils/utility.js';
+import { eventTryCatch } from '../helpers/try-catch.helper.js';
 
 
 
 // here define all chat events handler functionality of socket.io
 
 
-// here define chat join rooms
-const chatRoom = (socket) => socket.on(CHAT_JOINROOM, (data) => {
-
-    let { sender, reciever } = data;
-
-    let roomId = [sender, reciever].sort().join(".");
-
-    socket.join(roomId);
-
-    console.log(CHAT_JOINROOM, roomId);
-
-});
-
-
-
 // here define send chat evvents
-const chatSend = (socket) => socket.on(SEND_CHAT, (data) => {
+const chatSend = (socket, userId) => socket.on(SEND_CHAT, eventTryCatch(async (data) => {
 
-    let { sender, roomId, messages } = data;
+    let { messages } = data;
 
-    console.log({ sender, roomId, messages });
-    // socket.emit(SEND_CHAT, { messages });
-    socket.to(roomId).emit(SEND_CHAT, {sender,  messages});
+    // here can check auth userId
+    if (!userId) {
+        throw eventErrorHandler('User are not authorized');
+    }
+    else {
+
+        await messages;
+        socket.emit(SEND_CHAT, { messages });
+    }
 
 
-});
+}));
 
 
 // here export all handles events of chats
 export {
-    chatRoom,
     chatSend
 };
 

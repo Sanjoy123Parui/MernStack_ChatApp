@@ -26,7 +26,7 @@ const checkError = (err, req, res, next) => {
 }
 
 
-const checkEventsError = (err, socket, next) => {
+const checkEventsError = (err, socket) => {
 
     err.message ||= "Internal server error";
 
@@ -47,7 +47,6 @@ const checkEventsError = (err, socket, next) => {
 
 
     socket.emit('err', errorServer);
-    // next();
 }
 
 
