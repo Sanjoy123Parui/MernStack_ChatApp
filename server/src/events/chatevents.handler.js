@@ -1,33 +1,41 @@
 // here import library packages and modules
-
 import {
     SEND_CHAT
 } from '../constants/customevents.js';
-import { eventErrorHandler } from '../utils/utility.js';
-import { eventTryCatch } from '../helpers/try-catch.helper.js';
-
 
 
 // here define all chat events handler functionality of socket.io
 
 
 // here define send chat evvents
-const chatSend = (socket, userId) => socket.on(SEND_CHAT, eventTryCatch(async (data) => {
+const chatSend = (socket, userId) => socket.on(SEND_CHAT, async (data) => {
 
-    let { messages } = data;
+    try {
 
-    // here can check auth userId
-    if (!userId) {
-        throw eventErrorHandler('User are not authorized');
+        let { messages } = data;
+
+        // here can check user can be authenticate or not
+        if (!userId) {
+
+            socket.emit(SEND_CHAT, "User are not authenticated");
+
+        }
+        else {
+
+            console.log({ messages });
+            socket.emit(SEND_CHAT, { messages });
+
+        }
+
+
     }
-    else {
+    catch (error) {
 
-        await messages;
-        socket.emit(SEND_CHAT, { messages });
+        socket.emit(SEND_CHAT, `Internal server error : ${error}`);
+
     }
 
-
-}));
+});
 
 
 // here export all handles events of chats

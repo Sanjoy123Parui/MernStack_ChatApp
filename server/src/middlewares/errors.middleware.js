@@ -26,30 +26,6 @@ const checkError = (err, req, res, next) => {
 }
 
 
-const checkEventsError = (err, socket) => {
-
-    err.message ||= "Internal server error";
-
-    // here check 11000 code error
-    if (err.code === 11000) {
-        let error = Object.keys(err.keyPattern).join(",");
-        err.message = `Duplicate field : ${error}`;
-    }
-
-    // check castError of path
-    if (err.name === "CastError") {
-        let errorPath = err.path;
-        err.message = `Invalid format of ${errorPath}`;
-    }
-
-    // here declare which server has running
-    let errorServer = process.env.NODE_ENV.trim() === "DEVELOPMENT" ? err.message : err.message;
-
-
-    socket.emit('err', errorServer);
-}
-
-
 // export error middleware
-export { checkError, checkEventsError };
+export { checkError };
 console.log('Error middleware is worked successfully');

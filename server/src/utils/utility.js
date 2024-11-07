@@ -9,19 +9,9 @@ const errorHandler = (message, statusCode) => {
 
 
 
-// there are define event errorHandler utility function
-const eventErrorHandler = (message) => {
-
-    let error = new Error(message);
-
-    return error;
-
-}
-
 // export utility
 export {
-    errorHandler,
-    eventErrorHandler
+    errorHandler
 };
 
 console.log('Error handler utility is worked successfully');
