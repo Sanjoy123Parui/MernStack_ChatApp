@@ -21,4 +21,4 @@ chatSeeders();
 
 // export socket.io connection
 export { express, cookieParser, io, app, server };
-console.log("Websocket are worked successfully");
+console.log("Websocket is worked successfully");
