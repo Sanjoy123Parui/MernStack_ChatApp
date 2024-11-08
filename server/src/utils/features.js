@@ -74,5 +74,8 @@ const sendAdminToken = async (res, admin, statusCode, message) => {
 }
 
 // export features
-export { sendUserToken, sendAdminToken, cookieOptions };
-console.log('Auth features is worked successfully');
+export { 
+    sendUserToken, 
+    sendAdminToken, 
+    cookieOptions 
+};

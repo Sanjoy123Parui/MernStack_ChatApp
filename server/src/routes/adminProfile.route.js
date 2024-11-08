@@ -49,4 +49,3 @@ adminProfileRouter.route('/profile/update/:adminprofile_id').all(
 
 // export admin profile router
 export { adminProfileRouter };
-console.log('Admin profile route is worked successfully');

@@ -33,4 +33,3 @@ const userSignupModel = mongoose.model('usersignups', userSignupSchema);
 
 // export user signup Model schema
 export { userSignupModel };
-console.log('User signup model is worked successfully');

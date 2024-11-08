@@ -28,4 +28,3 @@ const checkError = (err, req, res, next) => {
 
 // export error middleware
 export { checkError };
-console.log('Error middleware is worked successfully');

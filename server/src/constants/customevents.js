@@ -7,5 +7,3 @@ const SEND_CHAT = "SEND_CHAT";
 export {
     SEND_CHAT
 };
-
-console.log('Custom events is worked successfully');

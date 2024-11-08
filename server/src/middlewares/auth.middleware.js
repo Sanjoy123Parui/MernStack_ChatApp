@@ -85,5 +85,8 @@ const socketIoAuthenticator = TryCatch(async (err, socket, next) => {
 
 
 // export auth middleware
-export { userCheckAuth, adminCheckAuth, socketIoAuthenticator };
-console.log('Auth middleware is worked successfully');
+export { 
+    userCheckAuth, 
+    adminCheckAuth, 
+    socketIoAuthenticator 
+};

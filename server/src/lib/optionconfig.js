@@ -7,4 +7,3 @@ const corsOption = {
 
 // export configuration
 export { corsOption };
-console.log('Option config is worked successfully');

@@ -45,5 +45,9 @@ const refreshAdminToken = (admin) => {
 
 
 // there export all accessToken and refresh Token
-export { accessUserToken, refreshUserToken, accessAdminToken, refreshAdminToken };
-console.log('Generated auth is worked successfully');
+export { 
+    accessUserToken, 
+    refreshUserToken, 
+    accessAdminToken, 
+    refreshAdminToken 
+};

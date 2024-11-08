@@ -71,7 +71,7 @@ const userLogin = TryCatch(async (req, res, next) => {
         phone
     }).exec();
 
-    
+
     // condition are check user are valid or not
     if (!existUser) {
         return next(errorHandler("Please required the correct phone", 400));
@@ -175,5 +175,9 @@ const userLogout = TryCatch(async (req, res, next) => {
 
 
 //  there export user signup controlle
-export { userRegister, userLogin, userRecover, userLogout };
-console.log('User signup controller is worked successfully');
+export {
+    userRegister,
+    userLogin,
+    userRecover,
+    userLogout
+};

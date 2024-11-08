@@ -21,4 +21,3 @@ const uploadObj = multer({
 
 // export upload files middleware
 export { uploadObj };
-console.log('File uploads middleware is worked successfully');

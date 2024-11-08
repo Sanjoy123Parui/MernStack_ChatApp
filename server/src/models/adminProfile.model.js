@@ -44,4 +44,3 @@ const adminProfileModel = mongoose.model('adminprofiles', adminProfileSchema);
 
 // export admin profile model schema
 export { adminProfileModel };
-console.log('Admin profile model is worked successfully');

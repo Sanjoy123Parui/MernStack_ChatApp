@@ -70,4 +70,3 @@ contactRouter.route('/remove/user/:contact_id').delete(
 
 // export contact router
 export { contactRouter };
-console.log('Contact route is worked successfully');

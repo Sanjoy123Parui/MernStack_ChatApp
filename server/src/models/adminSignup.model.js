@@ -34,4 +34,3 @@ const adminSignupModel = mongoose.model('adminsignups', adminSignupSchema);
 
 // export admin signup model schema
 export { adminSignupModel };
-console.log('Admin signup model is worked successfully');

@@ -373,4 +373,3 @@ export {
     editContact,
     removeContact
 };
-console.log('Contact controller is worked successfully');

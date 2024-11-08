@@ -50,4 +50,3 @@ const uploadFiles = async ()=>{
 
 // export file uploads helper
 export { uploadFiles };
-console.log('File uploads helper is worked');

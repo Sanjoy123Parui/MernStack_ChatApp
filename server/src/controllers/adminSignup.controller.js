@@ -67,7 +67,7 @@ const adminLogin = TryCatch(async (req, res, next) => {
     let existAdmin = await adminSignupModel.findOne({
         phone
     }).exec();
-    
+
 
     // condition can be check there phone number is correct or not
     if (!existAdmin) {
@@ -83,7 +83,7 @@ const adminLogin = TryCatch(async (req, res, next) => {
             return next(errorHandler("Invalid admin", 404));
         }
         else {
-           return sendAdminToken(res, existAdmin, 201, "Logged in Successfully");
+            return sendAdminToken(res, existAdmin, 201, "Logged in Successfully");
         }
 
     }
@@ -128,7 +128,7 @@ const adminRecover = TryCatch(async (req, res, next) => {
                 return next(errorHandler("Auth was expired or not used", 404));
 
             }
-            else{
+            else {
 
                 return sendAdminToken(res, admin, 200, "Admin authenticated successfully");
 
@@ -178,5 +178,9 @@ const adminLogout = TryCatch(async (req, res, next) => {
 
 
 // export there adminSignup controller
-export { adminRegister, adminLogin, adminRecover, adminLogout };
-console.log('Admin signup controller is worked successfully');
+export {
+    adminRegister,
+    adminLogin,
+    adminRecover,
+    adminLogout
+};

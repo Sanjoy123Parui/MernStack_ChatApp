@@ -20,5 +20,10 @@ const io = new Server(server, {
 chatSeeders();
 
 // export socket.io connection
-export { express, cookieParser, io, app, server };
-console.log("Websocket is worked successfully");
+export { 
+    express, 
+    cookieParser, 
+    io, 
+    app, 
+    server 
+};

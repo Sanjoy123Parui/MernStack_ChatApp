@@ -15,8 +15,4 @@ const TryCatch = (paramsData) => async (req, res, next) => {
 
 
 // export trycatch helper
-export {
-    TryCatch
-};
-
-console.log('Try-Catch helper is worked successfully');
+export { TryCatch };

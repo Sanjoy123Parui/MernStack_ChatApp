@@ -296,5 +296,10 @@ const userProfileupdate = TryCatch(async (req, res, next) => {
 
 
 // export user profile all controllers
-export { userNewProfile, userProfileviewAll, userProfileview, userProfileImageupdate, userProfileupdate };
-console.log('User profile controller is worked successfully');
+export {
+    userNewProfile,
+    userProfileviewAll,
+    userProfileview,
+    userProfileImageupdate,
+    userProfileupdate
+};

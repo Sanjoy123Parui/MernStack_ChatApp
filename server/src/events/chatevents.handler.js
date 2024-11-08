@@ -136,5 +136,3 @@ const chatSend = (socket, userId) => socket.on(SEND_CHAT, async (data) => {
 export {
     chatSend
 };
-
-console.log('Chat event handler is worked successfully');

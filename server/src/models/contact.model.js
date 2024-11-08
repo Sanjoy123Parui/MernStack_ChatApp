@@ -39,4 +39,3 @@ const contactModel = mongoose.model('contacts', contactSchema);
 
 // export contact model schema
 export { contactModel };
-console.log('Contact model is worked successfully');

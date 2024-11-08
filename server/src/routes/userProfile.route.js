@@ -57,4 +57,3 @@ userprofileRouter.route('/profile/updates/:userprofile_id').all(
 
 // export there user profile router
 export { userprofileRouter };
-console.log('User profile route is worked successfully');

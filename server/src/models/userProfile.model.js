@@ -44,4 +44,3 @@ const userProfileModel = mongoose.model('userprofiles', userProfileSchema);
 
 // export user profile schema model
 export { userProfileModel };
-console.log('User profile model is worked successfully');

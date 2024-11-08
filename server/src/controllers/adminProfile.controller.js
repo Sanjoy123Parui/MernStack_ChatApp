@@ -251,5 +251,9 @@ const adminProfileupdate = TryCatch(async (req, res, next) => {
 
 
 // export there admin profile all controllers operation
-export { adminNewprofile, adminViewprofile, adminProfileImageupdate, adminProfileupdate };
-console.log('Admin profile controller is worked successfully');
+export {
+    adminNewprofile,
+    adminViewprofile,
+    adminProfileImageupdate,
+    adminProfileupdate
+};

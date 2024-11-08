@@ -55,5 +55,3 @@ const chatSeeders = (() => {
 export {
     chatSeeders
 };
-
-console.log('Chat namespace is worked successfully');

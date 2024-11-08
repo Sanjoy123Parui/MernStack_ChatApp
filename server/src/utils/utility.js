@@ -13,5 +13,3 @@ const errorHandler = (message, statusCode) => {
 export {
     errorHandler
 };
-
-console.log('Error handler utility is worked successfully');

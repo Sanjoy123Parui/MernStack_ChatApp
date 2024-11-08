@@ -73,4 +73,3 @@ const chatModel = mongoose.model('chats', chatSchema);
 
 // here export chat schema model
 export { chatModel };
-console.log('Chat model is worked successfully');
