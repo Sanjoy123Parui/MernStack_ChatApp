@@ -18,9 +18,7 @@ const checkError = (err, req, res, next) => {
         err.statusCode = 400;
     }
 
-    return res.status(err.statusCode).json({
-        message: process.env.NODE_ENV.trim() === "DEVELOPMENT" ? err.message : err.message
-    });
+    return res.status(err.statusCode).json({ message: err.message });
 
 
 }

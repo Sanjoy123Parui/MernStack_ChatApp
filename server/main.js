@@ -20,7 +20,6 @@ conn(process.env.MONGODB_URI);
 
 // there are declare port, server running for developement or production
 const port = process.env.PORT || 5000;
-const nodeENV = process.env.NODE_ENV.trim() || "PRODUCTION";
 
 //  use middlewares
 app.use(cors(corsOption));
@@ -49,6 +48,6 @@ app.use(checkError);
 //  restart server
 server.listen(port, () => {
 
-    console.log(`Server has been started at ${port} is ${nodeENV} mode`);
+    console.log(`Server has been started at ${port}`);
 
 });

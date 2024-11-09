@@ -1,15 +1,24 @@
 import express from "express";
 
-import { 
-    userNewProfile, 
-    userProfileviewAll, 
-    userProfileview, 
-    userProfileImageupdate, 
-    userProfileupdate 
+import {
+    userNewProfile,
+    userProfileviewAll,
+    userProfileview,
+    userProfileImageupdate,
+    userProfileupdate
 } from '../controllers/userProfile.controller.js';
 
-import { userCheckAuth, adminCheckAuth } from '../middlewares/auth.middleware.js';
+import { 
+    userCheckAuth, 
+    adminCheckAuth 
+} from '../middlewares/auth.middleware.js';
+
 import { uploadObj } from '../middlewares/fileuploads.middleware.js';
+
+import {
+    userProfileCreateValidator,
+    validateHandler
+} from '../validators/validator.js';
 
 
 
@@ -23,6 +32,8 @@ const userprofileRouter = express.Router();
 userprofileRouter.route('/profile/creates').post(
     userCheckAuth,
     uploadObj.single('avatar'),
+    userProfileCreateValidator,
+    validateHandler,
     userNewProfile
 );
 

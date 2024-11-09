@@ -8,7 +8,11 @@ import {
 } from '../controllers/userSingup.controller.js';
 
 import { userCheckAuth } from '../middlewares/auth.middleware.js';
-import { userRegisterValidator, userLoginValidator, validateHandler } from '../validators/validator.js';
+import { 
+    userRegisterValidator, 
+    userLoginValidator, 
+    validateHandler 
+} from '../validators/validator.js';
 
 
 const userSignupRouter = express.Router();

@@ -1,4 +1,4 @@
-import { body, param, validationResult } from "express-validator";
+import { body, check, validationResult } from "express-validator";
 
 // here define user signup validations
 
@@ -7,18 +7,28 @@ const userRegisterValidator = () => [
     body("country").notEmpty().withMessage("Please required the country"),
     body("phone").notEmpty().withMessage("Please required the phone"),
     body("password").notEmpty().withMessage("Please required the password"),
-    body("confirmPassword").notEmpty().withMessage("Please required the confirm password"),
+    body("confirmPassword").notEmpty().withMessage("Please required the confirm password")
 ];
 
 // user login 
 const userLoginValidator = () => [
     body("phone").notEmpty().withMessage("Please required the phone"),
-    body("password").notEmpty().withMessage("Please required the password"),
+    body("password").notEmpty().withMessage("Please required the password")
 ];
 
 
 
 // here define all user profile validations
+const userProfileCreateValidator = () => [
+    body("user_name").notEmpty().withMessage("Please required user name"),
+    body("gender").notEmpty().withMessage("Please required gender"),
+    body("dob").notEmpty().withMessage("Please required dob"),
+    body("abouts").notEmpty().withMessage("Please required abouts"),
+    check("avatar").custom((value, { req }) => {
+        if (!req.file) { throw new Error("Please required file"); }
+        return true;
+    }).withMessage("Please required profile image")
+];
 
 
 
@@ -51,5 +61,6 @@ const validateHandler = (req, res, next) => {
 export {
     userRegisterValidator,
     userLoginValidator,
+    userProfileCreateValidator,
     validateHandler
 };
