@@ -1,7 +1,7 @@
-import { io, cookieParser } from '../connections/socketconnection.js';
 import {
-    chatSend
-} from '../events/chatevents.handler.js';
+    io,
+    cookieParser
+} from '../connections/socketconnection.js';
 import { socketIoAuthenticator } from '../middlewares/auth.middleware.js';
 
 
@@ -34,8 +34,7 @@ const chatSeeders = (() => {
         console.log('User has been connected successfully', userConnected);
 
         // here declare all handling events call back functions
-        chatSend(socket, userId);
-        
+
 
         // define disconnect events
         socket.on("disconnect", () => {

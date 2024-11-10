@@ -11,6 +11,12 @@ import {
 
 import { userCheckAuth } from '../middlewares/auth.middleware.js';
 
+import {
+    addContactValidator,
+    updateContactValidator,
+    validateHandler
+} from '../validators/validator.js';
+
 // here define contact router 
 const contactRouter = express.Router();
 
@@ -20,6 +26,8 @@ const contactRouter = express.Router();
 // add contact router end-point with post
 contactRouter.route('/add').post(
     userCheckAuth,
+    addContactValidator(),
+    validateHandler,
     addContact
 );
 
@@ -54,6 +62,8 @@ contactRouter.route('/view/details/:contact_id').get(
 // update contact router end-point with put
 contactRouter.route('/update/user/:contact_id').put(
     userCheckAuth,
+    updateContactValidator(),
+    validateHandler,
     editContact
 );
 

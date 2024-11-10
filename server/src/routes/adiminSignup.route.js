@@ -9,6 +9,12 @@ import {
 
 import { adminCheckAuth } from '../middlewares/auth.middleware.js';
 
+import {
+    adminRegisterValidator,
+    adminLoginValidator,
+    validateHandler
+} from '../validators/validator.js';
+
 // there define admin signup router
 const adminSignupRouter = express.Router();
 
@@ -17,12 +23,16 @@ const adminSignupRouter = express.Router();
 
 // admin Register end-point router with post
 adminSignupRouter.route('/signup/register').post(
+    adminRegisterValidator(),
+    validateHandler,
     adminRegister
 );
 
 
 // admin login end-point router with post
 adminSignupRouter.route('/signup/login').post(
+    adminLoginValidator(),
+    validateHandler,
     adminLogin
 );
 

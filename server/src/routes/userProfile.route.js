@@ -17,6 +17,8 @@ import { uploadObj } from '../middlewares/fileuploads.middleware.js';
 
 import {
     userProfileCreateValidator,
+    userProfileImageUpdateValidator,
+    userProfileUpdateValidator,
     validateHandler
 } from '../validators/validator.js';
 
@@ -32,7 +34,7 @@ const userprofileRouter = express.Router();
 userprofileRouter.route('/profile/creates').post(
     userCheckAuth,
     uploadObj.single('avatar'),
-    userProfileCreateValidator,
+    userProfileCreateValidator(),
     validateHandler,
     userNewProfile
 );
@@ -56,6 +58,8 @@ userprofileRouter.route('/profile/read/:userprofile_id').get(
 userprofileRouter.route('/profile/image/update/:userprofile_id').put(
     userCheckAuth,
     uploadObj.single('avatar'),
+    userProfileImageUpdateValidator(),
+    validateHandler,
     userProfileImageupdate
 );
 
@@ -63,6 +67,8 @@ userprofileRouter.route('/profile/image/update/:userprofile_id').put(
 // updated profile router with all
 userprofileRouter.route('/profile/updates/:userprofile_id').all(
     userCheckAuth,
+    userProfileUpdateValidator(),
+    validateHandler,
     userProfileupdate
 );
 
