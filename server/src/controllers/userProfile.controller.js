@@ -122,7 +122,7 @@ const userProfileview = TryCatch(async (req, res, next) => {
 
     // declare payload of params
     let usersignup_id = req.user;
-    let { userprofile_id } = req.params;
+    // let { userprofile_id } = req.params;
 
     if (!usersignup_id) {
 
@@ -132,10 +132,9 @@ const userProfileview = TryCatch(async (req, res, next) => {
     else {
 
         // there are user profile fetch
-        let userProfiledata = await userProfileModel.findById(userprofile_id)
-            .populate({
-                path: 'usersignup_id'
-            }).exec();
+        let userProfiledata = await userProfileModel.findOne({usersignup_id}).populate({
+            path:'usersignup_id'
+        }).exec();
 
 
         // check the condition user data

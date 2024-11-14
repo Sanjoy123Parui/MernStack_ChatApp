@@ -3,6 +3,7 @@ import {
     cookieParser
 } from '../connections/socketconnection.js';
 import { socketIoAuthenticator } from '../middlewares/auth.middleware.js';
+import { chatSend } from '../events/chat.js';
 
 
 // here declare single chat namespace functionality
@@ -33,7 +34,9 @@ const chatSeeders = (() => {
 
         console.log('User has been connected successfully', userConnected);
 
+
         // here declare all handling events call back functions
+        chatSend(socket, userId);
 
 
         // define disconnect events

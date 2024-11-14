@@ -48,7 +48,7 @@ userprofileRouter.route('/profile/view/all').get(
 
 
 // view user profile router with get
-userprofileRouter.route('/profile/read/:userprofile_id').get(
+userprofileRouter.route('/profile/read/details').get(
     userCheckAuth,
     userProfileview
 );
