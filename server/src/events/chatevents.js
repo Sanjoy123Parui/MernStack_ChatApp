@@ -1,37 +1,96 @@
 import {
-    SEND_CHAT
+    sendChat
 } from '../constants/customevents.js';
 
+import { userProfileModel } from '../models/userProfile.model.js';
+import { contactModel } from '../models/contact.model.js';
+
+
+
 // here define all one-to-one chat events functionality
-const userSendChat = (socket, userId) => socket.on(SEND_CHAT, async (data) => {
+const postUserChat = (socket, userId) => socket.on(sendChat, async (data) => {
 
     try {
 
         // here declare data
-        let { messages } = data;
+        let { reciever_phone, reciever_name, messages } = data;
 
         // here check userId
         if (!userId) {
 
-            socket.emit(SEND_CHAT, "User does not exist");
+            socket.emit(sendChat, "User does not exist");
 
         }
         else {
 
-            await messages;
+            // here check condition for reciever
+            if (!(reciever_phone || reciever_name)) {
 
-            console.log({ userId, messages });
+                socket.emit(sendChat, "Invalid reciever");
+            }
+            else {
+
+                // here was retrieve user profile data
+                let userProfiledata = await userProfileModel.findOne({ usersignup_id: userId })
+                    .populate({ path: 'usersignup_id' }).exec();
+
+                // here was retrieve user contact data
+                let userContactdata = await contactModel.findOne({
+                    contact_phone: reciever_phone,
+                    myprofile_id: userProfiledata._id
+                }).populate([
+                    { path: 'myprofile_id', populate: { path: 'usersignup_id' } },
+                    { path: 'contactprofile_id', populate: { path: 'usersignup_id' } }
+                ]).exec();
+
+
+                // check the condition is user contactdata
+                if (!userContactdata) {
+                    socket.emit(sendChat, "Contact was wrong");
+                }
+                else {
+
+                    // here was retrieve data of sender and reciever
+                    let sender = userProfiledata.usersignup_id._id;
+                    let senderPhone = userContactdata.myprofile_id.usersignup_id.phone;
+                    let senderName = "You";
+                    let reciever = userContactdata.contactprofile_id.usersignup_id._id;
+
+                    let data = {
+                        sender: sender,
+                        sender_phone: senderPhone,
+                        sender_name: senderName,
+                        reciever: reciever,
+                        reciever_phone: reciever_phone,
+                        reciever_name: reciever_name,
+                        messages: messages
+                    };
+
+                    let msg = await data.messages;
+
+                    console.log({ messages: msg });
+
+                    socket.emit(sendChat, { messages: msg });
+
+
+
+
+                }
+
+            }
 
         }
 
     }
     catch (error) {
+
         socket.emit(SEND_CHAT, `Internal server error : ${error}`);
     }
 
 });
 
+
 // export all one-to-one chat events
 export {
-    userSendChat
+    postUserChat
 };

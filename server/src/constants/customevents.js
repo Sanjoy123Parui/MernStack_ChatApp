@@ -1,9 +1,9 @@
 // here declare all custom events
 
 // here declare one-on-one chat events
-const SEND_CHAT = "SEND_CHAT";
+const sendChat = "sendChat";
 
 // here export all type of events
 export {
-    SEND_CHAT
+    sendChat
 };

@@ -16,6 +16,10 @@ const io = new Server(server, {
 });
 
 
+// here was declare userSocketIds
+const userSocketIds = new Map();
+
+
 // here declare all namespace callback functions
 chatSeeders();
 
@@ -23,7 +27,8 @@ chatSeeders();
 export { 
     express, 
     cookieParser, 
-    io, 
+    io,
+    userSocketIds,
     app, 
     server 
 };

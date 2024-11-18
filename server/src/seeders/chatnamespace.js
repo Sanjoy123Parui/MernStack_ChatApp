@@ -1,18 +1,16 @@
 import {
     io,
-    cookieParser
+    cookieParser,
+    userSocketIds
 } from '../connections/socketconnection.js';
 import { socketIoAuthenticator } from '../middlewares/auth.middleware.js';
-import { userSendChat } from '../events/chatevents.js';
+import { postUserChat } from '../events/chatevents.js';
 
 
 // here declare single chat namespace functionality
 const chatSeeders = (() => {
 
     const chatNameSpace = io.of('/chat-namespace');
-
-    // here was declare userSocketIds
-    const userSocketIds = new Map();
 
     // here was define authentication middleware use of socket.io
     chatNameSpace.use((socket, next) => {
@@ -36,7 +34,7 @@ const chatSeeders = (() => {
 
 
         // here declare all handling events call back functions
-        userSendChat(socket, userId);
+        postUserChat(socket, userId);
 
         // define disconnect events
         socket.on("disconnect", () => {
