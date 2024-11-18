@@ -3,7 +3,7 @@ import bcryptjs from "bcryptjs";
 import { adminSignupModel } from '../models/adminSignup.model.js';
 import { TryCatch } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
-import { sendAdminToken, cookieOptions } from '../utils/features.js'
+import { sendAdminToken, cookieOptions } from '../utils/features.js';
 
 // there create all admin signup controllers
 

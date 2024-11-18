@@ -42,7 +42,7 @@ contactRouter.route('/view/all').get(
 
 
 // search contact router end-point with get
-contactRouter.route('/search/user/:myprofile_id').get(
+contactRouter.route('/search/user/:myProfile').get(
     userCheckAuth,
     searchContact
 );
@@ -51,7 +51,7 @@ contactRouter.route('/search/user/:myprofile_id').get(
 
 
 // view contact profile router end-point with get
-contactRouter.route('/view/details/:contact_id').get(
+contactRouter.route('/view/details/:contactId').get(
     userCheckAuth,
     viewContactProfile
 );
@@ -60,7 +60,7 @@ contactRouter.route('/view/details/:contact_id').get(
 
 
 // update contact router end-point with put
-contactRouter.route('/update/user/:contact_id').put(
+contactRouter.route('/update/user/:contactId').put(
     userCheckAuth,
     updateContactValidator(),
     validateHandler,
@@ -71,7 +71,7 @@ contactRouter.route('/update/user/:contact_id').put(
 
 
 // delete contact router end-point with delete
-contactRouter.route('/remove/user/:contact_id').delete(
+contactRouter.route('/remove/user/:contactId').delete(
     userCheckAuth,
     removeContact
 );

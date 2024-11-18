@@ -1,5 +1,5 @@
 // there import libraries and modules
-import jwt, { decode } from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 import bcyptjs from "bcryptjs";
 import { userSignupModel } from '../models/userSignup.model.js';
 import { TryCatch } from '../helpers/try-catch.helper.js';

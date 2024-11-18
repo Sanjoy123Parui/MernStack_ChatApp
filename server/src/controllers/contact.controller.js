@@ -11,10 +11,10 @@ import { errorHandler } from '../utils/utility.js';
 const addContact = TryCatch(async (req, res, next) => {
 
     // here can be declare payload
-    let userSignupId = req.user;
+    let userSignup = req.user;
     let { contact_phone, contact_name } = req.body;
 
-    if (!userSignupId) {
+    if (!userSignup) {
 
         return next(errorHandler("Please login to access user", 400));
 
@@ -44,34 +44,34 @@ const addContact = TryCatch(async (req, res, next) => {
 
                 // here will be retrieve user profile _id and check exist user find or not
                 let existUser = await userProfileModel.findOne({
-                    usersignup_id: userSignupId
+                    userSignup: userSignup
                 }).populate({
-                    path: 'usersignup_id'
+                    path: 'userSignup'
                 }).exec();
 
                 // here will be retrieve contact profile _id with phone are exist or not
                 let contactUser = await userSignupModel.findOne({ phone: contact_phone }).exec();
 
                 let existContact = await userProfileModel.findOne({
-                    usersignup_id: contactUser._id
+                    userSignup: contactUser._id
                 }).populate({
-                    path: 'usersignup_id'
+                    path: 'userSignup'
                 }).exec();
 
                 // check condition for phone are matched or not
-                if (existContact.usersignup_id.phone !== contact_phone) {
+                if (existContact.userSignup.phone !== contact_phone) {
                     return next(errorHandler("Please required the valid phone number", 400));
                 }
                 else {
 
                     // declare all profile id
-                    let myprofile_id = existUser._id;
-                    let contactprofile_id = existContact._id;
+                    let myProfile = existUser._id;
+                    let contactProfile = existContact._id;
 
                     // here was data insert into the database
                     let userContact = await contactModel.create({
-                        myprofile_id,
-                        contactprofile_id,
+                        myProfile,
+                        contactProfile,
                         contact_phone,
                         contact_name
                     });
@@ -101,16 +101,16 @@ const addContact = TryCatch(async (req, res, next) => {
 const viewAllContact = TryCatch(async (req, res, next) => {
 
     // there are declare payload
-    let userSignupId = req.user;
+    let userSignup = req.user;
 
-    if (!userSignupId) {
+    if (!userSignup) {
         return next(errorHandler("Please login to access user", 400));
     }
     else {
 
         // here was retrieve from auth profile id
         let existUserprofile = await userProfileModel.findOne({
-            usersignup_id: userSignupId
+            userSignup: userSignup
         }).exec();
 
 
@@ -124,20 +124,20 @@ const viewAllContact = TryCatch(async (req, res, next) => {
 
 
             // here was declare myprofile_id
-            let myprofile_id = existUserprofile._id;
+            let myProfile = existUserprofile._id;
 
             // here whose all contact data can be retrieve from database where this _id are exist
-            let userContact = await contactModel.find({ myprofile_id }).populate([
+            let userContact = await contactModel.find({ myProfile }).populate([
                 {
-                    path: 'contactprofile_id',
+                    path: 'contactProfile',
                     populate: {
-                        path: 'usersignup_id'
+                        path: 'userSignup'
                     }
                 },
                 {
-                    path: 'myprofile_id',
+                    path: 'myProfile',
                     populate: {
-                        path: 'usersignup_id'
+                        path: 'userSignup'
                     }
                 }
             ]).exec();
@@ -155,7 +155,7 @@ const viewAllContact = TryCatch(async (req, res, next) => {
                     return ({
                         contact_phone: contact.contact_phone,
                         contact_name: contact.contact_name,
-                        contact_profileimg: contact.contactprofile_id.user_profileimg
+                        contact_profileimg: contact.contactProfile.user_profileimg
                     });
 
                 });
@@ -177,12 +177,12 @@ const viewAllContact = TryCatch(async (req, res, next) => {
 const searchContact = TryCatch(async (req, res, next) => {
 
     // declare payload data
-    let userSignupId = req.user;
-    let { myprofile_id } = req.params
+    let userSignup = req.user;
+    let { myProfile } = req.params
     let { contact_phone, contact_name } = req.body;
 
     // check user can logged in
-    if (!userSignupId) {
+    if (!userSignup) {
         return next(errorHandler("Please login to access user", 400));
     }
     else {
@@ -196,11 +196,11 @@ const searchContact = TryCatch(async (req, res, next) => {
         else {
 
             // here are declare query for fetch the particular contact search data from database
-            let userContact = await contactModel.findOne({ myprofile_id }).populate({
+            let userContact = await contactModel.findOne({ myProfile }).populate({
 
-                path: 'contactprofile_id',
+                path: 'contactProfile',
                 populate: {
-                    path: 'usersignup_id'
+                    path: 'userSignup'
                 }
 
             }).exec();
@@ -212,7 +212,7 @@ const searchContact = TryCatch(async (req, res, next) => {
                 return res.status(200).json({
                     contact_phone: userContact.contact_phone,
                     contact_name: userContact.contact_name,
-                    contact_profileimg: userContact.contactprofile_id.user_profileimg
+                    contact_profileimg: userContact.contactProfile.user_profileimg
                 });
 
             }
@@ -235,10 +235,10 @@ const searchContact = TryCatch(async (req, res, next) => {
 const viewContactProfile = TryCatch(async (req, res, next) => {
 
     // there declare payload
-    let userSignupId = req.user;
-    let { contact_id } = req.params;
+    let userSignup = req.user;
+    let { contactId } = req.params;
 
-    if (!userSignupId) {
+    if (!userSignup) {
 
         return next(errorHandler("Please login to access user", 400));
 
@@ -247,10 +247,10 @@ const viewContactProfile = TryCatch(async (req, res, next) => {
 
 
         // here are declare query for fetch the particular contact full details data from database
-        let userContact = await contactModel.findById(contact_id).populate({
-            path: 'contactprofile_id',
+        let userContact = await contactModel.findById(contactId).populate({
+            path: 'contactProfile',
             populate: {
-                path: 'usersignup_id'
+                path: 'userSignup'
             }
         }).exec();
 
@@ -267,11 +267,12 @@ const viewContactProfile = TryCatch(async (req, res, next) => {
                 data: {
                     contact_phone: userContact.contact_phone,
                     contact_name: userContact.contact_name,
-                    contact_profileimg: userContact.contactprofile_id.user_profileimg,
-                    contact_gender: userContact.contactprofile_id.gender,
-                    contact_dob: userContact.contactprofile_id.dob,
-                    contact_abouts: userContact.contactprofile_id.abouts,
-                    phone: userContact.contactprofile_id.usersignup_id.phone
+                    contact_profileimg: userContact.contactProfile.user_profileimg,
+                    contact_gender: userContact.contactProfile.gender,
+                    contact_dob: userContact.contactProfile.dob,
+                    contact_abouts: userContact.contactProfile.abouts,
+                    country: userContact.contactProfile.userSignup.country,
+                    phone: userContact.contactProfile.userSignup.phone
                 }
             });
 
@@ -288,12 +289,12 @@ const viewContactProfile = TryCatch(async (req, res, next) => {
 const editContact = TryCatch(async (req, res, next) => {
 
     // there declare payload
-    let userSignupId = req.user;
-    let { contact_id } = req.params;
+    let userSignup = req.user;
+    let { contactId } = req.params;
     let { contact_phone, contact_name } = req.body;
 
 
-    if (!userSignupId) {
+    if (!userSignup) {
 
         return next(errorHandler("Please login to access user", 400));
 
@@ -302,7 +303,7 @@ const editContact = TryCatch(async (req, res, next) => {
 
         // here was update user contact from database
         let userContact = await contactModel.updateOne({
-            _id: contact_id,
+            _id: contactId,
             contact_phone
         }, {
             $set: {
@@ -334,10 +335,10 @@ const editContact = TryCatch(async (req, res, next) => {
 const removeContact = TryCatch(async (req, res, next) => {
 
     // there declare payload
-    let userSignupId = req.user;
-    let { contact_id } = req.params;
+    let userSignup = req.user;
+    let { contactId } = req.params;
 
-    if (!userSignupId) {
+    if (!userSignup) {
 
         return next(errorHandler("Please login to access user", 400));
 
@@ -346,7 +347,7 @@ const removeContact = TryCatch(async (req, res, next) => {
 
         // there was declare query in which contact delete from database
         let userContact = await contactModel.deleteOne({
-            _id: contact_id
+            _id: contactId
         });
 
         // check condition data was delete or not 

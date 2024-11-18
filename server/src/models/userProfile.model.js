@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { userSignupModel } from './userSignup.model.js';
 
 // create user profile schema model
 const userProfileSchema = new mongoose.Schema({
@@ -29,9 +28,9 @@ const userProfileSchema = new mongoose.Schema({
         required: true
     },
 
-    usersignup_id: {
+    userSignup: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: userSignupModel,
+        ref: 'usersignups',
         required: true
     }
 

@@ -10,7 +10,7 @@ import { checkError } from './src/middlewares/errors.middleware.js';
 import { userSignupRouter } from './src/routes/userSignup.route.js';
 import { userprofileRouter } from './src/routes/userProfile.route.js';
 import { contactRouter } from './src/routes/contact.route.js';
-import { adminSignupRouter } from './src/routes/adiminSignup.route.js';
+import { adminSignupRouter } from './src/routes/adminSignup.route.js';
 import { adminProfileRouter } from './src/routes/adminProfile.route.js';
 import { conn } from './src/config/conncectdb.js';
 

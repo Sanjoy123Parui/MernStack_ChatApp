@@ -9,12 +9,12 @@ import { uploadFiles } from '../helpers/fileuploads.helper.js';
 const adminNewprofile = TryCatch(async (req, res, next) => {
 
     // there are declare payloads
-    let adminsignup_id = req.admin;
+    let adminSignup = req.admin;
     let { admin_name, gender, dob, abouts } = req.body;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
 
-    if (!adminsignup_id) {
+    if (!adminSignup) {
 
         return next(errorHandler("Please Login to access admin", 400));
 
@@ -23,7 +23,7 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
 
         // this data are find or not check
 
-        let adminInfo = await adminProfileModel.findOne({ adminsignup_id }).exec();
+        let adminInfo = await adminProfileModel.findOne({ adminSignup }).exec();
 
         // check the condition from this admin are exist or not
         if (adminInfo) {
@@ -50,7 +50,7 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
 
                     // there are data can be create and save into the database
                     let adminProfiledata = await adminProfileModel.create({
-                        adminsignup_id,
+                        adminSignup,
                         admin_name,
                         // admin_profileimg: uploads.secure_url,
                         admin_profileimg: uploads + 'uploads/' + filePath,
@@ -82,12 +82,11 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
 const adminViewprofile = TryCatch(async (req, res, next) => {
 
     // there are declare payload of params
-    let adminsignup_id = req.admin;
-    let { adminprofile_id } = req.params;
+    let adminSignup = req.admin;
 
 
     // check condition for admin can be access or not
-    if (!adminsignup_id) {
+    if (!adminSignup) {
 
         return next(errorHandler("Please Login to access admin", 400));
 
@@ -95,8 +94,8 @@ const adminViewprofile = TryCatch(async (req, res, next) => {
     else {
 
         // there can check findn the data
-        let existAdmin = await adminProfileModel.findById(adminprofile_id).populate({
-            path: 'adminsignup_id'
+        let existAdmin = await adminProfileModel.findOne({adminSignup}).populate({
+            path: 'adminSignup'
         }).exec();
 
         // there was check existAdmin
@@ -111,7 +110,8 @@ const adminViewprofile = TryCatch(async (req, res, next) => {
                     gender: existAdmin.gender,
                     dob: existAdmin.dob,
                     abouts: existAdmin.abouts,
-                    phone: existAdmin.adminsignup_id.phone
+                    country: existAdmin.adminSignup.country,
+                    phone: existAdmin.adminSignup.phone,
                 }
             });
         }
@@ -124,14 +124,14 @@ const adminViewprofile = TryCatch(async (req, res, next) => {
 const adminProfileImageupdate = TryCatch(async (req, res, next) => {
 
     // there declare payload
-    let adminsignup_id = req.admin;
-    let { adminprofile_id } = req.params;
+    let adminSignup = req.admin;
+    let { adminProfileId } = req.params;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
 
 
     // check condition for admin access
-    if (!adminsignup_id) {
+    if (!adminSignup) {
 
         return next(errorHandler("Please Login to access admin", 400));
 
@@ -139,7 +139,7 @@ const adminProfileImageupdate = TryCatch(async (req, res, next) => {
     else {
 
         // there are declare existadmin data
-        let existAdmin = await adminProfileModel.findById(adminprofile_id).exec();
+        let existAdmin = await adminProfileModel.findById(adminProfileId).exec();
 
         if (!existAdmin) {
             return next(errorHandler("Admin are not found", 404));
@@ -165,7 +165,7 @@ const adminProfileImageupdate = TryCatch(async (req, res, next) => {
                 else {
 
                     let adminProdfiledata = await adminProfileModel.updateOne({
-                        _id: adminprofile_id
+                        _id: adminProfileId
                     }, {
                         // admin_profileimg: uploads.secure_url
                         admin_profileimg: uploads + 'uploads/' + filePath
@@ -196,13 +196,13 @@ const adminProfileupdate = TryCatch(async (req, res, next) => {
     if (req.method === 'PUT' || req.method === 'PATCH') {
 
         // there are declare payload
-        let adminsignup_id = req.admin;
-        let { adminprofile_id } = req.params;
+        let adminSignup = req.admin;
+        let { adminProfileId } = req.params;
         let { admin_name, gender, dob, abouts } = req.body;
 
 
         // here check condition for admin can be access
-        if (!adminsignup_id) {
+        if (!adminSignup) {
 
             return next(errorHandler("Please Login to access admin", 400));
 
@@ -213,7 +213,7 @@ const adminProfileupdate = TryCatch(async (req, res, next) => {
 
 
             // existAdmin for are found or not
-            let existAdmin = await adminProfileModel.findById(adminprofile_id).exec();
+            let existAdmin = await adminProfileModel.findById(adminProfileId).exec();
 
             if (!existAdmin) {
                 return next(errorHandler("Admin are not found", 404));
@@ -222,7 +222,7 @@ const adminProfileupdate = TryCatch(async (req, res, next) => {
 
                 // there update admin profile data into the database
                 let adminProfiledata = await adminProfileModel.updateOne({
-                    _id: adminprofile_id
+                    _id: adminProfileId
                 }, {
                     $set: {
                         admin_name,

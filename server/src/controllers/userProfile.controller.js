@@ -9,18 +9,18 @@ import { uploadFiles } from '../helpers/fileuploads.helper.js';
 const userNewProfile = TryCatch(async (req, res, next) => {
 
     //there are declare payloads
-    let usersignup_id = req.user;
+    let userSignup = req.user;
     let { user_name, gender, dob, abouts } = req.body;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
 
-    if (!usersignup_id) {
+    if (!userSignup) {
         return next(errorHandler("Please login login to access user", 400));
     }
     else {
 
         // this data are find or not is check
-        let userInfo = await userProfileModel.findOne({ usersignup_id }).exec();
+        let userInfo = await userProfileModel.findOne({ userSignup }).exec();
 
         // condition to check find user
         if (userInfo) {
@@ -47,7 +47,7 @@ const userNewProfile = TryCatch(async (req, res, next) => {
 
                     // there are data will be create and save into the database
                     let userProfiledata = await userProfileModel.create({
-                        usersignup_id,
+                        userSignup,
                         user_name,
                         // user_profileimg: uploads.secure_url,
                         user_profileimg: uploads + 'uploads/' + filePath,
@@ -80,10 +80,10 @@ const userNewProfile = TryCatch(async (req, res, next) => {
 const userProfileviewAll = TryCatch(async (req, res, next) => {
 
     // here declare payload
-    let adminsignup_id = req.admin;
+    let adminSignup = req.admin;
 
     // check codition admin was login or not
-    if (!adminsignup_id) {
+    if (!adminSignup) {
 
         return next(errorHandler("Please login to access admin", 400));
 
@@ -92,7 +92,7 @@ const userProfileviewAll = TryCatch(async (req, res, next) => {
 
         // there are view profile data of user into the database
         let userProfiledata = await userProfileModel.find({}).populate({
-            path: 'usersignup_id'
+            path: 'userSignup'
         }).exec();
 
         // here was exact data retrive in given array and return new array
@@ -104,8 +104,8 @@ const userProfileviewAll = TryCatch(async (req, res, next) => {
                 'gender': profile.gender,
                 'dob': profile.dob,
                 'abouts': profile.abouts,
-                'phone': profile.usersignup_id.phone,
-                'country': profile.usersignup_id.country
+                'phone': profile.userSignup.phone,
+                'country': profile.userSignup.country
             });
 
         });
@@ -121,10 +121,9 @@ const userProfileviewAll = TryCatch(async (req, res, next) => {
 const userProfileview = TryCatch(async (req, res, next) => {
 
     // declare payload of params
-    let usersignup_id = req.user;
-    // let { userprofile_id } = req.params;
+    let userSignup = req.user;
 
-    if (!usersignup_id) {
+    if (!userSignup) {
 
         return next(errorHandler("Please login login to access user", 400));
 
@@ -132,8 +131,8 @@ const userProfileview = TryCatch(async (req, res, next) => {
     else {
 
         // there are user profile fetch
-        let userProfiledata = await userProfileModel.findOne({usersignup_id}).populate({
-            path:'usersignup_id'
+        let userProfiledata = await userProfileModel.findOne({ userSignup }).populate({
+            path: 'userSignup'
         }).exec();
 
 
@@ -150,7 +149,8 @@ const userProfileview = TryCatch(async (req, res, next) => {
                     gender: userProfiledata.gender,
                     dob: userProfiledata.dob,
                     abouts: userProfiledata.abouts,
-                    phone: userProfiledata.usersignup_id.phone
+                    country: userProfiledata.userSignup.country,
+                    phone: userProfiledata.userSignup.phone
                 }
             });
         }
@@ -167,13 +167,13 @@ const userProfileview = TryCatch(async (req, res, next) => {
 const userProfileImageupdate = TryCatch(async (req, res, next) => {
 
     // there declare payload
-    let usersignup_id = req.user;
-    let { userprofile_id } = req.params;
+    let userSignup = req.user;
+    let { userProfileId } = req.params;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
 
     // check condition for user can be access or not
-    if (!usersignup_id) {
+    if (!userSignup) {
 
         return next(errorHandler("Please login login to access user", 400));
 
@@ -181,7 +181,7 @@ const userProfileImageupdate = TryCatch(async (req, res, next) => {
     else {
 
         // check exist user
-        let existUser = await userProfileModel.findOne({ _id: userprofile_id }).exec();
+        let existUser = await userProfileModel.findOne({ _id: userProfileId }).exec();
 
         if (!existUser) {
             return next(errorHandler("User are not found", 400));
@@ -205,7 +205,7 @@ const userProfileImageupdate = TryCatch(async (req, res, next) => {
                 else {
 
                     let userProfiledata = await userProfileModel.updateOne({
-                        _id: userprofile_id
+                        _id: userProfileId
                     }, {
                         $set: {
                             // user_profileimg: uploads.secure_url
@@ -240,13 +240,13 @@ const userProfileupdate = TryCatch(async (req, res, next) => {
     // there have check the request method of condition
     if (req.method === 'PUT' || req.method === 'PATCH') {
         // declare payload data of params and body
-        let usersignup_id = req.user;
-        let { userprofile_id } = req.params;
+        let userSignup = req.user;
+        let { userProfileId } = req.params;
         let { user_name, gender, dob, abouts } = req.body;
 
 
         // here check condition user can access or not
-        if (!usersignup_id) {
+        if (!userSignup) {
 
             return next(errorHandler("Please login login to access user", 400));
 
@@ -254,7 +254,7 @@ const userProfileupdate = TryCatch(async (req, res, next) => {
         else {
 
             // there are declare userprofile_id was found or not
-            let existUser = await userProfileModel.findOne({ _id: userprofile_id }).exec();
+            let existUser = await userProfileModel.findOne({ _id: userProfileId }).exec();
 
             if (!existUser) {
                 return next(errorHandler("User are not found", 404));
@@ -263,7 +263,7 @@ const userProfileupdate = TryCatch(async (req, res, next) => {
 
                 // there can be updated data of profile
                 let userProfiledata = await userProfileModel.updateOne({
-                    _id: userprofile_id
+                    _id: userProfileId
                 }, {
                     $set: {
                         user_name,

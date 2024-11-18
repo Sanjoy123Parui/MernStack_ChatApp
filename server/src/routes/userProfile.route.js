@@ -55,7 +55,7 @@ userprofileRouter.route('/profile/read/details').get(
 
 
 // update  user profile image router with put
-userprofileRouter.route('/profile/image/update/:userprofile_id').put(
+userprofileRouter.route('/profile/image/update/:userProfileId').put(
     userCheckAuth,
     uploadObj.single('avatar'),
     userProfileImageUpdateValidator(),
@@ -65,7 +65,7 @@ userprofileRouter.route('/profile/image/update/:userprofile_id').put(
 
 
 // updated profile router with all
-userprofileRouter.route('/profile/updates/:userprofile_id').all(
+userprofileRouter.route('/profile/updates/:userProfileId').all(
     userCheckAuth,
     userProfileUpdateValidator(),
     validateHandler,

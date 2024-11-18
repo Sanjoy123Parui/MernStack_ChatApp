@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { userProfileModel } from './userProfile.model.js';
 
 // here are define contact model schema
 const contactSchema = new mongoose.Schema({
@@ -15,15 +14,15 @@ const contactSchema = new mongoose.Schema({
         required: true
     },
 
-    contactprofile_id: {
+    contactProfile: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: userProfileModel,
+        ref: 'userprofiles',
         required: true
     },
 
-    myprofile_id: {
+    myProfile: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: userProfileModel,
+        ref: 'userprofiles',
         required: true
     }
 

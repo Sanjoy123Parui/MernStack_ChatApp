@@ -1,19 +1,17 @@
 import mongoose from "mongoose";
-import { userSignupModel } from './userSignup.model.js';
-import { contactModel } from './contact.model.js';
 
 // here was define chat model schema
 const chatSchema = new mongoose.Schema({
 
     participants: [{
         type:mongoose.Schema.Types.ObjectId,
-        ref:userSignupModel,
+        ref:'usersignups',
         required:true
     }],
 
-    contact_id:{
+    contact:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:contactModel,
+        ref:'contacts',
         required:true
     },
 
@@ -37,6 +35,11 @@ const chatSchema = new mongoose.Schema({
     reciever_name:{
         type:String,
         default:''
+    },
+
+    chatCount:{
+        type:Number,
+        default:0
     }
 
 }, {

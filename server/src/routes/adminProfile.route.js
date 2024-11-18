@@ -33,14 +33,14 @@ adminProfileRouter.route('/profile/creates').post(
 
 
 // particular admin view own profile data router with get
-adminProfileRouter.route('/profile/read/:adminprofile_id').get(
+adminProfileRouter.route('/profile/read').get(
     adminCheckAuth,
     adminViewprofile
 );
 
 
 // admin profile image update router with put
-adminProfileRouter.route('/profile/change/:adminprofile_id').put(
+adminProfileRouter.route('/profile/change/:adminProfileId').put(
     adminCheckAuth,
     uploadObj.single('avatar'),
     adminProfileImageUpdateValidator(),
@@ -50,7 +50,7 @@ adminProfileRouter.route('/profile/change/:adminprofile_id').put(
 
 
 // admin profile data update router with all
-adminProfileRouter.route('/profile/update/:adminprofile_id').all(
+adminProfileRouter.route('/profile/update/:adminProfileId').all(
     adminCheckAuth,
     adminProfileUpdateValidator(),
     validateHandler,
