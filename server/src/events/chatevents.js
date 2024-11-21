@@ -2,81 +2,82 @@ import {
     sendChat
 } from '../constants/customevents.js';
 
+import { userSignupModel } from '../models/userSignup.model.js';
 import { userProfileModel } from '../models/userProfile.model.js';
-import { contactModel } from '../models/contact.model.js';
+import { userSocketIds } from '../connections/socketconnection.js';
+
 
 
 
 // here define all one-to-one chat events functionality
-const postUserChat = (socket, userId) => socket.on(sendChat, async (data) => {
+const sendUserChat = (socket, userId, chatNameSpace) => socket.on(sendChat, async (data) => {
 
     try {
 
-        // here declare data
+        // here was declare payload data
         let { reciever_phone, reciever_name, messages } = data;
 
-        // here check userId
+        // here check condition of userId
         if (!userId) {
 
-            socket.emit(sendChat, "User does not exist");
+            socket.on(sendChat, "User has not logged in");
 
         }
         else {
 
-            // here check condition for reciever
+            // check condition for reciever name or phone
             if (!(reciever_phone || reciever_name)) {
 
-                socket.emit(sendChat, "Invalid reciever");
+                socket.emit(sendChat, "Please required the reciever name or phone");
+
             }
             else {
 
-                // here was retrieve user profile data
-                let userProfiledata = await userProfileModel.findOne({ usersignup_id: userId })
-                    .populate({ path: 'usersignup_id' }).exec();
+                // here was retrive sender data from database
+                let senderInfo = await userProfileModel.findOne({ userSignup: userId }).populate({
+                    path: 'userSignup'
+                }).exec();
 
-                // here was retrieve user contact data
-                let userContactdata = await contactModel.findOne({
-                    contact_phone: reciever_phone,
-                    myprofile_id: userProfiledata._id
-                }).populate([
-                    { path: 'myprofile_id', populate: { path: 'usersignup_id' } },
-                    { path: 'contactprofile_id', populate: { path: 'usersignup_id' } }
-                ]).exec();
+                let sender = senderInfo.userSignup._id;
+                let senderProfile = senderInfo._id;
+                let senderPhone = senderInfo.userSignup.phone;
+                let senderName = "You";
+
+                // here was retrieve reciever data from database
+                let signupId = await userSignupModel.findOne({ phone: reciever_phone }).exec();
+                let recieverInfo = await userProfileModel.findOne({ userSignup: signupId._id }).populate({
+                    path: 'userSignup'
+                }).exec();
+
+                let reciever = recieverInfo.userSignup._id;
+                let recieverProfile = recieverInfo._id;
 
 
-                // check the condition is user contactdata
-                if (!userContactdata) {
-                    socket.emit(sendChat, "Contact was wrong");
+                // here can check reciever phone
+                if (reciever_phone !== recieverInfo.userSignup.phone) {
+
+                    socket.emit(sendChat, "Reciever phone are not found");
+
                 }
                 else {
 
-                    // here was retrieve data of sender and reciever
-                    let sender = userProfiledata.usersignup_id._id;
-                    let senderPhone = userContactdata.myprofile_id.usersignup_id.phone;
-                    let senderName = "You";
-                    let reciever = userContactdata.contactprofile_id.usersignup_id._id;
+                   
 
                     let data = {
                         sender: sender,
+                        senderProfile: senderProfile,
                         sender_phone: senderPhone,
                         sender_name: senderName,
                         reciever: reciever,
+                        recieverProfile: recieverProfile,
                         reciever_phone: reciever_phone,
-                        reciever_name: reciever_name,
-                        messages: messages
+                        reciever_name: reciever_name
                     };
 
-                    let msg = await data.messages;
-
-                    console.log({ messages: msg });
-
-                    socket.emit(sendChat, { messages: msg });
-
-
-
+                    console.log({ data,  messages });
+                    socket.emit(sendChat, { data,  messages });
 
                 }
-
             }
 
         }
@@ -84,7 +85,7 @@ const postUserChat = (socket, userId) => socket.on(sendChat, async (data) => {
     }
     catch (error) {
 
-        socket.emit(SEND_CHAT, `Internal server error : ${error}`);
+        socket.emit(sendChat, `Internal server error : ${error}`);
     }
 
 });
@@ -92,5 +93,5 @@ const postUserChat = (socket, userId) => socket.on(sendChat, async (data) => {
 
 // export all one-to-one chat events
 export {
-    postUserChat
+    sendUserChat
 };

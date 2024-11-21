@@ -4,42 +4,56 @@ import mongoose from "mongoose";
 const chatSchema = new mongoose.Schema({
 
     participants: [{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'usersignups',
-        required:true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'usersignups',
+        required: true
     }],
 
-    contact:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'contacts',
-        required:true
+    participantsProfile: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'userprofiles',
+        required: true
+    }],
+
+    sender_phone: {
+        type: String,
+        unique: true,
+        required: true,
     },
 
-    sender_phone:{
-        type:String,
-        unique:true,
-        required:true,
+    sender_name: {
+        type: String,
+        default: ''
     },
 
-    sender_name:{
-        type:String,
-        default:''
+    reciever_phone: {
+        type: String,
+        unique: true,
+        required: true,
     },
 
-    reciever_phone:{
-        type:String,
-        unique:true,
-        required:true,
+    reciever_name: {
+        type: String,
+        default: ''
     },
 
-    reciever_name:{
-        type:String,
-        default:''
-    },
+    contents: [{
 
-    chatCount:{
-        type:Number,
-        default:0
+        chatMessage: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'chatmessages',
+            default: []
+        },
+
+        messageCount: {
+            type: Number,
+            default: 0
+        }
+    }],
+
+    chatCount: {
+        type: Number,
+        default: 0
     }
 
 }, {
