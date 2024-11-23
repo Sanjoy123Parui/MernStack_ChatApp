@@ -1,10 +1,12 @@
+import { RouterProvider } from "react-router-dom";
+import { routerPath } from "./layouts/routelayout.tsx";
 import './App.css';
 
-const App = ()=>{
+const App = () => {
 
-  return(
+  return (
     <>
-      <h1>Welcome To Chat App</h1>
+      <RouterProvider router={routerPath} />
     </>
   );
 
