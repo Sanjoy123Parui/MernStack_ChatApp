@@ -76,46 +76,6 @@ const userNewProfile = TryCatch(async (req, res, next) => {
 });
 
 
-// admin view all user profile with controller
-const userProfileviewAll = TryCatch(async (req, res, next) => {
-
-    // here declare payload
-    let adminSignup = req.admin;
-
-    // check codition admin was login or not
-    if (!adminSignup) {
-
-        return next(errorHandler("Please login to access admin", 400));
-
-    }
-    else {
-
-        // there are view profile data of user into the database
-        let userProfiledata = await userProfileModel.find({}).populate({
-            path: 'userSignup'
-        }).exec();
-
-        // here was exact data retrive in given array and return new array
-        let data = await userProfiledata.map((profile) => {
-
-            return ({
-                'user_name': profile.user_name,
-                'user_profileimg': profile.user_profileimg,
-                'gender': profile.gender,
-                'dob': profile.dob,
-                'abouts': profile.abouts,
-                'phone': profile.userSignup.phone,
-                'country': profile.userSignup.country
-            });
-
-        });
-
-        return res.status(200).json({ data });
-
-    }
-
-});
-
 
 // view profile data controller
 const userProfileview = TryCatch(async (req, res, next) => {
@@ -297,7 +257,6 @@ const userProfileupdate = TryCatch(async (req, res, next) => {
 // export user profile all controllers
 export {
     userNewProfile,
-    userProfileviewAll,
     userProfileview,
     userProfileImageupdate,
     userProfileupdate

@@ -2,7 +2,6 @@ import express from "express";
 
 import {
     userNewProfile,
-    userProfileviewAll,
     userProfileview,
     userProfileImageupdate,
     userProfileupdate
@@ -37,13 +36,6 @@ userprofileRouter.route('/profile/creates').post(
     userProfileCreateValidator(),
     validateHandler,
     userNewProfile
-);
-
-
-// admin view all user profile router with get
-userprofileRouter.route('/profile/view/all').get(
-    adminCheckAuth,
-    userProfileviewAll
 );
 
 
