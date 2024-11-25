@@ -22,7 +22,7 @@ const userAccount = TryCatch(async (req, res, next) => {
 
         // here was specified pagination
         let page = Number(req.query.page) || 1;
-        let limit = Number(req.query.limit) || 6;
+        let limit = Number(req.query.limit) || 10;
         let skip = (page - 1) * limit;
 
         // here was fetch the userSignup data from database
@@ -121,7 +121,7 @@ const userAllProfile = TryCatch(async (req, res, next) => {
 
         // here was specified pagination
         let page = Number(req.query.page) || 1;
-        let limit = Number(req.query.limit) || 6;
+        let limit = Number(req.query.limit) || 10;
         let skip = (page - 1) * limit;
 
 
@@ -281,6 +281,155 @@ const userProfileSearch = TryCatch(async (req, res, next) => {
 
 
 
+// contact data
+
+// here was define to fetch all contacts controller functionality
+const userContactLists = TryCatch(async (req, res, next) => {
+
+    // here was declare payload
+    let adminSignup = req.admin;
+
+    // check admin
+    if (!adminSignup) {
+
+        return next(errorHandler("Please login to access admin", 400));
+
+    }
+    else {
+
+        // here was specified pagination
+        let page = Number(req.query.page) || 1;
+        let limit = Number(req.query.limit) || 10;
+        let skip = (page - 1) * limit;
+
+        // here was retrive the all contacts data in contactModel where who was contact in another person from database
+        let contactList = await contactModel.find({}).populate([
+            { path: 'myProfile', populate: { path: 'userSignup' } },
+            { path: 'contactProfile', populate: { path: 'userSignup' } }
+        ]).skip(skip).limit(limit).exec();
+
+
+        // here was map for contact data
+        let data = contactList.map((contact) => {
+
+            return ({
+                userimg: contact.myProfile.user_profileimg,
+                username: contact.myProfile.user_name,
+                userphone: contact.myProfile.userSignup.phone,
+                contactimg: contact.contactProfile.user_profileimg,
+                contactname: contact.contactProfile.user_name,
+                contactphone: contact.contactProfile.userSignup.phone,
+                savename: contact.contact_name,
+                savephone: contact.contact_phone
+            });
+
+        });
+
+        // here was declare totalPages
+        let total = await userSignupModel.countDocuments();
+        let totalPages = Math.ceil(total / limit);
+
+        res.status(200).json({
+            'data': data,
+            'currentPage': page,
+            'totalPages': totalPages
+        });
+
+    }
+
+});
+
+
+// here was define to fetch particular user contacts controller functionality
+const particularContact = TryCatch(async (req, res, next) => {
+
+    // declare payload
+    let adminSignup = req.admin;
+    let { phone, country } = req.body;
+
+    // check condition for admin
+    if (!adminSignup) {
+
+        return next(errorHandler("Please login to access admin", 400));
+
+    }
+    else {
+
+        // check user phone and country
+        if (!(phone && country)) {
+
+            return next(errorHandler("Please required phone and country", 400));
+
+        }
+        else {
+
+            // here was userId from database
+            let userSignup = await userSignupModel.findOne({ phone, country }).exec();
+            let myProfile = await userProfileModel.findOne({ userSignup: userSignup._id })
+                .populate({ path: 'userSignup' }).exec();
+
+
+            // check userId
+            if (!myProfile) {
+
+                return next(errorHandler("No more User are exist", 404));
+
+            }
+            else {
+
+
+                // here was specified pagination
+                let page = Number(req.query.page) || 1;
+                let limit = Number(req.query.limit) || 10;
+                let skip = (page - 1) * limit;
+
+
+                // here was declare how many contact are save in thos user in contacModel from database
+                let userContact = await contactModel.find({ myProfile: myProfile._id }).populate([
+                    {path:'myProfile',populate:{path:'userSignup'}},
+                    {path:'contactProfile',populate:{path:'userSignup'}},
+                ]).skip(skip).limit(limit);
+
+
+                // here was particular contact data map
+                let data = userContact.map((contact)=>{
+                    
+                    return({
+                        userimg:contact.myProfile.user_profileimg,
+                        userphone:contact.myProfile.userSignup.phone,
+                        username:contact.myProfile.user_name,
+                        usercountry:contact.myProfile.userSignup.country,
+                        contactimg:contact.contactProfile.user_profileimg,
+                        contacphone:contact.contact_phone,
+                        contactname:contact.contact_name,
+                        contactcountry:contact.contactProfile.userSignup.country
+                    });
+
+                });
+
+                // here was declare totalPages
+                let total = await userSignupModel.countDocuments();
+                let totalPages = Math.ceil(total / limit);
+
+                return res.status(200).json({
+                    'data':data,
+                    'currentPage':page,
+                    'totalPages':totalPages
+                });
+
+            }
+
+
+        }
+
+
+    }
+
+});
+
+
+
+
 // here was export all dashboard data controller funtions
 export {
 
@@ -291,6 +440,7 @@ export {
     userProfiledetails,
     userProfileSearch,
 
-   
+    userContactLists,
+    particularContact
 
 };

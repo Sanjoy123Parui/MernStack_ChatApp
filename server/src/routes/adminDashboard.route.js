@@ -7,6 +7,9 @@ import {
     userProfiledetails,
     userProfileSearch,
 
+    userContactLists,
+    particularContact
+
 } from '../controllers/adminDashboard.controller.js';
 import { adminCheckAuth } from '../middlewares/auth.middleware.js';
 
@@ -52,6 +55,24 @@ adminDashboardRouter.route('/user/profile/details').get(
 adminDashboardRouter.route('/user/profile/search').get(
     adminCheckAuth,
     userProfileSearch
+);
+
+
+
+
+// contact
+
+// user contactList end-point of router with get
+adminDashboardRouter.route('/contact/view/all').get(
+    adminCheckAuth,
+    userContactLists
+);
+
+
+// user contact particular _id of router with get
+adminDashboardRouter.route('/contact/user/view').get(
+    adminCheckAuth,
+    particularContact
 );
 
 

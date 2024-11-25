@@ -12,7 +12,7 @@ import { userprofileRouter } from './src/routes/userProfile.route.js';
 import { contactRouter } from './src/routes/contact.route.js';
 import { adminSignupRouter } from './src/routes/adminSignup.route.js';
 import { adminProfileRouter } from './src/routes/adminProfile.route.js';
-import {adminDashboardRouter} from './src/routes/adminDashboard.route.js';
+import { adminDashboardRouter } from './src/routes/adminDashboard.route.js';
 import { conn } from './src/config/conncectdb.js';
 
 
