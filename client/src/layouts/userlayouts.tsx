@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import Headers from '../components/users/headers/headers.tsx';
+import UserHeader from '../components/users/headers/userheader.tsx';
 
 // Here was define user layout component functionality
 const Userlayout = () => {
@@ -8,16 +8,15 @@ const Userlayout = () => {
     return (
         <>
             {/* headers component */}
-            <Headers/>
+            <UserHeader />
 
             {/* start main */}
-            <main>
+            <main className="bg-gray-300">
                 <Suspense>
-                    <Outlet/>
+                    <Outlet />
                 </Suspense>
             </main>
             {/* end main */}
-
         </>
     );
 }
