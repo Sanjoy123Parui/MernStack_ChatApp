@@ -11,7 +11,7 @@ const Userlayout = () => {
             <UserHeader />
 
             {/* start main */}
-            <main className="bg-gray-300">
+            <main className="bg-gray-200">
                 <Suspense>
                     <Outlet />
                 </Suspense>
