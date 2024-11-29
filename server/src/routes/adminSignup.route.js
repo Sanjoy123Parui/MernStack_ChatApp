@@ -1,19 +1,15 @@
 import express from "express";
 
-import { 
-    adminRegister, 
-    adminLogin, 
-    adminRecover, 
-    adminLogout 
+import {
+    adminRegister,
+    adminLogin,
+    adminRecover,
+    adminLogout
 } from '../controllers/adminSignup.controller.js';
 
 import { adminCheckAuth } from '../middlewares/auth.middleware.js';
 
-import {
-    adminRegisterValidator,
-    adminLoginValidator,
-    validateHandler
-} from '../validators/validator.js';
+
 
 // there define admin signup router
 const adminSignupRouter = express.Router();
@@ -23,16 +19,12 @@ const adminSignupRouter = express.Router();
 
 // admin Register end-point router with post
 adminSignupRouter.route('/signup/register').post(
-    adminRegisterValidator(),
-    validateHandler,
     adminRegister
 );
 
 
 // admin login end-point router with post
 adminSignupRouter.route('/signup/login').post(
-    adminLoginValidator(),
-    validateHandler,
     adminLogin
 );
 
@@ -45,7 +37,7 @@ adminSignupRouter.route('/signup/recover/admin').post(
 
 // admin logout end-point router with post
 adminSignupRouter.route('/signup/logout').post(
-    adminCheckAuth, 
+    adminCheckAuth,
     adminLogout
 );
 

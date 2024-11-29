@@ -9,12 +9,7 @@ import {
 
 import { adminCheckAuth } from '../middlewares/auth.middleware.js';
 import { uploadObj } from '../middlewares/fileuploads.middleware.js';
-import {
-    adminProfileCreateValidator,
-    adminProfileImageUpdateValidator,
-    adminProfileUpdateValidator,
-    validateHandler
-} from '../validators/validator.js';
+
 
 // there are define admin profile router
 const adminProfileRouter = express.Router();
@@ -26,8 +21,6 @@ const adminProfileRouter = express.Router();
 adminProfileRouter.route('/profile/creates').post(
     adminCheckAuth,
     uploadObj.single('avatar'),
-    adminProfileCreateValidator(),
-    validateHandler,
     adminNewprofile
 );
 
@@ -43,8 +36,6 @@ adminProfileRouter.route('/profile/read').get(
 adminProfileRouter.route('/profile/change/:adminProfileId').put(
     adminCheckAuth,
     uploadObj.single('avatar'),
-    adminProfileImageUpdateValidator(),
-    validateHandler,
     adminProfileImageupdate
 );
 
@@ -52,8 +43,6 @@ adminProfileRouter.route('/profile/change/:adminProfileId').put(
 // admin profile data update router with all
 adminProfileRouter.route('/profile/update/:adminProfileId').all(
     adminCheckAuth,
-    adminProfileUpdateValidator(),
-    validateHandler,
     adminProfileupdate
 );
 

@@ -8,11 +8,6 @@ import {
 } from '../controllers/userSingup.controller.js';
 
 import { userCheckAuth } from '../middlewares/auth.middleware.js';
-import { 
-    userRegisterValidator, 
-    userLoginValidator, 
-    validateHandler 
-} from '../validators/validator.js';
 
 
 const userSignupRouter = express.Router();
@@ -21,15 +16,11 @@ const userSignupRouter = express.Router();
 
 // userRegister end-point router with post
 userSignupRouter.route('/signup/register').post(
-    userRegisterValidator(),
-    validateHandler,
     userRegister
 );
 
 // userLogin end-point router with post
 userSignupRouter.route('/signup/login').post(
-    userLoginValidator(),
-    validateHandler,
     userLogin
 );
 
