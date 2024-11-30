@@ -1,5 +1,6 @@
 import express from "express";
 
+// here import all modules
 import {
     userRegister,
     userLogin,
@@ -7,7 +8,13 @@ import {
     userLogout
 } from '../controllers/userSingup.controller.js';
 
+import {
+    userRegisterValidator,
+    userLoginValidator
+} from '../validators/validator.js';
+
 import { userCheckAuth } from '../middlewares/auth.middleware.js';
+import { validateHandler } from '../middlewares/validator.middleware.js';
 
 
 const userSignupRouter = express.Router();
@@ -16,11 +23,13 @@ const userSignupRouter = express.Router();
 
 // userRegister end-point router with post
 userSignupRouter.route('/signup/register').post(
+    validateHandler(userRegisterValidator),
     userRegister
 );
 
 // userLogin end-point router with post
 userSignupRouter.route('/signup/login').post(
+    validateHandler(userLoginValidator),
     userLogin
 );
 

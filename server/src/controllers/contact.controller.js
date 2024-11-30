@@ -303,10 +303,10 @@ const editContact = TryCatch(async (req, res, next) => {
 
         // here was update user contact from database
         let userContact = await contactModel.updateOne({
-            _id: contactId,
-            contact_phone
+            _id: contactId
         }, {
             $set: {
+                contact_phone,
                 contact_name
             }
         });

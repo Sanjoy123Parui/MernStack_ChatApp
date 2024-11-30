@@ -1,15 +1,21 @@
 import express from "express";
 
-import { 
-    addContact, 
-    viewAllContact, 
-    searchContact, 
-    viewContactProfile, 
-    editContact, 
-    removeContact 
+import {
+    addContact,
+    viewAllContact,
+    searchContact,
+    viewContactProfile,
+    editContact,
+    removeContact
 } from '../controllers/contact.controller.js';
 
+import {
+    contactAddValidator,
+    contactUpdateValidator
+} from '../validators/validator.js';
+
 import { userCheckAuth } from '../middlewares/auth.middleware.js';
+import { validateHandler } from '../middlewares/validator.middleware.js';
 
 
 
@@ -22,6 +28,7 @@ const contactRouter = express.Router();
 // add contact router end-point with post
 contactRouter.route('/add').post(
     userCheckAuth,
+    validateHandler(contactAddValidator),
     addContact
 );
 
@@ -56,6 +63,7 @@ contactRouter.route('/view/details/:contactId').get(
 // update contact router end-point with put
 contactRouter.route('/update/user/:contactId').put(
     userCheckAuth,
+    validateHandler(contactUpdateValidator),
     editContact
 );
 
