@@ -7,8 +7,13 @@ import {
     adminLogout
 } from '../controllers/adminSignup.controller.js';
 
-import { adminCheckAuth } from '../middlewares/auth.middleware.js';
+import {
+    adminRegisterValidator,
+    adminLoginValidator
+} from '../validators/validator.js';
 
+import { adminCheckAuth } from '../middlewares/auth.middleware.js';
+import { validateHandler } from '../middlewares/validator.middleware.js';
 
 
 // there define admin signup router
@@ -19,12 +24,14 @@ const adminSignupRouter = express.Router();
 
 // admin Register end-point router with post
 adminSignupRouter.route('/signup/register').post(
+    validateHandler(adminRegisterValidator),
     adminRegister
 );
 
 
 // admin login end-point router with post
 adminSignupRouter.route('/signup/login').post(
+    validateHandler(adminLoginValidator),
     adminLogin
 );
 
