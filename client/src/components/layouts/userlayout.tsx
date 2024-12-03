@@ -1,19 +1,21 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import UserHeader from '../components/users/headers/userheader.tsx';
+import Headers from '../users/headers/userheader.tsx';
 
-// Here was define user layout component functionality
+
+// here define userLayout functionality
 const Userlayout = () => {
 
     return (
         <>
-            {/* headers component */}
-            <UserHeader />
+            {/* It is a headers component */}
+            <Headers/>
 
             {/* start main */}
             <main className="bg-gray-200">
                 <Suspense>
-                    <Outlet />
+                    {/* here all component loaded after header */}
+                    <Outlet/>
                 </Suspense>
             </main>
             {/* end main */}
@@ -21,4 +23,5 @@ const Userlayout = () => {
     );
 }
 
+// export user layout
 export default Userlayout;
