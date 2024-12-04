@@ -1,36 +1,32 @@
-import {lazy} from "react";
+import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Userlayout from './userlayout.tsx';
 
 // here declare or impor lazyloading router path of all components
-const UserRegister:any = lazy(()=>import('../users/signup/userRegister.tsx'));
-const UserLogin:any = lazy(()=>import('../users/signup/userLogin.tsx'));
+const UserSignupForm: any = lazy(() => import('../users/signup/userSignupForm.tsx'));
+
 
 // here declare all router path
-const routerPath:any = createBrowserRouter([
+const routerPath: any = createBrowserRouter([
     {
-        path:'/',
-        element:<Userlayout/>,
-        children:[
+        path: '/',
+        element: <Userlayout />,
+        children: [
             {
-                path:'/',
-                element:<UserRegister/>
+                path: '/',
+                element: <UserSignupForm />
             },
-            {
-                path:'/user/login',
-                element:<UserLogin/>
-            }
         ]
     }
 ]);
 
 // here was define router layout functional component
-const Routerlayout = ()=>{
+const Routerlayout = () => {
 
-    return(
+    return (
         <>
             {/* here provide all route path for loaded */}
-            <RouterProvider router={routerPath}/>
+            <RouterProvider router={routerPath} />
         </>
     )
 
