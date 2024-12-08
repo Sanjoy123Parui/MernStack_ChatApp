@@ -9,13 +9,13 @@ const Userlayout = () => {
     return (
         <>
             {/* It is a headers component */}
-            <Headers/>
+            <Headers />
 
             {/* start main */}
-            <main className="bg-gray-200">
+            <main>
                 <Suspense>
                     {/* here all component loaded after header */}
-                    <Outlet/>
+                    <Outlet />
                 </Suspense>
             </main>
             {/* end main */}

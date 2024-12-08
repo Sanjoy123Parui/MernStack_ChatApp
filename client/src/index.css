@@ -56,6 +56,13 @@
     --chart-5: 340 75% 55%
   }
 }
+body::-webkit-scrollbar{
+  display: none;
+}
+body{
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1))
+}
 @layer base {
   * {
     @apply border-border;
