@@ -4,7 +4,7 @@ import Userlayout from './userlayout.tsx';
 
 // here declare or impor lazyloading router path of all components
 const UserSignupForm: any = lazy(() => import('../users/signup/userSignupForm.tsx'));
-
+const UserLogin: any = lazy(() => import('../users/signup/userLogin.tsx'));
 
 
 
@@ -21,6 +21,10 @@ const Routerlayout = () => {
                     path: '/',
                     element: <UserSignupForm />
                 },
+                {
+                    path: '/',
+                    element: <UserLogin />
+                }
             ]
         }
     ]);
