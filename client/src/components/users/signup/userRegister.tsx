@@ -1,6 +1,6 @@
-const UserRegister = ()=>{
+const UserRegister: React.FC = () => {
 
-    return(
+    return (
         <>
             <h1>User Register</h1>
         </>

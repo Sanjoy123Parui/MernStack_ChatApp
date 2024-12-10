@@ -1,11 +1,11 @@
 import Routerlayout from './components/layouts/routerlayout.tsx';
 import './App.css';
 
-const App = () => {
+const App: React.FC = () => {
 
   return (
     <>
-      <Routerlayout/>
+      <Routerlayout />
     </>
   );
 

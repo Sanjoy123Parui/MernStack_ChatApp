@@ -4,7 +4,7 @@ import Headers from '../users/headers/userheader.tsx';
 
 
 // here define userLayout functionality
-const Userlayout = () => {
+const Userlayout: React.FC = () => {
 
     return (
         <>

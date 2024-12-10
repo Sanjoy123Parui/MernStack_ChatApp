@@ -2,14 +2,17 @@ import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Userlayout from './userlayout.tsx';
 
-// here declare or impor lazyloading router path of all components
+// here declare or import lazyloading router path of all components
+
+// here declare user functional component path import
 const UserSignupForm: any = lazy(() => import('../users/signup/userSignupForm.tsx'));
 const UserLogin: any = lazy(() => import('../users/signup/userLogin.tsx'));
+const UserRegister: any = lazy(() => import('../users/signup/userRegister.tsx'));
 
 
 
 // here was define router layout functional component
-const Routerlayout = () => {
+const Routerlayout: React.FC = () => {
 
     // here declare all router path
     const routerPath: any = createBrowserRouter([
@@ -24,6 +27,10 @@ const Routerlayout = () => {
                 {
                     path: '/',
                     element: <UserLogin />
+                },
+                {
+                    path: '/user/register',
+                    element: <UserRegister />
                 }
             ]
         }

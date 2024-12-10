@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 // here was define Header component
-const Userheaders = () => {
+const Userheaders: React.FC = () => {
 
     const [isOpen, setIsOpen] = useState<Boolean>(false);
 
