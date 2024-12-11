@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 // here was define Header component
@@ -7,8 +8,8 @@ const Userheaders: React.FC = () => {
     const [isOpen, setIsOpen] = useState<Boolean>(false);
 
     let listItems: any[] = [
-        { label: 'Login' },
-        { label: 'Register' }
+        { label: 'Login', path: '/' },
+        { label: 'Register', path: '/user/register' }
     ];
 
     return (
@@ -35,9 +36,9 @@ const Userheaders: React.FC = () => {
                         {listItems.map((items: any, index: any) => {
                             return (
                                 <li key={index} className=" mx-6 md:mx-auto p-[5px] md:p-0 md:text-right">
-                                    <a href="" className="block text-black md:text-white hover:text-yellow-400 md:hover:text-gray-300 transition-colors">
+                                    <Link to={items.path} className="block text-black md:text-white hover:text-yellow-400 md:hover:text-gray-300 transition-colors">
                                         {items.label}
-                                    </a>
+                                    </Link>
                                 </li>
                             );
                         })}
