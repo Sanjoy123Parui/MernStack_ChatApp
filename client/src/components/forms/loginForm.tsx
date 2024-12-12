@@ -16,7 +16,6 @@ import { Button } from '@/components/ui/button.tsx';
 
 
 
-
 // here was define login form functional component
 const LoginForm: React.FC = () => {
 
@@ -38,7 +37,7 @@ const LoginForm: React.FC = () => {
             {/* start login form-content */}
             <Form {...form}>
                 {/* start form */}
-                <form className="space-y-8 bg-white shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4">
+                <form className="space-y-8 bg-white shadow-xl rounded-2xl px-8 pt-6 pb-8 mb-4">
 
                     {/* login form phone input content */}
                     <div className="mb-4">

@@ -1,18 +1,16 @@
 // import many more functional components and libraries of packages
 import { Link } from "react-router-dom";
-
 import LoginForm from '../../forms/loginForm.tsx';
 
 
 // here are user login form functional component
 const UserLogin: React.FC = () => {
 
-
     return (
         <>
             {/* start div-flex for user login content */}
             <div className="flex gap-3 flex-col md:mx-11 mb-8">
-                <div className="bg-gray-100 border-[2px] rounded-2xl shadow-lg md:p-8 mx-2 md:mx-0 mt-8 p-6">
+                <div className="bg-gray-50 border-[2px] rounded-2xl shadow-lg md:p-8 mx-2 md:mx-0 mt-8 p-6">
 
                     {/* start section content for user login form and brand,logo */}
                     <section className="text-gray-600 body-font overflow-hidden">
@@ -38,7 +36,9 @@ const UserLogin: React.FC = () => {
 
                                         {/* start div are content for navigate route in user register form component */}
                                         <div className="flex items-center justify-center bg-gray-100 p-1">
-                                            <p>Don't have an account? <Link to="/user/register" className="text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700">Register</Link> </p>
+                                            <p>Don't have an account? <Link to="/user/register"
+                                                className="text-indigo-500 transition duration-100 
+                                            hover:text-indigo-600 active:text-indigo-700">Register</Link> </p>
                                         </div>
                                         {/* end div */}
 

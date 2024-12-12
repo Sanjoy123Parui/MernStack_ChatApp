@@ -8,7 +8,7 @@ const UserRegister: React.FC = () => {
         <>
             {/* start div flex for user register content */}
             <div className="flex gap-3 flex-col md:mx-11 mb-8">
-                <div className="bg-gray-100 border-[2px] rounded-2xl shadow-lg md:p-8 mx-2 md:mx-0 mt-8 p-6">
+                <div className="bg-gray-50 border-[2px] rounded-2xl shadow-lg md:p-8 mx-2 md:mx-0 mt-8 p-6">
 
                     {/* start section content for user Register form and brand,logo */}
                     <section className="text-gray-600 body-font overflow-hidden">
