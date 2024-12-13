@@ -8,11 +8,6 @@ import { z } from "zod";
 // adminRegisterValidator
 const adminRegisterValidator = z.object({
 
-    country: z
-        .string({ required_error: "Country is required type string" })
-        .trim()
-        .min(1, { message: "Country is required" }),
-
     phone: z
         .string({ required_error: "Phone is required type string" })
         .trim()
@@ -142,11 +137,6 @@ const adminProfileUpdateValidator = z.object({
 
 // userRegisterValidator schema
 const userRegisterValidator = z.object({
-
-    country: z
-        .string({ required_error: "Country is required type string" })
-        .trim()
-        .min(1, { message: "Country is required" }),
 
     phone: z
         .string({ required_error: "Phone is required type string" })

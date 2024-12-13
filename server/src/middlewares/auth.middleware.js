@@ -1,10 +1,10 @@
 // import library and modules 
 import jwt from "jsonwebtoken";
-import { TryCatch } from '../helpers/try-catch.helper.js';
+import { asyncHandler } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
 
 // there are define user authentication
-const userCheckAuth = TryCatch(async (req, res, next) => {
+const userCheckAuth = asyncHandler(async (req, res, next) => {
 
     // declare user access token are store cookie or headers
     let userToken = req.cookies?.access_userToken || req.header("Authorization")?.replace("Bearer ", "");
@@ -25,7 +25,7 @@ const userCheckAuth = TryCatch(async (req, res, next) => {
 
 
 // there are define admin authentication
-const adminCheckAuth = TryCatch(async (req, res, next) => {
+const adminCheckAuth = asyncHandler(async (req, res, next) => {
 
     // declare admin access token and refresh token are store cookie or headers
     let adminToken = req.cookies?.access_adminToken || req.header("Authorization")?.replace("Bearer ", "");
@@ -44,7 +44,7 @@ const adminCheckAuth = TryCatch(async (req, res, next) => {
 
 
 //there are define socketIo authenticator
-const socketIoAuthenticator = TryCatch(async (err, socket, next) => {
+const socketIoAuthenticator = asyncHandler(async (err, socket, next) => {
 
     // check err
     if (err) {

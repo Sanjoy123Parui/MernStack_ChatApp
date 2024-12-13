@@ -1,14 +1,14 @@
 import { contactModel } from '../models/contact.model.js';
 import { userProfileModel } from '../models/userProfile.model.js';
 import { userSignupModel } from '../models/userSignup.model.js';
-import { TryCatch } from '../helpers/try-catch.helper.js';
+import { asyncHandler } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
 
 
 // define functionality of all contact controller operations perform
 
 // add contact controller
-const addContact = TryCatch(async (req, res, next) => {
+const addContact = asyncHandler(async (req, res, next) => {
 
     // here can be declare payload
     let userSignup = req.user;
@@ -98,7 +98,7 @@ const addContact = TryCatch(async (req, res, next) => {
 
 
 // view all contact controller
-const viewAllContact = TryCatch(async (req, res, next) => {
+const viewAllContact = asyncHandler(async (req, res, next) => {
 
     // there are declare payload
     let userSignup = req.user;
@@ -174,7 +174,7 @@ const viewAllContact = TryCatch(async (req, res, next) => {
 
 
 // serach user contact controller
-const searchContact = TryCatch(async (req, res, next) => {
+const searchContact = asyncHandler(async (req, res, next) => {
 
     // declare payload data
     let userSignup = req.user;
@@ -232,7 +232,7 @@ const searchContact = TryCatch(async (req, res, next) => {
 
 
 // view contact profile controller
-const viewContactProfile = TryCatch(async (req, res, next) => {
+const viewContactProfile = asyncHandler(async (req, res, next) => {
 
     // there declare payload
     let userSignup = req.user;
@@ -271,7 +271,6 @@ const viewContactProfile = TryCatch(async (req, res, next) => {
                     contact_gender: userContact.contactProfile.gender,
                     contact_dob: userContact.contactProfile.dob,
                     contact_abouts: userContact.contactProfile.abouts,
-                    country: userContact.contactProfile.userSignup.country,
                     phone: userContact.contactProfile.userSignup.phone
                 }
             });
@@ -286,7 +285,7 @@ const viewContactProfile = TryCatch(async (req, res, next) => {
 
 
 // update contact controller
-const editContact = TryCatch(async (req, res, next) => {
+const editContact = asyncHandler(async (req, res, next) => {
 
     // there declare payload
     let userSignup = req.user;
@@ -332,7 +331,7 @@ const editContact = TryCatch(async (req, res, next) => {
 
 
 // delete contact controller
-const removeContact = TryCatch(async (req, res, next) => {
+const removeContact = asyncHandler(async (req, res, next) => {
 
     // there declare payload
     let userSignup = req.user;

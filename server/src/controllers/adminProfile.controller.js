@@ -1,12 +1,12 @@
 import { adminProfileModel } from '../models/adminProfile.model.js';
-import { TryCatch } from '../helpers/try-catch.helper.js';
+import { asyncHandler } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
 import { uploadFiles } from '../helpers/fileuploads.helper.js';
 
 // there are define all admin profile controllers here
 
 // admin profile create controller
-const adminNewprofile = TryCatch(async (req, res, next) => {
+const adminNewprofile = asyncHandler(async (req, res, next) => {
 
     // there are declare payloads
     let adminSignup = req.admin;
@@ -79,7 +79,7 @@ const adminNewprofile = TryCatch(async (req, res, next) => {
 
 
 // there admin own profile read
-const adminViewprofile = TryCatch(async (req, res, next) => {
+const adminViewprofile = asyncHandler(async (req, res, next) => {
 
     // there are declare payload of params
     let adminSignup = req.admin;
@@ -110,8 +110,7 @@ const adminViewprofile = TryCatch(async (req, res, next) => {
                     gender: existAdmin.gender,
                     dob: existAdmin.dob,
                     abouts: existAdmin.abouts,
-                    country: existAdmin.adminSignup.country,
-                    phone: existAdmin.adminSignup.phone,
+                    phone: existAdmin.adminSignup.phone
                 }
             });
         }
@@ -121,7 +120,7 @@ const adminViewprofile = TryCatch(async (req, res, next) => {
 
 
 // admin profile image data update controller
-const adminProfileImageupdate = TryCatch(async (req, res, next) => {
+const adminProfileImageupdate = asyncHandler(async (req, res, next) => {
 
     // there declare payload
     let adminSignup = req.admin;
@@ -190,7 +189,7 @@ const adminProfileImageupdate = TryCatch(async (req, res, next) => {
 
 
 // admin profile update cotroller
-const adminProfileupdate = TryCatch(async (req, res, next) => {
+const adminProfileupdate = asyncHandler(async (req, res, next) => {
 
     // check condition for request
     if (req.method === 'PUT' || req.method === 'PATCH') {

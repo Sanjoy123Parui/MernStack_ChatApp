@@ -3,11 +3,6 @@ import mongoose from "mongoose";
 // create there admin signup model schema
 const adminSignupSchema = new mongoose.Schema({
 
-    country: {
-        type: String,
-        required: true,
-    },
-
     phone: {
         type: String,
         unique: true,
@@ -27,7 +22,7 @@ const adminSignupSchema = new mongoose.Schema({
 
     timestamps: true,
     versionKey: false
-    
+
 });
 
 const adminSignupModel = mongoose.model('adminsignups', adminSignupSchema);

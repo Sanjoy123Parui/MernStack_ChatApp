@@ -2,17 +2,17 @@
 import jwt from "jsonwebtoken";
 import bcyptjs from "bcryptjs";
 import { userSignupModel } from '../models/userSignup.model.js';
-import { TryCatch } from '../helpers/try-catch.helper.js';
+import { asyncHandler } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
 import { sendUserToken, cookieOptions } from '../utils/features.js';
 
 // there are define user signup controllers
 
 // userRegister controller
-const userRegister = TryCatch(async (req, res, next) => {
+const userRegister = asyncHandler(async (req, res, next) => {
 
     // there are declare payload
-    let { country, phone, password, confirmPassword } = req.body;
+    let { phone, password, confirmPassword } = req.body;
 
     // check for compare the password
     if (password !== confirmPassword) {
@@ -38,7 +38,6 @@ const userRegister = TryCatch(async (req, res, next) => {
             // there are data save into the database
 
             let userInfo = await userSignupModel.create({
-                country,
                 phone,
                 password: hashPassword
             });
@@ -61,7 +60,7 @@ const userRegister = TryCatch(async (req, res, next) => {
 
 
 // user login controller
-const userLogin = TryCatch(async (req, res, next) => {
+const userLogin = asyncHandler(async (req, res, next) => {
 
     // there are declare payload
     let { phone, password } = req.body;
@@ -98,7 +97,7 @@ const userLogin = TryCatch(async (req, res, next) => {
 
 
 // user refresh token to access token recover
-const userRecover = TryCatch(async (req, res, next) => {
+const userRecover = asyncHandler(async (req, res, next) => {
 
     // there generate user refresh token from cookie and another
     let userRefresh = req.cookies.refresh_userToken || req.body.refresh_userToken;
@@ -145,7 +144,7 @@ const userRecover = TryCatch(async (req, res, next) => {
 
 
 // user logout controller
-const userLogout = TryCatch(async (req, res, next) => {
+const userLogout = asyncHandler(async (req, res, next) => {
 
     // here is declare user_id
     let user_Id = req.user;

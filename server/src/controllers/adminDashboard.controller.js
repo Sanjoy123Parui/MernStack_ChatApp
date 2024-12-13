@@ -1,4 +1,4 @@
-import { TryCatch } from '../helpers/try-catch.helper.js';
+import { asyncHandler } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
 import { userSignupModel } from '../models/userSignup.model.js';
 import { userProfileModel } from '../models/userProfile.model.js';
@@ -9,7 +9,7 @@ import { contactModel } from '../models/contact.model.js';
 // userSignup data
 
 // here was how many userAccount created check controller functionality
-const userAccount = TryCatch(async (req, res, next) => {
+const userAccount = asyncHandler(async (req, res, next) => {
 
     // here was declare payload
     let adminSignup = req.admin;
@@ -34,7 +34,6 @@ const userAccount = TryCatch(async (req, res, next) => {
 
             return ({
                 phone: user.phone,
-                country: user.country
             });
 
         });
@@ -57,11 +56,11 @@ const userAccount = TryCatch(async (req, res, next) => {
 
 
 // here search how many user account controller functionality
-const userAccountSearch = TryCatch(async (req, res, next) => {
+const userAccountSearch = asyncHandler(async (req, res, next) => {
 
     // here declare payload
     let adminSignup = req.admin;
-    let { country } = req.body
+    let { phone } = req.body
 
     // check admin
     if (!adminSignup) {
@@ -71,23 +70,22 @@ const userAccountSearch = TryCatch(async (req, res, next) => {
     }
     else {
 
-        // check condition for country are matched
-        if (!country) {
+        // check condition for phone are matched
+        if (!phone) {
 
-            return next(errorHandler("No more country has been found", 404));
+            return next(errorHandler("No more phone contact has been found", 404));
 
         }
         else {
 
             // here was fetch the search data in userSignup model from database
-            let searchData = await userSignupModel.find({ country }).exec();
+            let searchData = await userSignupModel.find({ phone }).exec();
 
             // here was map data
             let data = searchData.map((user) => {
 
                 return ({
                     phone: user.phone,
-                    country: user.country
                 });
 
             });
@@ -106,7 +104,7 @@ const userAccountSearch = TryCatch(async (req, res, next) => {
 // userProfile data
 
 // here was retrieve all the profile data controller functionality
-const userAllProfile = TryCatch(async (req, res, next) => {
+const userAllProfile = asyncHandler(async (req, res, next) => {
 
     // here was declare payload
     let adminSignup = req.admin;
@@ -137,8 +135,7 @@ const userAllProfile = TryCatch(async (req, res, next) => {
             return ({
                 user_profileimg: profile.user_profileimg,
                 user_name: profile.user_name,
-                phone: profile.userSignup.phone,
-                country: profile.userSignup.country
+                phone: profile.userSignup.phone
             });
 
         });
@@ -159,7 +156,7 @@ const userAllProfile = TryCatch(async (req, res, next) => {
 
 
 // here was retrieve the profile details controller functionality
-const userProfiledetails = TryCatch(async (req, res, next) => {
+const userProfiledetails = asyncHandler(async (req, res, next) => {
 
     // here was declare payload
     let adminSignup = req.admin;
@@ -211,8 +208,7 @@ const userProfiledetails = TryCatch(async (req, res, next) => {
                         phone: userDetails.userSignup.phone,
                         gender: userDetails.gender,
                         dob: userDetails.dob,
-                        abouts: userDetails.abouts,
-                        country: userDetails.userSignup.country,
+                        abouts: userDetails.abouts
                     };
 
                     return res.status(200).json({ data });
@@ -231,7 +227,7 @@ const userProfiledetails = TryCatch(async (req, res, next) => {
 
 
 // here was fetch of search profile data from users controller functionality
-const userProfileSearch = TryCatch(async (req, res, next) => {
+const userProfileSearch = asyncHandler(async (req, res, next) => {
 
     // here was declare payload
     let adminSignup = req.admin;
@@ -284,7 +280,7 @@ const userProfileSearch = TryCatch(async (req, res, next) => {
 // contact data
 
 // here was define to fetch all contacts controller functionality
-const userContactLists = TryCatch(async (req, res, next) => {
+const userContactLists = asyncHandler(async (req, res, next) => {
 
     // here was declare payload
     let adminSignup = req.admin;
@@ -341,11 +337,11 @@ const userContactLists = TryCatch(async (req, res, next) => {
 
 
 // here was define to fetch particular user contacts controller functionality
-const particularContact = TryCatch(async (req, res, next) => {
+const particularContact = asyncHandler(async (req, res, next) => {
 
     // declare payload
     let adminSignup = req.admin;
-    let { phone, country } = req.body;
+    let { phone } = req.body;
 
     // check condition for admin
     if (!adminSignup) {
@@ -356,15 +352,15 @@ const particularContact = TryCatch(async (req, res, next) => {
     else {
 
         // check user phone and country
-        if (!(phone && country)) {
+        if (!(phone)) {
 
-            return next(errorHandler("Please required phone and country", 400));
+            return next(errorHandler("Please required phone", 400));
 
         }
         else {
 
             // here was userId from database
-            let userSignup = await userSignupModel.findOne({ phone, country }).exec();
+            let userSignup = await userSignupModel.findOne({ phone }).exec();
             let myProfile = await userProfileModel.findOne({ userSignup: userSignup._id })
                 .populate({ path: 'userSignup' }).exec();
 
@@ -386,23 +382,22 @@ const particularContact = TryCatch(async (req, res, next) => {
 
                 // here was declare how many contact are save in thos user in contacModel from database
                 let userContact = await contactModel.find({ myProfile: myProfile._id }).populate([
-                    {path:'myProfile',populate:{path:'userSignup'}},
-                    {path:'contactProfile',populate:{path:'userSignup'}},
+                    { path: 'myProfile', populate: { path: 'userSignup' } },
+                    { path: 'contactProfile', populate: { path: 'userSignup' } },
                 ]).skip(skip).limit(limit);
 
 
                 // here was particular contact data map
-                let data = userContact.map((contact)=>{
-                    
-                    return({
-                        userimg:contact.myProfile.user_profileimg,
-                        userphone:contact.myProfile.userSignup.phone,
-                        username:contact.myProfile.user_name,
-                        usercountry:contact.myProfile.userSignup.country,
-                        contactimg:contact.contactProfile.user_profileimg,
-                        contacphone:contact.contact_phone,
-                        contactname:contact.contact_name,
-                        contactcountry:contact.contactProfile.userSignup.country
+                let data = userContact.map((contact) => {
+
+                    return ({
+                        userimg: contact.myProfile.user_profileimg,
+                        userphone: contact.myProfile.userSignup.phone,
+                        username: contact.myProfile.user_name,
+                        usercountry: contact.myProfile.userSignup.country,
+                        contactimg: contact.contactProfile.user_profileimg,
+                        contacphone: contact.contact_phone,
+                        contactname: contact.contact_name
                     });
 
                 });
@@ -412,9 +407,9 @@ const particularContact = TryCatch(async (req, res, next) => {
                 let totalPages = Math.ceil(total / limit);
 
                 return res.status(200).json({
-                    'data':data,
-                    'currentPage':page,
-                    'totalPages':totalPages
+                    'data': data,
+                    'currentPage': page,
+                    'totalPages': totalPages
                 });
 
             }

@@ -1,17 +1,17 @@
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import { adminSignupModel } from '../models/adminSignup.model.js';
-import { TryCatch } from '../helpers/try-catch.helper.js';
+import { asyncHandler } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
 import { sendAdminToken, cookieOptions } from '../utils/features.js';
 
 // there create all admin signup controllers
 
 // admin register controller
-const adminRegister = TryCatch(async (req, res, next) => {
+const adminRegister = asyncHandler(async (req, res, next) => {
 
     // there are declare payload of body
-    let { country, phone, password, confirmPassword } = req.body;
+    let { phone, password, confirmPassword } = req.body;
 
     // condition to check password and confirmpassword comparison
     if (password !== confirmPassword) {
@@ -36,7 +36,6 @@ const adminRegister = TryCatch(async (req, res, next) => {
             // there are insert the data and save
 
             let adminInfo = await adminSignupModel.create({
-                country,
                 phone,
                 password: hashPassword
             });
@@ -58,7 +57,7 @@ const adminRegister = TryCatch(async (req, res, next) => {
 
 
 // admin login controller
-const adminLogin = TryCatch(async (req, res, next) => {
+const adminLogin = asyncHandler(async (req, res, next) => {
 
     // there are declare payload of body
     let { phone, password } = req.body;
@@ -94,7 +93,7 @@ const adminLogin = TryCatch(async (req, res, next) => {
 
 
 // admin refresh token to access token recover
-const adminRecover = TryCatch(async (req, res, next) => {
+const adminRecover = asyncHandler(async (req, res, next) => {
 
     // there generate admin refresh token from cookie and another
     let adminRefresh = req.cookies.refresh_adminToken || req.body.refresh_adminToken;
@@ -145,7 +144,7 @@ const adminRecover = TryCatch(async (req, res, next) => {
 
 
 // admin logout controller
-const adminLogout = TryCatch(async (req, res, next) => {
+const adminLogout = asyncHandler(async (req, res, next) => {
 
     // here declare admin_id
     let admin_Id = req.admin;

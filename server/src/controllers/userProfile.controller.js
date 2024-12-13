@@ -1,12 +1,12 @@
 import { userProfileModel } from '../models/userProfile.model.js';
-import { TryCatch } from '../helpers/try-catch.helper.js';
+import { asyncHandler } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
 import { uploadFiles } from '../helpers/fileuploads.helper.js';
 
 // create user Profile all controllers operation perform
 
 // create new user profile
-const userNewProfile = TryCatch(async (req, res, next) => {
+const userNewProfile = asyncHandler(async (req, res, next) => {
 
     //there are declare payloads
     let userSignup = req.user;
@@ -78,7 +78,7 @@ const userNewProfile = TryCatch(async (req, res, next) => {
 
 
 // view profile data controller
-const userProfileview = TryCatch(async (req, res, next) => {
+const userProfileview = asyncHandler(async (req, res, next) => {
 
     // declare payload of params
     let userSignup = req.user;
@@ -109,7 +109,6 @@ const userProfileview = TryCatch(async (req, res, next) => {
                     gender: userProfiledata.gender,
                     dob: userProfiledata.dob,
                     abouts: userProfiledata.abouts,
-                    country: userProfiledata.userSignup.country,
                     phone: userProfiledata.userSignup.phone
                 }
             });
@@ -124,7 +123,7 @@ const userProfileview = TryCatch(async (req, res, next) => {
 
 
 // update profile image controller
-const userProfileImageupdate = TryCatch(async (req, res, next) => {
+const userProfileImageupdate = asyncHandler(async (req, res, next) => {
 
     // there declare payload
     let userSignup = req.user;
@@ -195,7 +194,7 @@ const userProfileImageupdate = TryCatch(async (req, res, next) => {
 
 
 // update profile data controller
-const userProfileupdate = TryCatch(async (req, res, next) => {
+const userProfileupdate = asyncHandler(async (req, res, next) => {
 
     // there have check the request method of condition
     if (req.method === 'PUT' || req.method === 'PATCH') {

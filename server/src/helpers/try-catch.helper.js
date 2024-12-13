@@ -1,5 +1,5 @@
-// there are define tryCatch helper function
-const TryCatch = (paramsData) => async (req, res, next) => {
+// there are define asynHandler of trycatch wrapper helper function
+const asyncHandler = (paramsData) => async (req, res, next) => {
 
     // use try-catch
     try {
@@ -15,4 +15,4 @@ const TryCatch = (paramsData) => async (req, res, next) => {
 
 
 // export trycatch helper
-export { TryCatch };
+export { asyncHandler };
