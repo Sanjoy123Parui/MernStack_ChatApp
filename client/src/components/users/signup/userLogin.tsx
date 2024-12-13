@@ -1,10 +1,30 @@
 // import many more functional components and libraries of packages
 import { Link } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form";
 import LoginForm from '../../forms/loginForm.tsx';
+import { userLoginFormData } from '../../models/loginModel.ts';
 
+// here declare instance of user login form data interface model
+// interface userLoginFormData {
+//     phone: string;
+//     password: string;
+// };
 
 // here are user login form functional component
 const UserLogin: React.FC = () => {
+
+    // declare useForm hook for user login data model handle
+    let form = useForm<userLoginFormData>({
+        defaultValues: {
+            phone: '',   // Default value for phone input
+            password: '', // Default value for password input
+        },
+    });
+
+    // declare function of handle login form submit
+    const userhandleLoginSubmit: SubmitHandler<userLoginFormData> = (data: any) => {
+        console.log(data);
+    }
 
     return (
         <>
@@ -12,7 +32,7 @@ const UserLogin: React.FC = () => {
             <div className="flex gap-3 flex-col md:mx-11 mb-8">
                 <div className="bg-gray-50 border-[2px] rounded-2xl shadow-lg md:p-8 mx-2 md:mx-0 mt-8 p-6">
 
-                    {/* start section content for user login form and brand,logo */}
+                    {/* start section content for user login form and brand, logo */}
                     <section className="text-gray-600 body-font overflow-hidden">
                         <div className="container px-5 py-7 mx-auto">
                             <div className="flex flex-wrap -m-12">
@@ -24,7 +44,7 @@ const UserLogin: React.FC = () => {
                                 </div>
                                 {/* end div */}
 
-                                {/* start div content of user login form  */}
+                                {/* start div content of user login form */}
                                 <div className="p-8 md:p-4 md:mb-12 w-full md:w-1/2 flex flex-col items-start">
                                     <div className="w-full max-w-sm mx-auto">
 
@@ -32,7 +52,10 @@ const UserLogin: React.FC = () => {
                                         <h1 className="text-2xl text-center font-bold text-blue-950 mb-6">Login</h1>
 
                                         {/* loginForm component */}
-                                        <LoginForm />
+                                        <LoginForm
+                                            form={form}
+                                            onSubmit={form.handleSubmit(userhandleLoginSubmit)}
+                                        />
 
                                         {/* start div are content for navigate route in user register form component */}
                                         <div className="flex items-center justify-center bg-gray-100 p-1">
@@ -56,7 +79,6 @@ const UserLogin: React.FC = () => {
             {/* end div-flex */}
         </>
     );
-
 }
 
 // export User Login Form functional component
