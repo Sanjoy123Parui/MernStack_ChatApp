@@ -1,6 +1,5 @@
 // here import all form packages of libraries
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import {
@@ -21,15 +20,15 @@ import {
 
 import { Input } from "@/components/ui/input.tsx";
 import { Button } from "@/components/ui/button.tsx";
+import { RegisterFormProps } from '../models/signupModel.ts';
+
+
 
 // here was define register form functional component
-const RegisterForm: React.FC = () => {
+const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
 
     // declare useState hook for show/hide password
     const [toggleRegisterPassword, setToggleRegisterPassword] = useState<boolean>(false);
-
-    // declare useForm hook from react-hook-form for form handling
-    let form = useForm<any>();
 
     // define function for toggle show/hide password
     const visibilityRegister = () => {
@@ -41,7 +40,7 @@ const RegisterForm: React.FC = () => {
             {/* start register form content */}
             <Form {...form}>
                 {/* start register form */}
-                <form className="space-y-8 bg-white shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4">
+                <form onSubmit={onSubmit} className="space-y-8 bg-white shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4">
 
                     {/* register form country input content */}
                     <div className="mb-4">
@@ -51,7 +50,7 @@ const RegisterForm: React.FC = () => {
                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                                     <FormControl>
                                         <SelectTrigger>
-                                            <SelectValue className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:ring-blue-500" placeholder="Choose you contry" />
+                                            <SelectValue className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500" placeholder="Choose you contry" />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
@@ -70,7 +69,7 @@ const RegisterForm: React.FC = () => {
                             <FormItem>
                                 <FormLabel className="block text-gray-700 text-sm md:text-base font-bold mb-2">Phone</FormLabel>
                                 <FormControl>
-                                    <Input type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:ring-blue-500" placeholder="Phone" {...field} />
+                                    <Input type="number" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500" placeholder="Phone" {...field} />
                                 </FormControl>
                             </FormItem>
                         )} />
@@ -82,7 +81,7 @@ const RegisterForm: React.FC = () => {
                             <FormItem>
                                 <FormLabel className="lock text-gray-700 text-sm md:text-base font-bold mb-2">Password</FormLabel>
                                 <FormControl>
-                                    <Input type={toggleRegisterPassword ? 'text' : 'password'} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:ring-blue-500"
+                                    <Input type={toggleRegisterPassword ? 'text' : 'password'} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500"
                                         placeholder="Password" {...field} />
                                 </FormControl>
                                 <button type="button" onClick={visibilityRegister} className="absolute top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500">{toggleRegisterPassword ? <FaEye /> : <FaEyeSlash />}</button>
@@ -93,12 +92,12 @@ const RegisterForm: React.FC = () => {
 
                     {/* register form confirm password input content */}
                     <div className="relative mb-4">
-                        <FormField control={form.control} name="password" render={({ field }) => (
+                        <FormField control={form.control} name="confirmPassword" render={({ field }) => (
                             <FormItem>
                                 <FormLabel className="lock text-gray-700 text-sm md:text-base font-bold mb-2">Confirm Password</FormLabel>
                                 <FormControl>
                                     <Input type={toggleRegisterPassword ? 'text' : 'password'} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:ring-blue-500"
-                                        placeholder="Password" {...field} />
+                                        placeholder="Confirm Password" {...field} />
                                 </FormControl>
                                 <button type="button" onClick={visibilityRegister} className="absolute top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500">{toggleRegisterPassword ? <FaEye /> : <FaEyeSlash />}</button>
                             </FormItem>

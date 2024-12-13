@@ -1,8 +1,27 @@
 // import many more functional components and libraries of packages
 import { Link } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form";
 import RegisterForm from '../../forms/registerForm.tsx';
+import { userRegisterFormData } from '../../models/signupModel.ts';
+
 
 const UserRegister: React.FC = () => {
+
+    // declare useForm hook for user register data model handle
+    let form = useForm<userRegisterFormData>({
+        defaultValues: {
+            country: '',
+            phone: '',
+            password: '',
+            confirmPassword: ''
+        }
+    });
+
+
+    // declare function of handle register form submit
+    const userhandleRegisterSubmit: SubmitHandler<userRegisterFormData> = (data: any) => {
+        console.log(data);
+    }
 
     return (
         <>
@@ -30,7 +49,10 @@ const UserRegister: React.FC = () => {
                                         <h1 className="text-2xl text-center font-bold text-blue-950 mb-6">Register</h1>
 
                                         {/* RegisterForm component */}
-                                        <RegisterForm />
+                                        <RegisterForm
+                                            form={form}
+                                            onSubmit={form.handleSubmit(userhandleRegisterSubmit)}
+                                        />
 
                                         {/* start div are content for navigate route in user login form component */}
                                         <div className="flex items-center justify-center bg-gray-100 p-1">

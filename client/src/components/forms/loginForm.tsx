@@ -12,7 +12,7 @@ import {
 
 import { Input } from '@/components/ui/input.tsx';
 import { Button } from '@/components/ui/button.tsx';
-import { LoginFormProps } from '../models/loginModel.ts';
+import { LoginFormProps } from '../models/signupModel.ts';
 
 
 
@@ -43,7 +43,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, onSubmit }) => {
                             <FormItem>
                                 <FormLabel className="block text-gray-700 text-sm md:text-base font-bold mb-2">Phone</FormLabel>
                                 <FormControl>
-                                    <Input type="number" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:ring-blue-500" {...field} placeholder="Phone" />
+                                    <Input type="number" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500" {...field} placeholder="Phone" />
                                 </FormControl>
                             </FormItem>
                         )} />
@@ -55,7 +55,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, onSubmit }) => {
                             <FormItem>
                                 <FormLabel className="block text-gray-700 text-sm md:text-base font-bold mb-2">Password</FormLabel>
                                 <FormControl>
-                                    <Input type={toggleLoginPassword ? 'text' : 'password'} {...field} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:ring-blue-500"
+                                    <Input type={toggleLoginPassword ? 'text' : 'password'} {...field} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500"
                                         placeholder="Password" />
                                 </FormControl>
                                 <button type="button" onClick={visibilityLogin} className="absolute top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500">{toggleLoginPassword ? <FaEye /> : <FaEyeSlash />}</button>

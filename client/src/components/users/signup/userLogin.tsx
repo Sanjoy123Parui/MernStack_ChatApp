@@ -2,13 +2,9 @@
 import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import LoginForm from '../../forms/loginForm.tsx';
-import { userLoginFormData } from '../../models/loginModel.ts';
+import { userLoginFormData } from '../../models/signupModel.ts';
 
-// here declare instance of user login form data interface model
-// interface userLoginFormData {
-//     phone: string;
-//     password: string;
-// };
+
 
 // here are user login form functional component
 const UserLogin: React.FC = () => {
@@ -16,9 +12,9 @@ const UserLogin: React.FC = () => {
     // declare useForm hook for user login data model handle
     let form = useForm<userLoginFormData>({
         defaultValues: {
-            phone: '',   // Default value for phone input
-            password: '', // Default value for password input
-        },
+            phone: '',
+            password: '',
+        }
     });
 
     // declare function of handle login form submit
