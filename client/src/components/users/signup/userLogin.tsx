@@ -10,7 +10,7 @@ import { userLoginFormData } from '../../models/signupModel.ts';
 const UserLogin: React.FC = () => {
 
     // declare useForm hook for user login data model handle
-    let form = useForm<userLoginFormData>({
+    let form: any = useForm<userLoginFormData>({
         defaultValues: {
             phone: '',
             password: '',

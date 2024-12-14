@@ -44,6 +44,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, onSubmit }) => {
                                 <FormControl>
                                     <Input type="number" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500" {...field} placeholder="Phone" />
                                 </FormControl>
+                                
                             </FormItem>
                         )} />
                     </div>
@@ -58,6 +59,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, onSubmit }) => {
                                         placeholder="Password" />
                                 </FormControl>
                                 <button type="button" onClick={visibilityLogin} className="absolute top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500">{toggleLoginPassword ? <FaEye /> : <FaEyeSlash />}</button>
+
                             </FormItem>
                         )} />
                     </div>
