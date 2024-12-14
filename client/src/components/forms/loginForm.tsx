@@ -1,8 +1,6 @@
 // here import all form packages of libraries
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-// import PhoneInput from "react-phone-number-input";
-// import 'react-phone-number-input/style.css';
 import {
     Form,
     FormField,
@@ -45,8 +43,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, onSubmit }) => {
                                 <FormLabel className="block text-gray-700 text-sm md:text-base font-bold mb-2">Phone</FormLabel>
                                 <FormControl>
                                     <Input type="number" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500" {...field} placeholder="Phone" />
-                                    {/* <PhoneInput type="number" {...field} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500" 
-                                    international countryCallingCodeEditable={false} defaultCountry="RU" placeholder="Phone" /> */}
                                 </FormControl>
                             </FormItem>
                         )} />
