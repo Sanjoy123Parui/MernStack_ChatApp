@@ -38,20 +38,23 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, onSubmit }) => {
 
                     {/* login form phone input content */}
                     <div className="mb-4">
-                        <FormField control={form.control} name="phone" render={({ field }) => (
+                        <FormField control={form.control} name="phone" render={({ field, fieldState }) => (
                             <FormItem>
                                 <FormLabel className="block text-gray-700 text-sm md:text-base font-bold mb-2">Phone</FormLabel>
                                 <FormControl>
                                     <Input type="number" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500" {...field} placeholder="Phone" />
                                 </FormControl>
-                                
+                                {/* error of login form phone input field validation */}
+                                {fieldState?.error && (
+                                    <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
+                                )}
                             </FormItem>
                         )} />
                     </div>
 
                     {/* login form password input content */}
                     <div className="relative mb-4">
-                        <FormField control={form.control} name="password" render={({ field }) => (
+                        <FormField control={form.control} name="password" render={({ field, fieldState }) => (
                             <FormItem>
                                 <FormLabel className="block text-gray-700 text-sm md:text-base font-bold mb-2">Password</FormLabel>
                                 <FormControl>
@@ -59,7 +62,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, onSubmit }) => {
                                         placeholder="Password" />
                                 </FormControl>
                                 <button type="button" onClick={visibilityLogin} className="absolute top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500">{toggleLoginPassword ? <FaEye /> : <FaEyeSlash />}</button>
-
+                                {/* error of login form password input field validation */}
+                                {fieldState?.error && (
+                                    <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
+                                )}
                             </FormItem>
                         )} />
                     </div>

@@ -7,6 +7,7 @@ import Userlayout from './userlayout.tsx';
 // here declare user functional component path import
 const UserLogin: any = lazy(() => import('../users/signup/userLogin.tsx'));
 const UserRegister: any = lazy(() => import('../users/signup/userRegister.tsx'));
+const CreateUser: any = lazy(() => import('../users/profiles/userCreate.tsx'));
 
 
 
@@ -16,16 +17,20 @@ const Routerlayout: React.FC = () => {
     // here declare all router path
     const routerPath: any = createBrowserRouter([
         {
-            path: '/',
+            path: `/`,
             element: <Userlayout />,
             children: [
                 {
-                    path: '/',
+                    path: `/`,
                     element: <UserLogin />
                 },
                 {
-                    path: '/user/register',
+                    path: `/user/register`,
                     element: <UserRegister />
+                },
+                {
+                    path: `/user/chat/profile`,
+                    element: <CreateUser />
                 }
             ]
         }

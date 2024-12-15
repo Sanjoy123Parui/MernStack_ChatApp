@@ -9,7 +9,6 @@ export interface userLoginFormData {
 
 // here declare instance of user register form data interface model
 export interface userRegisterFormData {
-    country: string;
     phone: string;
     password: string;
     confirmPassword: string;

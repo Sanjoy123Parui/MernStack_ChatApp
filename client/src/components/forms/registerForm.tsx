@@ -10,14 +10,6 @@ import {
     FormControl,
 } from "@/components/ui/form.tsx";
 
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue
-} from "@/components/ui/select.tsx";
-
 import { Input } from "@/components/ui/input.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { RegisterFormProps } from '../models/signupModel.ts';
@@ -42,42 +34,24 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
                 {/* start register form */}
                 <form onSubmit={onSubmit} className="space-y-8 bg-white shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4">
 
-                    {/* register form country input content */}
-                    <div className="mb-4">
-                        <FormField control={form.control} name="country" render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className="block text-gray-700 text-sm md:text-base font-bold mb-2">Country</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                    <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500" placeholder="Choose you contry" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="India">India</SelectItem>
-                                        <SelectItem value="USA">USA</SelectItem>
-                                        <SelectItem value="UK">UK</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </FormItem>
-                        )} />
-                    </div>
-
                     {/* register form phone input content */}
                     <div className="mb-4">
-                        <FormField control={form.control} name="phone" render={({ field }) => (
+                        <FormField control={form.control} name="phone" render={({ field, fieldState }) => (
                             <FormItem>
                                 <FormLabel className="block text-gray-700 text-sm md:text-base font-bold mb-2">Phone</FormLabel>
                                 <FormControl>
                                     <Input type="number" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500" placeholder="Phone" {...field} />
                                 </FormControl>
+                                {fieldState?.error && (
+                                    <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
+                                )}
                             </FormItem>
                         )} />
                     </div>
 
                     {/* register form password input content */}
                     <div className="relative mb-4">
-                        <FormField control={form.control} name="password" render={({ field }) => (
+                        <FormField control={form.control} name="password" render={({ field, fieldState }) => (
                             <FormItem>
                                 <FormLabel className="lock text-gray-700 text-sm md:text-base font-bold mb-2">Password</FormLabel>
                                 <FormControl>
@@ -85,6 +59,9 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
                                         placeholder="Password" {...field} />
                                 </FormControl>
                                 <button type="button" onClick={visibilityRegister} className="absolute top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500">{toggleRegisterPassword ? <FaEye /> : <FaEyeSlash />}</button>
+                                {fieldState?.error && (
+                                    <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
+                                )}
                             </FormItem>
                         )} />
                     </div>
@@ -92,7 +69,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
 
                     {/* register form confirm password input content */}
                     <div className="relative mb-4">
-                        <FormField control={form.control} name="confirmPassword" render={({ field }) => (
+                        <FormField control={form.control} name="confirmPassword" render={({ field, fieldState }) => (
                             <FormItem>
                                 <FormLabel className="lock text-gray-700 text-sm md:text-base font-bold mb-2">Confirm Password</FormLabel>
                                 <FormControl>
@@ -100,6 +77,9 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
                                         placeholder="Confirm Password" {...field} />
                                 </FormControl>
                                 <button type="button" onClick={visibilityRegister} className="absolute top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500">{toggleRegisterPassword ? <FaEye /> : <FaEyeSlash />}</button>
+                                {fieldState?.error && (
+                                    <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
+                                )}
                             </FormItem>
                         )} />
                     </div>

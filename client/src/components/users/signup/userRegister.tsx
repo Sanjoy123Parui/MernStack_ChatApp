@@ -1,16 +1,18 @@
 // import many more functional components and libraries of packages
 import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import RegisterForm from '../../forms/registerForm.tsx';
 import { userRegisterFormData } from '../../models/signupModel.ts';
+import { registerValidatorSchema } from '../../validations/signupValidator.ts';
 
 
 const UserRegister: React.FC = () => {
 
     // declare useForm hook for user register data model handle
     let form = useForm<userRegisterFormData>({
+        resolver: zodResolver(registerValidatorSchema),
         defaultValues: {
-            country: '',
             phone: '',
             password: '',
             confirmPassword: ''
@@ -43,7 +45,7 @@ const UserRegister: React.FC = () => {
 
                                 {/* start div content of user Register form  */}
                                 <div className="p-8 md:p-4 md:mb-12 w-full md:w-1/2 flex flex-col items-start">
-                                    <div className="w-full max-w-sm mx-auto">
+                                    <div className="w-full max-w-md mx-auto">
 
                                         {/* here is declare user Register form heading */}
                                         <h1 className="text-2xl text-center font-bold text-blue-950 mb-6">Register</h1>
