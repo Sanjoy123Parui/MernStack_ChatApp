@@ -1,13 +1,12 @@
-// here import components and libraries 
-import ProfileCreateForm from '../../forms/profileCreateForm.tsx';
-
 // here define User profile functional component
 const UserCreate: React.FC = () => {
 
     return (
-        <>
-            <h1>User Profile</h1>
-            <ProfileCreateForm />
+        <> 
+            {/* start div-flex for user profile content */}
+            <div>
+                <h1>Create Use Profile</h1>
+            </div>
         </>
     );
 
