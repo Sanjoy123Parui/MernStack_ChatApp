@@ -19,7 +19,7 @@ const Userheaders: React.FC = () => {
             <nav className="bg-indigo-950 sticky font-sans top-0 z-0 p-4">
 
                 {/* start div container */}
-                <div className="container mx-auto relative flex justify-between items-center">
+                <div className="container mx-auto relative flex justify-between px-0 md:px-8 items-center">
 
                     {/* brand name */}
                     <h1 className="text-white text-lg font-bold">hiChat</h1>
