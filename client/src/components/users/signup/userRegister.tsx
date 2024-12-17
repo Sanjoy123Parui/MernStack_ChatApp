@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import RegisterForm from '../../forms/registerForm.tsx';
-import { userRegisterFormData } from '../../models/signupModel.ts';
+import { registerFormdata } from '../../models/signupModel.ts';
 import { registerValidatorSchema } from '../../validations/signupValidator.ts';
 
 
 const UserRegister: React.FC = () => {
 
     // declare useForm hook for user register data model handle
-    let form = useForm<userRegisterFormData>({
+    let form = useForm<registerFormdata>({
         resolver: zodResolver(registerValidatorSchema),
         defaultValues: {
             phone: '',
@@ -21,7 +21,7 @@ const UserRegister: React.FC = () => {
 
 
     // declare function of handle register form submit
-    const userhandleRegisterSubmit: SubmitHandler<userRegisterFormData> = (data: any) => {
+    const userhandleRegisterSubmit: SubmitHandler<registerFormdata> = (data: any) => {
         console.log(data);
     }
 

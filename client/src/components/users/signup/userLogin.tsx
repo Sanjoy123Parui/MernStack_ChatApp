@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import LoginForm from '../../forms/loginForm.tsx';
-import { userLoginFormData } from '../../models/signupModel.ts';
+import { loginFormdata } from '../../models/signupModel.ts';
 import { loginValidatorSchema } from '../../validations/signupValidator.ts';
 
 
@@ -11,7 +11,7 @@ import { loginValidatorSchema } from '../../validations/signupValidator.ts';
 const UserLogin: React.FC = () => {
 
     // declare useForm hook for user login data model handle
-    let form: any = useForm<userLoginFormData>({
+    let form: any = useForm<loginFormdata>({
         resolver: zodResolver(loginValidatorSchema),
         defaultValues: {
             phone: '',
@@ -20,7 +20,7 @@ const UserLogin: React.FC = () => {
     });
 
     // declare function of handle login form submit
-    const userhandleLoginSubmit: SubmitHandler<userLoginFormData> = (data: any) => {
+    const userhandleLoginSubmit: SubmitHandler<loginFormdata> = (data: any) => {
         console.log(data);
     }
 

@@ -16,7 +16,7 @@ const Userheaders: React.FC = () => {
         <>
 
             {/* start nav */}
-            <nav className="bg-indigo-950 sticky font-sans top-0 z-0 p-4">
+            <nav className="bg-indigo-950 sticky shadow-md font-sans top-0 z-0 p-4">
 
                 {/* start div container */}
                 <div className="container mx-auto relative flex justify-between px-0 md:px-8 items-center">

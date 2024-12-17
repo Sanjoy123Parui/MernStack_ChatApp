@@ -12,12 +12,12 @@ import {
 
 import { Input } from "@/components/ui/input.tsx";
 import { Button } from "@/components/ui/button.tsx";
-import { RegisterFormProps } from '../models/signupModel.ts';
+import { registerFormProps } from '../models/signupModel.ts';
 
 
 
 // here was define register form functional component
-const RegisterForm: React.FC<RegisterFormProps> = ({ form, onSubmit }) => {
+const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
 
     // declare useState hook for show/hide password
     const [toggleRegisterPassword, setToggleRegisterPassword] = useState<boolean>(false);

@@ -11,13 +11,13 @@ import {
 
 import { Input } from '@/components/ui/input.tsx';
 import { Button } from '@/components/ui/button.tsx';
-import { LoginFormProps } from '../models/signupModel.ts';
+import { loginFormProps } from '../models/signupModel.ts';
 
 
 
 
 // here was define login form functional component
-const LoginForm: React.FC<LoginFormProps> = ({ form, onSubmit }) => {
+const LoginForm: React.FC<loginFormProps> = ({ form, onSubmit }) => {
 
     // declare useState hooks show/hide password
     let [toggleLoginPassword, setToggleLoginPassword] = useState<boolean>(false);
@@ -34,7 +34,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, onSubmit }) => {
             {/* start login form-content */}
             <Form {...form}>
                 {/* start form */}
-                <form onSubmit={onSubmit} className="space-y-8 bg-white shadow-xl rounded-2xl px-8 pt-6 pb-8 mb-4">
+                <form onSubmit={onSubmit} className="space-y-8 bg-white border-[2px] shadow-xl rounded-2xl px-8 pt-6 pb-8 mb-4">
 
                     {/* login form phone input content */}
                     <div className="mb-4">
