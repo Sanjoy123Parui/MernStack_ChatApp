@@ -1,8 +1,24 @@
 // here import many more functional components and libraries
+import { useForm, SubmitHandler } from "react-hook-form";
 import ProfileCreateForm from '../../forms/profileCreateForm.tsx';
+import { profileFormdata } from '../../models/profileModel.ts';
 
 // here define User profile functional component
 const UserCreate: React.FC = () => {
+
+    // declare useForm hook for handle with input data of form
+    let form: any = useForm<profileFormdata>({
+        defaultValues: {
+            full_name: ''
+        }
+    });
+
+
+    // declare function of handle user profile form submit with submitHandler hook
+    const userhandleProfileSubmit: SubmitHandler<profileFormdata> = (data: any) => {
+        console.log(data);
+        form.reset();
+    }
 
     return (
         <>
@@ -16,7 +32,10 @@ const UserCreate: React.FC = () => {
                             <div className="flex flex-wrap -m-12">
                                 <div className="p-8 md:p-4 md:mb-12 w-full flex flex-col items-center">
                                     <div className="w-full max-w-md mx-auto">
-                                        <ProfileCreateForm />
+                                        <ProfileCreateForm
+                                            form={form}
+                                            onSubmit={form.handleSubmit(userhandleProfileSubmit)}
+                                        />
                                     </div>
                                 </div>
                             </div>

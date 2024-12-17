@@ -5,12 +5,12 @@ import {
     Form,
     FormField,
     FormItem,
-    FormLabel,
     FormControl
-} from '@/components/ui/form.tsx';
+} from '../ui/form.tsx';
 
-import { Input } from '@/components/ui/input.tsx';
-import { Button } from '@/components/ui/button.tsx';
+import {Label} from '../ui/label.tsx';
+import { Input } from '../ui/input.tsx';
+import { Button } from '../ui/button.tsx';
 import { loginFormProps } from '../models/signupModel.ts';
 
 
@@ -40,7 +40,7 @@ const LoginForm: React.FC<loginFormProps> = ({ form, onSubmit }) => {
                     <div className="mb-4">
                         <FormField control={form.control} name="phone" render={({ field, fieldState }) => (
                             <FormItem>
-                                <FormLabel className="block text-gray-700 text-sm md:text-base font-bold mb-2">Phone</FormLabel>
+                                <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Phone</Label>
                                 <FormControl>
                                     <Input type="number" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500" {...field} placeholder="Phone" />
                                 </FormControl>
@@ -56,7 +56,7 @@ const LoginForm: React.FC<loginFormProps> = ({ form, onSubmit }) => {
                     <div className="relative mb-4">
                         <FormField control={form.control} name="password" render={({ field, fieldState }) => (
                             <FormItem>
-                                <FormLabel className="block text-gray-700 text-sm md:text-base font-bold mb-2">Password</FormLabel>
+                                <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Password</Label>
                                 <FormControl>
                                     <Input type={toggleLoginPassword ? 'text' : 'password'} {...field} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500"
                                         placeholder="Password" />

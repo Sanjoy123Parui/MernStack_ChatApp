@@ -2,35 +2,31 @@ import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Userlayout from './userlayout.tsx';
 
-// here declare or import lazyloading router path of all components
+// here was define and import all children components
+const UserLogin = lazy(() => import('../users/signup/userLogin.tsx'));
+const UserRegister = lazy(() => import('../users/signup/userRegister.tsx'));
+const UserCreate = lazy(() => import('../users/profiles/userCreate.tsx'));
 
-// here declare user functional component path import
-const UserLogin: any = lazy(() => import('../users/signup/userLogin.tsx'));
-const UserRegister: any = lazy(() => import('../users/signup/userRegister.tsx'));
-const CreateUser: any = lazy(() => import('../users/profiles/userCreate.tsx'));
-
-
-
-// here was define router layout functional component
+// here was create routerlayout functional component
 const Routerlayout: React.FC = () => {
 
-    // here declare all router path
+    // here was define route path of all components
     const routerPath: any = createBrowserRouter([
         {
-            path: `/`,
+            path: '/',
             element: <Userlayout />,
             children: [
                 {
-                    path: `/`,
+                    path: '/',
                     element: <UserLogin />
                 },
                 {
-                    path: `/user/register`,
+                    path: '/user/register',
                     element: <UserRegister />
                 },
                 {
-                    path: `/user/chat/profile`,
-                    element: <CreateUser />
+                    path: '/user/chat/profile',
+                    element: <UserCreate />
                 }
             ]
         }
@@ -38,12 +34,10 @@ const Routerlayout: React.FC = () => {
 
     return (
         <>
-            {/* here provide all route path for loaded */}
             <RouterProvider router={routerPath} />
         </>
     );
 
 }
 
-// export router layout component
 export default Routerlayout;

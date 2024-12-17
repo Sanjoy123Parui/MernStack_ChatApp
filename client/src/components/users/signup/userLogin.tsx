@@ -22,6 +22,7 @@ const UserLogin: React.FC = () => {
     // declare function of handle login form submit
     const userhandleLoginSubmit: SubmitHandler<loginFormdata> = (data: any) => {
         console.log(data);
+        form.reset();
     }
 
     return (

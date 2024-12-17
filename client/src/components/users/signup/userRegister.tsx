@@ -23,6 +23,7 @@ const UserRegister: React.FC = () => {
     // declare function of handle register form submit
     const userhandleRegisterSubmit: SubmitHandler<registerFormdata> = (data: any) => {
         console.log(data);
+        form.reset();
     }
 
     return (
