@@ -4,7 +4,7 @@ import {
     userSocketIds
 } from '../connections/socketconnection.js';
 import { socketIoAuthenticator } from '../middlewares/auth.middleware.js';
-import { sendUserChat } from '../events/chatevents.js';
+
 
 
 // here declare single chat namespace functionality
@@ -33,10 +33,6 @@ const chatSeeders = (() => {
         let userConnected = userSocketIds.set(userId, socket.id);
 
         console.log('User has been connected successfully', userConnected);
-
-
-        // here declare all handling events call back functions
-        sendUserChat(socket, userId, chatNameSpace);
 
         // define disconnect events
         socket.on("disconnect", () => {

@@ -13,11 +13,11 @@ import { contactRouter } from './src/routes/contact.route.js';
 import { adminSignupRouter } from './src/routes/adminSignup.route.js';
 import { adminProfileRouter } from './src/routes/adminProfile.route.js';
 import { adminDashboardRouter } from './src/routes/adminDashboard.route.js';
-import { conn } from './src/config/conncectdb.js';
+import { databaseConnection } from './src/config/conncectdb.js';
 
 
 // here are connect database
-conn(process.env.MONGODB_URI);
+databaseConnection(process.env.MONGODB_URI);
 
 // there are declare port, server running for developement or production
 const port = process.env.PORT || 5000;
