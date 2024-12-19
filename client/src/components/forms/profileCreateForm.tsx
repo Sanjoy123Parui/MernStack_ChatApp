@@ -15,6 +15,7 @@ import { Label } from '../ui/label.tsx';
 import { Input } from '../ui/input.tsx';
 import { Button } from '../ui/button.tsx';
 import { profileFormProps } from '../models/profileModel.ts';
+import CropAvatar from './cropAvatar.tsx';
 
 
 // here define profile form functional component
@@ -27,6 +28,8 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
 
                 {/* declare heading of profile form */}
                 <h1 className="text-3xl text-center font-bold text-blue-950 mb-8">Create</h1>
+
+                <CropAvatar />
 
 
                 {/* start Profile Form-content */}
