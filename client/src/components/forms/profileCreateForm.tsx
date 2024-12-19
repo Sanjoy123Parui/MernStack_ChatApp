@@ -47,6 +47,20 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                         </div>
 
 
+                        {/* profile form Picture content */}
+                        <div className="mb-4">
+                            <FormField control={form.control} name="avatar" render={({ field }) => (
+                                <FormItem>
+                                    <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Picture</Label>
+                                    <FormControl>
+                                        <Input type="file" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500"
+                                            onChange={(e) => field.onChange(e.currentTarget.files?.[0])} />
+                                    </FormControl>
+                                </FormItem>
+                            )} />
+                        </div>
+
+
                         {/* profile form gender content */}
                         <div className="mb-4">
                             <FormField control={form.control} name="gender" render={({ field }) => (
@@ -93,7 +107,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                         <div className="mb-4">
                             <FormField control={form.control} name="abouts" render={({ field }) => (
                                 <FormItem>
-                                    <Label>Abouts</Label>
+                                    <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Abouts</Label>
                                     <FormControl>
                                         <Textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500" {...field} placeholder="Please gives us abouts" />
                                     </FormControl>

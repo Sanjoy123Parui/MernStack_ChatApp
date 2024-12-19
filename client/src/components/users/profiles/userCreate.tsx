@@ -10,6 +10,7 @@ const UserCreate: React.FC = () => {
     let form: any = useForm<profileFormdata>({
         defaultValues: {
             full_name: '',
+            avatar: '',
             gender: '',
             dob: '',
             abouts: ''
@@ -19,7 +20,17 @@ const UserCreate: React.FC = () => {
 
     // declare function of handle user profile form submit with submitHandler hook
     const userhandleProfileSubmit: SubmitHandler<profileFormdata> = (data: any) => {
-        console.log(data);
+
+        // here declare formData with object of payload
+        let formData: any = new FormData();
+
+        formData.append('full_name', data.full_name);
+        formData.append('avatar', data.avatar);
+        formData.append('gender', data.gender);
+        formData.append('dob', data.dob);
+        formData.append('abouts', data.abouts);
+
+        console.log(...formData.entries());
         form.reset();
     }
 
@@ -35,10 +46,13 @@ const UserCreate: React.FC = () => {
                             <div className="flex flex-wrap -m-12">
                                 <div className="p-8 md:p-4 md:mb-12 w-full flex flex-col items-center">
                                     <div className="w-full max-w-md mx-auto">
+
+                                        {/* here was PorfileCreateForm component */}
                                         <ProfileCreateForm
                                             form={form}
                                             onSubmit={form.handleSubmit(userhandleProfileSubmit)}
                                         />
+
                                     </div>
                                 </div>
                             </div>
