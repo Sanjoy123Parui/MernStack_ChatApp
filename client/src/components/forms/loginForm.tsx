@@ -20,7 +20,7 @@ import { loginFormProps } from '../models/signupModel.ts';
 const LoginForm: React.FC<loginFormProps> = ({ form, onSubmit }) => {
 
     // declare useState hooks show/hide password
-    let [toggleLoginPassword, setToggleLoginPassword] = useState<boolean>(false);
+    const [toggleLoginPassword, setToggleLoginPassword] = useState<boolean>(false);
 
 
     // define function for toggle show/hide password

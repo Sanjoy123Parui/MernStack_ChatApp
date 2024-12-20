@@ -10,6 +10,9 @@ export interface profileFormdata {
 };
 
 
+// define interface for instance of passing props of profile form images crop
+export interface imageCropdialogprops {};
+
 // define interface for instance of passing props of profile form data
 export interface profileFormProps {
     form: UseFormReturn<any>;
