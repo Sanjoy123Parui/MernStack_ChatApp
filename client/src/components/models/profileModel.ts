@@ -1,12 +1,12 @@
 import { UseFormReturn } from "react-hook-form";
 
-// here declare instance of profile form data interface model
+// here define instance of profile form data interface model
 export interface profileFormdata {
     full_name: string;
-    avatar:string;
+    avatar: string;
     gender: string;
     dob: string;
-    abouts:string;
+    abouts: string;
 };
 
 
