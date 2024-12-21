@@ -38,7 +38,7 @@ const UserCreate: React.FC = () => {
         <>
             {/* start div-flex for user profile create content */}
             <div className="flex gap-3 flex-col md:mx-11 mb-8">
-                <div className="bg-orange-50 border-[2px] rounded-2xl shadow-lg md:p-8 mx-2 md:mx-0 mt-4 p-6">
+                <div className="bg-orange-50 border-[2px] rounded-2xl shadow-xl md:p-8 mx-2 md:mx-0 mt-4 p-6">
 
                     {/* start section content for user create profile */}
                     <section className="text-gray-600 body-font overflow-hidden">
