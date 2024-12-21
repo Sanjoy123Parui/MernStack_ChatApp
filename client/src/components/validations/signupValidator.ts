@@ -33,4 +33,4 @@ export const registerValidatorSchema = z.object({
 }).refine(data => data.password === data.confirmPassword, {
     path: ['confirmPassword'],
     message: 'Confirm password are not matching with password'
-})
+});

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
     Form,
     FormField,
@@ -16,11 +15,12 @@ import { Label } from '../ui/label.tsx';
 import { Input } from '../ui/input.tsx';
 import { Button } from '../ui/button.tsx';
 import { profileFormProps } from '../models/profileModel.ts';
-import ImageCropdialog from './imageCropdialog.tsx';
 
 
 // here define profile form functional component
 const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
+
+
 
     return (
         <>
@@ -29,8 +29,6 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
 
                 {/* declare heading of profile form */}
                 <h1 className="text-3xl text-center font-bold text-blue-950 mb-8">Create</h1>
-
-                <ImageCropdialog />
 
 
                 {/* start Profile Form-content */}
@@ -58,7 +56,9 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                                     <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Picture</Label>
                                     <FormControl>
                                         <Input type="file" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500"
-                                            onChange={(e) => field.onChange(e.currentTarget.files?.[0])} />
+                                            onChange={(e) => {
+                                                field.onChange(e.currentTarget.files?.[0]);
+                                            }} />
                                     </FormControl>
                                 </FormItem>
                             )} />
@@ -129,6 +129,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                     {/* end form */}
                 </Form>
                 {/* end Profile Form-content */}
+
 
             </div>
             {/* end div */}
