@@ -9,6 +9,7 @@ export interface profileFormdata {
     abouts: string;
 };
 
+
 // define interface for instance of passing props of profile form data
 export interface profileFormProps {
     form: UseFormReturn<any>;

@@ -21,7 +21,6 @@ import { profileFormProps } from '../models/profileModel.ts';
 const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
 
 
-
     return (
         <>
             {/* start div for create profile form */}
@@ -51,12 +50,12 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
 
                         {/* profile form Picture content */}
                         <div className="mb-4">
-                            <FormField control={form.control} name="avatar" render={({ field }) => (
+                            <FormField control={form.control} name="avatar" render={({field}) => (
                                 <FormItem>
                                     <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Picture</Label>
                                     <FormControl>
                                         <Input type="file" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500"
-                                            onChange={(e) => {
+                                            onChange={(e)=>{
                                                 field.onChange(e.currentTarget.files?.[0]);
                                             }} />
                                     </FormControl>
