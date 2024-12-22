@@ -31,7 +31,7 @@ const Userheaders: React.FC = () => {
                     {/* end button */}
 
                     {/* start ul for nav link */}
-                    <ul className={`${isOpen ? "block" : "hidden"}  md:flex absolute md:relative rounded-2xl md:rounded-none  h-60 bg-white md:bg-transparent w-48 md:w-auto md:h-auto right-0 top-full md:top-auto p-4 md:p-0 space-y-2 md:space-y-0 md:space-x-4`}>
+                    <ul className={`${isOpen ? "block" : "hidden"}  md:flex absolute md:relative rounded-2xl sm:shadow-lg md:rounded-none  h-60 bg-slate-100 md:bg-transparent w-48 md:w-auto md:h-auto right-0 top-full md:top-auto p-4 md:p-0 space-y-2 md:space-y-0 md:space-x-4`}>
 
                         {listItems.map((items: any, index: any) => {
                             return (

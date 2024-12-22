@@ -15,3 +15,11 @@ export interface profileFormProps {
     form: UseFormReturn<any>;
     onSubmit: (data: any) => void;
 };
+
+
+// define interface for instance of passing props of profile form data
+export interface imageCropProps {
+    imageSrc: string
+    onCropComplete: (croppedArea: any) => void;
+    onClose: () => void;
+};

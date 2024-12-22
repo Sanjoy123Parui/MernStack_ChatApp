@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import {
     Form,
     FormField,
@@ -15,14 +17,56 @@ import { Label } from '../ui/label.tsx';
 import { Input } from '../ui/input.tsx';
 import { Button } from '../ui/button.tsx';
 import { profileFormProps } from '../models/profileModel.ts';
+import ImageCrop from './imageCrop.tsx';
 
 
 // here define profile form functional component
 const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
 
+    // here declare useState hooks for image select in crop component
+    const [imageSrc, setImageSrc] = useState<string | null>(null);
+    const [showCropDialog, setShowCropDialog] = useState<boolean>(false);
+
+    //declare function of select file
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        // here declare variable of target files
+        let file: any = e.currentTarget.files?.[0];
+
+        // check condition
+        if (file) {
+
+            let reader = new FileReader();
+
+            reader.onload = () => {
+                setImageSrc(reader.result as string);
+                setShowCropDialog(true);
+            };
+            reader.readAsDataURL(file);
+        }
+
+    }
+
+
+    // declare here handleCrop function 
+    const handleCropComplete = (croppedArea: any) => {
+        console.log(croppedArea);
+
+        setShowCropDialog(false);
+    }
+
 
     return (
         <>
+            {/* here load image crop component */}
+            {showCropDialog && imageSrc && (
+                <ImageCrop
+                    imageSrc={imageSrc}
+                    onCropComplete={handleCropComplete}
+                    onClose={() => setShowCropDialog(false)}
+                />
+            )}
+
             {/* start div for create profile form */}
             <div className="bg-white border-[1px] shadow-2xl rounded-2xl px-8 pt-6 md:-mx-32 pb-8 mb-4">
 
@@ -50,13 +94,14 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
 
                         {/* profile form Picture content */}
                         <div className="mb-4">
-                            <FormField control={form.control} name="avatar" render={({field}) => (
+                            <FormField control={form.control} name="avatar" render={({ field }) => (
                                 <FormItem>
                                     <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Picture</Label>
                                     <FormControl>
                                         <Input type="file" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500"
-                                            onChange={(e)=>{
+                                            onChange={(e) => {
                                                 field.onChange(e.currentTarget.files?.[0]);
+                                                handleFileChange(e);
                                             }} />
                                     </FormControl>
                                 </FormItem>
