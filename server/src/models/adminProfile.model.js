@@ -3,12 +3,12 @@ import mongoose from "mongoose";
 // create admin profile model schema
 const adminProfileSchema = new mongoose.Schema({
 
-    admin_name: {
+    full_name: {
         type: String,
         required: true
     },
 
-    admin_profileimg: {
+    profile_img: {
         type: String,
         required:true
     },

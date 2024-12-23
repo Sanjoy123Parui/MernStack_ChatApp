@@ -10,7 +10,7 @@ const userNewProfile = asyncHandler(async (req, res, next) => {
 
     //there are declare payloads
     let userSignup = req.user;
-    let { user_name, gender, dob, abouts } = req.body;
+    let { full_name, gender, dob, abouts } = req.body;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
 
@@ -48,9 +48,9 @@ const userNewProfile = asyncHandler(async (req, res, next) => {
                     // there are data will be create and save into the database
                     let userProfiledata = await userProfileModel.create({
                         userSignup,
-                        user_name,
-                        // user_profileimg: uploads.secure_url,
-                        user_profileimg: uploads + 'uploads/' + filePath,
+                        full_name,
+                        //profile_img: uploads.secure_url,
+                        profile_img: uploads + 'uploads/' + filePath,
                         gender,
                         dob,
                         abouts
@@ -104,8 +104,8 @@ const userProfileview = asyncHandler(async (req, res, next) => {
 
             return res.status(200).json({
                 data: {
-                    user_name: userProfiledata.user_name,
-                    user_profileimg: userProfiledata.user_profileimg,
+                    full_name: userProfiledata.full_name,
+                    profile_img: userProfiledata.profile_img,
                     gender: userProfiledata.gender,
                     dob: userProfiledata.dob,
                     abouts: userProfiledata.abouts,
@@ -168,7 +168,7 @@ const userProfileImageupdate = asyncHandler(async (req, res, next) => {
                     }, {
                         $set: {
                             // user_profileimg: uploads.secure_url
-                            user_profileimg: uploads + 'uploads/' + filePath
+                            profile_img: uploads + 'uploads/' + filePath
                         }
                     });
 
@@ -190,6 +190,29 @@ const userProfileImageupdate = asyncHandler(async (req, res, next) => {
 
 
 
+// delete profile controller
+const userProfiledelete = asyncHandler(async (req, res, next) => {
+
+    // here declare payload
+    let userSignup = req.user;
+
+    // here can check condition for  userSignup
+    if (!userSignup) {
+        return next(errorHandler("Please login to access user", 400));
+    }
+    else {
+
+        // declare query from delete user profile into the database
+        let existUserProfile = await userProfileModel.deleteOne({ userSignup });
+
+        if (!existUserProfile.deletedCount) {
+            return next(errorHandler("Profile not found", 404));
+        }
+        else {
+            return res.status(200).json({ msg: "Profile are deleted successfully" });
+        }
+    }
+});
 
 
 
@@ -201,7 +224,7 @@ const userProfileupdate = asyncHandler(async (req, res, next) => {
         // declare payload data of params and body
         let userSignup = req.user;
         let { userProfileId } = req.params;
-        let { user_name, gender, dob, abouts } = req.body;
+        let { full_name, gender, dob, abouts } = req.body;
 
 
         // here check condition user can access or not
@@ -225,10 +248,7 @@ const userProfileupdate = asyncHandler(async (req, res, next) => {
                     _id: userProfileId
                 }, {
                     $set: {
-                        user_name,
-                        gender,
-                        dob,
-                        abouts
+                        full_name, gender, dob, abouts
                     }
                 });
 
@@ -258,5 +278,6 @@ export {
     userNewProfile,
     userProfileview,
     userProfileImageupdate,
+    userProfiledelete,
     userProfileupdate
 };

@@ -5,12 +5,15 @@ import {
     userRegister,
     userLogin,
     userRecover,
-    userLogout
+    userLogout,
+    userAccountdelete,
+    userChangePassword
 } from '../controllers/userSingup.controller.js';
 
 import {
     userRegisterValidator,
-    userLoginValidator
+    userLoginValidator,
+    userChangePassValidator
 } from '../validators/validator.js';
 
 import { userCheckAuth } from '../middlewares/auth.middleware.js';
@@ -42,6 +45,19 @@ userSignupRouter.route('/signup/recover/user').post(
 userSignupRouter.route('/signup/logout').post(
     userCheckAuth,
     userLogout
+);
+
+
+// userAccount delete end-point router with delete
+userSignupRouter.route('/signup/remove/:user_Id').delete(
+    userAccountdelete
+);
+
+
+// userChangePassword end-point router with all
+userSignupRouter.route('/signup/password/:user_Id').all(
+    validateHandler(userChangePassValidator),
+    userChangePassword
 );
 
 // export user signup router

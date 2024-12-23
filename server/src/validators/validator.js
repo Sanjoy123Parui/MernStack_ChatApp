@@ -1,7 +1,7 @@
 // import zod library
 import { z } from "zod";
 
-// here was defaine all validation schema
+// here was define all validation schema
 
 // adminSignup validation
 
@@ -39,6 +39,24 @@ const adminLoginValidator = z.object({
 });
 
 
+// adminRegisterValidator
+const adminChangePassValidator = z.object({
+
+    phone: z
+        .string({ required_error: "Phone is required type string" })
+        .trim()
+        .min(1, { message: "Phone is required" }),
+
+    password: z
+        .string({ required_error: "Password is required type string" })
+        .min(1, { message: "Password is required" }),
+
+    confirmPassword: z
+        .string({ required_error: "Confirm password is required type string" })
+        .min(1, { message: "Confirm password is required" })
+
+});
+
 
 
 
@@ -47,7 +65,7 @@ const adminLoginValidator = z.object({
 // adminNewProfileValidator schema
 const adminNewProfileValidator = z.object({
 
-    admin_name: z
+    full_name: z
         .string({ required_error: "Admin name is required type string" })
         .trim()
         .min(1, { message: "Admin name is required" }),
@@ -108,7 +126,7 @@ const adminProfileImageValidator = z.object({
 // adminProfileUpdateValidator schema
 const adminProfileUpdateValidator = z.object({
 
-    admin_name: z
+    full_name: z
         .string({ required_error: "Admin name is required type string" })
         .trim()
         .min(1, { message: "Admin name is required" }),
@@ -169,6 +187,25 @@ const userLoginValidator = z.object({
 });
 
 
+// userChangePassValidator schema
+const userChangePassValidator = z.object({
+
+    phone: z
+        .string({ required_error: "Phone is required type string" })
+        .trim()
+        .min(1, { message: "Phone is required" }),
+
+    password: z
+        .string({ required_error: "Password is required type string" })
+        .min(1, { message: "Password is required" }),
+
+    confirmPassword: z
+        .string({ required_error: "Confirm password is required type string" })
+        .min(1, { message: "Confirm password is required" })
+
+});
+
+
 
 
 
@@ -177,7 +214,7 @@ const userLoginValidator = z.object({
 // userNewProfileValidators schema
 const userNewProfileValidators = z.object({
 
-    user_name: z
+    full_name: z
         .string({ required_error: "User name is required type string" })
         .trim()
         .min(1, { message: "User name is required" }),
@@ -237,7 +274,7 @@ const userProfileImageValidator = z.object({
 // userProfileUpdateValidator schema
 const userProfileUpdateValidator = z.object({
 
-    user_name: z
+    full_name: z
         .string({ required_error: "User name is required type string" })
         .trim()
         .min(1, { message: "User name is required" }),
@@ -303,6 +340,7 @@ export {
 
     adminRegisterValidator,
     adminLoginValidator,
+    adminChangePassValidator,
 
     adminNewProfileValidator,
     adminProfileImageValidator,
@@ -310,6 +348,7 @@ export {
 
     userRegisterValidator,
     userLoginValidator,
+    userChangePassValidator,
 
     userNewProfileValidators,
     userProfileImageValidator,

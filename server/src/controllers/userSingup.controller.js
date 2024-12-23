@@ -2,6 +2,7 @@
 import jwt from "jsonwebtoken";
 import bcyptjs from "bcryptjs";
 import { userSignupModel } from '../models/userSignup.model.js';
+import { userProfileModel } from '../models/userProfile.model.js';
 import { asyncHandler } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
 import { sendUserToken, cookieOptions } from '../utils/features.js';
@@ -59,7 +60,7 @@ const userRegister = asyncHandler(async (req, res, next) => {
 
 
 
-// user login controller
+// user login controller 
 const userLogin = asyncHandler(async (req, res, next) => {
 
     // there are declare payload
@@ -96,7 +97,7 @@ const userLogin = asyncHandler(async (req, res, next) => {
 
 
 
-// user refresh token to access token recover
+// user refresh token to access token recover controller
 const userRecover = asyncHandler(async (req, res, next) => {
 
     // there generate user refresh token from cookie and another
@@ -143,7 +144,7 @@ const userRecover = asyncHandler(async (req, res, next) => {
 
 
 
-// user logout controller
+// user logout controller 
 const userLogout = asyncHandler(async (req, res, next) => {
 
     // here is declare user_id
@@ -173,10 +174,93 @@ const userLogout = asyncHandler(async (req, res, next) => {
 });
 
 
-//  there export user signup controlle
+
+// user accout delete controller
+const userAccountdelete = asyncHandler(async (req, res, next) => {
+
+    // declare payload
+    let { user_Id } = req.params;
+
+    // declare query from delete user into the database
+    let userAccout = await Promise.all([
+        userSignupModel.findOneAndDelete({ _id: user_Id }),
+        userProfileModel.findOneAndDelete({ userSignup: user_Id })
+    ]);
+
+    // check condition user account are delete or not
+    if (!userAccout) {
+        return next(errorHandler("This accront are not found", 404));
+    }
+    else {
+        return res.status(200).json({ msg: "Account are deleted successfully" });
+    }
+    
+});
+
+
+
+// user change password controller
+const userChangePassword = asyncHandler(async (req, res, next) => {
+
+    // here check condition for request method
+    if (req.method === 'PUT' || req.method === 'PATCH') {
+        // here declare payload
+        let { user_Id } = req.params;
+        let { phone, password, confirmPassword } = req.body;
+
+        // here check condition to match password and confirmPassword
+        if (password !== confirmPassword) {
+            return next(errorHandler("Password are not matched to the confirmPassword", 404));
+        }
+        else {
+
+            // declare here query to check and retrieve user signup phone number into the database
+            let existUser = await userSignupModel.findOne({ phone: phone }).exec();
+
+            // here password can bcrypted
+            let salt = bcyptjs.genSaltSync(10);
+            let hashPassword = bcyptjs.hashSync(password, salt);
+
+            // check condition existUser are found or not
+            if (!existUser) {
+                return next(errorHandler("This user can't found", 404));
+            }
+            else {
+
+                // declare query from update or change password into the database
+                let userPassword = await userSignupModel.updateOne({ _id: user_Id }, {
+                    phone: phone,
+                    password: hashPassword
+                });
+
+                // check condition for password are changed or not
+                if (userPassword.matchedCount && userPassword.modifiedCount) {
+                    return res.status(200).json({ msg: "Password are updated successfully" });
+                }
+                else {
+                    return next(errorHandler("Password can't be changed", 404));
+                }
+            }
+
+        }
+
+
+    }
+    else {
+        return next(errorHandler("Request are not found", 400));
+    }
+
+});
+
+
+
+
+//  there export user signup controller
 export {
     userRegister,
     userLogin,
     userRecover,
-    userLogout
+    userLogout,
+    userAccountdelete,
+    userChangePassword
 };

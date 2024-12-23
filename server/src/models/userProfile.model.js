@@ -3,12 +3,12 @@ import mongoose from "mongoose";
 // create user profile schema model
 const userProfileSchema = new mongoose.Schema({
 
-    user_name: {
+    full_name: {
         type: String,
         required: true
     },
 
-    user_profileimg: {
+    profile_img: {
         type: String,
         required:true
     },

@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import { adminSignupModel } from '../models/adminSignup.model.js';
+import { adminProfileModel } from '../models/adminProfile.model.js';
 import { asyncHandler } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
 import { sendAdminToken, cookieOptions } from '../utils/features.js';
@@ -91,6 +92,28 @@ const adminLogin = asyncHandler(async (req, res, next) => {
 
 
 
+// user accout delete controller
+const adminAccountdelete = asyncHandler(async (req, res, next) => {
+
+    // declare payload
+    let { admin_Id } = req.params;
+
+    // declare query from delete admin into the database
+    let adminAccout = await Promise.all([
+        adminSignupModel.findOneAndDelete({ _id: admin_Id }),
+        adminProfileModel.findOneAndDelete({ adminSignup: admin_Id })
+    ]);
+
+    // check condition admin account are delete or not
+    if (!adminAccout) {
+        return next(errorHandler("This accront are not found", 404));
+    }
+    else {
+        return res.status(200).json({ msg: "Account are deleted successfully" });
+    }
+
+});
+
 
 // admin refresh token to access token recover
 const adminRecover = asyncHandler(async (req, res, next) => {
@@ -176,10 +199,65 @@ const adminLogout = asyncHandler(async (req, res, next) => {
 
 
 
+// admin change password controller function
+const adminChangePassword = asyncHandler(async (req, res, next) => {
+
+    // check codition for request method
+    if (req.method === 'PUT' || req.method === 'PATCH') {
+        // declare payload
+        let { admin_Id } = req.params;
+        let { phone, password, confirmPassword } = req.body;
+
+        // here check condition for password and confirmPassword match
+        if (password !== confirmPassword) {
+            return next(errorHandler("Password are not matched to the confirmPassword", 404));
+        }
+        else {
+
+            // declare here query to check and retrieve admin signup phone number into the database
+            let existAdmin = await adminSignupModel.findOne({ phone: phone }).exec();
+
+            // here password can bcrypted
+            let salt = bcryptjs.genSaltSync(10);
+            let hashPassword = bcryptjs.hashSync(password, salt);
+
+            // check condition existAdmin are found or not
+            if (!existAdmin) {
+                return next(errorHandler("This user can't found", 404));
+            }
+            else {
+
+                // declare query from update or change password into the database
+                let adminPassword = await adminSignupModel.updateOne({ _id: admin_Id }, {
+                    phone: phone,
+                    password: hashPassword
+                });
+
+                // check condition for password are changed or not
+                if (adminPassword.matchedCount && adminPassword.modifiedCount) {
+                    return res.status(200).json({ msg: "Password are updated successfully" });
+                }
+                else {
+                    return next(errorHandler("Password can't be changed", 404));
+                }
+            }
+
+        }
+    }
+    else {
+        return next(errorHandler("Request are not found", 400));
+    }
+
+});
+
+
+
 // export there adminSignup controller
 export {
     adminRegister,
     adminLogin,
     adminRecover,
-    adminLogout
+    adminLogout,
+    adminAccountdelete,
+    adminChangePassword
 };

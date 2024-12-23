@@ -133,8 +133,8 @@ const userAllProfile = asyncHandler(async (req, res, next) => {
         let data = profileData.map((profile) => {
 
             return ({
-                user_profileimg: profile.user_profileimg,
-                user_name: profile.user_name,
+                profile_img: profile.profile_img,
+                full_name: profile.full_name,
                 phone: profile.userSignup.phone
             });
 
@@ -203,8 +203,8 @@ const userProfiledetails = asyncHandler(async (req, res, next) => {
 
                     // object of data
                     let data = {
-                        user_profileimg: userDetails.user_profileimg,
-                        user_name: userDetails.user_name,
+                        profile_img: userDetails.profile_img,
+                        full_name: userDetails.full_name,
                         phone: userDetails.userSignup.phone,
                         gender: userDetails.gender,
                         dob: userDetails.dob,
@@ -231,7 +231,7 @@ const userProfileSearch = asyncHandler(async (req, res, next) => {
 
     // here was declare payload
     let adminSignup = req.admin;
-    let { user_name, dob } = req.body;
+    let { full_name, dob } = req.body;
 
     // check admin
     if (!adminSignup) {
@@ -242,7 +242,7 @@ const userProfileSearch = asyncHandler(async (req, res, next) => {
     else {
 
         // check payload
-        if (!(user_name || dob)) {
+        if (!(full_name || dob)) {
 
             return next(errorHandler("Please give some required data", 400));
 
@@ -251,7 +251,7 @@ const userProfileSearch = asyncHandler(async (req, res, next) => {
 
             // here was retrieve search data of userProfile from database
             let searchProfile = await userProfileModel.find({
-                $or: [{ user_name: user_name }, { dob: dob }]
+                $or: [{ full_name: full_name }, { dob: dob }]
             }).populate({ path: 'userSignup' }).exec();
 
 
@@ -259,10 +259,9 @@ const userProfileSearch = asyncHandler(async (req, res, next) => {
             let data = searchProfile.map((search) => {
 
                 return ({
-                    user_profileimg: search.user_profileimg,
-                    user_name: search.user_name,
-                    phone: search.userSignup.phone,
-                    country: search.userSignup.country
+                    profile_img: search.profile_img,
+                    full_name: search.full_name,
+                    phone: search.userSignup.phone
                 });
 
             });
@@ -309,11 +308,11 @@ const userContactLists = asyncHandler(async (req, res, next) => {
         let data = contactList.map((contact) => {
 
             return ({
-                userimg: contact.myProfile.user_profileimg,
-                username: contact.myProfile.user_name,
+                userimg: contact.myProfile.profile_img,
+                username: contact.myProfile.full_name,
                 userphone: contact.myProfile.userSignup.phone,
-                contactimg: contact.contactProfile.user_profileimg,
-                contactname: contact.contactProfile.user_name,
+                contactimg: contact.contactProfile.profile_img,
+                contactname: contact.contactProfile.full_name,
                 contactphone: contact.contactProfile.userSignup.phone,
                 savename: contact.contact_name,
                 savephone: contact.contact_phone
@@ -391,11 +390,10 @@ const particularContact = asyncHandler(async (req, res, next) => {
                 let data = userContact.map((contact) => {
 
                     return ({
-                        userimg: contact.myProfile.user_profileimg,
+                        userimg: contact.myProfile.profile_img,
                         userphone: contact.myProfile.userSignup.phone,
-                        username: contact.myProfile.user_name,
-                        usercountry: contact.myProfile.userSignup.country,
-                        contactimg: contact.contactProfile.user_profileimg,
+                        username: contact.myProfile.full_name,
+                        contactimg: contact.contactProfile.profile_img,
                         contacphone: contact.contact_phone,
                         contactname: contact.contact_name
                     });

@@ -50,13 +50,11 @@ contactRouter.route('/search/user/:myProfile').get(
 
 
 
-
 // view contact profile router end-point with get
 contactRouter.route('/view/details/:contactId').get(
     userCheckAuth,
     viewContactProfile
 );
-
 
 
 
@@ -66,7 +64,6 @@ contactRouter.route('/update/user/:contactId').put(
     validateHandler(contactUpdateValidator),
     editContact
 );
-
 
 
 

@@ -10,7 +10,7 @@ const adminNewprofile = asyncHandler(async (req, res, next) => {
 
     // there are declare payloads
     let adminSignup = req.admin;
-    let { admin_name, gender, dob, abouts } = req.body;
+    let { full_name, gender, dob, abouts } = req.body;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
 
@@ -51,9 +51,9 @@ const adminNewprofile = asyncHandler(async (req, res, next) => {
                     // there are data can be create and save into the database
                     let adminProfiledata = await adminProfileModel.create({
                         adminSignup,
-                        admin_name,
+                        full_name,
                         // admin_profileimg: uploads.secure_url,
-                        admin_profileimg: uploads + 'uploads/' + filePath,
+                        profile_img: uploads + 'uploads/' + filePath,
                         gender,
                         dob,
                         abouts
@@ -94,7 +94,7 @@ const adminViewprofile = asyncHandler(async (req, res, next) => {
     else {
 
         // there can check findn the data
-        let existAdmin = await adminProfileModel.findOne({adminSignup}).populate({
+        let existAdmin = await adminProfileModel.findOne({ adminSignup }).populate({
             path: 'adminSignup'
         }).exec();
 
@@ -105,8 +105,8 @@ const adminViewprofile = asyncHandler(async (req, res, next) => {
         else {
             return res.status(200).json({
                 data: {
-                    admin_name: existAdmin.admin_name,
-                    admin_profileimg: existAdmin.admin_profileimg,
+                    full_name: existAdmin.full_name,
+                    profile_img: existAdmin.profile_image,
                     gender: existAdmin.gender,
                     dob: existAdmin.dob,
                     abouts: existAdmin.abouts,
@@ -167,7 +167,7 @@ const adminProfileImageupdate = asyncHandler(async (req, res, next) => {
                         _id: adminProfileId
                     }, {
                         // admin_profileimg: uploads.secure_url
-                        admin_profileimg: uploads + 'uploads/' + filePath
+                        profile_img: uploads + 'uploads/' + filePath
                     });
 
                     if (!adminProdfiledata.acknowledged) {
@@ -188,6 +188,32 @@ const adminProfileImageupdate = asyncHandler(async (req, res, next) => {
 
 
 
+// admin profile delete controller
+const adminProfiledelete = asyncHandler(async (req, res, next) => {
+
+    // here declare payload
+    let adminSignup = req.admin;
+
+    // here can check condition for  adminSignup
+    if (!adminSignup) {
+        return next(errorHandler("Please login to access admin", 400));
+    }
+    else {
+
+        // declare query from delete admin profile into the database
+        let existAdminProfile = await adminProfileModel.deleteOne({ adminSignup });
+
+        if (!existAdminProfile.deletedCount) {
+            return next(errorHandler("Profile not found", 404));
+        }
+        else {
+            return res.status(200).json({ msg: "Profile are deleted successfully" });
+        }
+    }
+});
+
+
+
 // admin profile update cotroller
 const adminProfileupdate = asyncHandler(async (req, res, next) => {
 
@@ -197,7 +223,7 @@ const adminProfileupdate = asyncHandler(async (req, res, next) => {
         // there are declare payload
         let adminSignup = req.admin;
         let { adminProfileId } = req.params;
-        let { admin_name, gender, dob, abouts } = req.body;
+        let { full_name, gender, dob, abouts } = req.body;
 
 
         // here check condition for admin can be access
@@ -224,7 +250,7 @@ const adminProfileupdate = asyncHandler(async (req, res, next) => {
                     _id: adminProfileId
                 }, {
                     $set: {
-                        admin_name,
+                        full_name,
                         gender,
                         dob,
                         abouts
@@ -254,5 +280,6 @@ export {
     adminNewprofile,
     adminViewprofile,
     adminProfileImageupdate,
+    adminProfiledelete,
     adminProfileupdate
 };

@@ -6,6 +6,7 @@ import {
     adminNewprofile,
     adminViewprofile,
     adminProfileImageupdate,
+    adminProfiledelete,
     adminProfileupdate
 } from '../controllers/adminProfile.controller.js';
 
@@ -48,6 +49,13 @@ adminProfileRouter.route('/profile/change/:adminProfileId').put(
     uploadObj.single('avatar'),
     validateHandler(adminProfileImageValidator),
     adminProfileImageupdate
+);
+
+
+// delete admin profile end-point router with delete
+adminProfileRouter.route('/profile/remove').delete(
+    adminCheckAuth,
+    adminProfiledelete
 );
 
 

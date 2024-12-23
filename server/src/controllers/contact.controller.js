@@ -155,7 +155,7 @@ const viewAllContact = asyncHandler(async (req, res, next) => {
                     return ({
                         contact_phone: contact.contact_phone,
                         contact_name: contact.contact_name,
-                        contact_profileimg: contact.contactProfile.user_profileimg
+                        contact_profileimg: contact.contactProfile.profile_img
                     });
 
                 });
@@ -212,7 +212,7 @@ const searchContact = asyncHandler(async (req, res, next) => {
                 return res.status(200).json({
                     contact_phone: userContact.contact_phone,
                     contact_name: userContact.contact_name,
-                    contact_profileimg: userContact.contactProfile.user_profileimg
+                    contact_profileimg: userContact.contactProfile.profile_img
                 });
 
             }
@@ -267,7 +267,7 @@ const viewContactProfile = asyncHandler(async (req, res, next) => {
                 data: {
                     contact_phone: userContact.contact_phone,
                     contact_name: userContact.contact_name,
-                    contact_profileimg: userContact.contactProfile.user_profileimg,
+                    contact_profileimg: userContact.contactProfile.profile_img,
                     contact_gender: userContact.contactProfile.gender,
                     contact_dob: userContact.contactProfile.dob,
                     contact_abouts: userContact.contactProfile.abouts,

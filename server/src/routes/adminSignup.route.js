@@ -4,12 +4,15 @@ import {
     adminRegister,
     adminLogin,
     adminRecover,
-    adminLogout
+    adminLogout,
+    adminAccountdelete,
+    adminChangePassword
 } from '../controllers/adminSignup.controller.js';
 
 import {
     adminRegisterValidator,
-    adminLoginValidator
+    adminLoginValidator,
+    adminChangePassValidator
 } from '../validators/validator.js';
 
 import { adminCheckAuth } from '../middlewares/auth.middleware.js';
@@ -46,6 +49,20 @@ adminSignupRouter.route('/signup/recover/admin').post(
 adminSignupRouter.route('/signup/logout').post(
     adminCheckAuth,
     adminLogout
+);
+
+
+    
+// adminAccount delete end-point router with delete
+adminSignupRouter.route('/signup/remove/:admin_Id').delete(
+    adminAccountdelete
+);
+
+
+// userChangePassword end-point router with all
+adminSignupRouter.route('/signup/password/:admin_Id').all(
+    validateHandler(adminChangePassValidator),
+    adminChangePassword
 );
 
 // export adminRegister router

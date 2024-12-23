@@ -4,6 +4,7 @@ import {
     userNewProfile,
     userProfileview,
     userProfileImageupdate,
+    userProfiledelete,
     userProfileupdate
 } from '../controllers/userProfile.controller.js';
 
@@ -24,7 +25,7 @@ const userprofileRouter = express.Router();
 // there are define all routes of end points in user profile
 
 
-// create new user profile router with post
+// create new user profile router end-point with post
 userprofileRouter.route('/profile/creates').post(
     userCheckAuth,
     uploadObj.single('avatar'),
@@ -33,14 +34,14 @@ userprofileRouter.route('/profile/creates').post(
 );
 
 
-// view user profile router with get
+// view user profile router end-point with get
 userprofileRouter.route('/profile/read/details').get(
     userCheckAuth,
     userProfileview
 );
 
 
-// update  user profile image router with put
+// update  user profile image end-point router with put
 userprofileRouter.route('/profile/image/update/:userProfileId').put(
     userCheckAuth,
     uploadObj.single('avatar'),
@@ -49,7 +50,14 @@ userprofileRouter.route('/profile/image/update/:userProfileId').put(
 );
 
 
-// updated profile router with all
+// delete user profile end-point router with delete
+userprofileRouter.route('/profile/remove').delete(
+    userCheckAuth,
+    userProfiledelete
+)
+
+
+// updated profile end-point router with all
 userprofileRouter.route('/profile/updates/:userProfileId').all(
     userCheckAuth,
     validateHandler(userProfileUpdateValidator),
