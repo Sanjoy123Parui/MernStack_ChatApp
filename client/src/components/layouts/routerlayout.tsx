@@ -1,11 +1,15 @@
-import { lazy } from "react";
+import {
+    lazy,
+    Suspense
+} from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Userlayout from './userlayout.tsx';
 
 // here was define and import all children components
-const UserLogin = lazy(() => import('../users/signup/userLogin.tsx'));
-const UserRegister = lazy(() => import('../users/signup/userRegister.tsx'));
-const UserCreate = lazy(() => import('../users/profiles/userCreate.tsx'));
+const UserLogin: any = lazy(() => import('../users/signup/userLogin.tsx'));
+const UserRegister: any = lazy(() => import('../users/signup/userRegister.tsx'));
+const UserCreate: any = lazy(() => import('../users/profiles/userCreate.tsx'));
+const Notfound: any = lazy(() => import('../layouts/notfound.tsx'));
 
 // here was create routerlayout functional component
 const Routerlayout: React.FC = () => {
@@ -27,14 +31,20 @@ const Routerlayout: React.FC = () => {
                 {
                     path: '/user/chat/profile',
                     element: <UserCreate />
-                }
+                },
             ]
+        },
+        {
+            path: '/*',
+            element: <Notfound />
         }
     ]);
 
     return (
         <>
-            <RouterProvider router={routerPath} />
+            <Suspense fallback={<div>...loading</div>}>
+                <RouterProvider router={routerPath} />
+            </Suspense>
         </>
     );
 

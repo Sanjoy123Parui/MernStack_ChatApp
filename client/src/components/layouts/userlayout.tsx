@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import Headers from '../users/headers/userheader.tsx';
 
@@ -13,10 +12,7 @@ const Userlayout: React.FC = () => {
 
             {/* start main */}
             <main>
-                <Suspense>
-                    {/* here all component loaded after header */}
-                    <Outlet />
-                </Suspense>
+                <Outlet />
             </main>
             {/* end main */}
         </>
