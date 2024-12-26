@@ -24,16 +24,20 @@ const Routerlayout: React.FC = () => {
                     path: '/',
                     element: <UserLogin />
                 },
+
                 {
                     path: '/user/register',
                     element: <UserRegister />
                 },
+
                 {
                     path: '/user/chat/profile',
                     element: <UserCreate />
                 },
+
             ]
         },
+
         {
             path: '/*',
             element: <Notfound />
@@ -42,7 +46,7 @@ const Routerlayout: React.FC = () => {
 
     return (
         <>
-            <Suspense fallback={<div>...loading</div>}>
+            <Suspense>
                 <RouterProvider router={routerPath} />
             </Suspense>
         </>

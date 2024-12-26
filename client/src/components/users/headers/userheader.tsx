@@ -1,16 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import UserSignupNav from './userSignupNav.tsx';
 
 // here was define Header component
 const Userheaders: React.FC = () => {
 
-    const [isOpen, setIsOpen] = useState<Boolean>(false);
-
-    let listItems: any[] = [
-        { label: 'Login', path: '/' },
-        { label: 'Register', path: '/user/register' }
-    ];
+    const [isOpen, setIsOpen] = useState<any>(false);
 
     return (
         <>
@@ -30,21 +25,9 @@ const Userheaders: React.FC = () => {
                     </button>
                     {/* end button */}
 
-                    {/* start ul for nav link */}
-                    <ul className={`${isOpen ? "block" : "hidden"}  md:flex absolute md:relative rounded-2xl sm:shadow-lg md:rounded-none  h-60 bg-slate-100 md:bg-transparent w-48 md:w-auto md:h-auto right-0 top-full md:top-auto p-4 md:p-0 space-y-2 md:space-y-0 md:space-x-4`}>
-
-                        {listItems.map((items: any, index: any) => {
-                            return (
-                                <li key={index} className=" mx-6 md:mx-auto p-[5px] md:p-0 md:text-right">
-                                    <Link to={items.path} className="block text-black md:text-white hover:text-yellow-400 md:hover:text-gray-300 transition-colors">
-                                        {items.label}
-                                    </Link>
-                                </li>
-                            );
-                        })}
-
-                    </ul>
-                    {/* end ul */}
+                   {/* here loaded userSignupNav component */}
+                   <UserSignupNav isOpen={isOpen} />
+                    
 
                 </div>
                 {/* end div container */}

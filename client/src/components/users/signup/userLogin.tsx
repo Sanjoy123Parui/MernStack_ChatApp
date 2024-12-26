@@ -45,7 +45,7 @@ const UserLogin: React.FC = () => {
 
                                 {/* start div content of user login form */}
                                 <div className="p-8 md:p-4 md:mb-12 w-full md:w-1/2 flex flex-col items-start">
-                                    <div className="w-full max-w-md mx-auto">
+                                    <div className="w-full max-w-[30rem] mx-auto">
 
                                         {/* here is declare user login form heading */}
                                         <h1 className="text-2xl text-center font-bold text-blue-950 mb-6">Login</h1>
