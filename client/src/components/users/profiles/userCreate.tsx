@@ -6,7 +6,7 @@ import { profileFormdata } from '../../models/profileModel.ts';
 // here define User profile functional component
 const UserCreate: React.FC = () => {
 
-    // declare useForm hook for handle with input data of form
+    // declare useForm hook for handle with input data of form with validation
     let form: any = useForm<profileFormdata>({
         defaultValues: {
             full_name: '',
