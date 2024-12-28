@@ -11,7 +11,7 @@ const Dropdown: React.FC<isDropdownProps> = ({ isDropdownOpen }) => {
   let accountDropdownList: signupListItem[] = [
     {
       listItem: "Change Password",
-      itemPath: "#",
+      itemPath: "/user/change-password",
     },
     {
       listItem: "Delete Account",

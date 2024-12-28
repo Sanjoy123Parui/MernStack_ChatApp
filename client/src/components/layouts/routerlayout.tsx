@@ -8,6 +8,7 @@ import Userlayout from './userlayout.tsx';
 // here was define and import all children components
 const UserLogin: any = lazy(() => import('../users/signup/userLogin.tsx'));
 const UserRegister: any = lazy(() => import('../users/signup/userRegister.tsx'));
+const UserChangePassword: any = lazy(() => import('../users/signup/userChangePassword.tsx'));
 const UserCreate: any = lazy(() => import('../users/profiles/userCreate.tsx'));
 const Notfound: any = lazy(() => import('../layouts/notfound.tsx'));
 
@@ -28,6 +29,11 @@ const Routerlayout: React.FC = () => {
                 {
                     path: '/user/register',
                     element: <UserRegister />
+                },
+
+                {
+                    path: '/user/change-password',
+                    element: <UserChangePassword />
                 },
 
                 {
