@@ -15,6 +15,14 @@ export interface registerFormdata {
 };
 
 
+// here declare instance of change password form data interface model
+export interface changePasswordFormdata {
+    phone: string;
+    password: string,
+    confirmPassword: string;
+};
+
+
 
 // define interface for instance of passing props of login form data
 export interface loginFormProps {
@@ -27,4 +35,11 @@ export interface loginFormProps {
 export interface registerFormProps {
     form: UseFormReturn<any>;
     onSubmit: (data: any) => void;
-}
+};
+
+
+// define interface for instance of passing props of change password form data
+export interface changePasswordFormProps {
+    form: UseFormReturn<any>;
+    onSubmit: (data: any) => void;
+};

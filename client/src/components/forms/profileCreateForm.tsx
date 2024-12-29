@@ -81,86 +81,100 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
 
                         {/* profile form fullName content */}
                         <div className="mb-4">
-                            <FormField control={form.control} name="full_name" render={({ field }) => (
-                                <FormItem>
-                                    <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Full name</Label>
-                                    <FormControl>
-                                        <Input type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500" {...field} placeholder="Full name" />
-                                    </FormControl>
-                                </FormItem>
-                            )} />
+                            <FormField
+                                control={form.control}
+                                name="full_name"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Full name</Label>
+                                        <FormControl>
+                                            <Input type="text" {...field} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700"  placeholder="Full name" />
+                                        </FormControl>
+                                    </FormItem>
+                                )} />
                         </div>
 
 
                         {/* profile form Picture content */}
                         <div className="mb-4">
-                            <FormField control={form.control} name="avatar" render={({ field }) => (
-                                <FormItem>
-                                    <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Picture</Label>
-                                    <FormControl>
-                                        <Input type="file" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500"
-                                            onChange={(e) => {
+                            <FormField
+                                control={form.control}
+                                name="avatar"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Picture</Label>
+                                        <FormControl>
+                                            <Input type="file" onChange={(e) => {
                                                 field.onChange(e.currentTarget.files?.[0]);
                                                 handleFileChange(e);
-                                            }} />
-                                    </FormControl>
-                                </FormItem>
-                            )} />
+                                            }} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700" />
+                                        </FormControl>
+                                    </FormItem>
+                                )} />
                         </div>
 
 
                         {/* profile form gender content */}
                         <div className="mb-4">
-                            <FormField control={form.control} name="gender" render={({ field }) => (
-                                <FormItem className="space-y-3">
-                                    <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Gender</Label>
-                                    <FormControl>
-                                        <RadioGroup
-                                            onValueChange={field.onChange}
-                                            defaultValue={field.value}
-                                            className="flex flex-col space-y-1">
-                                            <FormItem className="flex items-center space-x-3 space-y-0">
-                                                <FormControl>
-                                                    <RadioGroupItem value="Male" />
-                                                </FormControl>
-                                                <Label className="font-normal">Male</Label>
-                                            </FormItem>
-                                            <FormItem className="flex items-center space-x-3 space-y-0">
-                                                <FormControl>
-                                                    <RadioGroupItem value="Female" />
-                                                </FormControl>
-                                                <Label className="font-normal">Female</Label>
-                                            </FormItem>
-                                        </RadioGroup>
-                                    </FormControl>
-                                </FormItem>
-                            )} />
+                            <FormField
+                                control={form.control}
+                                name="gender"
+                                render={({ field }) => (
+                                    <FormItem className="space-y-3">
+                                        <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Gender</Label>
+                                        <FormControl>
+                                            <RadioGroup
+                                                onValueChange={field.onChange}
+                                                defaultValue={field.value}
+                                                className="flex flex-col space-y-1">
+                                                <FormItem className="flex items-center space-x-3 space-y-0">
+                                                    <FormControl>
+                                                        <RadioGroupItem value="Male" />
+                                                    </FormControl>
+                                                    <Label className="font-normal">Male</Label>
+                                                </FormItem>
+                                                <FormItem className="flex items-center space-x-3 space-y-0">
+                                                    <FormControl>
+                                                        <RadioGroupItem value="Female" />
+                                                    </FormControl>
+                                                    <Label className="font-normal">Female</Label>
+                                                </FormItem>
+                                            </RadioGroup>
+                                        </FormControl>
+                                    </FormItem>
+                                )} />
                         </div>
 
 
                         {/* profile form DateOfBirth content */}
                         <div className="mb-4">
-                            <FormField control={form.control} name="dob" render={({ field }) => (
-                                <FormItem>
-                                    <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">D.O.B</Label>
-                                    <FormControl>
-                                        <Input type="date" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500" {...field} />
-                                    </FormControl>
-                                </FormItem>
-                            )} />
+                            <FormField
+                                control={form.control}
+                                name="dob"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">D.O.B</Label>
+                                        <FormControl>
+                                            <Input type="date" {...field} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700" />
+                                        </FormControl>
+                                    </FormItem>
+                                )} />
                         </div>
 
 
                         {/* profile form DateOfBirth content */}
                         <div className="mb-4">
-                            <FormField control={form.control} name="abouts" render={({ field }) => (
-                                <FormItem>
-                                    <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Abouts</Label>
-                                    <FormControl>
-                                        <Textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-blue-500" {...field} placeholder="Please gives us abouts" />
-                                    </FormControl>
-                                </FormItem>
-                            )} />
+                            <FormField
+                                control={form.control}
+                                name="abouts"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Abouts</Label>
+                                        <FormControl>
+                                            <Textarea {...field} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700" placeholder="Please gives us abouts" />
+                                        </FormControl>
+                                    </FormItem>
+                                )} />
                         </div>
 
 

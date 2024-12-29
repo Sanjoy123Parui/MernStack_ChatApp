@@ -1,7 +1,29 @@
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import PasswordChangeForm from '../../forms/passwordChangeForm.tsx';
+import { changePasswordFormdata } from '../../models/signupModel.ts';
+import { passwordChangeValidatorSchema } from '../../validations/signupValidator.ts';
 
 // here define use changepassword functional component
-const UserChangePassword = () => {
+const UserChangePassword: React.FC = () => {
+
+    // declare useForm hook for user change password form data model handle
+    const form = useForm<changePasswordFormdata>({
+        resolver: zodResolver(passwordChangeValidatorSchema),
+        defaultValues: {
+            phone: '',
+            password: '',
+            confirmPassword: ''
+        }
+
+    });
+
+
+    // declare function of handle password change form submit
+    let userPasswordSave: SubmitHandler<changePasswordFormdata> = (data: any) => {
+        console.log(data);
+        form.reset();
+    }
 
     return (
         <>
@@ -29,7 +51,10 @@ const UserChangePassword = () => {
                                         <h1 className="text-2xl text-center font-bold text-blue-950 mb-6">Change Password</h1>
 
                                         {/*  here define password change functional component */}
-                                        <PasswordChangeForm />
+                                        <PasswordChangeForm
+                                            form={form}
+                                            onSubmit={form.handleSubmit(userPasswordSave)}
+                                        />
 
                                     </div>
                                 </div>

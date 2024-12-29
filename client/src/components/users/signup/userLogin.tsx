@@ -11,7 +11,7 @@ import { loginValidatorSchema } from '../../validations/signupValidator.ts';
 const UserLogin: React.FC = () => {
 
     // declare useForm hook for user login data model handle
-    let form: any = useForm<loginFormdata>({
+    const form: any = useForm<loginFormdata>({
         resolver: zodResolver(loginValidatorSchema),
         defaultValues: {
             phone: '',

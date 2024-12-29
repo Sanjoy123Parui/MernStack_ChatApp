@@ -10,7 +10,7 @@ import { registerValidatorSchema } from '../../validations/signupValidator.ts';
 const UserRegister: React.FC = () => {
 
     // declare useForm hook for user register data model handle
-    let form = useForm<registerFormdata>({
+    const form = useForm<registerFormdata>({
         resolver: zodResolver(registerValidatorSchema),
         defaultValues: {
             phone: '',
@@ -21,8 +21,8 @@ const UserRegister: React.FC = () => {
 
 
     // declare function of handle register form submit
-    const userhandleRegisterSubmit: SubmitHandler<registerFormdata> = (data: any) => {
-        console.log(data);
+    const userhandleRegisterSubmit: SubmitHandler<registerFormdata> = (res: any) => {
+        console.log(res);
         form.reset();
     }
 

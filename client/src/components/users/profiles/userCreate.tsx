@@ -8,6 +8,7 @@ const UserCreate: React.FC = () => {
 
     // declare useForm hook for handle with input data of form with validation
     let form: any = useForm<profileFormdata>({
+
         defaultValues: {
             full_name: '',
             avatar: '',
@@ -15,23 +16,16 @@ const UserCreate: React.FC = () => {
             dob: '',
             abouts: ''
         }
+        
     });
 
 
     // declare function of handle user profile form submit with submitHandler hook
     const userhandleProfileSubmit: SubmitHandler<profileFormdata> = (data: any) => {
 
-        // here declare formData with object of payload
-        let formData: any = new FormData();
-
-        formData.append('full_name', data.full_name);
-        formData.append('avatar', data.avatar);
-        formData.append('gender', data.gender);
-        formData.append('dob', data.dob);
-        formData.append('abouts', data.abouts);
-
-        console.log(...formData.entries());
+        console.log(data);
         form.reset();
+
     }
 
     return (
