@@ -50,9 +50,10 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
 
     // declare here handleCrop function 
     const handleCropComplete = (croppedArea: any) => {
-        console.log(croppedArea);
-
+        // console.log(croppedArea);
         setShowCropDialog(false);
+
+        return croppedArea;
     }
 
 
@@ -84,12 +85,15 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                             <FormField
                                 control={form.control}
                                 name="full_name"
-                                render={({ field }) => (
+                                render={({ field, fieldState }) => (
                                     <FormItem>
                                         <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Full name</Label>
                                         <FormControl>
-                                            <Input type="text" {...field} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700"  placeholder="Full name" />
+                                            <Input type="text" {...field} className={`shadow ${fieldState.error ? "border-red-500" : "border-gray-300"} appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`} placeholder="Full name" />
                                         </FormControl>
+                                        {fieldState?.error && (
+                                            <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
+                                        )}
                                     </FormItem>
                                 )} />
                         </div>
@@ -100,15 +104,18 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                             <FormField
                                 control={form.control}
                                 name="avatar"
-                                render={({ field }) => (
+                                render={({ field, fieldState }) => (
                                     <FormItem>
                                         <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Picture</Label>
                                         <FormControl>
                                             <Input type="file" onChange={(e) => {
                                                 field.onChange(e.currentTarget.files?.[0]);
                                                 handleFileChange(e);
-                                            }} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700" />
+                                            }} className={`shadow ${fieldState.error ? "border-red-500" : "border-gray-300"} appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`} />
                                         </FormControl>
+                                        {fieldState?.error && (
+                                            <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
+                                        )}
                                     </FormItem>
                                 )} />
                         </div>
@@ -119,7 +126,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                             <FormField
                                 control={form.control}
                                 name="gender"
-                                render={({ field }) => (
+                                render={({ field, fieldState }) => (
                                     <FormItem className="space-y-3">
                                         <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Gender</Label>
                                         <FormControl>
@@ -141,6 +148,9 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                                                 </FormItem>
                                             </RadioGroup>
                                         </FormControl>
+                                        {fieldState?.error && (
+                                            <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
+                                        )}
                                     </FormItem>
                                 )} />
                         </div>
@@ -151,12 +161,15 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                             <FormField
                                 control={form.control}
                                 name="dob"
-                                render={({ field }) => (
+                                render={({ field, fieldState }) => (
                                     <FormItem>
                                         <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">D.O.B</Label>
                                         <FormControl>
-                                            <Input type="date" {...field} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700" />
+                                            <Input type="date" {...field} className={`shadow ${fieldState.error ? "border-red-500" : "border-gray-300"} appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`} />
                                         </FormControl>
+                                        {fieldState?.error && (
+                                            <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
+                                        )}
                                     </FormItem>
                                 )} />
                         </div>
@@ -167,12 +180,15 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                             <FormField
                                 control={form.control}
                                 name="abouts"
-                                render={({ field }) => (
+                                render={({ field, fieldState }) => (
                                     <FormItem>
                                         <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Abouts</Label>
                                         <FormControl>
-                                            <Textarea {...field} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700" placeholder="Please gives us abouts" />
+                                            <Textarea {...field} className={`shadow ${fieldState.error ? "border-red-500" : "border-gray-300"} appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`} placeholder="Please gives us abouts" />
                                         </FormControl>
+                                        {fieldState?.error && (
+                                            <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
+                                        )}
                                     </FormItem>
                                 )} />
                         </div>

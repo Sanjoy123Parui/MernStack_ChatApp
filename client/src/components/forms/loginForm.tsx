@@ -45,7 +45,7 @@ const LoginForm: React.FC<loginFormProps> = ({ form, onSubmit }) => {
                                 <FormItem>
                                     <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Phone</Label>
                                     <FormControl>
-                                        <Input type="number" {...field} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700"  placeholder="Phone" />
+                                        <Input type="number" {...field} className={`shadow ${fieldState.error ? "border-red-500" : "border-gray-300"} appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`} placeholder="Phone" />
                                     </FormControl>
                                     {/* error of login form phone input field validation */}
                                     {fieldState?.error && (
@@ -64,8 +64,7 @@ const LoginForm: React.FC<loginFormProps> = ({ form, onSubmit }) => {
                                 <FormItem>
                                     <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Password</Label>
                                     <FormControl>
-                                        <Input type={toggleLoginPassword ? 'text' : 'password'} {...field} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700"
-                                            placeholder="Password" />
+                                        <Input type={toggleLoginPassword ? 'text' : 'password'} {...field} className={`shadow ${fieldState.error ? "border-red-500" : "border-gray-300"} appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`} placeholder="Password"/>
                                     </FormControl>
                                     <button type="button" onClick={visibilityLogin} className="absolute top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500">{toggleLoginPassword ? <FaEye /> : <FaEyeSlash />}</button>
                                     {/* error of login form password input field validation */}

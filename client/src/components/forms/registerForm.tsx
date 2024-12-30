@@ -43,7 +43,7 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
                                 <FormItem>
                                     <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Phone</Label>
                                     <FormControl>
-                                        <Input type="number" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700" placeholder="Phone" {...field} />
+                                        <Input type="number" {...field} className={`shadow ${fieldState.error ? "border-red-500" : "border-gray-300"} appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`} placeholder="Phone"/>
                                     </FormControl>
                                     {fieldState?.error && (
                                         <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
@@ -61,8 +61,7 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
                                 <FormItem>
                                     <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Password</Label>
                                     <FormControl>
-                                        <Input type={toggleRegisterPassword ? 'text' : 'password'} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700"
-                                            placeholder="Password" {...field} />
+                                        <Input type={toggleRegisterPassword ? 'text' : 'password'} {...field} className={`shadow ${fieldState.error ? "border-red-500" : "border-gray-300"} appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`} placeholder="Password"/>
                                     </FormControl>
                                     <button type="button" onClick={visibilityRegister} className="absolute top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500">{toggleRegisterPassword ? <FaEye /> : <FaEyeSlash />}</button>
                                     {fieldState?.error && (
@@ -82,8 +81,7 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
                                 <FormItem>
                                     <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Confirm Password</Label>
                                     <FormControl>
-                                        <Input type={toggleRegisterPassword ? 'text' : 'password'} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:ring-gray-700"
-                                            placeholder="Confirm Password" {...field} />
+                                        <Input type={toggleRegisterPassword ? 'text' : 'password'}  {...field} className={`shadow ${fieldState.error ? "border-red-500" : "border-gray-300"} appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`} placeholder="Confirm Password"/>
                                     </FormControl>
                                     <button type="button" onClick={visibilityRegister} className="absolute top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500">{toggleRegisterPassword ? <FaEye /> : <FaEyeSlash />}</button>
                                     {fieldState?.error && (

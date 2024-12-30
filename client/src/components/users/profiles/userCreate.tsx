@@ -1,14 +1,16 @@
 // here import many more functional components and libraries
 import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
 import ProfileCreateForm from '../../forms/profileCreateForm.tsx';
 import { profileFormdata } from '../../models/profileModel.ts';
+import { createProfileValidatorSchema } from '../../validations/profileValidator.ts';
 
 // here define User profile functional component
 const UserCreate: React.FC = () => {
 
     // declare useForm hook for handle with input data of form with validation
     let form: any = useForm<profileFormdata>({
-
+        resolver:zodResolver(createProfileValidatorSchema),
         defaultValues: {
             full_name: '',
             avatar: '',
