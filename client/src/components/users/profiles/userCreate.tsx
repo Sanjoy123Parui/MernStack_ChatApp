@@ -16,7 +16,7 @@ const UserCreate: React.FC = () => {
             dob: '',
             abouts: ''
         }
-        
+
     });
 
 
