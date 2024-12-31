@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { isOpenheaderProps, isDropdownProps, signupListItem } from "../../models/userModel.ts";
+import { isOpenheaderProps, isDropdownProps, navListItem } from "../../models/userModel.ts";
 
 // here define props functionality which pass in same functional component
 const Dropdown: React.FC<isDropdownProps> = ({ isDropdownOpen }) => {
 
 
   // here was declare drop-down content array
-  let accountDropdownList: signupListItem[] = [
+  const accountDropdownList: navListItem[] = [
     {
       listItem: "Change Password",
       itemPath: "/user/change-password",
@@ -52,7 +52,7 @@ const UserSignupNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
 
 
   // here declare nav list items
-  let signupList: signupListItem[] = [
+  const signupList: navListItem[] = [
     {
       listItem: "Login",
       itemPath: "/",
@@ -66,10 +66,11 @@ const UserSignupNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
   return (
     <>
       {/* start ul for nav link */}
-      <ul className={`${isOpen ? "block" : "hidden"}  
-        md:flex absolute md:relative rounded-2xl shadow-lg md:shadow-none md:rounded-none  
+      <ul className={`md:flex ${isOpen ? "block" : "hidden"} absolute md:relative rounded-2xl shadow-lg md:shadow-none md:rounded-none  
           h-48 bg-slate-100 md:bg-transparent w-48 md:w-auto md:h-auto right-0 top-full 
           md:top-auto p-4 md:p-0 space-y-2 md:space-y-0 md:space-x-4`}>
+
+        {/* here declare navlink list item */}
         {signupList.map((items: any, i: any) => {
           return (
             <li
