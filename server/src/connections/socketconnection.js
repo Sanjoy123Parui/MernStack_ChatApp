@@ -1,6 +1,7 @@
 // here import all socket.io connection library packages and modules
 import http from "http";
 import express from "express";
+import cors from "cors";
 import { corsOption } from '../lib/optionconfig.js';
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
@@ -25,7 +26,8 @@ chatSeeders();
 
 // export socket.io connection
 export { 
-    express, 
+    express,
+    cors,
     cookieParser, 
     io,
     userSocketIds,

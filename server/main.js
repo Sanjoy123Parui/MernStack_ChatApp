@@ -1,10 +1,9 @@
 // here are import all libraries
 import dotenv from "dotenv";
 dotenv.config({ path: './.env' });
-import cors from "cors";
 
 // here import all modules
-import { express, app, cookieParser, server } from './src/connections/socketconnection.js';
+import { express, cors, app, cookieParser, server } from './src/connections/socketconnection.js';
 import { corsOption } from './src/lib/optionconfig.js';
 import { checkError } from './src/middlewares/errors.middleware.js';
 import { userSignupRouter } from './src/routes/userSignup.route.js';

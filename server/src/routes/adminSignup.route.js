@@ -1,4 +1,5 @@
-import express from "express";
+// here import all modules and libraies of packages
+import { express } from '../connections/socketconnection.js';
 
 import {
     adminRegister,
@@ -52,7 +53,7 @@ adminSignupRouter.route('/signup/logout').post(
 );
 
 
-    
+
 // adminAccount delete end-point router with delete
 adminSignupRouter.route('/signup/remove/:admin_Id').delete(
     adminAccountdelete
