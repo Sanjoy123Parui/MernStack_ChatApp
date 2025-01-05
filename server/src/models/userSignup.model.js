@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { mongoose } from '../connections/socketconnection.js';
 
 // create user model schema
 const userSignupSchema = new mongoose.Schema({
@@ -14,10 +14,10 @@ const userSignupSchema = new mongoose.Schema({
         required: true
     },
 
-    refresh_userToken:{
-        type:String
+    refresh_userToken: {
+        type: String
     }
-    
+
 
 }, {
     timestamps: true,

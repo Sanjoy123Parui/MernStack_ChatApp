@@ -3,7 +3,17 @@ import dotenv from "dotenv";
 dotenv.config({ path: './.env' });
 
 // here import all modules
-import { express, cors, app, cookieParser, server } from './src/connections/socketconnection.js';
+import {
+    express,
+    cors,
+    cluster,
+    os,
+    morgan,
+    app,
+    cookieParser,
+    server
+} from './src/connections/socketconnection.js';
+
 import { corsOption } from './src/lib/optionconfig.js';
 import { checkError } from './src/middlewares/errors.middleware.js';
 import { userSignupRouter } from './src/routes/userSignup.route.js';
@@ -15,40 +25,54 @@ import { adminDashboardRouter } from './src/routes/adminDashboard.route.js';
 import { databaseConnection } from './src/config/conncectdb.js';
 
 
-// here are connect database
-databaseConnection(process.env.MONGODB_URI);
+// here can check totalCPUs in os of load balancing with node cluster
+const totalCPUs = os.cpus().length;
 
-// there are declare port, server running for developement or production
-const port = process.env.PORT || 5000;
+// here check condition cluster primary
+if (cluster.isPrimary) {
 
-//  use middlewares
-app.use(cors(corsOption));
-app.use(express.static('./src/public'));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(cookieParser());
+    for (let i = 0; i < totalCPUs; i++) {
+        cluster.fork();
+    }
+}
+else {
+
+    // here are connect database
+    databaseConnection(process.env.MONGODB_URI);
+
+    // there are declare port, server running for developement or production
+    const port = process.env.PORT || 5000;
+
+    //  use middlewares
+    app.use(cors(corsOption));
+    app.use(morgan("dev"));
+    app.use(express.static('./src/public'));
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json());
+    app.use(cookieParser());
 
 
-// check the rest api
-app.get('/', (req, res) => {
-    res.sendFile('./src/public/index.html');
-});
+    // check the rest api
+    app.get('/', (req, res) => {
+        res.sendFile('./src/public/index.html');
+    });
 
 
-// use all endpoints middlewares of routes
-app.use('/user/api', userSignupRouter);
-app.use('/user/api', userprofileRouter);
-app.use('/contact/api', contactRouter);
-app.use('/admin/api', adminSignupRouter);
-app.use('/admin/api', adminProfileRouter);
-app.use('/admin/dashboard/api', adminDashboardRouter);
+    // use all endpoints middlewares of routes
+    app.use('/user/api', userSignupRouter);
+    app.use('/user/api', userprofileRouter);
+    app.use('/contact/api', contactRouter);
+    app.use('/admin/api', adminSignupRouter);
+    app.use('/admin/api', adminProfileRouter);
+    app.use('/admin/dashboard/api', adminDashboardRouter);
 
-// use error middlewares
-app.use(checkError);
+    // use error middlewares
+    app.use(checkError);
 
-//  restart server
-server.listen(port, () => {
+    //  restart server
+    server.listen(port, () => {
 
-    console.log(`Server has been started at ${port}`);
+        console.log(`Server has been started at ${port}`);
 
-});
+    });
+}

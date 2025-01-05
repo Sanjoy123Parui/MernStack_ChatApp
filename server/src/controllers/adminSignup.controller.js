@@ -229,8 +229,10 @@ const adminChangePassword = asyncHandler(async (req, res, next) => {
 
                 // declare query from update or change password into the database
                 let adminPassword = await adminSignupModel.updateOne({ _id: admin_Id }, {
-                    phone: phone,
-                    password: hashPassword
+                    $set: {
+                        phone: phone,
+                        password: hashPassword
+                    }
                 });
 
                 // check condition for password are changed or not

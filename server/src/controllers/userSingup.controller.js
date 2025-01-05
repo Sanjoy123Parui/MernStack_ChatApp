@@ -1,6 +1,7 @@
 // there import libraries and modules
 import jwt from "jsonwebtoken";
 import bcyptjs from "bcryptjs";
+import { cache } from '../connections/socketconnection.js';
 import { userSignupModel } from '../models/userSignup.model.js';
 import { userProfileModel } from '../models/userProfile.model.js';
 import { asyncHandler } from '../helpers/try-catch.helper.js';
@@ -43,7 +44,15 @@ const userRegister = asyncHandler(async (req, res, next) => {
                 password: hashPassword
             });
 
-            // check condition
+            // here declare cache variables
+            let myProfile, contactId;
+
+            // delete cache key
+            const cacheKey = ["userSignup", "userProfiledata", "existUserprofile", "userContact", `userSearchContact:${myProfile}`,
+                `userContact:${contactId}`];
+            cache.del(cacheKey);
+
+            // check condition for register user
             if (!userInfo) {
                 return next(errorHandler("Occured user registered", 404));
             }
@@ -78,9 +87,16 @@ const userLogin = asyncHandler(async (req, res, next) => {
     }
     else {
 
-
         // passwor synchronise compare
         let isMatchPassword = bcyptjs.compareSync(password, existUser.password);
+
+        // here declare cache variables
+        let myProfile, contactId;
+
+        // delete cache key
+        const cacheKey = ["userSignup", "userProfiledata", "existUserprofile", "userContact", `userSearchContact:${myProfile}`,
+            `userContact:${contactId}`];
+        cache.del(cacheKey);
 
         // check password with condition
         if (!isMatchPassword) {
@@ -118,6 +134,14 @@ const userRecover = asyncHandler(async (req, res, next) => {
         // there was retrive user _id from database
         let user = await userSignupModel.findById(decodedData._id).exec();
 
+        // here declare cache variables
+        let myProfile, contactId;
+
+        // delete cache key
+        const cacheKey = ["userSignup", "userProfiledata", "existUserprofile", "userContact", `userSearchContact:${myProfile}`,
+            `userContact:${contactId}`];
+        cache.del(cacheKey);
+
         // there can check right user are authorized
         if (!user) {
             return next(errorHandler("Invalid user", 401));
@@ -147,18 +171,25 @@ const userRecover = asyncHandler(async (req, res, next) => {
 // user logout controller 
 const userLogout = asyncHandler(async (req, res, next) => {
 
-    // here is declare user_id
-    let user_Id = req.user;
-
+    // here is declare userSignupId
+    let userSignup = req.user;
 
     // declare the user can check exist or not
-    let existUser = await userSignupModel.findByIdAndUpdate(user_Id, {
+    let existUser = await userSignupModel.findByIdAndUpdate(userSignup, {
         $set: {
             refresh_userToken: undefined
         }
     }, {
         new: true
     });
+
+    // here declare cache variables
+    let myProfile, contactId;
+
+    // delete cache key
+    const cacheKey = ["userSignup", "userProfiledata", "existUserprofile", "userContact", `userSearchContact:${myProfile}`,
+        `userContact:${contactId}`];
+    cache.del(cacheKey);
 
     if (!existUser) {
         return next(errorHandler('Unauthorized user', 404));
@@ -187,6 +218,15 @@ const userAccountdelete = asyncHandler(async (req, res, next) => {
         userProfileModel.findOneAndDelete({ userSignup: user_Id })
     ]);
 
+
+    // here declare cache variables
+    let myProfile, contactId;
+
+    // delete cache key
+    const cacheKey = ["userSignup", "userProfiledata", "existUserprofile", "userContact", `userSearchContact:${myProfile}`,
+        `userContact:${contactId}`];
+    cache.del(cacheKey);
+
     // check condition user account are delete or not
     if (!userAccout) {
         return next(errorHandler("This accront are not found", 404));
@@ -194,7 +234,7 @@ const userAccountdelete = asyncHandler(async (req, res, next) => {
     else {
         return res.status(200).json({ msg: "Account are deleted successfully" });
     }
-    
+
 });
 
 
@@ -229,9 +269,19 @@ const userChangePassword = asyncHandler(async (req, res, next) => {
 
                 // declare query from update or change password into the database
                 let userPassword = await userSignupModel.updateOne({ _id: user_Id }, {
-                    phone: phone,
-                    password: hashPassword
+                    $set: {
+                        phone: phone,
+                        password: hashPassword
+                    }
                 });
+
+                // here declare cache variables
+                let myProfile, contactId;
+
+                // delete cache key
+                const cacheKey = ["userSignup", "userProfiledata", "existUserprofile", "userContact", `userSearchContact:${myProfile}`,
+                    `userContact:${contactId}`];
+                cache.del(cacheKey);
 
                 // check condition for password are changed or not
                 if (userPassword.matchedCount && userPassword.modifiedCount) {

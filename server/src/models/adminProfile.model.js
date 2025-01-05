@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { mongoose } from '../connections/socketconnection.js';
 
 // create admin profile model schema
 const adminProfileSchema = new mongoose.Schema({
@@ -10,12 +10,12 @@ const adminProfileSchema = new mongoose.Schema({
 
     profile_img: {
         type: String,
-        required:true
+        required: true
     },
 
-    gender:{
-        type:String,
-        required:true
+    gender: {
+        type: String,
+        required: true
     },
 
     dob: {

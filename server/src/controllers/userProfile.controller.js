@@ -1,3 +1,4 @@
+import { cache } from '../connections/socketconnection.js';
 import { userProfileModel } from '../models/userProfile.model.js';
 import { asyncHandler } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
@@ -8,8 +9,19 @@ import { uploadFiles } from '../helpers/fileuploads.helper.js';
 // create new user profile
 const userNewProfile = asyncHandler(async (req, res, next) => {
 
+    // declare userSignupId variables
+    let userSignup;
+
+    // here check condition from cache data is userSignupId
+    if (cache.has("userSignup")) {
+        userSignup = JSON.parse(cache.get("userSignup"));
+    }
+    else {
+        userSignup = req.user;
+        cache.set(JSON.stringify(userSignup), 300);
+    }
+
     //there are declare payloads
-    let userSignup = req.user;
     let { full_name, gender, dob, abouts } = req.body;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
@@ -56,6 +68,15 @@ const userNewProfile = asyncHandler(async (req, res, next) => {
                         abouts
                     });
 
+                    // here declare cache variables
+                    let contactId;
+
+                    // delete cache key
+                    const cacheKey = ["userProfiledata", "existUserprofile", "userContact", `userContact:${contactId}`];
+                    cache.del(cacheKey);
+
+
+                    // here check condition profile data save into the database
                     if (!userProfiledata) {
                         return next(errorHandler("Profile are not created", 404));
                     }
@@ -80,23 +101,46 @@ const userNewProfile = asyncHandler(async (req, res, next) => {
 // view profile data controller
 const userProfileview = asyncHandler(async (req, res, next) => {
 
-    // declare payload of params
-    let userSignup = req.user;
+    // declare userSignupId variables
+    let userSignup;
 
+    // here can check the condition of userSignupId in nodecache
+    if (cache.has("userSignup")) {
+        userSignup = JSON.parse(cache.get("userSignup"));
+    }
+    else {
+        userSignup = req.user;
+        cache.set("userSignup", JSON.stringify(userSignup), 300);
+    }
+
+
+    // here check condition of user can login or not
     if (!userSignup) {
-
         return next(errorHandler("Please login login to access user", 400));
-
     }
     else {
 
-        // there are user profile fetch
-        let userProfiledata = await userProfileModel.findOne({ userSignup }).populate({
-            path: 'userSignup'
-        }).exec();
+        // declare userProfiledata variables
+        let userProfiledata;
+
+        // here can check condition the data was fetch from cache
+        if (cache.has("userProfiledata")) {
+            userProfiledata = JSON.parse(cache.get("userProfiledata"));
+        }
+        else {
+
+            // there are user profile fetch from database
+            userProfiledata = await userProfileModel.findOne({ userSignup }).populate({
+                path: 'userSignup'
+            }).exec();
+
+            // here set the data from database to cache
+            cache.set("userProfiledata", JSON.stringify(userProfiledata), 300);
+
+        }
 
 
-        // check the condition user data
+        // check the condition userdata
         if (!userProfiledata) {
             return next(errorHandler("Profile data are not find here"));
         }
@@ -115,9 +159,6 @@ const userProfileview = asyncHandler(async (req, res, next) => {
         }
 
     }
-
-
-
 });
 
 
@@ -125,8 +166,19 @@ const userProfileview = asyncHandler(async (req, res, next) => {
 // update profile image controller
 const userProfileImageupdate = asyncHandler(async (req, res, next) => {
 
-    // there declare payload
-    let userSignup = req.user;
+    // declare userSignupId variables
+    let userSignup;
+
+    // here check condition from cache data is userSignupId
+    if (cache.has("userSignup")) {
+        userSignup = JSON.parse(cache.get("userSignup"));
+    }
+    else {
+        userSignup = req.user;
+        cache.set("userSignup", JSON.stringify(userSignup), 300);
+    }
+
+    // there declare payload of params and file of body
     let { userProfileId } = req.params;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
@@ -172,6 +224,13 @@ const userProfileImageupdate = asyncHandler(async (req, res, next) => {
                         }
                     });
 
+                    // here declare cache variables
+                    let contactId;
+
+                    // delete cache key
+                    const cacheKey = ["userProfiledata", "existUserprofile", "userContact", `userContact:${contactId}`];
+                    cache.del(cacheKey);
+
                     if (!userProfiledata.acknowledged) {
                         return next(errorHandler("Profile image can not changed"));
                     }
@@ -193,8 +252,17 @@ const userProfileImageupdate = asyncHandler(async (req, res, next) => {
 // delete profile controller
 const userProfiledelete = asyncHandler(async (req, res, next) => {
 
-    // here declare payload
-    let userSignup = req.user;
+    // declare userSignupId variables
+    let userSignup;
+
+    // here can check the condition of userSignupId in nodecache
+    if (cache.has("userSignup")) {
+        userSignup = JSON.parse(cache.get("userSignup"));
+    }
+    else {
+        userSignup = req.user;
+        cache.set("userSignup", JSON.stringify(userSignup), 300);
+    }
 
     // here can check condition for  userSignup
     if (!userSignup) {
@@ -204,6 +272,13 @@ const userProfiledelete = asyncHandler(async (req, res, next) => {
 
         // declare query from delete user profile into the database
         let existUserProfile = await userProfileModel.deleteOne({ userSignup });
+
+        // here declare cache variables
+        let contactId;
+
+        // delete cache key
+        const cacheKey = ["userProfiledata", "existUserprofile", "userContact", `userContact:${contactId}`];
+        cache.del(cacheKey);
 
         if (!existUserProfile.deletedCount) {
             return next(errorHandler("Profile not found", 404));
@@ -221,8 +296,21 @@ const userProfileupdate = asyncHandler(async (req, res, next) => {
 
     // there have check the request method of condition
     if (req.method === 'PUT' || req.method === 'PATCH') {
+
+        // declare userSignupId variables
+        let userSignup;
+
+        // here can check the condition of userSignupId in nodecache
+        if (cache.has("userSignup")) {
+            userSignup = JSON.parse(cache.get("userSignup"));
+        }
+        else {
+            userSignup = req.user;
+            cache.set("userSignup", JSON.stringify(userSignup), 300);
+        }
+
+
         // declare payload data of params and body
-        let userSignup = req.user;
         let { userProfileId } = req.params;
         let { full_name, gender, dob, abouts } = req.body;
 
@@ -251,6 +339,13 @@ const userProfileupdate = asyncHandler(async (req, res, next) => {
                         full_name, gender, dob, abouts
                     }
                 });
+
+                // here declare cache variables
+                let contactId;
+
+                // delete cache key
+                const cacheKey = ["userProfiledata", "existUserprofile", "userContact", `userContact:${contactId}`];
+                cache.del(cacheKey);
 
                 // check the condition for update data
                 if (!userProfiledata.matchedCount && userProfiledata.modifiedCount) {

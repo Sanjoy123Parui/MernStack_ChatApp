@@ -1,5 +1,5 @@
 // import mongoose library from database connections
-import mongoose from "mongoose";
+import { mongoose } from '../connections/socketconnection.js';
 
 // create a database connection
 const databaseConnection = async (uri) => {

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { mongoose } from '../connections/socketconnection.js';
 
 // here are define contact model schema
 const contactSchema = new mongoose.Schema({

@@ -2,15 +2,28 @@
 import http from "http";
 import express from "express";
 import cors from "cors";
-import { corsOption } from '../lib/optionconfig.js';
+import mongoose from "mongoose";
+import cluster from "cluster";
+import os from "os";
+import morgan from "morgan";
 import cookieParser from "cookie-parser";
+import NodeCache from "node-cache";
 import { Server } from "socket.io";
+import { corsOption } from '../lib/optionconfig.js';
+
+
 import {
     chatSeeders
 } from '../seeders/chatnamespace.js';
 
-// here define object of socket.io connection
+
+
+// here define object of restapi and websocket api
 const app = express();
+const cache = new NodeCache({
+    stdTTL: 300,
+    checkperiod: 60
+});
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: corsOption
@@ -24,13 +37,18 @@ const userSocketIds = new Map();
 // here declare all namespace callback functions
 chatSeeders();
 
-// export socket.io connection
-export { 
+// export all library packages of connection
+export {
     express,
     cors,
-    cookieParser, 
+    mongoose,
+    cluster,
+    os,
+    morgan,
+    cookieParser,
+    cache,
     io,
     userSocketIds,
-    app, 
-    server 
+    app,
+    server
 };
