@@ -3,6 +3,7 @@ import http from "http";
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import path from "path";
 import cluster from "cluster";
 import os from "os";
 import morgan from "morgan";
@@ -42,6 +43,7 @@ export {
     express,
     cors,
     mongoose,
+    path,
     cluster,
     os,
     morgan,

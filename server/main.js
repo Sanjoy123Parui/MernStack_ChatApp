@@ -6,6 +6,7 @@ dotenv.config({ path: './.env' });
 import {
     express,
     cors,
+    path,
     cluster,
     os,
     morgan,
@@ -54,7 +55,9 @@ else {
 
     // check the rest api
     app.get('/', (req, res) => {
-        res.sendFile('./src/public/index.html');
+
+        const filePath = path.join(import.meta.dirname, './src/public/index.html');
+        res.sendFile(filePath);
     });
 
 
