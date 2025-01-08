@@ -1,3 +1,4 @@
+import { cache } from '../connections/socketconnection.js';
 import { asyncHandler } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
 import { userSignupModel } from '../models/userSignup.model.js';
@@ -6,114 +7,26 @@ import { contactModel } from '../models/contact.model.js';
 
 // here was define all admin-dashboard data controller functions
 
-// userSignup data
-
-// here was how many userAccount created check controller functionality
-const userAccount = asyncHandler(async (req, res, next) => {
-
-    // here was declare payload
-    let adminSignup = req.admin;
-
-    // check condition admin signup
-    if (!adminSignup) {
-        return next(errorHandler("Please login to access admin", 400));
-    }
-    else {
-
-        // here was specified pagination
-        let page = Number(req.query.page) || 1;
-        let limit = Number(req.query.limit) || 10;
-        let skip = (page - 1) * limit;
-
-        // here was fetch the userSignup data from database
-        let userSignupdata = await userSignupModel.find({})
-            .skip(skip).limit(limit).exec();
-
-        // here was map data
-        let data = userSignupdata.map((user) => {
-
-            return ({
-                phone: user.phone,
-            });
-
-        });
-
-
-        // here was declare totalPages
-        let total = await userSignupModel.countDocuments();
-        let totalPages = Math.ceil(total / limit);
-
-
-        return res.status(200).json({
-            'data': data,
-            'currentPage': page,
-            'totalPages': totalPages
-        });
-
-    }
-
-});
-
-
-// here search how many user account controller functionality
-const userAccountSearch = asyncHandler(async (req, res, next) => {
-
-    // here declare payload
-    let adminSignup = req.admin;
-    let { phone } = req.body
-
-    // check admin
-    if (!adminSignup) {
-
-        return next(errorHandler("Please login to access admin", 400));
-
-    }
-    else {
-
-        // check condition for phone are matched
-        if (!phone) {
-
-            return next(errorHandler("No more phone contact has been found", 404));
-
-        }
-        else {
-
-            // here was fetch the search data in userSignup model from database
-            let searchData = await userSignupModel.find({ phone }).exec();
-
-            // here was map data
-            let data = searchData.map((user) => {
-
-                return ({
-                    phone: user.phone,
-                });
-
-            });
-
-            return res.status(200).json({ data });
-
-        }
-
-    }
-
-});
-
-
-
-
 // userProfile data
 
 // here was retrieve all the profile data controller functionality
 const userAllProfile = asyncHandler(async (req, res, next) => {
 
-    // here was declare payload
-    let adminSignup = req.admin;
+    // here declare variables
+    let adminSignup, profileData, data;
 
-    // check admin
+    // check conditon of adminSignup cache data
+    if (cache.has("adminSignup")) {
+        adminSignup = JSON.parse(cache.get("adminSignup"))
+    }
+    else {
+        adminSignup = req.admin;
+        cache.set("adminSignup", JSON.stringify(adminSignup), 300);
+    }
+
+    // check condition of adminSignup
     if (!adminSignup) {
-
         return next(errorHandler("Please login to access admin", 400));
-
     }
     else {
 
@@ -122,32 +35,35 @@ const userAllProfile = asyncHandler(async (req, res, next) => {
         let limit = Number(req.query.limit) || 10;
         let skip = (page - 1) * limit;
 
-
-        // here was fetch userProfile model data from database
-        let profileData = await userProfileModel.find({}).populate({
-            path: 'userSignup'
-        }).skip(skip).limit(limit).exec();
-
-
-        // here was map data
-        let data = profileData.map((profile) => {
-
-            return ({
-                profile_img: profile.profile_img,
-                full_name: profile.full_name,
-                phone: profile.userSignup.phone
-            });
-
-        });
-
         // here was declare totalPages
         let total = await userSignupModel.countDocuments();
         let totalPages = Math.ceil(total / limit);
 
+        // check condtion for cache
+        if (cache.has(`profileData_page_${page}_limit_${limit}`)) {
+            data = JSON.parse(cache.get(`profileData_page_${page}_limit_${limit}`));
+        }
+        else {
+            // here was fetch userProfile model data from database
+            profileData = await userProfileModel.find({}).populate({
+                path: 'userSignup'
+            }).skip(skip).limit(limit).exec();
+
+            // here was map of userProfiledata
+            let result = await profileData.map((profile) => ({
+                profile_img: profile.profile_img,
+                full_name: profile.full_name,
+                phone: profile.userSignup.phone
+            }));
+
+            data = { result, page, totalPages };
+            cache.set(`profileData_page_${page}_limit_${limit}`, JSON.stringify(data), 300);
+        }
+
         return res.status(200).json({
-            'data': data,
-            'currentPage': page,
-            'totalPages': totalPages
+            'data': data.result,
+            'currentPage': data.page,
+            'totalPages': data.totalPages
         });
 
     }
@@ -158,68 +74,50 @@ const userAllProfile = asyncHandler(async (req, res, next) => {
 // here was retrieve the profile details controller functionality
 const userProfiledetails = asyncHandler(async (req, res, next) => {
 
-    // here was declare payload
-    let adminSignup = req.admin;
+    // here was declare adminSignup and userProfile full details variables
+    let adminSignup, userProfiledetails;
 
-    let { phone } = req.body;
+    // here declare payload of params
+    let { userId } = req.params;
 
-    // check admin
+    // check cache of adminSignup
+    if (cache.has("adminSignup")) {
+        adminSignup = JSON.parse(cache.get("adminSignup"));
+    }
+    else {
+        adminSignup = req.admin;
+        cache.set("adminSignup", JSON.stringify(adminSignup), 300);
+    }
+
+    // check condition of adminSignup
     if (!adminSignup) {
-
         return next(errorHandler("Please login to access admin", 400));
-
     }
     else {
 
-        if (!phone) {
-            return next(errorHandler("Please required the phone number", 400));
+        // here can check cache data
+        if (cache.has(`userProfiledetails_${userId}`)) {
+            userProfiledetails = JSON.parse(cache.get(`userProfiledetails_${userId}`));
         }
-
         else {
+            // retrieve the data from database to the cache
+            userProfiledetails = await userProfileModel.findById(userId).populate({
+                path: 'userSignup'
+            }).exec();
 
-
-            // here was fetch userSignup model _id
-            let userSignup = await userSignupModel.findOne({ phone }).exec();
-
-            // here check condition phone was matched or not
-            if (phone !== userSignup.phone) {
-
-                return next(errorHandler("Phone are not valid", 404));
-
-            }
-            else {
-
-                // here fetch profile details userProfile model from database
-                let userDetails = await userProfileModel.findOne({ userSignup: userSignup._id }).populate({
-                    path: 'userSignup'
-                }).exec();
-
-                if (!userDetails) {
-
-                    return next(errorHandler("No more profile for this user", 404));
-
-                }
-                else {
-
-                    // object of data
-                    let data = {
-                        profile_img: userDetails.profile_img,
-                        full_name: userDetails.full_name,
-                        phone: userDetails.userSignup.phone,
-                        gender: userDetails.gender,
-                        dob: userDetails.dob,
-                        abouts: userDetails.abouts
-                    };
-
-                    return res.status(200).json({ data });
-
-                }
-
-            }
-
+            cache.set(`userProfiledetails_${userId}`, JSON.stringify(userProfiledetails), 300);
         }
 
-
+        return res.status(200).json({
+            data: {
+                full_name: userProfiledetails.full_name,
+                profile_img: userProfiledetails.profile_img,
+                gender: userProfiledetails.gender,
+                dob: userProfiledetails.dob,
+                abouts: userProfiledetails.abouts,
+                phone: userProfiledetails.userSignup.phone
+            }
+        });
 
     }
 
@@ -229,15 +127,24 @@ const userProfiledetails = asyncHandler(async (req, res, next) => {
 // here was fetch of search profile data from users controller functionality
 const userProfileSearch = asyncHandler(async (req, res, next) => {
 
+    // declare variables
+    let adminSignup;
+
+    // here can check cache of adminSignup
+    if (cache.has("adminSignup")) {
+        adminSignup = JSON.parse(cache.get("adminSignup"));
+    }
+    else {
+        adminSignup = req.admin;
+        cache.set("adminSignup", JSON.stringify(adminSignup), 300);
+    }
+
     // here was declare payload
-    let adminSignup = req.admin;
     let { full_name, dob } = req.body;
 
     // check admin
     if (!adminSignup) {
-
         return next(errorHandler("Please login to access admin", 400));
-
     }
     else {
 
@@ -256,14 +163,12 @@ const userProfileSearch = asyncHandler(async (req, res, next) => {
 
 
             // here was map of search profile data
-            let data = searchProfile.map((search) => {
-
+            let data = await searchProfile.map((search) => {
                 return ({
                     profile_img: search.profile_img,
                     full_name: search.full_name,
                     phone: search.userSignup.phone
                 });
-
             });
 
             return res.status(200).json({ data });
@@ -281,8 +186,17 @@ const userProfileSearch = asyncHandler(async (req, res, next) => {
 // here was define to fetch all contacts controller functionality
 const userContactLists = asyncHandler(async (req, res, next) => {
 
-    // here was declare payload
-    let adminSignup = req.admin;
+    // here was declare variables
+    let adminSignup, contactList, data;
+
+    // here check condition of adminSignup cache
+    if (cache.has("adminSignup")) {
+        adminSignup = JSON.parse(cache.get("adminSignup"));
+    }
+    else {
+        adminSignup = req.admin;
+        cache.set("adminSignup", JSON.stringify(adminSignup), 300);
+    }
 
     // check admin
     if (!adminSignup) {
@@ -297,37 +211,45 @@ const userContactLists = asyncHandler(async (req, res, next) => {
         let limit = Number(req.query.limit) || 10;
         let skip = (page - 1) * limit;
 
-        // here was retrive the all contacts data in contactModel where who was contact in another person from database
-        let contactList = await contactModel.find({}).populate([
-            { path: 'myProfile', populate: { path: 'userSignup' } },
-            { path: 'contactProfile', populate: { path: 'userSignup' } }
-        ]).skip(skip).limit(limit).exec();
-
-
-        // here was map for contact data
-        let data = contactList.map((contact) => {
-
-            return ({
-                userimg: contact.myProfile.profile_img,
-                username: contact.myProfile.full_name,
-                userphone: contact.myProfile.userSignup.phone,
-                contactimg: contact.contactProfile.profile_img,
-                contactname: contact.contactProfile.full_name,
-                contactphone: contact.contactProfile.userSignup.phone,
-                savename: contact.contact_name,
-                savephone: contact.contact_phone
-            });
-
-        });
-
         // here was declare totalPages
         let total = await userSignupModel.countDocuments();
         let totalPages = Math.ceil(total / limit);
 
-        res.status(200).json({
-            'data': data,
-            'currentPage': page,
-            'totalPages': totalPages
+        // check condition of cache
+        if (cache.has(`contactList_page_${page}_limit_${limit}`)) {
+            data = JSON.parse(cache.get(`contactList_page_${page}_limit_${limit}`));
+        }
+        else {
+            // here was retrive the all contacts data in contactModel where who was contact in another person from database
+            contactList = await contactModel.find({}).populate([
+                { path: 'myProfile', populate: { path: 'userSignup' } },
+                { path: 'contactProfile', populate: { path: 'userSignup' } }
+            ]).skip(skip).limit(limit).exec();
+
+
+            // here was map for contact data
+            let result = await contactList.map((contact) => {
+                return ({
+                    userimg: contact.myProfile.profile_img,
+                    username: contact.myProfile.full_name,
+                    userphone: contact.myProfile.userSignup.phone,
+                    contactimg: contact.contactProfile.profile_img,
+                    contactname: contact.contactProfile.full_name,
+                    contactphone: contact.contactProfile.userSignup.phone,
+                    savename: contact.contact_name,
+                    savephone: contact.contact_phone
+                });
+            });
+
+            data = { result, page, totalPages };
+
+            cache.set(`contactList_page_${page}_limit_${limit}`, JSON.stringify(data), 300);
+        }
+
+        return res.status(200).json({
+            'data': data.result,
+            'currentPage': data.page,
+            'totalPages': data.totalPages
         });
 
     }
@@ -338,84 +260,66 @@ const userContactLists = asyncHandler(async (req, res, next) => {
 // here was define to fetch particular user contacts controller functionality
 const particularContact = asyncHandler(async (req, res, next) => {
 
-    // declare payload
-    let adminSignup = req.admin;
-    let { phone } = req.body;
+    // here declare variables
+    let adminSignup, userContact, data;
+
+    // ccheck  condition of cache data
+    if (cache.has("adminSignup")) {
+        adminSignup = JSON.parse(cache.get("adminSignup"));
+    }
+    else {
+        adminSignup = req.admin;
+        cache.set("adminSignup", JSON.stringify(adminSignup), 300);
+    }
+
+    // declare payload of params
+    let { userId } = req.params;
 
     // check condition for admin
     if (!adminSignup) {
-
         return next(errorHandler("Please login to access admin", 400));
-
     }
     else {
 
-        // check user phone and country
-        if (!(phone)) {
+        // here was specified pagination
+        let page = Number(req.query.page) || 1;
+        let limit = Number(req.query.limit) || 10;
+        let skip = (page - 1) * limit;
 
-            return next(errorHandler("Please required phone", 400));
+        // here was declare totalPages
+        let total = await userSignupModel.countDocuments();
+        let totalPages = Math.ceil(total / limit);
 
+        // check condition of cache how many contact connect which data fetch
+        if (cache.has(`userContact_userId_${userId}_page_${page}_limit_${limit}`)) {
+            data = JSON.parse(cache.get(`userContact_userId_${userId}_page_${page}_limit_${limit}`));
         }
         else {
-
-            // here was userId from database
-            let userSignup = await userSignupModel.findOne({ phone }).exec();
-            let myProfile = await userProfileModel.findOne({ userSignup: userSignup._id })
-                .populate({ path: 'userSignup' }).exec();
-
-
-            // check userId
-            if (!myProfile) {
-
-                return next(errorHandler("No more User are exist", 404));
-
-            }
-            else {
+            // here was declare how many contact are save in thos user in contacModel from database
+            userContact = await contactModel.find({ myProfile: userId }).populate([
+                { path: 'myProfile', populate: { path: 'userSignup' } },
+                { path: 'contactProfile', populate: { path: 'userSignup' } },
+            ]).skip(skip).limit(limit);
 
 
-                // here was specified pagination
-                let page = Number(req.query.page) || 1;
-                let limit = Number(req.query.limit) || 10;
-                let skip = (page - 1) * limit;
-
-
-                // here was declare how many contact are save in thos user in contacModel from database
-                let userContact = await contactModel.find({ myProfile: myProfile._id }).populate([
-                    { path: 'myProfile', populate: { path: 'userSignup' } },
-                    { path: 'contactProfile', populate: { path: 'userSignup' } },
-                ]).skip(skip).limit(limit);
-
-
-                // here was particular contact data map
-                let data = userContact.map((contact) => {
-
-                    return ({
-                        userimg: contact.myProfile.profile_img,
-                        userphone: contact.myProfile.userSignup.phone,
-                        username: contact.myProfile.full_name,
-                        contactimg: contact.contactProfile.profile_img,
-                        contacphone: contact.contact_phone,
-                        contactname: contact.contact_name
-                    });
-
+            // here was particular contact data map
+            let result = userContact.map((contact) => {
+                return ({
+                    contactimg: contact.contactProfile.profile_img,
+                    contacphone: contact.contact_phone,
+                    contactname: contact.contact_name
                 });
+            });
 
-                // here was declare totalPages
-                let total = await userSignupModel.countDocuments();
-                let totalPages = Math.ceil(total / limit);
-
-                return res.status(200).json({
-                    'data': data,
-                    'currentPage': page,
-                    'totalPages': totalPages
-                });
-
-            }
-
-
+            data = {result, page, totalPages};
+            cache.set(`userContact_userId_${userId}_page_${page}_limit_${limit}`, JSON.stringify(data), 300);
         }
 
-
+        return res.status(200).json({
+            'data':data.result,
+            'currentPage':data.page,
+            'totalPages':data.totalPages
+        })
     }
 
 });
@@ -425,9 +329,6 @@ const particularContact = asyncHandler(async (req, res, next) => {
 
 // here was export all dashboard data controller funtions
 export {
-
-    userAccount,
-    userAccountSearch,
 
     userAllProfile,
     userProfiledetails,

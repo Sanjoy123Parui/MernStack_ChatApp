@@ -1,3 +1,4 @@
+import { cache } from '../connections/socketconnection.js';
 import { adminProfileModel } from '../models/adminProfile.model.js';
 import { asyncHandler } from '../helpers/try-catch.helper.js';
 import { errorHandler } from '../utils/utility.js';
@@ -8,8 +9,19 @@ import { uploadFiles } from '../helpers/fileuploads.helper.js';
 // admin profile create controller
 const adminNewprofile = asyncHandler(async (req, res, next) => {
 
+    // there are declare adminSignup variables
+    let adminSignup;
+
+    // here can check condition for cache data of admin
+    if (cache.has("adminSignup")) {
+        adminSignup = JSON.parse(cache.get("adminSignup"));
+    }
+    else {
+        adminSignup = req.admin;
+        cache.set("adminSignup", JSON.stringify(adminSignup), 300);
+    }
+
     // there are declare payloads
-    let adminSignup = req.admin;
     let { full_name, gender, dob, abouts } = req.body;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
@@ -60,6 +72,12 @@ const adminNewprofile = asyncHandler(async (req, res, next) => {
                     });
 
 
+                    // declare delete cache key admin
+                    let userId, page, limit;
+                    const admincacheKey = ["existAdmin", `profileData_page_${page}_limit_${limit}`, `userProfiledetails_${userId}`, `contactList_page_${page}_limit_${limit}`, `userContact_userId_${userId}_page_${page}_limit_${limit}`];
+                    cache.del(admincacheKey);
+
+
                     if (!adminProfiledata) {
                         return next(errorHandler("Profile can not inserted"));
                     }
@@ -81,9 +99,17 @@ const adminNewprofile = asyncHandler(async (req, res, next) => {
 // there admin own profile read
 const adminViewprofile = asyncHandler(async (req, res, next) => {
 
-    // there are declare payload of params
-    let adminSignup = req.admin;
+    // there are declare adminSignup variables
+    let adminSignup;
 
+    // here can check condition for cache data of admin
+    if (cache.has("adminSignup")) {
+        adminSignup = JSON.parse(cache.get("adminSignup"));
+    }
+    else {
+        adminSignup = req.admin;
+        cache.set("adminSignup", JSON.stringify(adminSignup), 300);
+    }
 
     // check condition for admin can be access or not
     if (!adminSignup) {
@@ -93,10 +119,23 @@ const adminViewprofile = asyncHandler(async (req, res, next) => {
     }
     else {
 
-        // there can check findn the data
-        let existAdmin = await adminProfileModel.findOne({ adminSignup }).populate({
-            path: 'adminSignup'
-        }).exec();
+        // here declare existAdmin profile data variables
+        let existAdmin;
+
+        // here can check condition of admin cache data
+        if (cache.has("existAdmin")) {
+
+            existAdmin = JSON.parse(cache.get("existAdmin"));
+        }
+        else {
+
+            // there can check find the data into the database
+            existAdmin = await adminProfileModel.findOne({ adminSignup }).populate({
+                path: 'adminSignup'
+            }).exec();
+
+            cache.set("existAdmin", JSON.stringify(existAdmin), 300);
+        }
 
         // there was check existAdmin
         if (!existAdmin) {
@@ -122,8 +161,19 @@ const adminViewprofile = asyncHandler(async (req, res, next) => {
 // admin profile image data update controller
 const adminProfileImageupdate = asyncHandler(async (req, res, next) => {
 
+    // declare adminSignup variables
+    let adminSignup;
+
+    // check condition of cache data
+    if (cache.has("adminSignup")) {
+        adminSignup = JSON.parse(cache.get("adminSignup"));
+    }
+    else {
+        adminSignup = req.admin;
+        cache.set("adminSignup", JSON.stringify(adminSignup), 300);
+    }
+
     // there declare payload
-    let adminSignup = req.admin;
     let { adminProfileId } = req.params;
     // let filePath = req.file.path;
     let filePath = req.file.filename;
@@ -170,6 +220,11 @@ const adminProfileImageupdate = asyncHandler(async (req, res, next) => {
                         profile_img: uploads + 'uploads/' + filePath
                     });
 
+                    // declare delete cache key admin
+                    let userId, page, limit;
+                    const admincacheKey = ["existAdmin", `profileData_page_${page}_limit_${limit}`, `userProfiledetails_${userId}`, `contactList_page_${page}_limit_${limit}`, `userContact_userId_${userId}_page_${page}_limit_${limit}`];
+                    cache.del(admincacheKey);
+
                     if (!adminProdfiledata.acknowledged) {
                         return next(errorHandler("Profile picture can't changed"));
                     }
@@ -191,8 +246,17 @@ const adminProfileImageupdate = asyncHandler(async (req, res, next) => {
 // admin profile delete controller
 const adminProfiledelete = asyncHandler(async (req, res, next) => {
 
-    // here declare payload
-    let adminSignup = req.admin;
+    // here declare adminSignup variables
+    let adminSignup;
+
+    // check condition of cache key in adminSignup key
+    if (cache.has("adminSignup")) {
+        adminSignup = JSON.parse(cache.get("adminSignup"));
+    }
+    else {
+        adminSignup = req.admin;
+        cache.set("adminSignup", JSON.stringify(adminSignup), 300);
+    }
 
     // here can check condition for  adminSignup
     if (!adminSignup) {
@@ -203,6 +267,12 @@ const adminProfiledelete = asyncHandler(async (req, res, next) => {
         // declare query from delete admin profile into the database
         let existAdminProfile = await adminProfileModel.deleteOne({ adminSignup });
 
+        // declare delete cache key admin
+        let userId, page, limit;
+        const admincacheKey = ["existAdmin", `profileData_page_${page}_limit_${limit}`, `userProfiledetails_${userId}`, `contactList_page_${page}_limit_${limit}`, `userContact_userId_${userId}_page_${page}_limit_${limit}`];
+        cache.del(admincacheKey);
+
+        //  here can check condition profile data was delete or not
         if (!existAdminProfile.deletedCount) {
             return next(errorHandler("Profile not found", 404));
         }
@@ -220,8 +290,21 @@ const adminProfileupdate = asyncHandler(async (req, res, next) => {
     // check condition for request
     if (req.method === 'PUT' || req.method === 'PATCH') {
 
+        // declare adminSignup varibles
+        let adminSignup;
+
+        // check adminSignup of cache
+        if (cache.has("adminSignup")) {
+            adminSignup = JSON.parse(cache.get("adminSignup"));
+        }
+        else {
+            adminSignup = req.admin;
+            cache.set("adminSignup", JSON.stringify(adminSignup), 300);
+        }
+
+
+
         // there are declare payload
-        let adminSignup = req.admin;
         let { adminProfileId } = req.params;
         let { full_name, gender, dob, abouts } = req.body;
 
@@ -234,8 +317,6 @@ const adminProfileupdate = asyncHandler(async (req, res, next) => {
         }
 
         else {
-
-
 
             // existAdmin for are found or not
             let existAdmin = await adminProfileModel.findById(adminProfileId).exec();
@@ -257,6 +338,12 @@ const adminProfileupdate = asyncHandler(async (req, res, next) => {
                     }
                 });
 
+                // declare delete cache key admin
+                let userId, page, limit;
+                const admincacheKey = ["existAdmin", `profileData_page_${page}_limit_${limit}`, `userProfiledetails_${userId}`, `contactList_page_${page}_limit_${limit}`, `userContact_userId_${userId}_page_${page}_limit_${limit}`];
+                cache.del(admincacheKey);
+
+                // here can check condition for update admin prfile
                 if (!adminProfiledata.matchedCount && adminProfiledata.modifiedCount) {
                     return next(errorHandler("Your profile are not updated"));
                 }

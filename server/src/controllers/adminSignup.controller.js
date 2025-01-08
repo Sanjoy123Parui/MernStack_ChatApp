@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
+import { cache } from '../connections/socketconnection.js';
 import { adminSignupModel } from '../models/adminSignup.model.js';
 import { adminProfileModel } from '../models/adminProfile.model.js';
 import { asyncHandler } from '../helpers/try-catch.helper.js';
@@ -41,6 +42,11 @@ const adminRegister = asyncHandler(async (req, res, next) => {
                 password: hashPassword
             });
 
+            // declare delete cache key admin
+            let userId, page, limit;
+            const admincacheKey = ["adminSignup", "existAdmin", `profileData_page_${page}_limit_${limit}`, `userProfiledetails_${userId}`, `contactList_page_${page}_limit_${limit}`, `userContact_userId_${userId}_page_${page}_limit_${limit}`];
+            cache.del(admincacheKey);
+
             // check condition
             if (!adminInfo) {
                 return next(errorHandler("Unoccured Registered"));
@@ -78,6 +84,11 @@ const adminLogin = asyncHandler(async (req, res, next) => {
         // there was comparison of admin password with bcryptjs
         let isMatchPassword = bcryptjs.compareSync(password, existAdmin.password);
 
+        // declare delete cache key admin
+        let userId, page, limit;
+        const admincacheKey = ["adminSignup", "existAdmin", `profileData_page_${page}_limit_${limit}`, `userProfiledetails_${userId}`, `contactList_page_${page}_limit_${limit}`, `userContact_userId_${userId}_page_${page}_limit_${limit}`];
+        cache.del(admincacheKey);
+
         // check the comparison password
         if (!isMatchPassword) {
             return next(errorHandler("Invalid admin", 404));
@@ -103,6 +114,11 @@ const adminAccountdelete = asyncHandler(async (req, res, next) => {
         adminSignupModel.findOneAndDelete({ _id: admin_Id }),
         adminProfileModel.findOneAndDelete({ adminSignup: admin_Id })
     ]);
+
+    // declare delete cache key admin
+    let userId, page, limit;
+    const admincacheKey = ["adminSignup", "existAdmin", `profileData_page_${page}_limit_${limit}`, `userProfiledetails_${userId}`, `contactList_page_${page}_limit_${limit}`, `userContact_userId_${userId}_page_${page}_limit_${limit}`];
+    cache.del(admincacheKey);
 
     // check condition admin account are delete or not
     if (!adminAccout) {
@@ -138,6 +154,11 @@ const adminRecover = asyncHandler(async (req, res, next) => {
         // there was retrive admin _id from database
         let admin = await adminSignupModel.findById(decodedData._id).exec();
 
+        // declare delete cache key admin
+        let userId, page, limit;
+        const admincacheKey = ["adminSignup", "existAdmin", `profileData_page_${page}_limit_${limit}`, `userProfiledetails_${userId}`, `contactList_page_${page}_limit_${limit}`, `userContact_userId_${userId}_page_${page}_limit_${limit}`];
+        cache.del(admincacheKey);
+
         // there can check right admin are authorized
         if (!admin) {
             return next(errorHandler("Invalid admin", 401));
@@ -170,17 +191,22 @@ const adminRecover = asyncHandler(async (req, res, next) => {
 const adminLogout = asyncHandler(async (req, res, next) => {
 
     // here declare admin_id
-    let admin_Id = req.admin;
+    let adminSignup = req.admin;
 
 
     // here is admin are exist or not into the database
-    let existAdmin = await adminSignupModel.findByIdAndUpdate(admin_Id, {
+    let existAdmin = await adminSignupModel.findByIdAndUpdate(adminSignup, {
         $set: {
             refresh_adminToken: undefined
         }
     }, {
         new: true
-    })
+    });
+
+    // declare delete cache key admin
+    let userId, page, limit;
+    const admincacheKey = ["adminSignup", "existAdmin", `profileData_page_${page}_limit_${limit}`, `userProfiledetails_${userId}`, `contactList_page_${page}_limit_${limit}`, `userContact_userId_${userId}_page_${page}_limit_${limit}`];
+    cache.del(admincacheKey);
 
     // check condition for admin are found or not then logout
     if (!existAdmin) {
@@ -234,6 +260,11 @@ const adminChangePassword = asyncHandler(async (req, res, next) => {
                         password: hashPassword
                     }
                 });
+
+                // declare delete cache key admin
+                let userId, page, limit;
+                const admincacheKey = ["adminSignup", "existAdmin", `profileData_page_${page}_limit_${limit}`, `userProfiledetails_${userId}`, `contactList_page_${page}_limit_${limit}`, `userContact_userId_${userId}_page_${page}_limit_${limit}`];
+                cache.del(admincacheKey);
 
                 // check condition for password are changed or not
                 if (adminPassword.matchedCount && adminPassword.modifiedCount) {

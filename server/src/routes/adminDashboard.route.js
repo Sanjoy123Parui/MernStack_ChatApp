@@ -2,16 +2,14 @@
 import { express } from '../connections/socketconnection.js';
 
 import {
-    userAccount,
-    userAccountSearch,
-
+    
     userAllProfile,
     userProfiledetails,
     userProfileSearch,
 
     userContactLists,
     particularContact
-
+    
 } from '../controllers/adminDashboard.controller.js';
 import { adminCheckAuth } from '../middlewares/auth.middleware.js';
 
@@ -19,22 +17,6 @@ import { adminCheckAuth } from '../middlewares/auth.middleware.js';
 const adminDashboardRouter = express.Router();
 
 // here was all admin dashcoard route
-
-
-// userSignup
-
-// user account fetch end-point of router with get
-adminDashboardRouter.route('/user/signup/account').get(
-    adminCheckAuth,
-    userAccount
-);
-
-// user account search end-point of router with get
-adminDashboardRouter.route('/user/signup/search').get(
-    adminCheckAuth,
-    userAccountSearch
-);
-
 
 
 // userProfile
@@ -47,7 +29,7 @@ adminDashboardRouter.route('/user/profile/all').get(
 
 
 // user profile fetch details end-point of router with get
-adminDashboardRouter.route('/user/profile/details').get(
+adminDashboardRouter.route('/user/profile/details/:userId').get(
     adminCheckAuth,
     userProfiledetails
 );
@@ -72,7 +54,7 @@ adminDashboardRouter.route('/contact/view/all').get(
 
 
 // user contact particular _id of router with get
-adminDashboardRouter.route('/contact/user/view').get(
+adminDashboardRouter.route('/contact/user/view/:userId').get(
     adminCheckAuth,
     particularContact
 );
