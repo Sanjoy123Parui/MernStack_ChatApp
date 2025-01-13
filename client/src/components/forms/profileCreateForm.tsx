@@ -69,7 +69,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
             )}
 
             {/* start div for create profile form */}
-            <div className="bg-white border-[1px] shadow-2xl rounded-2xl px-8 pt-6 md:-mx-32 pb-8 mb-4">
+            <div className="bg-white border-[1px] shadow-2xl rounded-2xl px-8 pt-6 mt-0 md:mt-4 md:-mx-32 pb-8 mb-4">
 
                 {/* declare heading of profile form */}
                 <h1 className="text-3xl text-center font-bold text-blue-950 mb-8">Create</h1>
@@ -81,7 +81,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                     <form onSubmit={onSubmit} className="space-y-8">
 
                         {/* profile form fullName content */}
-                        <div className="mb-4">
+                        <div className="mb-2">
                             <FormField
                                 control={form.control}
                                 name="full_name"
@@ -100,7 +100,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
 
 
                         {/* profile form Picture content */}
-                        <div className="mb-4">
+                        <div className="mb-2">
                             <FormField
                                 control={form.control}
                                 name="avatar"
@@ -122,7 +122,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
 
 
                         {/* profile form gender content */}
-                        <div className="mb-4">
+                        <div className="mb-2">
                             <FormField
                                 control={form.control}
                                 name="gender"
@@ -157,7 +157,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
 
 
                         {/* profile form DateOfBirth content */}
-                        <div className="mb-4">
+                        <div className="mb-2">
                             <FormField
                                 control={form.control}
                                 name="dob"
@@ -176,7 +176,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
 
 
                         {/* profile form DateOfBirth content */}
-                        <div className="mb-4">
+                        <div className="mb-2">
                             <FormField
                                 control={form.control}
                                 name="abouts"
