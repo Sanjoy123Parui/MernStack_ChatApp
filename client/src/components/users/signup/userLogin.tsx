@@ -1,5 +1,5 @@
 // import many more functional components and libraries of packages
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import LoginForm from '../../forms/loginForm.tsx';
@@ -9,6 +9,9 @@ import { loginValidatorSchema } from '../../validations/signupValidator.ts';
 
 // here are user login form functional component
 const UserLogin: React.FC = () => {
+
+    // here declare useNavigate hook for navigate next component
+    const navigate: any = useNavigate();
 
     // declare useForm hook for user login data model handle
     const form: any = useForm<loginFormdata>({
@@ -22,6 +25,8 @@ const UserLogin: React.FC = () => {
     // declare function of handle login form submit
     const userhandleLoginSubmit: SubmitHandler<loginFormdata> = (data: any) => {
         console.log(data);
+        // here redirect next component after user login
+        navigate('/user/create-profile');
         form.reset();
     }
 

@@ -1,4 +1,5 @@
 // here import many more functional components and libraries
+import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
 import ProfileCreateForm from '../../forms/profileCreateForm.tsx';
@@ -8,8 +9,11 @@ import { createProfileValidatorSchema } from '../../validations/profileValidator
 // here define User profile functional component
 const UserCreate: React.FC = () => {
 
+    // here declare useNavigate hooke for navigate next component
+    const navigate:any = useNavigate();
+
     // declare useForm hook for handle with input data of form with validation
-    let form: any = useForm<profileFormdata>({
+    const form: any = useForm<profileFormdata>({
         resolver: zodResolver(createProfileValidatorSchema),
         defaultValues: {
             full_name: '',
@@ -24,10 +28,10 @@ const UserCreate: React.FC = () => {
 
     // declare function of handle user profile form submit with submitHandler hook
     const userhandleProfileSubmit: SubmitHandler<profileFormdata> = (data: any) => {
-
         console.log(data);
+        // here can declare navigate variable for redirect next component after create profile
+        navigate('/user/chat');
         form.reset();
-
     }
 
     return (
