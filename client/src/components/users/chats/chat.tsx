@@ -1,22 +1,18 @@
+import { useEffect } from "react";
 import ChatList from './chatList.tsx';
-import ChatMessage from './chatMessage.tsx';
-import ChatProfile from './chatProfile.tsx';
 
 // here declare Chat functional component
 const Chat: React.FC = () => {
 
+    // here declare useEffect hook
+    useEffect(() => {
+        return () => { }
+    }, []);
+
     return (
         <>
-            <div className="flex">
-                <section>
-                    <ChatList />
-                </section>
-                <div>
-                    <ChatMessage />
-                </div>
-                <section>
-                    <ChatProfile />
-                </section>
+            <div>
+                <ChatList />
             </div>
         </>
     );

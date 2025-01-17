@@ -111,7 +111,9 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                                             <Input type="file" onChange={(e) => {
                                                 field.onChange(e.currentTarget.files?.[0]);
                                                 handleFileChange(e);
-                                            }} className={`shadow ${fieldState.error ? "border-red-500" : "border-gray-300"} appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`} />
+                                            }} className={`shadow ${fieldState.error ? "border-red-500" : "border-gray-300"} 
+                                            appearance-none border rounded w-full pb-12 px-8 text-gray-900 leading-tight 
+                                            focus:outline-none focus:ring focus:ring-gray-700`} />
                                         </FormControl>
                                         {fieldState?.error && (
                                             <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
