@@ -11,12 +11,12 @@ const Chat: React.FC = () => {
 
     return (
         <>
-            <div>
+            <section>
                 <ChatList />
-            </div>
+            </section>
         </>
     );
 }
 
 // export Chat functional component
-export default Chat;
+export default Chat;    
