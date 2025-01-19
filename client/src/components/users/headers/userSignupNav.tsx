@@ -10,11 +10,11 @@ const Dropdown: React.FC<isDropdownProps> = ({ isDropdownOpen }) => {
   // here was declare drop-down content array
   const accountDropdownList: navListItem[] = [
     {
-      listItem: "Change Password",
+      listItem: "ChangePassword",
       itemPath: "/user/change-password",
     },
     {
-      listItem: "Delete Account",
+      listItem: "DeleteAccount",
       itemPath: "#",
     },
   ];

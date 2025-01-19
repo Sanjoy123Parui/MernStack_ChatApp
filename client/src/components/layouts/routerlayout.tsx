@@ -10,7 +10,7 @@ const UserLogin: any = lazy(() => import('../users/signup/userLogin.tsx'));
 const UserRegister: any = lazy(() => import('../users/signup/userRegister.tsx'));
 const UserChangePassword: any = lazy(() => import('../users/signup/userChangePassword.tsx'));
 const UserCreate: any = lazy(() => import('../users/profiles/userCreate.tsx'));
-const Chat: any = lazy(() => import('../users/chats/chat.tsx'));
+const Content: any = lazy(() => import('../users/content.tsx'));
 const Notfound: any = lazy(() => import('../layouts/notfound.tsx'));
 
 // here was create routerlayout functional component
@@ -44,9 +44,8 @@ const Routerlayout: React.FC = () => {
 
                 {
                     path: '/user/chat',
-                    element: <Chat />
+                    element: <Content />
                 }
-
             ]
         },
 
