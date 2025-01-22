@@ -10,6 +10,10 @@ const UserLogin: any = lazy(() => import('../users/signup/userLogin.tsx'));
 const UserRegister: any = lazy(() => import('../users/signup/userRegister.tsx'));
 const UserChangePassword: any = lazy(() => import('../users/signup/userChangePassword.tsx'));
 const UserCreate: any = lazy(() => import('../users/profiles/userCreate.tsx'));
+const UserViewProfile: any = lazy(() => import('../users/profiles/userViewProfile.tsx'));
+const Chat:any = lazy(()=>import('../users/chats.tsx'));
+const Stories:any = lazy(()=>import('../users/stories.tsx'));
+const Groups:any = lazy(()=>import('../users/groups.tsx'));
 const Notfound: any = lazy(() => import('../layouts/notfound.tsx'));
 
 // here was create routerlayout functional component
@@ -39,6 +43,26 @@ const Routerlayout: React.FC = () => {
                 {
                     path: '/user/create-profile',
                     element: <UserCreate />
+                },
+
+                {
+                    path: '/user/content/profile',
+                    element: <UserViewProfile />
+                },
+
+                {
+                    path:'/user/content/chat',
+                    element:<Chat/>
+                },
+
+                {
+                    path:'/user/content/story',
+                    element:<Stories/>
+                },
+
+                {
+                    path:'/user/content/groups',
+                    element:<Groups/>
                 }
             ]
         },

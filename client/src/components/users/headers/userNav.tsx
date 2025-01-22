@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { RiArrowDropDownLine } from "react-icons/ri"
 import { isOpenheaderProps, isDropdownProps, navListItem, themesListMode } from '../../models/userModel.ts';
 
@@ -46,8 +46,20 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
     // here declare nav list content
     const chatNavItem: navListItem[] = [
         {
+            listItem: "Chat",
+            itemPath: "/user/content/chat"
+        },
+        {
+            listItem: "Stories",
+            itemPath: "/user/content/story"
+        },
+        {
+            listItem: "Groups",
+            itemPath: "/user/content/groups"
+        },
+        {
             listItem: "MyProfile",
-            itemPath: "#"
+            itemPath: "/user/content/profile"
         },
         {
             listItem: "Logout",
@@ -59,7 +71,7 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
         <>
             {/* start ul for chat list nav content */}
             <ul className={`md:flex ${isOpen ? "block" : "hidden"} absolute md:relative rounded-2xl shadow-lg md:shadow-none md:rounded-none  
-            h-48 bg-slate-100 md:bg-transparent w-48 md:w-auto md:h-auto right-0 top-full 
+            h-auto bg-slate-100 md:bg-transparent w-48 md:w-auto md:h-auto right-0 top-full 
             md:top-auto p-4 md:p-0 space-y-2 md:space-y-0 md:space-x-4`}>
 
                 {/* here are declare drop-down of themes */}
@@ -85,12 +97,12 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
                 {/* here decalare chat navlink list items */}
                 {chatNavItem.map((items: any, i: any) => (
                     <li key={i} className=" mx-6 md:mx-auto p-[5px] md:p-0 md:text-right">
-                        <Link
+                        <NavLink
                             to={items.itemPath}
                             className="block text-gray-600 md:text-white md:text-base 
                         hover:text-black md:hover:text-gray-300 transition-colors">
                             {items.listItem}
-                        </Link>
+                        </NavLink>
                     </li>
                 ))}
 

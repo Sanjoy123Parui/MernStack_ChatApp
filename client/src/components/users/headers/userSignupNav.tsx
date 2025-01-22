@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { isOpenheaderProps, isDropdownProps, navListItem } from "../../models/userModel.ts";
 
@@ -27,9 +27,9 @@ const Dropdown: React.FC<isDropdownProps> = ({ isDropdownOpen }) => {
           h-40 w-48 right-0 top-full p-4 space-y-2">
           {accountDropdownList.map((subItem: any, j: any) => (
             <li key={j} className="p-[5px] md:p-0 md:text-left">
-              <Link to={subItem.itemPath} className="block px-4 mt-3 text-sm md:text-base text-gray-700 hover:text-black">
+              <NavLink to={subItem.itemPath} className="block px-4 mt-3 text-sm md:text-base text-gray-700 hover:text-black">
                 {subItem.listItem}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>
@@ -77,12 +77,12 @@ const UserSignupNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
               key={i}
               className=" mx-6 md:mx-auto p-[5px] md:p-0 md:text-right"
             >
-              <Link
+              <NavLink
                 to={items.itemPath}
                 className="block text-gray-600 md:text-white md:text-base hover:text-black md:hover:text-gray-300 transition-colors"
               >
                 {items.listItem}
-              </Link>
+              </NavLink>
             </li>
           );
         })}
