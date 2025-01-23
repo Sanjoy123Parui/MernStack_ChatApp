@@ -13,12 +13,6 @@ import { Server } from "socket.io";
 import { corsOption } from '../lib/optionconfig.js';
 
 
-import {
-    chatSeeders
-} from '../seeders/chatnamespace.js';
-
-
-
 // here define object of restapi and websocket api
 const app = express();
 const cache = new NodeCache({
@@ -30,13 +24,6 @@ const io = new Server(server, {
     cors: corsOption
 });
 
-
-// here was declare userSocketIds
-const userSocketIds = new Map();
-
-
-// here declare all namespace callback functions
-chatSeeders();
 
 // export all library packages of connection
 export {
@@ -50,7 +37,6 @@ export {
     cookieParser,
     cache,
     io,
-    userSocketIds,
     app,
     server
 };
