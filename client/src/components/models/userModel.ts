@@ -9,13 +9,21 @@ export interface isDropdownProps{
     isDropdownOpen:boolean;
 };
 
-// here define navListItem content interface model
-export interface navListItem{
+// here define userSignupListItem content interface model
+export interface userSignupListItem{
+    listItem:string;
+    itemPath:string;
+};
+
+// here define userNavListItem content interface model
+export interface userNavListItem{
+    listIcon:any;
     listItem:string;
     itemPath:string;
 };
 
 // here define themes dropdown content interface model
 export interface themesListMode{
+    themesIcon:any;
     themesItem:string;
 };

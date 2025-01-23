@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { isOpenheaderProps, isDropdownProps, navListItem } from "../../models/userModel.ts";
+import { 
+  isOpenheaderProps, 
+  isDropdownProps,
+  userSignupListItem 
+} from "../../models/userModel.ts";
 
 // here define props functionality which pass in same functional component
 const Dropdown: React.FC<isDropdownProps> = ({ isDropdownOpen }) => {
 
 
   // here was declare drop-down content array
-  const accountDropdownList: navListItem[] = [
+  const accountDropdownList: userSignupListItem[] = [
     {
       listItem: "ChangePassword",
       itemPath: "/user/change-password",
@@ -52,7 +56,7 @@ const UserSignupNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
 
 
   // here declare nav list items
-  const signupList: navListItem[] = [
+  const signupList: userSignupListItem[] = [
     {
       listItem: "Login",
       itemPath: "/",
