@@ -35,8 +35,8 @@ adminDashboardRouter.route('/user/profile/details/:userId').get(
 );
 
 
-// user profile search end-point of router with get
-adminDashboardRouter.route('/user/profile/search').get(
+// user profile search end-point of router with post
+adminDashboardRouter.route('/user/profile/search').post(
     adminCheckAuth,
     userProfileSearch
 );

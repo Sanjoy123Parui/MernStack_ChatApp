@@ -44,7 +44,7 @@ contactRouter.route('/view/all').get(
 
 
 // search contact router end-point with get
-contactRouter.route('/search/user/:myProfile').get(
+contactRouter.route('/search/user/:myProfile').post(
     userCheckAuth,
     searchContact
 );

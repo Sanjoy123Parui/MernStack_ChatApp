@@ -51,6 +51,7 @@ const userAllProfile = asyncHandler(async (req, res, next) => {
 
             // here was map of userProfiledata
             let result = await profileData.map((profile) => ({
+                userProfileId: profile._id,
                 profile_img: profile.profile_img,
                 full_name: profile.full_name,
                 phone: profile.userSignup.phone
@@ -110,6 +111,7 @@ const userProfiledetails = asyncHandler(async (req, res, next) => {
 
         return res.status(200).json({
             data: {
+                userProfileId: userProfiledetails._id,
                 full_name: userProfiledetails.full_name,
                 profile_img: userProfiledetails.profile_img,
                 gender: userProfiledetails.gender,
@@ -161,10 +163,16 @@ const userProfileSearch = asyncHandler(async (req, res, next) => {
                 $or: [{ full_name: full_name }, { dob: dob }]
             }).populate({ path: 'userSignup' }).exec();
 
+            // declare delete cache key admin
+            let userId, page, limit;
+            const admincacheKey = ["existAdmin", `profileData_page_${page}_limit_${limit}`, `userProfiledetails_${userId}`, `contactList_page_${page}_limit_${limit}`, `userContact_userId_${userId}_page_${page}_limit_${limit}`];
+            cache.del(admincacheKey);
+
 
             // here was map of search profile data
             let data = await searchProfile.map((search) => {
                 return ({
+                    userProfileId:search._id,
                     profile_img: search.profile_img,
                     full_name: search.full_name,
                     phone: search.userSignup.phone
@@ -230,6 +238,7 @@ const userContactLists = asyncHandler(async (req, res, next) => {
             // here was map for contact data
             let result = await contactList.map((contact) => {
                 return ({
+                    contactId: contact._id,
                     userimg: contact.myProfile.profile_img,
                     username: contact.myProfile.full_name,
                     userphone: contact.myProfile.userSignup.phone,
@@ -303,22 +312,23 @@ const particularContact = asyncHandler(async (req, res, next) => {
 
 
             // here was particular contact data map
-            let result = userContact.map((contact) => {
+            let result = await userContact.map((contact) => {
                 return ({
+                    contactId: contact._id,
                     contactimg: contact.contactProfile.profile_img,
                     contacphone: contact.contact_phone,
                     contactname: contact.contact_name
                 });
             });
 
-            data = {result, page, totalPages};
+            data = { result, page, totalPages };
             cache.set(`userContact_userId_${userId}_page_${page}_limit_${limit}`, JSON.stringify(data), 300);
         }
 
         return res.status(200).json({
-            'data':data.result,
-            'currentPage':data.page,
-            'totalPages':data.totalPages
+            'data': data.result,
+            'currentPage': data.page,
+            'totalPages': data.totalPages
         })
     }
 

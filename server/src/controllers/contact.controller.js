@@ -206,6 +206,7 @@ const viewAllContact = asyncHandler(async (req, res, next) => {
                 let data = await userContact.map((contact) => {
 
                     return ({
+                        contactId: contact._id,
                         contact_phone: contact.contact_phone,
                         contact_name: contact.contact_name,
                         contact_profileimg: contact.contactProfile.profile_img
@@ -269,9 +270,17 @@ const searchContact = asyncHandler(async (req, res, next) => {
                 { path: 'contactProfile', populate: { path: 'userSignup' } }
             ]).exec();
 
+            // here declare cache variables
+            let contactId;
+
+            // delete cache key
+            const cacheKey = ["userProfiledata", "existUserprofile", "userContact", `userContact:${contactId}`];
+            cache.del(cacheKey);
+
 
             // here was map userSearchContact for retrieve exist data
             let data = await userSearchContact.map((user) => ({
+                contactId: user._id,
                 profile_img: user.contactProfile.profile_img,
                 contact_phone: user.contact_phone,
                 contact_name: user.contact_name
@@ -346,6 +355,7 @@ const viewContactProfile = asyncHandler(async (req, res, next) => {
 
             return res.status(200).json({
                 data: {
+                    contactId: userContact._id,
                     contact_phone: userContact.contact_phone,
                     contact_name: userContact.contact_name,
                     contact_profileimg: userContact.contactProfile.profile_img,

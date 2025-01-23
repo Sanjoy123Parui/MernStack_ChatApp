@@ -43,50 +43,8 @@ const adminCheckAuth = asyncHandler(async (req, res, next) => {
 });
 
 
-//there are define socketIo authenticator
-const socketIoAuthenticator = asyncHandler(async (err, socket, next) => {
-
-    // check err
-    if (err) {
-        return next(err);
-    }
-    else {
-
-        // here can userToken authenticate
-        let userToken = socket.request.cookies.access_userToken;
-
-        if (!userToken) {
-            return next(errorHandler("Unauthorized token please login to access", 401));
-        }
-        else {
-
-            // declare there decoded data verify
-            let decodeData = jwt.verify(userToken, process.env.JWT_ACCESS_SCKEY);
-
-            // here decoded data _id
-            let user = await decodeData._id;
-
-            // check user
-            if (!user) {
-                return next(errorHandler("Please login to access authentication", 401));
-            }
-            else {
-
-                socket.user = user;
-                next();
-
-            }
-
-        }
-
-    }
-
-});
-
-
 // export auth middleware
 export { 
     userCheckAuth, 
-    adminCheckAuth, 
-    socketIoAuthenticator 
+    adminCheckAuth
 };

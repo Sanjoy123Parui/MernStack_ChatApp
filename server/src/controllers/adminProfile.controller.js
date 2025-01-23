@@ -144,6 +144,7 @@ const adminViewprofile = asyncHandler(async (req, res, next) => {
         else {
             return res.status(200).json({
                 data: {
+                    adminProfileId:existAdmin._id,
                     full_name: existAdmin.full_name,
                     profile_img: existAdmin.profile_image,
                     gender: existAdmin.gender,

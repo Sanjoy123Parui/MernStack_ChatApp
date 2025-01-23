@@ -148,6 +148,7 @@ const userProfileview = asyncHandler(async (req, res, next) => {
 
             return res.status(200).json({
                 data: {
+                    userProfileId:userProfiledata._id,
                     full_name: userProfiledata.full_name,
                     profile_img: userProfiledata.profile_img,
                     gender: userProfiledata.gender,
