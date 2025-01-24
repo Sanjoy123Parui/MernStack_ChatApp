@@ -2,7 +2,9 @@
 const ListContent: React.FC = () => {
     return (
         <>
-            <h1>ChatList</h1>
+            <section>
+                <h1 className="text-lg font-semibold">Chat</h1>
+            </section>
         </>
     );
 }
