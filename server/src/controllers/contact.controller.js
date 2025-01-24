@@ -77,12 +77,12 @@ const addContact = asyncHandler(async (req, res, next) => {
                 else {
 
                     // declare all profile id
-                    let myProfile = existUser._id;
+                    let userProfile = existUser._id;
                     let contactProfile = existContact._id;
 
                     // here was data insert into the database
                     let userContact = await contactModel.create({
-                        myProfile,
+                        userProfile,
                         contactProfile,
                         contact_phone,
                         contact_name
@@ -165,7 +165,7 @@ const viewAllContact = asyncHandler(async (req, res, next) => {
 
 
             // here was declare myprofile_id
-            let myProfile = existUserprofile._id;
+            let userProfile = existUserprofile._id;
 
             // here can check data
             if (cache.has("userContact")) {
@@ -176,7 +176,7 @@ const viewAllContact = asyncHandler(async (req, res, next) => {
             else {
 
                 // here whose all contact data can be retrieve from database where this _id are exist
-                userContact = await contactModel.find({ myProfile }).populate([
+                userContact = await contactModel.find({ userProfile }).populate([
                     {
                         path: 'contactProfile',
                         populate: {
@@ -184,7 +184,7 @@ const viewAllContact = asyncHandler(async (req, res, next) => {
                         }
                     },
                     {
-                        path: 'myProfile',
+                        path: 'userProfile',
                         populate: {
                             path: 'userSignup'
                         }
@@ -209,7 +209,9 @@ const viewAllContact = asyncHandler(async (req, res, next) => {
                         contactId: contact._id,
                         contact_phone: contact.contact_phone,
                         contact_name: contact.contact_name,
-                        contact_profileimg: contact.contactProfile.profile_img
+                        contact_profileimg: contact.contactProfile.profile_img,
+                        userProfile:contact.userProfile._id,
+                        contactProfile:contact.contactProfile._id
                     });
 
                 });
@@ -243,7 +245,7 @@ const searchContact = asyncHandler(async (req, res, next) => {
     }
 
     // declare payload data of params and body
-    let { myProfile } = req.params;
+    let { userProfile } = req.params;
     let { contact_phone, contact_name } = req.body;
 
     // check user can logged in
@@ -260,13 +262,13 @@ const searchContact = asyncHandler(async (req, res, next) => {
 
             // here are declare query for fetch the particular contact search data from database
             let userSearchContact = await contactModel.find({
-                myProfile,
+                userProfile,
                 $or: [
                     { contact_phone },
                     { contact_name }
                 ]
             }).populate([
-                { path: 'myProfile', populate: { path: 'userSignup' } },
+                { path: 'userProfile', populate: { path: 'userSignup' } },
                 { path: 'contactProfile', populate: { path: 'userSignup' } }
             ]).exec();
 
@@ -283,7 +285,9 @@ const searchContact = asyncHandler(async (req, res, next) => {
                 contactId: user._id,
                 profile_img: user.contactProfile.profile_img,
                 contact_phone: user.contact_phone,
-                contact_name: user.contact_name
+                contact_name: user.contact_name,
+                userProfile:user.userProfile._id,
+                contactProfile:user.contactProfile._id
             }))
 
             return res.status(200).json({ data });
@@ -334,12 +338,20 @@ const viewContactProfile = asyncHandler(async (req, res, next) => {
         else {
 
             // here are declare query for fetch the particular contact full details data from database
-            userContact = await contactModel.findById(contactId).populate({
-                path: 'contactProfile',
-                populate: {
-                    path: 'userSignup'
+            userContact = await contactModel.findById(contactId).populate([
+                {
+                    path: 'contactProfile',
+                    populate: {
+                        path: 'userSignup'
+                    }
+                },
+                {
+                    path: 'userProfile',
+                    populate: {
+                        path: 'userSignup'
+                    }
                 }
-            }).exec();
+            ]).exec();
 
             cache.set(`userContact:${contactId}`, JSON.stringify(userContact), 300);
 
@@ -362,7 +374,9 @@ const viewContactProfile = asyncHandler(async (req, res, next) => {
                     contact_gender: userContact.contactProfile.gender,
                     contact_dob: userContact.contactProfile.dob,
                     contact_abouts: userContact.contactProfile.abouts,
-                    phone: userContact.contactProfile.userSignup.phone
+                    phone: userContact.contactProfile.userSignup.phone,
+                    userProfile:userContact.userProfile._id,
+                    contactProfile:userContact.contactProfile._id,
                 }
             });
 

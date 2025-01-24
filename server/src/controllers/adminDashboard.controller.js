@@ -230,7 +230,7 @@ const userContactLists = asyncHandler(async (req, res, next) => {
         else {
             // here was retrive the all contacts data in contactModel where who was contact in another person from database
             contactList = await contactModel.find({}).populate([
-                { path: 'myProfile', populate: { path: 'userSignup' } },
+                { path: 'userProfile', populate: { path: 'userSignup' } },
                 { path: 'contactProfile', populate: { path: 'userSignup' } }
             ]).skip(skip).limit(limit).exec();
 
@@ -239,14 +239,16 @@ const userContactLists = asyncHandler(async (req, res, next) => {
             let result = await contactList.map((contact) => {
                 return ({
                     contactId: contact._id,
-                    userimg: contact.myProfile.profile_img,
-                    username: contact.myProfile.full_name,
-                    userphone: contact.myProfile.userSignup.phone,
+                    userimg: contact.userProfile.profile_img,
+                    username: contact.userProfile.full_name,
+                    userphone: contact.userProfile.userSignup.phone,
                     contactimg: contact.contactProfile.profile_img,
                     contactname: contact.contactProfile.full_name,
                     contactphone: contact.contactProfile.userSignup.phone,
                     savename: contact.contact_name,
-                    savephone: contact.contact_phone
+                    savephone: contact.contact_phone,
+                    userProfile:contact.userProfile._id,
+                    contactProfile:contact.contactProfile._id
                 });
             });
 
@@ -305,8 +307,8 @@ const particularContact = asyncHandler(async (req, res, next) => {
         }
         else {
             // here was declare how many contact are save in thos user in contacModel from database
-            userContact = await contactModel.find({ myProfile: userId }).populate([
-                { path: 'myProfile', populate: { path: 'userSignup' } },
+            userContact = await contactModel.find({ userProfile: userId }).populate([
+                { path: 'userProfile', populate: { path: 'userSignup' } },
                 { path: 'contactProfile', populate: { path: 'userSignup' } },
             ]).skip(skip).limit(limit);
 
@@ -317,7 +319,9 @@ const particularContact = asyncHandler(async (req, res, next) => {
                     contactId: contact._id,
                     contactimg: contact.contactProfile.profile_img,
                     contacphone: contact.contact_phone,
-                    contactname: contact.contact_name
+                    contactname: contact.contact_name,
+                    userProfile:contact.userProfile._id,
+                    contactProfile:contact.contactProfile._id
                 });
             });
 

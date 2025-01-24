@@ -1,5 +1,5 @@
 // here import all modules and libraies of packages
-import {express} from '../connections/socketconnection.js';
+import { express } from '../connections/socketconnection.js';
 
 import {
     addContact,
@@ -44,7 +44,7 @@ contactRouter.route('/view/all').get(
 
 
 // search contact router end-point with get
-contactRouter.route('/search/user/:myProfile').post(
+contactRouter.route('/search/user/:userProfile').post(
     userCheckAuth,
     searchContact
 );

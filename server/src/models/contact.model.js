@@ -1,5 +1,6 @@
 import { mongoose } from '../connections/socketconnection.js';
 
+
 // here are define contact model schema
 const contactSchema = new mongoose.Schema({
 
@@ -20,7 +21,7 @@ const contactSchema = new mongoose.Schema({
         required: true
     },
 
-    myProfile: {
+    userProfile: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'userprofiles',
         required: true
