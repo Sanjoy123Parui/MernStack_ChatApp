@@ -22,7 +22,7 @@ import {
     isDropdownProps,
     userNavListItem,
     themesListMode
-} from '../../models/userModel.ts';
+} from '../../models/userModel.tsx';
 
 
 

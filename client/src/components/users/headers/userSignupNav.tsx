@@ -5,7 +5,7 @@ import {
   isOpenheaderProps, 
   isDropdownProps,
   userSignupListItem 
-} from "../../models/userModel.ts";
+} from "../../models/userModel.tsx";
 
 // here define props functionality which pass in same functional component
 const Dropdown: React.FC<isDropdownProps> = ({ isDropdownOpen }) => {
