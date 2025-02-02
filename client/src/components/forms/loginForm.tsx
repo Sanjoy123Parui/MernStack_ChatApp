@@ -11,7 +11,7 @@ import {
 import { Label } from '../ui/label.tsx';
 import { Input } from '../ui/input.tsx';
 import { Button } from '../ui/button.tsx';
-import { loginFormProps } from '../models/signupModel.tsx';
+import { loginFormProps } from '../models/signupModel.ts';
 
 
 

@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import LoginForm from '../../forms/loginForm.tsx';
-import { loginFormdata } from '../../models/signupModel.tsx';
-import { loginValidatorSchema } from '../../validations/signupValidator.tsx';
+import { loginFormdata } from '../../models/signupModel.ts';
+import { loginValidatorSchema } from '../../validations/signupValidator.ts';
 
 
 // here are user login form functional component

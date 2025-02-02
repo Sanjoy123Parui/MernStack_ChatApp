@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PasswordChangeForm from '../../forms/passwordChangeForm.tsx';
-import { changePasswordFormdata } from '../../models/signupModel.tsx';
-import { passwordChangeValidatorSchema } from '../../validations/signupValidator.tsx';
+import { changePasswordFormdata } from '../../models/signupModel.ts';
+import { passwordChangeValidatorSchema } from '../../validations/signupValidator.ts';
 
 // here define use changepassword functional component
 const UserChangePassword: React.FC = () => {

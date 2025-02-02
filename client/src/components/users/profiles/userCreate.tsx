@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
 import ProfileCreateForm from '../../forms/profileCreateForm.tsx';
-import { profileFormdata } from '../../models/profileModel.tsx';
-import { createProfileValidatorSchema } from '../../validations/profileValidator.tsx';
+import { profileFormdata } from '../../models/profileModel.ts';
+import { createProfileValidatorSchema } from '../../validations/profileValidator.ts';
 
 // here define User profile functional component
 const UserCreate: React.FC = () => {
