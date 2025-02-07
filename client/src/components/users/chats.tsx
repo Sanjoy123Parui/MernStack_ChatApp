@@ -8,10 +8,10 @@ const Chats: React.FC = () => {
     }, []);
 
     return (
-        <>
+        <>  
             <h1>Chats</h1>
         </>
     );
 }
 // export Chats functional components
-export default Chats;
+export default Chats;   

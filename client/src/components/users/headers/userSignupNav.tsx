@@ -70,20 +70,20 @@ const UserSignupNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
   return (
     <>
       {/* start ul for nav link */}
-      <ul className={`md:flex ${isOpen ? "block" : "hidden"} absolute md:relative rounded-2xl shadow-lg md:shadow-none md:rounded-none  
-          h-48 bg-slate-100 md:bg-transparent w-48 md:w-auto md:h-auto right-0 top-full 
-          md:top-auto p-4 md:p-0 space-y-2 md:space-y-0 md:space-x-4`}>
+      <ul className={`lg:flex ${isOpen ? "block" : "hidden"} absolute lg:relative rounded-2xl shadow-lg lg:shadow-none lg:rounded-none  
+          h-48 bg-slate-100 lg:bg-transparent w-48 lg:w-auto lg:h-auto right-0 top-full 
+          lg:top-auto p-4 lg:p-0 space-y-2 lg:space-y-0 lg:space-x-4`}>
 
         {/* here declare navlink list item */}
         {signupList.map((items: any, i: any) => {
           return (
             <li
               key={i}
-              className=" mx-6 md:mx-auto p-[5px] md:p-0 md:text-right"
+              className=" mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right"
             >
               <NavLink
                 to={items.itemPath}
-                className="block text-gray-600 md:text-white md:text-base hover:text-black md:hover:text-gray-300 transition-colors"
+                className="block text-gray-600 lg:text-white lg:text-base hover:text-black lg:hover:text-gray-300 transition-colors"
               >
                 {items.listItem}
               </NavLink>
@@ -95,9 +95,9 @@ const UserSignupNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
         <li
           onMouseEnter={() => setIsDropdownOpen(true)}
           onMouseLeave={() => setIsDropdownOpen(false)}
-          className="relative group mx-6 md:mx-auto p-[5px] md:p-0 md:text-right">
+          className="relative group mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
           {/*  button of drop-down */}
-          <a className="flex items-center text-gray-600 md:text-white hover:text-black md:hover:text-gray-300 transition-colors">
+          <a className="flex items-center text-gray-600 lg:text-white hover:text-black lg:hover:text-gray-300 transition-colors">
             Account
             <RiArrowDropDownLine className="mr-2" />
           </a>
