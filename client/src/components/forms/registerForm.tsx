@@ -32,7 +32,7 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
             {/* start register form content */}
             <Form {...form}>
                 {/* start register form */}
-                <form onSubmit={onSubmit} className="space-y-8 bg-white shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4">
+                <form onSubmit={onSubmit} className="space-y-8 px-8 pt-6 pb-8 mb-4">
 
                     {/* register form phone input content */}
                     <div className="mb-4">
@@ -41,12 +41,17 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
                             name="phone"
                             render={({ field, fieldState }) => (
                                 <FormItem>
-                                    <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Phone</Label>
+                                    <Label className="block text-gray-700 sm:text-md md:text-base 
+                                    lg:text-lg font-bold mb-2">Phone</Label>
                                     <FormControl>
-                                        <Input type="number" {...field} className={`shadow ${fieldState.error ? "border-red-500" : "border-gray-300"} appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`} placeholder="Phone"/>
+                                        <Input type="number" {...field}
+                                            className={`shadow appearance-none border-[1px]
+                                            ${fieldState.error ? "border-red-500" : "border-gray-300"}  
+                                            rounded w-full py-2 px-3 text-gray-900 leading-tight 
+                                            focus:outline-none focus:ring focus:ring-gray-700`} placeholder="Phone" />
                                     </FormControl>
                                     {fieldState?.error && (
-                                        <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
+                                        <p className="text-red-500 text-sm lg:text-base">{fieldState?.error.message}</p>
                                     )}
                                 </FormItem>
                             )} />
@@ -59,13 +64,20 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
                             name="password"
                             render={({ field, fieldState }) => (
                                 <FormItem>
-                                    <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Password</Label>
+                                    <Label className="block text-gray-700 sm:text-md md:text-base 
+                                lg:text-lg font-bold mb-2">Password</Label>
                                     <FormControl>
-                                        <Input type={toggleRegisterPassword ? 'text' : 'password'} {...field} className={`shadow ${fieldState.error ? "border-red-500" : "border-gray-300"} appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`} placeholder="Password"/>
+                                        <Input type={toggleRegisterPassword ? 'text' : 'password'} {...field}
+                                            className={`shadow appearance-none border-[1px]
+                                        ${fieldState.error ? "border-red-500" : "border-gray-300"}
+                                        rounded w-full py-2 px-3 text-gray-900 leading-tight
+                                        focus:outline-none focus:ring focus:ring-gray-700`} placeholder="Password" />
                                     </FormControl>
-                                    <button type="button" onClick={visibilityRegister} className="absolute top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500">{toggleRegisterPassword ? <FaEye /> : <FaEyeSlash />}</button>
+                                    <button type="button" onClick={visibilityRegister} className="absolute top-8 md:top-11 lg:top-12 right-3 mt-4 transform -translate-y-1/2 text-gray-500">
+                                        {toggleRegisterPassword ? <FaEye /> : <FaEyeSlash />}
+                                    </button>
                                     {fieldState?.error && (
-                                        <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
+                                        <p className="text-red-500 text-sm lg:text-base">{fieldState?.error.message}</p>
                                     )}
                                 </FormItem>
                             )} />
@@ -79,13 +91,21 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
                             name="confirmPassword"
                             render={({ field, fieldState }) => (
                                 <FormItem>
-                                    <Label className="block text-gray-700 text-sm md:text-base font-bold mb-2">Confirm Password</Label>
+                                    <Label className="block text-gray-700 sm:text-md md:text-base 
+                                lg:text-lg font-bold mb-2">Confirm Password</Label>
                                     <FormControl>
-                                        <Input type={toggleRegisterPassword ? 'text' : 'password'}  {...field} className={`shadow ${fieldState.error ? "border-red-500" : "border-gray-300"} appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`} placeholder="Confirm Password"/>
+                                        <Input type={toggleRegisterPassword ? 'text' : 'password'}  {...field}
+                                            className={`shadow appearance-none border-[1px]
+                                                ${fieldState.error ? "border-red-500" : "border-gray-300"}
+                                                rounded w-full py-2 px-3 text-gray-900 leading-tight
+                                                focus:outline-none focus:ring focus:ring-gray-700`}
+                                            placeholder="Confirm Password" />
                                     </FormControl>
-                                    <button type="button" onClick={visibilityRegister} className="absolute top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500">{toggleRegisterPassword ? <FaEye /> : <FaEyeSlash />}</button>
+                                    <button type="button" onClick={visibilityRegister} className="absolute top-8 md:top-11 lg:top-12 right-3 mt-4 transform -translate-y-1/2 text-gray-500">
+                                        {toggleRegisterPassword ? <FaEye /> : <FaEyeSlash />}
+                                    </button>
                                     {fieldState?.error && (
-                                        <p className="text-red-500 text-sm">{fieldState?.error.message}</p>
+                                        <p className="text-red-500 text-sm lg:text-base">{fieldState?.error.message}</p>
                                     )}
                                 </FormItem>
                             )} />
@@ -93,7 +113,8 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
 
                     {/* register form register button content */}
                     <div className="flex items-center justify-between">
-                        <Button className="w-full bg-blue-700 hover:bg-blue-950 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Register</Button>
+                        <Button type="submit" className="w-full bg-blue-700 hover:bg-blue-950 
+                        text-white font-bold py-2 px-4 rounded-3xl focus:outline-none focus:shadow-outline">Register</Button>
                     </div>
 
                 </form>

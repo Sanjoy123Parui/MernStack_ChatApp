@@ -9,7 +9,7 @@ import Userlayout from './userlayout.tsx';
 const UserLogin: any = lazy(() => import('../users/signup/userLogin.tsx'));
 const UserRegister: any = lazy(() => import('../users/signup/userRegister.tsx'));
 const UserChangePassword: any = lazy(() => import('../users/signup/userChangePassword.tsx'));
-const UserCreate: any = lazy(() => import('../users/profiles/userCreate.tsx'));
+const UserCreateProfile: any = lazy(() => import('../users/profiles/userCreateProfile.tsx'));
 const UserViewProfile: any = lazy(() => import('../users/profiles/userViewProfile.tsx'));
 const Chat:any = lazy(()=>import('../users/chats.tsx'));
 const Stories:any = lazy(()=>import('../users/stories.tsx'));
@@ -42,7 +42,7 @@ const Routerlayout: React.FC = () => {
 
                 {
                     path: '/user/create-profile',
-                    element: <UserCreate />
+                    element: <UserCreateProfile />
                 },
 
                 {
