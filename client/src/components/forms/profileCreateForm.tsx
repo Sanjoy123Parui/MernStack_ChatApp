@@ -8,7 +8,7 @@ import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Textarea } from "../ui/textarea.tsx";
 import { Button } from "../ui/button.tsx";
-import { profileFormProps } from "../models/profileModel.ts";
+import { profileFormProps } from "../models/profileModel.tsx";
 import ImageCrop from "./imageCrop.tsx";
 
 // here define ProfileCreateForm functional component

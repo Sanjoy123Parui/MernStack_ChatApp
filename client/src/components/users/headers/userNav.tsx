@@ -74,11 +74,6 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
       listItem: "Groups",
       itemPath: "/user/content/groups",
     },
-    {
-      listIcon: <CgProfile />,
-      listItem: "MyProfile",
-      itemPath: "/user/content/profile",
-    },
   ];
 
   return (
@@ -112,7 +107,7 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
 
         {/* here decalare chat navlink list items */}
         {chatNavItem.map((items: any, i: any) => (
-          <li key={i} className="mx-6 lg:mx-auto p-[5px] lg:p-0 md:text-right">
+          <li key={i} className="mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
             <NavLink
               to={items.itemPath}
               className="flex text-gray-600 lg:text-white 
@@ -124,7 +119,18 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
           </li>
         ))}
 
-        {/* here can declare logout option */}
+        {/* here can declare myProfile button */}
+        <li className="mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
+          <a
+            className="flex items-center text-gray-600 lg:text-white 
+                    hover:text-black lg:hover:text-gray-300 transition-colors"
+          >
+            MyProfile
+            <CgProfile className="mx-1" />
+          </a>
+        </li>
+
+        {/* here can declare logout button */}
         <li className="mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
           <a
             className="flex items-center text-gray-600 lg:text-white 
