@@ -1,5 +1,3 @@
-
-
 // here define Search content functional component
 const SearchContent: React.FC = () => {
     return (
