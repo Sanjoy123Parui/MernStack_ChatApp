@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import HeadingContent from "./contents/headingContent.tsx";
+import ChatList from "./contents/chatList.tsx";
 
 // here define Chats functional components
 const Chats: React.FC = () => {
@@ -11,10 +11,10 @@ const Chats: React.FC = () => {
   return (
     <>
       {/* start div grid-layout */}
-      <div className="grid gap-0 grid-cols-1 lg:grid-cols-8">
+      <div className="grid gap-0 grid-cols-1 bg-gray-50 lg:grid-cols-8">
         {/* start first section of chatList content */}
         <section className="col-auto w-full h-full border lg:col-span-3">
-          <HeadingContent />
+          <ChatList />
         </section>
         {/* end first section */}
         {/* start second section of messages content */}
