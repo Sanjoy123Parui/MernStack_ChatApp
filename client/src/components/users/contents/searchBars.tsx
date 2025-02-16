@@ -1,7 +1,7 @@
 import { IoSearch } from "react-icons/io5";
 
-// here define Searchbar component
-const SearchBar: React.FC = () => {
+// here was SearchBars component
+const SearchBars: React.FC = () => {
   return (
     <>
       {/* start searchbar content */}
@@ -29,26 +29,5 @@ const SearchBar: React.FC = () => {
     </>
   );
 };
-
-// define ListHeading functional component
-const ListHeading: React.FC = () => {
-  return (
-    <>
-      {/* start div for chatList heading */}
-      <div className="bg-purple-600 py-3 lg:py-4">
-        <div className="mb-0 px-8">
-          <h1 className="text-white text-lg lg:text-2xl font-bold">Chats</h1>
-        </div>
-      </div>
-      {/* end div */}
-
-      {/* start div for loading searchBar component */}
-      <div className="p-4">
-        <SearchBar />
-      </div>
-      {/* end div */}
-    </>
-  );
-};
-// export list heading functional component
-export default ListHeading;
+// export Searchbars component
+export default SearchBars;
