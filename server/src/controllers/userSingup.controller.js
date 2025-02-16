@@ -32,9 +32,7 @@ const userRegister = asyncHandler(async (req, res, next) => {
 
     // check the condition user can be found or not
     if (existUser) {
-      return res
-        .status(200)
-        .json({ msg: "This Account has been already exist" });
+      return next(errorHandler("This Account has been already exist", 400));
     } else {
       // there are data save into the database
 

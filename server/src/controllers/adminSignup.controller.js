@@ -30,9 +30,7 @@ const adminRegister = asyncHandler(async (req, res, next) => {
     let hashPassword = bcryptjs.hashSync(password, salt);
 
     if (existPhone) {
-      return res
-        .status(200)
-        .json({ msg: "This phone number is already exist" });
+      return next(errorHandler("This phone number is already exist", 400));
     } else {
       // there are insert the data and save
 
