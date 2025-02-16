@@ -12,14 +12,14 @@
 //     //     api_secret: process.env.CLOUDINARY_API_SECRET
 //     // });
 
-//     
+//
 
 //     // normal use try-catch
 //     try {
 
 //         // declare filepath
 //         let result = await cloudinary.uploader.upload(filePath);
-//   
+//
 //         fs.unlinkSync(filePath);
 //         return result;
 //     }
@@ -30,23 +30,18 @@
 
 // }
 
-
 // localserver filepath upload functionality
-const uploadFiles = async ()=>{
+const uploadFiles = async () => {
+  // there was declare file path
+  let filePath = `http://localhost:${process.env.PORT}/`;
 
-    // there was declare file path
-    let filePath = `http://localhost:${process.env.PORT}/`;
-
-    try {
-
-        let result = await filePath;
-        return result;
-        
-    } 
-    catch (error) {
-        return null;
-    }
-}
+  try {
+    let result = await filePath;
+    return result;
+  } catch (error) {
+    return null;
+  }
+};
 
 // export file uploads helper
 export { uploadFiles };

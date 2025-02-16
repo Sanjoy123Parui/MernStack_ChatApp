@@ -1,30 +1,30 @@
-import { mongoose } from '../connections/socketconnection.js';
+import { mongoose } from "../connections/socketconnection.js";
 
 // create user model schema
-const userSignupSchema = new mongoose.Schema({
-
+const userSignupSchema = new mongoose.Schema(
+  {
     phone: {
-        type: String,
-        unique: true,
-        required: true
+      type: String,
+      unique: true,
+      required: true,
     },
 
     password: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
 
     refresh_userToken: {
-        type: String
-    }
-
-
-}, {
+      type: String,
+    },
+  },
+  {
     timestamps: true,
-    versionKey: false
-});
+    versionKey: false,
+  }
+);
 
-const userSignupModel = mongoose.model('usersignups', userSignupSchema);
+const userSignupModel = mongoose.model("usersignups", userSignupSchema);
 
 // export user signup Model schema
 export { userSignupModel };

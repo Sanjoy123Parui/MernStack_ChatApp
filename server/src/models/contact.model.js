@@ -1,41 +1,38 @@
-import { mongoose } from '../connections/socketconnection.js';
-
+import { mongoose } from "../connections/socketconnection.js";
 
 // here are define contact model schema
-const contactSchema = new mongoose.Schema({
-
+const contactSchema = new mongoose.Schema(
+  {
     contact_phone: {
-        type: String,
-        unique: true,
-        required: true
+      type: String,
+      unique: true,
+      required: true,
     },
 
     contact_name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
 
     contactProfile: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'userprofiles',
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "userprofiles",
+      required: true,
     },
 
     userProfile: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'userprofiles',
-        required: true
-    }
-
-}, {
-
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "userprofiles",
+      required: true,
+    },
+  },
+  {
     timestamps: true,
-    versionKey: false
+    versionKey: false,
+  }
+);
 
-});
-
-
-const contactModel = mongoose.model('contacts', contactSchema);
+const contactModel = mongoose.model("contacts", contactSchema);
 
 // export contact model schema
 export { contactModel };
