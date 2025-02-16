@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Headings from "./contents/headings.tsx";
+import SearchBars from "./contents/searchBars.tsx";
 import ContentLists from "./contents/contentLists.tsx";
 import MessageHeading from "./contents/messgaeHeading.tsx";
 
@@ -19,8 +20,15 @@ const Chats: React.FC = () => {
       <div className="grid gap-0 grid-cols-1 bg-gray-50 lg:grid-cols-8">
         {/* start first section of chatList content */}
         <section className="col-auto w-full h-full border lg:col-span-3">
-          {/* loaded contentHeading component */}
-          <Headings headingTitle={headingTitle} />
+          {/* start div */}
+          <div>
+            <Headings headingTitle={headingTitle} />
+            <div className="p-4">
+              <SearchBars />
+            </div>
+          </div>
+          {/* end div */}
+
           {/* start div for loading contentLists  */}
           <div>
             <ContentLists />

@@ -5,7 +5,7 @@ const ContentLists: React.FC = () => {
   return (
     <>
       {/* start div for chat list content */}
-      <div className="border-t px-2">
+      <div className="border-t px-4">
         {/* start ul of user list */}
         <ul className="max-w-lg divide-y divide-gray-200 dark:divide-gray-700">
           <li className="py-4 lg:py-3">

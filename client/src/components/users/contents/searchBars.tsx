@@ -6,10 +6,10 @@ const SearchBars: React.FC = () => {
     <>
       {/* start searchbar content */}
       <form className="flex items-center max-w-lg mx-auto">
-        <div className="relative w-full">
+        <div className="w-full">
           <input
             type="text"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm md:text-base rounded-lg 
+            className="bg-gray-50 border  border-gray-300 text-gray-900 text-sm md:text-base rounded-lg 
             focus:ring-gray-500 focus:border-gray-500 block w-full ps-10 p-2.5  
             dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
             dark:focus:ring-gray-500 dark:focus:border-gray-500"
