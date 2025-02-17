@@ -14,13 +14,13 @@ const ContentLists: React.FC = () => {
                 <Avatar>
                   <AvatarImage
                     src=""
-                    className="w-full h-full rounded-full"
+                    className="w-full h-fit rounded-full"
                     alt="avatar image"
                   />
                 </Avatar>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm md:text-base font-medium truncate dark:text-white">
+                <p className="text-sm md:text-base font-medium truncate dark:text-black">
                   Neil sims
                 </p>
                 <p className="text-sm text-gray-500 truncate dark:text-gray-400">
