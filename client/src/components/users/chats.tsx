@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Headings from "./contents/headings.tsx";
-import SearchBars from "./contents/searchBars.tsx";
 import ContentLists from "./contents/contentLists.tsx";
 import MessageHeading from "./contents/messgaeHeading.tsx";
+import Conversations from "./contents/conversations.tsx";
 
 // here define Chats functional components
 const Chats: React.FC = () => {
@@ -17,28 +17,25 @@ const Chats: React.FC = () => {
   return (
     <>
       {/* start div grid-layout */}
-      <div className="grid gap-0 grid-cols-1 bg-gray-50 lg:grid-cols-8">
+      <div className="grid gap-0 grid-cols-1 lg:grid-cols-8">
         {/* start first section of chatList content */}
-        <section className="col-auto w-full h-full border lg:col-span-3">
-          {/* start div */}
+        <section className="col-auto w-full bg-slate-50 h-[664px] border lg:col-span-3">
           <div>
             <Headings headingTitle={headingTitle} />
-            <div className="p-4">
-              <SearchBars />
-            </div>
           </div>
-          {/* end div */}
-
-          {/* start div for loading contentLists  */}
           <div>
             <ContentLists />
           </div>
-          {/* end div */}
         </section>
         {/* end first section */}
         {/* start second section of messages content */}
-        <section className="col-auto border w-full h-full lg:col-span-5">
-          <MessageHeading />
+        <section className="col-auto border w-full bg-slate-50 h-[664px] lg:col-span-5">
+          <div>
+            <MessageHeading />
+          </div>
+          <div className="mt-[33rem]">
+            <Conversations />
+          </div>
         </section>
         {/* end second section */}
       </div>

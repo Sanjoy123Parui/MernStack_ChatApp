@@ -27,9 +27,9 @@ const ContentLists: React.FC = () => {
                   Hii
                 </p>
               </div>
-              <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white px-2">
+              {/* <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white px-2">
                 1
-              </div>
+              </div> */}
             </div>
           </li>
         </ul>
