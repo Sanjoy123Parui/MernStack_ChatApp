@@ -12,12 +12,14 @@ import NodeCache from "node-cache";
 import { Server } from "socket.io";
 import { corsOption } from "../lib/optionconfig.js";
 
-// here define object of restapi and websocket api
+// here was declare object of middleware in express server
 const app = express();
+// here create object of cache
 const cache = new NodeCache({
   stdTTL: 300,
   checkperiod: 60,
 });
+// here create server
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: corsOption,

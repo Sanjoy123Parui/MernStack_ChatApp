@@ -132,6 +132,7 @@ const userProfileview = asyncHandler(async (req, res, next) => {
           gender: userProfiledata.gender,
           dob: userProfiledata.dob,
           abouts: userProfiledata.abouts,
+          userSignupId: userProfiledata.userSignup._id,
           phone: userProfiledata.userSignup.phone,
         },
       });
