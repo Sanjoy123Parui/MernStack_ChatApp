@@ -1,3 +1,4 @@
+import { MdOutlineEmojiEmotions } from "react-icons/md";
 import { MdAttachFile } from "react-icons/md";
 import { IoSendSharp } from "react-icons/io5";
 import { Input } from "../../ui/input.tsx";
@@ -10,7 +11,7 @@ const Conversations: React.FC = () => {
       <div className="flex p-4 items-center bg-slate-200">
         <div className="mr-2 flex">
           <a className="text-[21px] md:text-[25px] text-gray-500 font-medium truncate">
-            <MdAttachFile />
+            <MdOutlineEmojiEmotions />
           </a>
           <a className="text-[21px] md:text-[25px] text-gray-500 font-medium truncate">
             <MdAttachFile />

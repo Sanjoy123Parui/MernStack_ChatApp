@@ -8,7 +8,7 @@ import { Form, FormField, FormItem, FormControl } from "../ui/form.tsx";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
-import { changePasswordFormProps } from "../models/signupModel.tsx";
+import { changePasswordFormProps } from "../models/signupModel.ts";
 
 // here define change paasrd form functional component
 const PasswordChangeForm: React.FC<changePasswordFormProps> = ({

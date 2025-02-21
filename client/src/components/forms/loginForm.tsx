@@ -7,7 +7,7 @@ import { Form, FormField, FormItem, FormControl } from "../ui/form.tsx";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
-import { loginFormProps } from "../models/signupModel.tsx";
+import { loginFormProps } from "../models/signupModel.ts";
 
 // here define LoginForm functional component
 const LoginForm: React.FC<loginFormProps> = ({ form, onSubmit }) => {

@@ -1,4 +1,4 @@
-import { contentHeading } from "../../models/contentModel.tsx";
+import { contentHeading } from "../../models/contentModel.ts";
 import SearchBars from "./searchBars.tsx";
 
 // here define heading functional component

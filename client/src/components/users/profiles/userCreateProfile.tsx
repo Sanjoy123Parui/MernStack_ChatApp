@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 // here import components
 import ProfileCreateForm from "../../forms/profileCreateForm.tsx";
-import { profileFormdata } from "../../models/profileModel.tsx";
-import { createProfileValidatorSchema } from "../../validations/profileValidator.tsx";
+import { profileFormdata } from "../../models/profileModel.ts";
+import { createProfileValidatorSchema } from "../../validations/profileValidator.ts";
 
 // define userCreate functional component
 const UserCreateProfile: React.FC = () => {

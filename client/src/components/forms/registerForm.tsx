@@ -7,7 +7,7 @@ import { Form, FormField, FormItem, FormControl } from "../ui/form.tsx";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
-import { registerFormProps } from "../models/signupModel.tsx";
+import { registerFormProps } from "../models/signupModel.ts";
 
 // here was define register form functional component
 const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {

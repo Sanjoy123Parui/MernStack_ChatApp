@@ -19,7 +19,7 @@ const Chats: React.FC = () => {
       {/* start div grid-layout */}
       <div className="grid gap-0 grid-cols-1 lg:grid-cols-8">
         {/* start first section of chatList content */}
-        <section className="col-auto w-full bg-slate-50 h-[664px] border lg:col-span-3">
+        <section className="col-auto w-full bg-slate-50 h-[668px] border lg:col-span-3">
           <div>
             <Headings headingTitle={headingTitle} />
           </div>
@@ -29,7 +29,7 @@ const Chats: React.FC = () => {
         </section>
         {/* end first section */}
         {/* start second section of messages content */}
-        <section className="col-auto border w-full bg-slate-50 h-[664px] lg:col-span-5">
+        <section className="col-auto border w-full bg-slate-50 h-[668px] lg:col-span-5">
           <div>
             <MessageHeading />
           </div>

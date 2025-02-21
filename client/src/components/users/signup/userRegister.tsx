@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import RegisterForm from "../../forms/registerForm.tsx";
-import { registerFormdata } from "../../models/signupModel.tsx";
-import { registerValidatorSchema } from "../../validations/signupValidator.tsx";
+import { registerFormdata } from "../../models/signupModel.ts";
+import { registerValidatorSchema } from "../../validations/signupValidator.ts";
 
 const UserRegister: React.FC = () => {
   // here declare useEffect hook
