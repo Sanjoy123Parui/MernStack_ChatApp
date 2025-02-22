@@ -1,5 +1,5 @@
 // there are define asynHandler of trycatch wrapper helper function
-const asyncHandler = (paramsData) => async (req, res, next) => {
+export const asyncHandler = (paramsData) => async (req, res, next) => {
   // use try-catch
   try {
     await paramsData(req, res, next);
@@ -7,6 +7,3 @@ const asyncHandler = (paramsData) => async (req, res, next) => {
     next(error);
   }
 };
-
-// export trycatch helper
-export { asyncHandler };

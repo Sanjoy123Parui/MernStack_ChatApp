@@ -4,7 +4,7 @@ import { asyncHandler } from "../helpers/try-catch.helper.js";
 import { errorHandler } from "../utils/utility.js";
 
 // there are define user authentication
-const userCheckAuth = asyncHandler(async (req, res, next) => {
+export const userCheckAuth = asyncHandler(async (req, res, next) => {
   // declare user access token are store cookie or headers
   let userToken =
     req.cookies?.access_userToken ||
@@ -22,7 +22,7 @@ const userCheckAuth = asyncHandler(async (req, res, next) => {
 });
 
 // there are define admin authentication
-const adminCheckAuth = asyncHandler(async (req, res, next) => {
+export const adminCheckAuth = asyncHandler(async (req, res, next) => {
   // declare admin access token and refresh token are store cookie or headers
   let adminToken =
     req.cookies?.access_adminToken ||
@@ -38,6 +38,3 @@ const adminCheckAuth = asyncHandler(async (req, res, next) => {
     next();
   }
 });
-
-// export auth middleware
-export { userCheckAuth, adminCheckAuth };

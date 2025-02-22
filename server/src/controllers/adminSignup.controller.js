@@ -10,7 +10,7 @@ import { sendAdminToken, cookieOptions } from "../utils/features.js";
 // there create all admin signup controllers
 
 // admin register controller
-const adminRegister = asyncHandler(async (req, res, next) => {
+export const adminRegister = asyncHandler(async (req, res, next) => {
   // there are declare payload of body
   let { phone, password, confirmPassword } = req.body;
 
@@ -64,7 +64,7 @@ const adminRegister = asyncHandler(async (req, res, next) => {
 });
 
 // admin login controller
-const adminLogin = asyncHandler(async (req, res, next) => {
+export const adminLogin = asyncHandler(async (req, res, next) => {
   // there are declare payload of body
   let { phone, password } = req.body;
 
@@ -104,7 +104,7 @@ const adminLogin = asyncHandler(async (req, res, next) => {
 });
 
 // user accout delete controller
-const adminAccountdelete = asyncHandler(async (req, res, next) => {
+export const adminAccountdelete = asyncHandler(async (req, res, next) => {
   // declare payload
   let { admin_Id } = req.params;
 
@@ -135,7 +135,7 @@ const adminAccountdelete = asyncHandler(async (req, res, next) => {
 });
 
 // admin refresh token to access token recover
-const adminRecover = asyncHandler(async (req, res, next) => {
+export const adminRecover = asyncHandler(async (req, res, next) => {
   // there generate admin refresh token from cookie and another
   let adminRefresh =
     req.cookies.refresh_adminToken || req.body.refresh_adminToken;
@@ -184,7 +184,7 @@ const adminRecover = asyncHandler(async (req, res, next) => {
 });
 
 // admin logout controller
-const adminLogout = asyncHandler(async (req, res, next) => {
+export const adminLogout = asyncHandler(async (req, res, next) => {
   // here declare admin_id
   let adminSignup = req.admin;
 
@@ -226,7 +226,7 @@ const adminLogout = asyncHandler(async (req, res, next) => {
 });
 
 // admin change password controller function
-const adminChangePassword = asyncHandler(async (req, res, next) => {
+export const adminChangePassword = asyncHandler(async (req, res, next) => {
   // check codition for request method
   if (req.method === "PUT" || req.method === "PATCH") {
     // declare payload
@@ -287,13 +287,3 @@ const adminChangePassword = asyncHandler(async (req, res, next) => {
     return next(errorHandler("Request are not found", 400));
   }
 });
-
-// export there adminSignup controller
-export {
-  adminRegister,
-  adminLogin,
-  adminRecover,
-  adminLogout,
-  adminAccountdelete,
-  adminChangePassword,
-};

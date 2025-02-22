@@ -8,7 +8,7 @@ import { cache } from "../connections/socketconnection.js";
 // define functionality of all contact controller operations perform
 
 // add contact controller
-const addContact = asyncHandler(async (req, res, next) => {
+export const addContact = asyncHandler(async (req, res, next) => {
   // declare userSignupId variables
   let userSignup;
 
@@ -108,7 +108,7 @@ const addContact = asyncHandler(async (req, res, next) => {
 });
 
 // view all contact controller
-const viewAllContact = asyncHandler(async (req, res, next) => {
+export const viewAllContact = asyncHandler(async (req, res, next) => {
   // declare userSignupId variables
   let userSignup;
 
@@ -197,7 +197,7 @@ const viewAllContact = asyncHandler(async (req, res, next) => {
 });
 
 // serach user contact controller
-const searchContact = asyncHandler(async (req, res, next) => {
+export const searchContact = asyncHandler(async (req, res, next) => {
   // declare userSignupId variables
   let userSignup;
 
@@ -263,7 +263,7 @@ const searchContact = asyncHandler(async (req, res, next) => {
 });
 
 // view contact profile controller
-const viewContactProfile = asyncHandler(async (req, res, next) => {
+export const viewContactProfile = asyncHandler(async (req, res, next) => {
   // there declare userSignupId variables
   let userSignup;
 
@@ -333,7 +333,7 @@ const viewContactProfile = asyncHandler(async (req, res, next) => {
 });
 
 // update contact controller
-const editContact = asyncHandler(async (req, res, next) => {
+export const editContact = asyncHandler(async (req, res, next) => {
   // there declare userSignupId variables
   let userSignup;
 
@@ -384,7 +384,7 @@ const editContact = asyncHandler(async (req, res, next) => {
 });
 
 // delete contact controller
-const removeContact = asyncHandler(async (req, res, next) => {
+export const removeContact = asyncHandler(async (req, res, next) => {
   // there declare userSignupId variables
   let userSignup;
 
@@ -424,13 +424,3 @@ const removeContact = asyncHandler(async (req, res, next) => {
     }
   }
 });
-
-// export here all contact controllers
-export {
-  addContact,
-  viewAllContact,
-  searchContact,
-  viewContactProfile,
-  editContact,
-  removeContact,
-};

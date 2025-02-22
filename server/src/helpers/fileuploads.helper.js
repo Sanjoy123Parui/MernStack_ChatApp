@@ -3,7 +3,7 @@
 // import fs from "fs";
 
 // define filepath of cloudinary and uploads the path functionality
-// const uploadFiles = async (filePath) => {
+// export const uploadFiles = async (filePath) => {
 
 //     // configuration of cloudinary
 //     // cloudinary.config({
@@ -31,7 +31,7 @@
 // }
 
 // localserver filepath upload functionality
-const uploadFiles = async () => {
+export const uploadFiles = async () => {
   // there was declare file path
   let filePath = `http://localhost:${process.env.PORT}/`;
 
@@ -42,6 +42,3 @@ const uploadFiles = async () => {
     return null;
   }
 };
-
-// export file uploads helper
-export { uploadFiles };

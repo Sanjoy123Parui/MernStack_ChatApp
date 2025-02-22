@@ -13,20 +13,28 @@ import {
   app,
   cookieParser,
   server,
+  io,
 } from "./src/connections/socketconnection.js";
 
 import { corsOption } from "./src/lib/optionconfig.js";
 import { checkError } from "./src/middlewares/errors.middleware.js";
+// here import all routes
 import { userSignupRouter } from "./src/routes/userSignup.route.js";
 import { userprofileRouter } from "./src/routes/userProfile.route.js";
 import { contactRouter } from "./src/routes/contact.route.js";
 import { adminSignupRouter } from "./src/routes/adminSignup.route.js";
 import { adminProfileRouter } from "./src/routes/adminProfile.route.js";
 import { adminDashboardRouter } from "./src/routes/adminDashboard.route.js";
+// import all namespace of events
+import { chatNamespace } from "./src/seeders/chats.js";
+// import database path
 import { databaseConnection } from "./src/config/conncectdb.js";
 
 // here can check totalCPUs in os of load balancing with node cluster
 const totalCPUs = os.cpus().length;
+
+// there are declare port, server running for developement or production
+const port = process.env.PORT || 5000;
 
 // here check condition cluster primary
 if (cluster.isPrimary) {
@@ -36,9 +44,6 @@ if (cluster.isPrimary) {
 } else {
   // here are connect database
   databaseConnection(process.env.MONGODB_URI);
-
-  // there are declare port, server running for developement or production
-  const port = process.env.PORT || 5000;
 
   //  use middlewares
   app.use(cors(corsOption));
@@ -61,6 +66,9 @@ if (cluster.isPrimary) {
   app.use("/admin/api", adminSignupRouter);
   app.use("/admin/api", adminProfileRouter);
   app.use("/admin/dashboard/api", adminDashboardRouter);
+
+  // here can use socket.io middleware
+  io.use(chatNamespace);
 
   // use error middlewares
   app.use(checkError);

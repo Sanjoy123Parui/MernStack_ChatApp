@@ -10,7 +10,7 @@ import { contactModel } from "../models/contact.model.js";
 // userProfile data
 
 // here was retrieve all the profile data controller functionality
-const userAllProfile = asyncHandler(async (req, res, next) => {
+export const userAllProfile = asyncHandler(async (req, res, next) => {
   // here declare variables
   let adminSignup, profileData, data;
 
@@ -74,7 +74,7 @@ const userAllProfile = asyncHandler(async (req, res, next) => {
 });
 
 // here was retrieve the profile details controller functionality
-const userProfiledetails = asyncHandler(async (req, res, next) => {
+export const userProfiledetails = asyncHandler(async (req, res, next) => {
   // here was declare adminSignup and userProfile full details variables
   let adminSignup, userProfiledetails;
 
@@ -129,7 +129,7 @@ const userProfiledetails = asyncHandler(async (req, res, next) => {
 });
 
 // here was fetch of search profile data from users controller functionality
-const userProfileSearch = asyncHandler(async (req, res, next) => {
+export const userProfileSearch = asyncHandler(async (req, res, next) => {
   // declare variables
   let adminSignup;
 
@@ -189,7 +189,7 @@ const userProfileSearch = asyncHandler(async (req, res, next) => {
 // contact data
 
 // here was define to fetch all contacts controller functionality
-const userContactLists = asyncHandler(async (req, res, next) => {
+export const userContactLists = asyncHandler(async (req, res, next) => {
   // here was declare variables
   let adminSignup, contactList, data;
 
@@ -264,7 +264,7 @@ const userContactLists = asyncHandler(async (req, res, next) => {
 });
 
 // here was define to fetch particular user contacts controller functionality
-const particularContact = asyncHandler(async (req, res, next) => {
+export const particularContact = asyncHandler(async (req, res, next) => {
   // here declare variables
   let adminSignup, userContact, data;
 
@@ -335,12 +335,3 @@ const particularContact = asyncHandler(async (req, res, next) => {
     });
   }
 });
-
-// here was export all dashboard data controller funtions
-export {
-  userAllProfile,
-  userProfiledetails,
-  userProfileSearch,
-  userContactLists,
-  particularContact,
-};

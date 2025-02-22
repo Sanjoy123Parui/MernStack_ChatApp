@@ -2,7 +2,7 @@
 import { mongoose } from "../connections/socketconnection.js";
 
 // create a database connection
-const databaseConnection = async (uri) => {
+export const databaseConnection = async (uri) => {
   // declare database connection path
   let conn = await mongoose.connect(uri, { dbName: "chatDB" });
 
@@ -17,6 +17,3 @@ const databaseConnection = async (uri) => {
     console.log(`While error are not connect to the database :${error}`);
   }
 };
-
-// export database connection module
-export { databaseConnection };

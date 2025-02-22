@@ -7,7 +7,7 @@ import { uploadFiles } from "../helpers/fileuploads.helper.js";
 // there are define all admin profile controllers here
 
 // admin profile create controller
-const adminNewprofile = asyncHandler(async (req, res, next) => {
+export const adminNewprofile = asyncHandler(async (req, res, next) => {
   // there are declare adminSignup variables
   let adminSignup;
 
@@ -84,7 +84,7 @@ const adminNewprofile = asyncHandler(async (req, res, next) => {
 });
 
 // there admin own profile read
-const adminViewprofile = asyncHandler(async (req, res, next) => {
+export const adminViewprofile = asyncHandler(async (req, res, next) => {
   // there are declare adminSignup variables
   let adminSignup;
 
@@ -138,7 +138,7 @@ const adminViewprofile = asyncHandler(async (req, res, next) => {
 });
 
 // admin profile image data update controller
-const adminProfileImageupdate = asyncHandler(async (req, res, next) => {
+export const adminProfileImageupdate = asyncHandler(async (req, res, next) => {
   // declare adminSignup variables
   let adminSignup;
 
@@ -214,7 +214,7 @@ const adminProfileImageupdate = asyncHandler(async (req, res, next) => {
 });
 
 // admin profile delete controller
-const adminProfiledelete = asyncHandler(async (req, res, next) => {
+export const adminProfiledelete = asyncHandler(async (req, res, next) => {
   // here declare adminSignup variables
   let adminSignup;
 
@@ -254,7 +254,7 @@ const adminProfiledelete = asyncHandler(async (req, res, next) => {
 });
 
 // admin profile update cotroller
-const adminProfileupdate = asyncHandler(async (req, res, next) => {
+export const adminProfileupdate = asyncHandler(async (req, res, next) => {
   // check condition for request
   if (req.method === "PUT" || req.method === "PATCH") {
     // declare adminSignup varibles
@@ -322,12 +322,3 @@ const adminProfileupdate = asyncHandler(async (req, res, next) => {
     return next(errorHandler("Wrong Cridential", 400));
   }
 });
-
-// export there admin profile all controllers operation
-export {
-  adminNewprofile,
-  adminViewprofile,
-  adminProfileImageupdate,
-  adminProfiledelete,
-  adminProfileupdate,
-};

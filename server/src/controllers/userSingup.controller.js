@@ -11,7 +11,7 @@ import { sendUserToken, cookieOptions } from "../utils/features.js";
 // there are define user signup controllers
 
 // userRegister controller
-const userRegister = asyncHandler(async (req, res, next) => {
+export const userRegister = asyncHandler(async (req, res, next) => {
   // there are declare payload
   let { phone, password, confirmPassword } = req.body;
 
@@ -68,7 +68,7 @@ const userRegister = asyncHandler(async (req, res, next) => {
 });
 
 // user login controller
-const userLogin = asyncHandler(async (req, res, next) => {
+export const userLogin = asyncHandler(async (req, res, next) => {
   // there are declare payload
   let { phone, password } = req.body;
 
@@ -110,7 +110,7 @@ const userLogin = asyncHandler(async (req, res, next) => {
 });
 
 // user refresh token to access token recover controller
-const userRecover = asyncHandler(async (req, res, next) => {
+export const userRecover = asyncHandler(async (req, res, next) => {
   // there generate user refresh token from cookie and another
   let userRefresh = req.cookies.refresh_userToken || req.body.refresh_userToken;
 
@@ -153,7 +153,7 @@ const userRecover = asyncHandler(async (req, res, next) => {
 });
 
 // user logout controller
-const userLogout = asyncHandler(async (req, res, next) => {
+export const userLogout = asyncHandler(async (req, res, next) => {
   // here is declare userSignupId
   let userSignup = req.user;
 
@@ -196,7 +196,7 @@ const userLogout = asyncHandler(async (req, res, next) => {
 });
 
 // user accout delete controller
-const userAccountdelete = asyncHandler(async (req, res, next) => {
+export const userAccountdelete = asyncHandler(async (req, res, next) => {
   // declare payload
   let { user_Id } = req.params;
 
@@ -229,7 +229,7 @@ const userAccountdelete = asyncHandler(async (req, res, next) => {
 });
 
 // user change password controller
-const userChangePassword = asyncHandler(async (req, res, next) => {
+export const userChangePassword = asyncHandler(async (req, res, next) => {
   // here check condition for request method
   if (req.method === "PUT" || req.method === "PATCH") {
     // here declare payload
@@ -292,13 +292,3 @@ const userChangePassword = asyncHandler(async (req, res, next) => {
     return next(errorHandler("Request are not found", 400));
   }
 });
-
-//  there export user signup controller
-export {
-  userRegister,
-  userLogin,
-  userRecover,
-  userLogout,
-  userAccountdelete,
-  userChangePassword,
-};

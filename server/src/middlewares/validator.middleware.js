@@ -1,5 +1,5 @@
 // here was define validator middleware functionality
-const validateHandler = (schema) => async (req, res, next) => {
+export const validateHandler = (schema) => async (req, res, next) => {
   // use try-catch
   try {
     // here declare payload
@@ -19,6 +19,3 @@ const validateHandler = (schema) => async (req, res, next) => {
     res.status(400).json({ message: erroMessage });
   }
 };
-
-// here export validate middleware
-export { validateHandler };

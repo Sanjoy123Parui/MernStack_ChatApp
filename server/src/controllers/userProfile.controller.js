@@ -7,7 +7,7 @@ import { uploadFiles } from "../helpers/fileuploads.helper.js";
 // create user Profile all controllers operation perform
 
 // create new user profile
-const userNewProfile = asyncHandler(async (req, res, next) => {
+export const userNewProfile = asyncHandler(async (req, res, next) => {
   // declare userSignupId variables
   let userSignup;
 
@@ -85,7 +85,7 @@ const userNewProfile = asyncHandler(async (req, res, next) => {
 });
 
 // view profile data controller
-const userProfileview = asyncHandler(async (req, res, next) => {
+export const userProfileview = asyncHandler(async (req, res, next) => {
   // declare userSignupId variables
   let userSignup;
 
@@ -141,7 +141,7 @@ const userProfileview = asyncHandler(async (req, res, next) => {
 });
 
 // update profile image controller
-const userProfileImageupdate = asyncHandler(async (req, res, next) => {
+export const userProfileImageupdate = asyncHandler(async (req, res, next) => {
   // declare userSignupId variables
   let userSignup;
 
@@ -220,7 +220,7 @@ const userProfileImageupdate = asyncHandler(async (req, res, next) => {
 });
 
 // delete profile controller
-const userProfiledelete = asyncHandler(async (req, res, next) => {
+export const userProfiledelete = asyncHandler(async (req, res, next) => {
   // declare userSignupId variables
   let userSignup;
 
@@ -260,7 +260,7 @@ const userProfiledelete = asyncHandler(async (req, res, next) => {
 });
 
 // update profile data controller
-const userProfileupdate = asyncHandler(async (req, res, next) => {
+export const userProfileupdate = asyncHandler(async (req, res, next) => {
   // there have check the request method of condition
   if (req.method === "PUT" || req.method === "PATCH") {
     // declare userSignupId variables
@@ -331,12 +331,3 @@ const userProfileupdate = asyncHandler(async (req, res, next) => {
     return next(errorHandler("Wrong Cridential", 400));
   }
 });
-
-// export user profile all controllers
-export {
-  userNewProfile,
-  userProfileview,
-  userProfileImageupdate,
-  userProfiledelete,
-  userProfileupdate,
-};

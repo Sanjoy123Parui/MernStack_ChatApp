@@ -6,13 +6,13 @@ import {
 } from "../lib/generatedAuth.js";
 
 // declare options of cookie expiration
-const cookieOptions = {
+export const cookieOptions = {
   httpOnly: true,
   secure: true,
 };
 
 // define there sendUserToken features function
-const sendUserToken = async (res, user, statusCode, message) => {
+export const sendUserToken = async (res, user, statusCode, message) => {
   // use normal try-catch
   try {
     // there are declare user_id
@@ -37,7 +37,7 @@ const sendUserToken = async (res, user, statusCode, message) => {
 };
 
 // define there sendAdminToken features function
-const sendAdminToken = async (res, admin, statusCode, message) => {
+export const sendAdminToken = async (res, admin, statusCode, message) => {
   // user normal try-catch
   try {
     // there declare admin_id
@@ -61,6 +61,3 @@ const sendAdminToken = async (res, admin, statusCode, message) => {
     return res.status(500).json({ error });
   }
 };
-
-// export features
-export { sendUserToken, sendAdminToken, cookieOptions };
