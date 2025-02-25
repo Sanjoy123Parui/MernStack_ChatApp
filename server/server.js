@@ -25,6 +25,9 @@ import { contactRouter } from "./src/routes/contact.route.js";
 import { adminSignupRouter } from "./src/routes/adminSignup.route.js";
 import { adminProfileRouter } from "./src/routes/adminProfile.route.js";
 import { adminDashboardRouter } from "./src/routes/adminDashboard.route.js";
+// import all namespace
+import { chatsContent } from "./src/seeders/chats.js";
+
 // import database path
 import { databaseConnection } from "./src/config/conncectdb.js";
 
@@ -67,6 +70,9 @@ if (cluster.isPrimary) {
 
   // use error middlewares
   app.use(checkError);
+
+  // user all namespaces
+  io.use(chatsContent());
 
   //  restart server
   server.listen(port, () => {

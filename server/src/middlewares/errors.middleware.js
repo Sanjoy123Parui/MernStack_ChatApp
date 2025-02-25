@@ -1,4 +1,4 @@
-// create error middleware
+// create error middleware functions
 export const checkError = (err, req, res, next) => {
   err.message ||= "Internal server error";
   err.statusCode ||= 500;
