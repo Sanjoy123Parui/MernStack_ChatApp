@@ -13,7 +13,7 @@ import {
   app,
   cookieParser,
   server,
-  io,
+  envMode,
 } from "./src/connections/socketconnection.js";
 
 import { corsOption } from "./src/lib/optionconfig.js";
@@ -27,7 +27,6 @@ import { adminProfileRouter } from "./src/routes/adminProfile.route.js";
 import { adminDashboardRouter } from "./src/routes/adminDashboard.route.js";
 // import all namespace
 import { chatsContent } from "./src/seeders/chats.js";
-
 // import database path
 import { databaseConnection } from "./src/config/conncectdb.js";
 
@@ -68,14 +67,14 @@ if (cluster.isPrimary) {
   app.use("/admin/api", adminProfileRouter);
   app.use("/admin/dashboard/api", adminDashboardRouter);
 
+  // here was namsepace events functions call
+  chatsContent();
+
   // use error middlewares
   app.use(checkError);
 
-  // user all namespaces
-  io.use(chatsContent());
-
   //  restart server
   server.listen(port, () => {
-    console.log(`Server has been started at ${port}`);
+    console.log(`Server has been started at ${port} in ${envMode} Mode`);
   });
 }

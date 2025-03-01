@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { asyncHandler } from "../helpers/try-catch.helper.js";
 import { errorHandler } from "../utils/utility.js";
 
-// there are define user authentication
+// here are define user authentication
 export const userCheckAuth = asyncHandler(async (req, res, next) => {
   // declare user access token are store cookie or headers
   let userToken =
@@ -21,7 +21,7 @@ export const userCheckAuth = asyncHandler(async (req, res, next) => {
   }
 });
 
-// there are define admin authentication
+// here are define admin authentication
 export const adminCheckAuth = asyncHandler(async (req, res, next) => {
   // declare admin access token and refresh token are store cookie or headers
   let adminToken =

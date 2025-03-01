@@ -12,6 +12,9 @@ import NodeCache from "node-cache";
 import { Server } from "socket.io";
 import { corsOption } from "../lib/optionconfig.js";
 
+// here was declare server envMode
+const envMode = process.env.NODE_ENV.trim() || "PRODUCTION";
+
 // here was declare object of middleware in express server
 const app = express();
 // here create object of cache
@@ -38,5 +41,6 @@ export {
   cache,
   io,
   app,
+  envMode,
   server,
 };

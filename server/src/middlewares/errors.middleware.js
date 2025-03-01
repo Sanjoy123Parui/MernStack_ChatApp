@@ -1,3 +1,5 @@
+import { envMode } from "../connections/socketconnection.js";
+
 // create error middleware functions
 export const checkError = (err, req, res, next) => {
   err.message ||= "Internal server error";
@@ -17,5 +19,25 @@ export const checkError = (err, req, res, next) => {
     err.statusCode = 400;
   }
 
-  return res.status(err.statusCode).json({ message: err.message });
+  return res.status(err.statusCode).json({
+    message: envMode === "DEVELOPMENT" ? err : err.message,
+  });
+};
+
+// create events error middleware functions of socket.io
+export const checkEventsError = (err, socket) => {
+  // default error message
+  err.message ||= "SocketIO error occured";
+
+  // check  condition for socketIo events handled
+  if (err.code === "E_CONNREFUSED") {
+    err.message = "Connection refused. Please check the server.";
+  } else if (err.name === "TimeoutError") {
+    err.message = "Connection timed out.";
+  }
+
+  // here emit the error of events in socket.Io
+  socket.emit("error", {
+    message: envMode === "DEVELOPMENT" ? err : err.message,
+  });
 };
