@@ -15,6 +15,9 @@ import { corsOption } from "../lib/optionconfig.js";
 // here was declare server envMode
 const envMode = process.env.NODE_ENV.trim() || "PRODUCTION";
 
+// here was declare userSocketIds
+const userSocketIds = new Map();
+
 // here was declare object of middleware in express server
 const app = express();
 // here create object of cache
@@ -37,6 +40,7 @@ export {
   cluster,
   os,
   morgan,
+  userSocketIds,
   cookieParser,
   cache,
   io,

@@ -23,21 +23,3 @@ export const checkError = (err, req, res, next) => {
     message: envMode === "DEVELOPMENT" ? err : err.message,
   });
 };
-
-// create events error middleware functions of socket.io
-export const checkEventsError = (err, socket) => {
-  // default error message
-  err.message ||= "SocketIO error occured";
-
-  // check  condition for socketIo events handled
-  if (err.code === "E_CONNREFUSED") {
-    err.message = "Connection refused. Please check the server.";
-  } else if (err.name === "TimeoutError") {
-    err.message = "Connection timed out.";
-  }
-
-  // here emit the error of events in socket.Io
-  socket.emit("error", {
-    message: envMode === "DEVELOPMENT" ? err : err.message,
-  });
-};
