@@ -1,5 +1,3 @@
-import { envMode } from "../connections/socketconnection.js";
-
 // create error middleware functions
 export const checkError = (err, req, res, next) => {
   err.message ||= "Internal server error";
@@ -19,7 +17,5 @@ export const checkError = (err, req, res, next) => {
     err.statusCode = 400;
   }
 
-  return res.status(err.statusCode).json({
-    message: envMode === "DEVELOPMENT" ? err : err.message,
-  });
+  return res.status(err.statusCode).json({ message: err.message });
 };

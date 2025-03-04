@@ -27,11 +27,10 @@ export const chatsContent = async () => {
           if (!userId) {
             socket.emit("sendChatMsg", "Unauthorized user token");
           } else {
-            console.log("sendChatMsg", { userId, messages });
             chatNamespace.emit("sendChatMsg", { userId, messages });
           }
         } catch (error) {
-          socket.emit("sendChatMsg", error);
+          socket.emit("sendChatMsg", `Socket error occurred is ${error}`);
         }
       });
 
