@@ -40,7 +40,8 @@ const adminProfileSchema = new mongoose.Schema(
   }
 );
 
-const adminProfileModel = mongoose.model("adminprofiles", adminProfileSchema);
-
 // export admin profile model schema
-export { adminProfileModel };
+export const adminProfileModel = mongoose.model(
+  "adminprofiles",
+  adminProfileSchema
+);

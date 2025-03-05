@@ -23,11 +23,16 @@ export const chatsContent = async () => {
       socket.on("sendChatMsg", async (data) => {
         try {
           const { messages } = await data;
+
+          let recieverId = "ugucoioc454fegejDHd";
           // check condition at first for authentication
           if (!userId) {
             socket.emit("sendChatMsg", "Unauthorized user token");
           } else {
-            chatNamespace.emit("sendChatMsg", { userId, messages });
+            // chatNamespace.emit("sendChatMsg", { userId, messages });
+            chatNamespace
+              .to(recieverId)
+              .emit("sendChatMsg", { userId, messages });
           }
         } catch (error) {
           socket.emit("sendChatMsg", `Socket error occurred is ${error}`);

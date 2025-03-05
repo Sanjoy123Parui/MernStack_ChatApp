@@ -24,7 +24,8 @@ const adminSignupSchema = new mongoose.Schema(
   }
 );
 
-const adminSignupModel = mongoose.model("adminsignups", adminSignupSchema);
-
-// export admin signup model schema
-export { adminSignupModel };
+// export adminSignup model schema
+export const adminSignupModel = mongoose.model(
+  "adminsignups",
+  adminSignupSchema
+);

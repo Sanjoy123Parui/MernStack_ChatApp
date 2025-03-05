@@ -1,6 +1,6 @@
 import { mongoose } from "../connections/socketconnection.js";
 
-// create user model schema
+// create userSignup model schema
 const userSignupSchema = new mongoose.Schema(
   {
     phone: {
@@ -24,7 +24,5 @@ const userSignupSchema = new mongoose.Schema(
   }
 );
 
-const userSignupModel = mongoose.model("usersignups", userSignupSchema);
-
-// export user signup Model schema
-export { userSignupModel };
+// export userSignup model schema
+export const userSignupModel = mongoose.model("usersignups", userSignupSchema);
