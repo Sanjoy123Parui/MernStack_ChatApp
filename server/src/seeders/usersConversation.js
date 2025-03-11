@@ -16,9 +16,10 @@ export const socketUsers = async () => {
     // here define connection of namespace
     await usersIo.on("connection", (socket) => {
       // here was retrive userId
-      let userId = socket.user._id;
+      let user = socket.user._id;
+      let userId = user.toString();
       // here can set userId with socketId
-      userSocketIds.set(userId.toString(), socket.id);
+      userSocketIds.set(userId, socket.id);
       console.log("User connection successfully", userSocketIds);
 
       // here was declare all events of socketIo
@@ -27,7 +28,7 @@ export const socketUsers = async () => {
       // here define disconnect socket of namespace
       socket.on("disconnect", () => {
         // here remove userId of sockets when disconnect
-        userSocketIds.delete(userId.toString());
+        userSocketIds.delete(userId);
         console.log("User disconnected", userSocketIds);
       });
     });
