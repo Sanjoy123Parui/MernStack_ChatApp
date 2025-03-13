@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Headings from "./contents/headings.tsx";
 import ContentLists from "./contents/contentLists.tsx";
 import MessageHeading from "./contents/messgaeHeading.tsx";
@@ -6,8 +6,8 @@ import Conversations from "./contents/conversations.tsx";
 
 // here define Chats functional components
 const Chats: React.FC = () => {
-  // here was declare useState hooks for heading
-  const [headingTitle] = useState<any>("Chat");
+  // here was declare heading variables of chat App
+  const headingTitle: string = "Chat";
 
   // declare useEffect hook
   useEffect(() => {
