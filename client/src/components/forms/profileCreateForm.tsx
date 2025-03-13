@@ -57,7 +57,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
       )}
 
       {/* start div for create profile form */}
-      <div className="bg-white border-[1px] shadow-xl rounded-2xl px-8 pt-6 mt-0 lg:mt-4 -mx-0 lg:-mx-32 pb-8 mb-4 ">
+      <div className="bg-white border-[1px] shadow-xl rounded-2xl px-8 pt-6 md:p-16 mt-0 lg:mt-4 -mx-0 lg:-mx-32 pb-8 mb-4 ">
         {/* here is heading of profile form */}
         <h1 className=" text-lg lg:text-2xl text-center font-bold text-blue-950 mb-8">
           Create Profile

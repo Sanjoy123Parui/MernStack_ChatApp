@@ -1,12 +1,16 @@
 import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import UserLanding from "./userLanding.tsx";
 import PasswordChangeForm from "../../forms/passwordChangeForm.tsx";
 import { changePasswordFormdata } from "../../models/signupModel.ts";
 import { passwordChangeValidatorSchema } from "../../validations/signupValidator.ts";
 
 // here define use changepassword functional component
 const UserChangePassword: React.FC = () => {
+  // here was declare heading
+  const changeHeading: string = "Change Password";
+
   // here declare useEffect hook
   useEffect(() => {
     return () => {};
@@ -37,30 +41,15 @@ const UserChangePassword: React.FC = () => {
           <section className="body-font overflow-hidden">
             <div className="container px-5 py-7 mx-auto">
               <div className="flex flex-wrap -m-12">
-                {/* start div for brand and logo */}
-                <div className="p-12 w-full lg:w-1/2 hidden lg:flex flex-col items-start">
-                  <h2
-                    className="text-2xl title-font font-medium 
-                                    text-gray-900 my-4"
-                  >
-                    hiChat is a Chat Web Application
-                  </h2>
-                  <p
-                    className="leading-relaxed text-lg 
-                                    text-gray-700 mb-8"
-                  >
-                    Here is you can messages on your friends and join the group
-                    of communities
-                  </p>
-                </div>
-                {/* end div */}
+                {/* here was load user landing component */}
+                <UserLanding />
 
                 {/* start div content of user change password form  */}
                 <div className="p-8 lg:p-4 mb-0 lg:mb-12 w-full lg:w-1/2 flex flex-col items-start">
                   <div className="w-full max-w-[30rem] mx-auto">
                     {/* here is declare user change password form heading */}
                     <h1 className="text-2xl text-center font-bold text-blue-950 mb-6">
-                      Change Password
+                      {changeHeading}
                     </h1>
 
                     {/*  here define password change functional component */}

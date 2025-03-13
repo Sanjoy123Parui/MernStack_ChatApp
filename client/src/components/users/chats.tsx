@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Headings from "./contents/headings.tsx";
 import ContentLists from "./contents/contentLists.tsx";
 import MessageHeading from "./contents/messgaeHeading.tsx";
+import Messages from "./contents/messages.tsx";
 import Conversations from "./contents/conversations.tsx";
 
 // here define Chats functional components
@@ -28,12 +29,16 @@ const Chats: React.FC = () => {
           </div>
         </section>
         {/* end first section */}
+
         {/* start second section of messages content */}
         <section className="col-auto border w-full bg-slate-50 h-[668px] lg:col-span-5">
           <div>
             <MessageHeading />
           </div>
-          <div className="mt-[33rem]">
+          <div>
+            <Messages />
+          </div>
+          <div className="-mt-16">
             <Conversations />
           </div>
         </section>
