@@ -12,7 +12,9 @@ export const userCheckAuth = asyncHandler(async (req, res, next) => {
 
   // here check token are exist or not with condition
   if (!userToken) {
-    return next(errorHandler("Unauthorized token please login to access", 401));
+    return next(
+      errorHandler("Unauthorized users token please login to access", 401)
+    );
   } else {
     // declare decodeData
     let decodeData = jwt.verify(userToken, process.env.JWT_ACCESS_SCKEY);
@@ -30,7 +32,9 @@ export const adminCheckAuth = asyncHandler(async (req, res, next) => {
 
   // check the ondition token can be expired or not
   if (!adminToken) {
-    return next(errorHandler("Unauthorized token please login to access", 401));
+    return next(
+      errorHandler("Unauthorized admin token please login to access", 401)
+    );
   } else {
     // there are decoded data
     let decodeData = jwt.verify(adminToken, process.env.JWT_ACCESS_SCKEY);

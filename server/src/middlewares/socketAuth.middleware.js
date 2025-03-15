@@ -15,7 +15,7 @@ export const userSocketAuth = async (socket, next) => {
 
     //   here can check the condition of token
     if (!userToken) {
-      return next(new Error("Unauthorized token please login to access"));
+      return next(new Error("Unauthorized users token please login to access"));
     } else {
       // here was jwt token verify
       jwt.verify(userToken, process.env.JWT_ACCESS_SCKEY, (err, decoded) => {

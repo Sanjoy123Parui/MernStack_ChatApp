@@ -13,7 +13,7 @@ const chatSchema = new mongoose.Schema(
       ref: "userprofiles",
       required: true,
     },
-    chatContentId: [
+    chatMessageId: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "chatmessages",

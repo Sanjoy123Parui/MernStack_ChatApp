@@ -1,13 +1,8 @@
 import { mongoose } from "../connections/socketconnection.js";
 
-// here was define chatContent model schema
-const chatContentSchema = new mongoose.Schema(
+// here was define chatMessage model schema
+const chatMessageSchema = new mongoose.Schema(
   {
-    chatId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "chats",
-      required: true,
-    },
     sender: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "userprofiles",
@@ -31,8 +26,8 @@ const chatContentSchema = new mongoose.Schema(
   }
 );
 
-// here was export chatContent model schema
-export const chatContentModel = mongoose.model(
+// here was export chatMessage model schema
+export const chatMessageModel = mongoose.model(
   "chatmessages",
-  chatContentSchema
+  chatMessageModel
 );
