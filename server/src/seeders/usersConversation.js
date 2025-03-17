@@ -23,7 +23,7 @@ export const socketUsers = async () => {
       console.log("User connection successfully", userSocketIds);
 
       // here was declare all events of socketIo
-      sendChat(userId, usersIo, socket);
+      sendChat(userId, socket);
 
       // here define disconnect socket of namespace
       socket.on("disconnect", () => {

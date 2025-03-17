@@ -187,6 +187,8 @@ export const viewAllContact = asyncHandler(async (req, res, next) => {
             contact_profileimg: contact.contactProfile.profile_img,
             userProfile: contact.userProfile._id,
             contactProfile: contact.contactProfile._id,
+            userSignup: contact.userProfile.userSignup._id,
+            contactSignup: contact.contactProfile.userSignup._id,
           };
         });
 

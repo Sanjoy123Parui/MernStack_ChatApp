@@ -5,9 +5,26 @@ const chatMessageSchema = new mongoose.Schema(
   {
     sender: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "userprofiles",
+      ref: "usersignups",
       required: true,
     },
+    senderInfo: [
+      {
+        senderProfileId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "userprofiles",
+          required: true,
+        },
+        senderPhone: {
+          type: String,
+          unique: true,
+          required: true,
+        },
+        senderName: {
+          type: String,
+        },
+      },
+    ],
     messages: {
       type: String,
     },
@@ -29,5 +46,5 @@ const chatMessageSchema = new mongoose.Schema(
 // here was export chatMessage model schema
 export const chatMessageModel = mongoose.model(
   "chatmessages",
-  chatMessageModel
+  chatMessageSchema
 );
