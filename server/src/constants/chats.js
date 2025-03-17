@@ -87,11 +87,7 @@ export const sendChat = (userId, socket) =>
                 recieverName: recieverName,
               },
             ],
-            chatMessageItems: [
-              {
-                chatMessageId: chatMessageId,
-              },
-            ],
+            chatMessageItems: [{ chatMessageId: chatMessageId }],
           });
 
           // here was insert chat data
@@ -117,15 +113,7 @@ export const sendChat = (userId, socket) =>
                 },
               ],
             },
-            {
-              $push: {
-                chatMessageItems: [
-                  {
-                    chatMessageId: chatMessageId,
-                  },
-                ],
-              },
-            }
+            { $push: { chatMessageItems: [{ chatMessageId: chatMessageId }] } }
           );
         }
 
