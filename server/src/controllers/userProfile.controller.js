@@ -25,7 +25,7 @@ export const userNewProfile = asyncHandler(async (req, res, next) => {
   let filePath = req.file.filename;
 
   if (!userSignup) {
-    return next(errorHandler("Please login login to access user", 400));
+    return next(errorHandler("Please login to access user", 400));
   } else {
     // this data are find or not is check
     let userInfo = await userProfileModel.findOne({ userSignup }).exec();

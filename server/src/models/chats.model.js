@@ -35,7 +35,7 @@ const chatSchema = new mongoose.Schema(
 
     recieverInfo: [
       {
-        recieverProfile: {
+        recieverProfileId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "userprofiles",
           required: true,
@@ -51,11 +51,13 @@ const chatSchema = new mongoose.Schema(
       },
     ],
 
-    chatMessageId: [
+    chatMessageItems: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "chatmessages",
-        required: true,
+        chatMessageId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "chatmessages",
+          required: true,
+        },
       },
     ],
   },
