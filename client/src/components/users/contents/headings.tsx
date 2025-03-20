@@ -15,7 +15,7 @@ const Headings: React.FC<contentHeading> = ({ headingTitle }) => {
       </div>
       {/* end div */}
       {/* start div for SearchBar components loaded */}
-      <div className="p-4 shadow">
+      <div className="p-4 bg-slate-50 shadow">
         <SearchBars />
       </div>
       {/* end div */}

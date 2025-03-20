@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,12 +29,6 @@ const UserLogin: React.FC = () => {
     navigate("/user/create-profile");
     form.reset();
   };
-
-  // declare useEffect hook
-  useEffect(() => {
-    // here was componentWillUnmount
-    return () => {};
-  }, []);
 
   return (
     <>

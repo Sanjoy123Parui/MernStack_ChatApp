@@ -1,4 +1,5 @@
-import { Avatar, AvatarImage } from "../../ui/avatar.tsx";
+// import { Avatar, AvatarImage } from "../../ui/avatar.tsx";
+import { FaUser } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
 // define MessageHeading component
@@ -14,13 +15,17 @@ const MessageHeading: React.FC = () => {
               <a className="text-white text-lg mr-1 flex lg:hidden lg:text-2xl font-bold">
                 <GoArrowLeft />
               </a>
-              <Avatar className="border-white border-[2px] font-bold">
+              {/* <Avatar className="border-white border-[2px] font-bold">
                 <AvatarImage
                   src=""
                   className="w-full h-fit rounded-full"
                   alt="avatar image"
                 />
-              </Avatar>
+              </Avatar> */}
+
+              <div className="relative w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-600">
+                <FaUser className="absolute w-8 h-12 text-gray-400 left-[3px]" />
+              </div>
             </div>
             {/* end div */}
 

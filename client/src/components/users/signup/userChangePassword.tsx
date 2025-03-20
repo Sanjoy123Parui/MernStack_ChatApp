@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import UserLanding from "./userLanding.tsx";
@@ -10,11 +9,6 @@ import { passwordChangeValidatorSchema } from "../../validations/signupValidator
 const UserChangePassword: React.FC = () => {
   // here was declare heading
   const changeHeading: string = "Change Password";
-
-  // here declare useEffect hook
-  useEffect(() => {
-    return () => {};
-  }, []);
 
   // declare useForm hook for user change password form data model handle
   const form = useForm<changePasswordFormdata>({

@@ -1,5 +1,5 @@
 // here import packages of libraies
-import { useEffect } from "react";
+
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -10,10 +10,6 @@ import { createProfileValidatorSchema } from "../../validations/profileValidator
 
 // define userCreate functional component
 const UserCreateProfile: React.FC = () => {
-  // declare useEffect hook
-  useEffect(() => {
-    return () => {};
-  }, []);
 
   // declare useform hook for  handle user profile form
   const form: any = useForm<profileFormdata>({

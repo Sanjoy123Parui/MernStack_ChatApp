@@ -59,10 +59,15 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
 
   // here declare nav list content
   const chatNavItem: userNavListItem[] = [
+    // {
+    //   listIcon: <MdOutlineChatBubble />,
+    //   listItem: "Chat",
+    //   itemPath: "/user/content/chat",
+    // },
     {
       listIcon: <MdOutlineChatBubble />,
       listItem: "Chat",
-      itemPath: "/user/content/chat",
+      itemPath: "/",
     },
     {
       listIcon: <RiDonutChartFill />,
@@ -80,9 +85,8 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
     <>
       {/* start ul for chat list nav content */}
       <ul
-        className={`lg:flex ${
-          isOpen ? "block" : "hidden"
-        } absolute lg:relative rounded-2xl shadow-lg lg:shadow-none lg:rounded-none  
+        className={`lg:flex ${isOpen ? "block" : "hidden"
+          } absolute lg:relative rounded-2xl shadow-lg lg:shadow-none lg:rounded-none  
             h-auto bg-slate-100 lg:bg-transparent w-48 lg:w-auto text-base lg:text-lg lg:h-auto right-0 top-full 
             lg:top-auto p-4 lg:p-0 space-y-2 lg:space-y-0 lg:space-x-4`}
       >
@@ -94,7 +98,7 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
         >
           {/*  button of drop-down */}
           <a
-            className="flex items-center text-gray-600 sm:px-0 md:px-6 lg:px-0 lg:text-white 
+            className="flex items-center  text-gray-600 sm:px-0 md:px-6 lg:px-0 lg:text-white 
                     hover:text-black lg:hover:text-gray-300 transition-colors"
           >
             Themes
@@ -113,7 +117,7 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
               className="flex text-gray-600 lg:text-white 
                         hover:text-black lg:hover:text-gray-300 transition-colors"
             >
-              {items.listItem}
+              <p className="flex lg:hidden">{items.listItem}</p>
               <p className="px-4 lg:px-[5px] mt-[0.4rem]">{items.listIcon}</p>
             </NavLink>
           </li>
@@ -125,8 +129,8 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
             className="flex items-center text-gray-600 lg:text-white 
                     hover:text-black lg:hover:text-gray-300 transition-colors"
           >
-            MyProfile
-            <CgProfile className="mx-1" />
+            <p className="flex lg:hidden">MyProfile</p>
+            <p className="mt-1.5"><CgProfile className="mx-1" /></p>
           </a>
         </li>
 
@@ -136,8 +140,8 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
             className="flex items-center text-gray-600 lg:text-white 
                     hover:text-black lg:hover:text-gray-300 transition-colors"
           >
-            Logout
-            <FiLogOut className="mx-1" />
+            <p className="flex lg:hidden">Logout</p>
+            <p className="mt-[5px]"><FiLogOut className="mx-1" /></p>
           </a>
         </li>
       </ul>
