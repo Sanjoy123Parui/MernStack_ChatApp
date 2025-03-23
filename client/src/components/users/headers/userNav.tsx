@@ -1,61 +1,46 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import { RiArrowDropDownLine, RiDonutChartFill } from "react-icons/ri";
-
-import { MdOutlineChatBubble, MdGroups, MdSunny } from "react-icons/md";
-
+import { RiDonutChartFill } from "react-icons/ri";
+import { MdOutlineChatBubble, MdGroups } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
-import { IoIosMoon } from "react-icons/io";
+import { isOpenheaderProps, userNavListItem, actionListItems } from "../../models/userModel.tsx";
 
-import {
-  isOpenheaderProps,
-  isDropdownProps,
-  userNavListItem,
-  themesListMode,
-} from "../../models/userModel.tsx";
 
-// here define dropdownthems props funcional component
-const Themesdropdownprops: React.FC<isDropdownProps> = ({ isDropdownOpen }) => {
-  // here declare themes drop down list item
-  const themesList: themesListMode[] = [
+// here define NavActions functional component
+const NavActions: React.FC = () => {
+
+  const actionItem: actionListItems[] = [
     {
-      themesIcon: <IoIosMoon />,
-      themesItem: "Dark",
+      actionItemsName: "Accounts",
+      actionIcon: <CgProfile className="mx-1" />
     },
     {
-      themesIcon: <MdSunny />,
-      themesItem: "Light",
-    },
+      actionItemsName: "Logout",
+      actionIcon: <FiLogOut className="mx-1" />
+    }
   ];
 
   return (
     <>
-      {/* here declare themes drop-down content show or hide */}
-      {isDropdownOpen && (
-        <ul
-          className="block absolute bg-white rounded-2xl shadow-lg 
-                h-40 w-48 right-0 top-full p-4 space-y-2"
-        >
-          {themesList.map((subItem: any, j: any) => (
-            <li key={j} className="p-[5px] md:p-0 md:text-left">
-              <a className="flex px-4 mt-3 text-gray-700 hover:text-black">
-                {subItem.themesItem}
-                <p className="px-4 mt-[0.4rem]">{subItem.themesIcon}</p>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className="flex flex-col lg:flex-row items-center lg:items-end space-y-2 lg:space-y-0 lg:space-x-4">
+        {actionItem.map((items, i) => (
+          <div key={i}>
+            <a className="flex text-gray-600 lg:text-white hover:text-black lg:hover:text-gray-300 transition-colors">
+              <p className="flex lg:hidden">{items.actionItemsName}</p>
+              <p className="mt-1.5">{items.actionIcon}</p>
+            </a>
+          </div>
+        ))}
+      </div>
     </>
   );
-};
+}
+
 
 // here define usernav functional component
 const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
-  // here declare useState hooks for toggle dropdown of themes
-  const [isDropdownOpen, setIsDropdownOpen] = useState<any>(false);
 
   // here declare nav list content
   const chatNavItem: userNavListItem[] = [
@@ -90,24 +75,6 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
             h-auto bg-slate-100 lg:bg-transparent w-48 lg:w-auto text-base lg:text-lg lg:h-auto right-0 top-full 
             lg:top-auto p-4 lg:p-0 space-y-2 lg:space-y-0 lg:space-x-4`}
       >
-        {/* here are declare drop-down of themes */}
-        <li
-          onMouseEnter={() => setIsDropdownOpen(true)}
-          onMouseLeave={() => setIsDropdownOpen(false)}
-          className="relative group mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right"
-        >
-          {/*  button of drop-down */}
-          <a
-            className="flex items-center  text-gray-600 sm:px-0 md:px-6 lg:px-0 lg:text-white 
-                    hover:text-black lg:hover:text-gray-300 transition-colors"
-          >
-            Themes
-            <RiArrowDropDownLine className="mx-1" />
-          </a>
-
-          {/* here load Themesdropdownprops component */}
-          <Themesdropdownprops isDropdownOpen={isDropdownOpen} />
-        </li>
 
         {/* here decalare chat navlink list items */}
         {chatNavItem.map((items: any, i: any) => (
@@ -123,27 +90,12 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
           </li>
         ))}
 
-        {/* here can declare myProfile button */}
+
+        {/* here can declare myProfile and logout buttons in one li */}
         <li className="mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
-          <a
-            className="flex items-center text-gray-600 lg:text-white 
-                    hover:text-black lg:hover:text-gray-300 transition-colors"
-          >
-            <p className="flex lg:hidden">MyProfile</p>
-            <p className="mt-1.5"><CgProfile className="mx-1" /></p>
-          </a>
+          <NavActions />
         </li>
 
-        {/* here can declare logout button */}
-        <li className="mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
-          <a
-            className="flex items-center text-gray-600 lg:text-white 
-                    hover:text-black lg:hover:text-gray-300 transition-colors"
-          >
-            <p className="flex lg:hidden">Logout</p>
-            <p className="mt-[5px]"><FiLogOut className="mx-1" /></p>
-          </a>
-        </li>
       </ul>
       {/* end ul */}
     </>

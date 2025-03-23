@@ -1,9 +1,9 @@
 import Headings from "./contents/headings.tsx";
 import ContentLists from "./contents/contentLists.tsx";
-// import MessageHeading from "./contents/messgaeHeading.tsx";
-// import Messages from "./contents/messages.tsx";
-// import Conversations from "./contents/conversations.tsx";
-import EmptyContent from "./contents/emptyContent.tsx";
+import MessageHeading from "./contents/messgaeHeading.tsx";
+import Messages from "./contents/messages.tsx";
+import Conversations from "./contents/conversations.tsx";
+// import EmptyContent from "./contents/emptyContent.tsx";
 
 // here define Chats functional components
 const Chats: React.FC = () => {
@@ -24,7 +24,7 @@ const Chats: React.FC = () => {
         </section>
 
 
-        {/* <section className="col-span-1 border w-full h-[668px] lg:col-span-5">
+        <section className="col-span-1 border w-full h-[668px] lg:col-span-5">
           <div>
             <MessageHeading />
           </div>
@@ -34,13 +34,11 @@ const Chats: React.FC = () => {
           <div>
             <Conversations />
           </div>
-        </section> */}
 
 
-        <section className="col-span-1 border w-full h-[668px] lg:col-span-5">
-          <div className="bg-slate-50">
+          {/* <div className="bg-slate-50">
             <EmptyContent />
-          </div>
+          </div> */}
         </section>
       </div>
       {/* end div */}
