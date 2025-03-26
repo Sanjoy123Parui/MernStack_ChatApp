@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 // import UserSignupNav from "./userSignupNav.tsx";
+// import UserProfileNav from "./userProfileNav.tsx";
 import UserNav from "../../users/headers/userNav.tsx";
 
 // here was define Header component
@@ -26,10 +27,9 @@ const Userheaders: React.FC = () => {
           </button>
           {/* end button */}
 
-          {/* here loaded userSignupNav component */}
+          {/* here loaded userSignupNav userNav and userProfileNav component */}
           {/* <UserSignupNav isOpen={isOpen} /> */}
-
-          {/* here loaded userNav component */}
+          {/* <UserProfileNav isOpen={isOpen} /> */}
           <UserNav isOpen={isOpen} />
         </div>
         {/* end div container */}

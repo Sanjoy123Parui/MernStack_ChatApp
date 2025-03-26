@@ -5,10 +5,6 @@ export interface isOpenheaderProps {
   isOpen: boolean;
 }
 
-export interface isDropdownProps {
-  isDropdownOpen: boolean;
-}
-
 // here define userSignupListItem content interface model
 export interface userSignupListItem {
   listItem: string;
@@ -26,4 +22,5 @@ export interface userNavListItem {
 export interface actionListItems {
   actionItemsName: string;
   actionIcon: any;
+  // actionHandler:()=>void;
 }

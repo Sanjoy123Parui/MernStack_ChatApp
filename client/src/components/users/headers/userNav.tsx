@@ -1,6 +1,5 @@
-// import { useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-
 import { RiDonutChartFill } from "react-icons/ri";
 import { MdOutlineChatBubble, MdGroups } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
@@ -11,16 +10,17 @@ import { isOpenheaderProps, userNavListItem, actionListItems } from "../../model
 // here define NavActions functional component
 const NavActions: React.FC = () => {
 
-  const actionItem: actionListItems[] = [
+  const [actionItem] = useState<actionListItems[]>([
     {
       actionItemsName: "Accounts",
-      actionIcon: <CgProfile className="mx-1" />
+      actionIcon: <CgProfile className="mx-1" />,
+      // actionHandler
     },
     {
       actionItemsName: "Logout",
       actionIcon: <FiLogOut className="mx-1" />
     }
-  ];
+  ]);
 
   return (
     <>
@@ -43,17 +43,17 @@ const NavActions: React.FC = () => {
 const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
 
   // here declare nav list content
-  const chatNavItem: userNavListItem[] = [
-    // {
-    //   listIcon: <MdOutlineChatBubble />,
-    //   listItem: "Chat",
-    //   itemPath: "/user/content/chat",
-    // },
+  const [chatNavItem] = useState<userNavListItem[]>([
     {
       listIcon: <MdOutlineChatBubble />,
       listItem: "Chat",
-      itemPath: "/",
+      itemPath: "/user/content/chat",
     },
+    // {
+    //   listIcon: <MdOutlineChatBubble />,
+    //   listItem: "Chat",
+    //   itemPath: "/",
+    // },
     {
       listIcon: <RiDonutChartFill />,
       listItem: "Stories",
@@ -64,26 +64,20 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
       listItem: "Groups",
       itemPath: "/user/content/groups",
     },
-  ];
+  ]);
 
   return (
     <>
       {/* start ul for chat list nav content */}
-      <ul
-        className={`lg:flex ${isOpen ? "block" : "hidden"
-          } absolute lg:relative rounded-2xl shadow-lg lg:shadow-none lg:rounded-none  
-            h-auto bg-slate-100 lg:bg-transparent w-48 lg:w-auto text-base lg:text-lg lg:h-auto right-0 top-full 
-            lg:top-auto p-4 lg:p-0 space-y-2 lg:space-y-0 lg:space-x-4`}
-      >
+      <ul className={`lg:flex ${isOpen ? "block" : "hidden"} absolute lg:relative rounded-2xl shadow-lg 
+      lg:shadow-none lg:rounded-none h-auto bg-slate-100 lg:bg-transparent w-48 lg:w-auto text-base 
+      lg:text-lg lg:h-auto right-0 top-full lg:top-auto p-4 lg:p-0 space-y-2 lg:space-y-0 lg:space-x-4`}>
 
         {/* here decalare chat navlink list items */}
         {chatNavItem.map((items: any, i: any) => (
           <li key={i} className="mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
-            <NavLink
-              to={items.itemPath}
-              className="flex text-gray-600 lg:text-white 
-                        hover:text-black lg:hover:text-gray-300 transition-colors"
-            >
+            <NavLink to={items.itemPath} className="flex text-gray-600 lg:text-white 
+           hover:text-black lg:hover:text-gray-300 transition-colors">
               <p className="flex lg:hidden">{items.listItem}</p>
               <p className="px-4 lg:px-[5px] mt-[0.4rem]">{items.listIcon}</p>
             </NavLink>

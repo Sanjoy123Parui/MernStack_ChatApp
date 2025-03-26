@@ -1,5 +1,4 @@
 // here import packages of libraies
-
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -22,6 +21,8 @@ const UserCreateProfile: React.FC = () => {
       abouts: "",
     },
   });
+
+  // here was declare useNavigate hook
 
   // here declare  submit profile form function with submitHandler hook
   const userhandleProfileSubmit: SubmitHandler<profileFormdata> = (

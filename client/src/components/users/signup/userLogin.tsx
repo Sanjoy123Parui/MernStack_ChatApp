@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import UserLanding from "./userLanding.tsx";
 import LoginForm from "../../forms/loginForm.tsx";
-import { loginFormdata } from "../../models/signupModel.ts";
+import { loginFormdata, routeNavigateList } from "../../models/signupModel.ts";
 import { loginValidatorSchema } from "../../validations/signupValidator.ts";
 
 // here define UserLogin component
@@ -23,10 +23,27 @@ const UserLogin: React.FC = () => {
     },
   });
 
+
+  // here was declare array of links for navigate routes
+  const routeList: routeNavigateList[] = [
+    {
+      desc: "Forgot Password?",
+      links: "/user/change-password",
+      linkName: "Change Password "
+    },
+    {
+      desc: "Don't have any account?",
+      links: "/user/register",
+      linkName: "Register"
+    }
+  ]
+
+
+
   // here was declare action of event trigger after form fillup
   const userhandleLoginSubmit: SubmitHandler<loginFormdata> = (data: any) => {
-    console.log(data);
     navigate("/user/create-profile");
+    console.log(data);
     form.reset();
   };
 
@@ -56,19 +73,19 @@ const UserLogin: React.FC = () => {
                       onSubmit={form.handleSubmit(userhandleLoginSubmit)}
                     />
 
-                    {/* start div are content for navigate route in user register form component */}
-                    <div className="flex items-center justify-center p-1">
-                      <p className="text-base">
-                        Don't have any account?
-                        <Link
-                          to="/user/register"
-                          className="text-indigo-500 transition duration-100 
-                                                hover:text-indigo-600 active:text-indigo-700"
-                        >
-                          Register
-                        </Link>
-                      </p>
+                    {/* start div for links route */}
+                    <div>
+                      {routeList.map((listItem, i) => (
+                        <div key={i} className="flex items-center justify-center p-1">
+                          <p className="text-base">
+                            {listItem.desc}
+                            <Link to={listItem.links} className="text-indigo-500 transition duration-100 
+                          hover:text-indigo-600 active:text-indigo-700">{listItem.linkName}</Link>
+                          </p>
+                        </div>
+                      ))}
                     </div>
+                    {/* end div */}
                   </div>
                 </div>
                 {/* end div */}
