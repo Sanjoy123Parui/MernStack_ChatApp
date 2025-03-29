@@ -15,18 +15,18 @@ const UserChangePassword: any = lazy(
 const UserCreateProfile: any = lazy(
   () => import("../users/profiles/userCreateProfile.tsx")
 );
-// const UserViewProfile: any = lazy(
-//   () => import("../users/profiles/userViewProfile.tsx")
-// );
-// const Chat: any = lazy(
-//   () => import("../users/chats.tsx")
-// );
-// const Stories: any = lazy(
-//   () => import("../users/stories.tsx")
-// );
-// const Groups: any = lazy(
-//   () => import("../users/groups.tsx")
-// );
+const UserViewProfile: any = lazy(
+  () => import("../users/profiles/userViewProfile.tsx")
+);
+const Chat: any = lazy(
+  () => import("../users/chats.tsx")
+);
+const Stories: any = lazy(
+  () => import("../users/stories.tsx")
+);
+const Groups: any = lazy(
+  () => import("../users/groups.tsx")
+);
 const Notfound: any = lazy(
   () => import("../layouts/notfound.tsx")
 );
@@ -59,25 +59,25 @@ const Routerlayout: React.FC = () => {
           element: <UserCreateProfile />,
         },
 
-        // {
-        //   path: "/user/content/profile",
-        //   element: <UserViewProfile />,
-        // },
+        {
+          path: "/user/content/profile",
+          element: <UserViewProfile />,
+        },
 
-        // {
-        //   path: "/user/content/chat",
-        //   element: <Chat />,
-        // },
+        {
+          path: "/user/content/chat",
+          element: <Chat />,
+        },
 
-        // {
-        //   path: "/user/content/story",
-        //   element: <Stories />,
-        // },
+        {
+          path: "/user/content/story",
+          element: <Stories />,
+        },
 
-        // {
-        //   path: "/user/content/groups",
-        //   element: <Groups />,
-        // },
+        {
+          path: "/user/content/groups",
+          element: <Groups />,
+        },
       ],
     },
 

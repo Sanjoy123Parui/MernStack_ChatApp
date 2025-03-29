@@ -1,4 +1,5 @@
 // here import packages of libraies
+import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -9,6 +10,9 @@ import { createProfileValidatorSchema } from "../../validations/profileValidator
 
 // define userCreate functional component
 const UserCreateProfile: React.FC = () => {
+
+  // here declare useNavigate hook
+  const navigate: any = useNavigate();
 
   // declare useform hook for  handle user profile form
   const form: any = useForm<profileFormdata>({
@@ -28,6 +32,9 @@ const UserCreateProfile: React.FC = () => {
   const userhandleProfileSubmit: SubmitHandler<profileFormdata> = (
     data: any
   ) => {
+    // let userProfile = "uhfghfihfuirf34yt6y6";
+    // localStorage.setItem("userProfile", userProfile);
+    navigate("/user/content/chat");
     console.log(data);
   };
 

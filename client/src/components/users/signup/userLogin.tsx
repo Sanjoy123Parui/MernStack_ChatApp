@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,6 +12,20 @@ const UserLogin: React.FC = () => {
   // here was declare useNaviagte hook
   const navigate: any = useNavigate();
 
+  // here was declare useState hooks
+  const routeList = useState<routeNavigateList[]>([
+    {
+      desc: "Forgot Password?",
+      links: "/user/change-password",
+      linkName: "Change Password "
+    },
+    {
+      desc: "Don't have any account?",
+      links: "/user/register",
+      linkName: "Register"
+    }
+  ]);
+
   // here declare login form headin variable
   const loginHeading: string = " Login";
 
@@ -23,25 +38,12 @@ const UserLogin: React.FC = () => {
     },
   });
 
-
-  // here was declare array of links for navigate routes
-  const routeList: routeNavigateList[] = [
-    {
-      desc: "Forgot Password?",
-      links: "/user/change-password",
-      linkName: "Change Password "
-    },
-    {
-      desc: "Don't have any account?",
-      links: "/user/register",
-      linkName: "Register"
-    }
-  ]
-
-
-
   // here was declare action of event trigger after form fillup
   const userhandleLoginSubmit: SubmitHandler<loginFormdata> = (data: any) => {
+    // let userToken = "yghughkm56846fdhguyfpoo3373739sjhjfvhvhekeihvi";
+    let userSignup = "vdf56000odhgpfhfhbhbg580";
+    // localStorage.setItem("userToken", userToken);
+    localStorage.setItem("userSignup", userSignup);
     navigate("/user/create-profile");
     console.log(data);
     form.reset();
@@ -75,7 +77,7 @@ const UserLogin: React.FC = () => {
 
                     {/* start div for links route */}
                     <div>
-                      {routeList.map((listItem, i) => (
+                      {routeList.map((listItem: any, i: any) => (
                         <div key={i} className="flex items-center justify-center p-1">
                           <p className="text-base">
                             {listItem.desc}
