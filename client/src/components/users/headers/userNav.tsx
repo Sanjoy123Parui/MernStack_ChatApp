@@ -44,16 +44,16 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
 
   // here declare nav list content
   const [chatNavItem] = useState<userNavListItem[]>([
-    {
-      listIcon: <MdOutlineChatBubble />,
-      listItem: "Chat",
-      itemPath: "/user/content/chat",
-    },
     // {
     //   listIcon: <MdOutlineChatBubble />,
     //   listItem: "Chat",
-    //   itemPath: "/",
+    //   itemPath: "/user/content/chat",
     // },
+    {
+      listIcon: <MdOutlineChatBubble />,
+      listItem: "Chat",
+      itemPath: "/",
+    },
     {
       listIcon: <RiDonutChartFill />,
       listItem: "Stories",
