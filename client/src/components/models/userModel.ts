@@ -22,5 +22,4 @@ export interface userNavListItem {
 export interface actionListItems {
   actionItemsName: string;
   actionIcon: any;
-  // actionHandler:()=>void;
 }

@@ -5,22 +5,21 @@ import { MdOutlineChatBubble, MdGroups } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { isOpenheaderProps, userNavListItem, actionListItems } from "../../models/userModel.tsx";
-import Userlogout from "../signup/userlogout.tsx";
 
 // here define NavActions functional component
 const NavActions: React.FC = () => {
 
-  // declare useState hooks
-  const [userLogoutToggle, setUserLogoutToggle] = useState<boolean>(false);
+  // declare useState hook
   const [actionItem] = useState<actionListItems[]>([
     {
       actionItemsName: "Accounts",
       actionIcon: <CgProfile className="mx-1" />,
-      // actionHandler
+
     },
     {
       actionItemsName: "Logout",
-      actionIcon: <FiLogOut className="mx-1" />
+      actionIcon: <FiLogOut className="mx-1" />,
+
     }
   ]);
 
@@ -29,16 +28,13 @@ const NavActions: React.FC = () => {
       <div className="flex flex-col lg:flex-row items-center lg:items-end space-y-2 lg:space-y-0 lg:space-x-4">
         {actionItem.map((items, i) => (
           <div key={i}>
-            <a className="flex text-gray-600 lg:text-white hover:text-black lg:hover:text-gray-300 transition-colors">
+            <a data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+              className="flex text-gray-600 lg:text-white hover:text-black lg:hover:text-gray-300 transition-colors">
               <p className="flex lg:hidden">{items.actionItemsName}</p>
               <p className="mt-1.5">{items.actionIcon}</p>
             </a>
           </div>
         ))}
-      </div>
-
-      <div>
-        <Userlogout />
       </div>
     </>
   );
@@ -50,16 +46,12 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
 
   // here declare nav list content
   const [chatNavItem] = useState<userNavListItem[]>([
-    // {
-    //   listIcon: <MdOutlineChatBubble />,
-    //   listItem: "Chat",
-    //   itemPath: "/user/content/chat",
-    // },
     {
       listIcon: <MdOutlineChatBubble />,
       listItem: "Chat",
-      itemPath: "/",
+      itemPath: "/user/content/chat",
     },
+
     {
       listIcon: <RiDonutChartFill />,
       listItem: "Stories",
