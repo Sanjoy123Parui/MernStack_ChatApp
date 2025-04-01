@@ -40,10 +40,6 @@ const UserLogin: React.FC = () => {
 
   // here was declare action of event trigger after form fillup
   const userhandleLoginSubmit: SubmitHandler<loginFormdata> = (data: any) => {
-    // let userToken = "yghughkm56846fdhguyfpoo3373739sjhjfvhvhekeihvi";
-    let userSignup = "vdf56000odhgpfhfhbhbg580";
-    // localStorage.setItem("userToken", userToken);
-    localStorage.setItem("userSignup", userSignup);
     navigate("/user/create-profile");
     console.log(data);
     form.reset();

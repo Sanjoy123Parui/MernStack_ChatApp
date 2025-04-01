@@ -5,11 +5,13 @@ import { MdOutlineChatBubble, MdGroups } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { isOpenheaderProps, userNavListItem, actionListItems } from "../../models/userModel.tsx";
-
+import Userlogout from "../signup/userlogout.tsx";
 
 // here define NavActions functional component
 const NavActions: React.FC = () => {
 
+  // declare useState hooks
+  const [userLogoutToggle, setUserLogoutToggle] = useState<boolean>(false);
   const [actionItem] = useState<actionListItems[]>([
     {
       actionItemsName: "Accounts",
@@ -33,6 +35,10 @@ const NavActions: React.FC = () => {
             </a>
           </div>
         ))}
+      </div>
+
+      <div>
+        <Userlogout />
       </div>
     </>
   );

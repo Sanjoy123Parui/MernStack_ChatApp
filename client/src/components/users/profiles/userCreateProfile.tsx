@@ -32,8 +32,6 @@ const UserCreateProfile: React.FC = () => {
   const userhandleProfileSubmit: SubmitHandler<profileFormdata> = (
     data: any
   ) => {
-    // let userProfile = "uhfghfihfuirf34yt6y6";
-    // localStorage.setItem("userProfile", userProfile);
     navigate("/user/content/chat");
     console.log(data);
   };
