@@ -4,11 +4,11 @@ import Senders from "./senders.tsx";
 const Messages: React.FC = () => {
   return (
     <>
+      {/* start div for all messages conversation content */}
       <div className="bg-slate-100 w-auto h-full">
-        <div>
-          <Senders />
-        </div>
+        <Senders />
       </div>
+      {/* end div */}
     </>
   );
 };
