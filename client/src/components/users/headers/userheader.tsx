@@ -5,15 +5,16 @@ import UserProfileNav from "./userProfileNav.tsx";
 import UserNav from "../../users/headers/userNav.tsx";
 
 // here was define Header component
-const Userheaders: React.FC = () => {
+const Userheader: React.FC = () => {
   // here declare useState hook
   const [isOpen, setIsOpen] = useState<any>(false);
   const [hasUserSignup, setHasUserSignup] = useState<any>(false);
   const [hasUserProfile, setHasUserProfile] = useState<any>(false);
 
+  const userSignup = localStorage.getItem("userSignup");
+  const userProfile = localStorage.getItem("userProfile");
+
   useEffect(() => {
-    const userSignup = localStorage.getItem("userSignup");
-    const userProfile = localStorage.getItem("userProfile");
     setHasUserSignup(userSignup);
     setHasUserProfile(userProfile);
   }, []);
@@ -37,25 +38,32 @@ const Userheaders: React.FC = () => {
           </button>
           {/* end button */}
 
-          {/* here loaded navbar menus component */}
-          {/* <UserSignupNav isOpen={isOpen} /> */}
-          {/* <UserProfileNav isOpen={isOpen} /> */}
-          {/* <UserNav isOpen={isOpen} /> */}
+          {/* start list content */}
+          <ul className={`lg:flex ${isOpen ? "block" : "hidden"} absolute lg:relative rounded-2xl shadow-lg 
+          lg:shadow-none lg:rounded-none h-auto bg-slate-100 lg:bg-transparent w-48 lg:w-auto text-base 
+          lg:text-lg lg:h-auto right-0 top-full lg:top-auto p-4 lg:p-0 space-y-2 lg:space-y-0 lg:space-x-4`}>
 
-          {hasUserSignup && hasUserProfile ? (
-            <UserNav isOpen={isOpen} />
-          ) : hasUserSignup && !hasUserProfile ? (
-            <UserProfileNav isOpen={isOpen} />
-          ) : (
-            <UserSignupNav isOpen={isOpen} />
-          )}
+            {/* here loaded navbar menus component */}
+            {/* <UserSignupNav isOpen={isOpen} /> */}
+            {/* <UserProfileNav isOpen={isOpen} /> */}
+            {/* <UserNav isOpen={isOpen} /> */}
 
+            {hasUserSignup && hasUserProfile ? (
+              <UserNav />
+            ) : hasUserSignup && !hasUserProfile ? (
+              <UserProfileNav />
+            ) : (
+              <UserSignupNav />
+            )}
+          </ul>
+          {/* end list content */}
         </div>
         {/* end div container */}
       </nav>
       {/* end nav */}
+
     </>
   );
 };
 
-export default Userheaders;
+export default Userheader;

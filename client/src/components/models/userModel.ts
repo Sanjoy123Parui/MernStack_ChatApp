@@ -1,8 +1,7 @@
-// here can define normal interface model which instanse passing props
-
-// define header instance of nav interface model in props
-export interface isOpenheaderProps {
-  isOpen: boolean;
+// here userLogout modal popup modal props
+export interface userLogoutModalProps {
+  onUserLogoutModal: () => void;
+  onUserLogoutCancel: () => void;
 }
 
 // here define userSignupListItem content interface model
@@ -22,4 +21,5 @@ export interface userNavListItem {
 export interface actionListItems {
   actionItemsName: string;
   actionIcon: any;
+  handleAction: () => void;
 }

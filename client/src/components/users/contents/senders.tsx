@@ -9,7 +9,7 @@ const SenderMsg: React.FC = () => {
                     <p className="text-sm md:text-base font-normal py-2.5">Hello</p>
 
                     <div className="flex justify-between items-center">
-                        <span className="text-sm font-semibold">11:25 am</span>
+                        <span className="text-xs font-semibold">11:25 am</span>
                     </div>
                 </div>
             </div>
@@ -17,6 +17,9 @@ const SenderMsg: React.FC = () => {
         </>
     );
 }
+
+
+
 
 
 

@@ -4,31 +4,51 @@ import { RiDonutChartFill } from "react-icons/ri";
 import { MdOutlineChatBubble, MdGroups } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
-import { isOpenheaderProps, userNavListItem, actionListItems } from "../../models/userModel.tsx";
+import { userNavListItem, actionListItems } from "../../models/userModel.ts";
+import UserLogout from "../signup/userlogout.tsx";
 
-// here define NavActions functional component
-const NavActions: React.FC = () => {
+const UserActionNav: React.FC = () => {
 
   // declare useState hook
+  const [isUserlogoutModal, setIsUserlogoutModal] = useState<any>(false);
+
   const [actionItem] = useState<actionListItems[]>([
     {
       actionItemsName: "Accounts",
       actionIcon: <CgProfile className="mx-1" />,
+      handleAction: () => {
+        console.log("Navigate page");
+      }
 
     },
     {
       actionItemsName: "Logout",
       actionIcon: <FiLogOut className="mx-1" />,
+      handleAction: () => {
+        console.log("Log out");
+        setIsUserlogoutModal(true);
+      }
 
     }
   ]);
+
+
+  // here was define userLogout modal close
+  const onUserLogoutModal = () => {
+    setIsUserlogoutModal(false);
+  }
+
+  // here was define userLogout  cancel
+  const onUserLogoutCancel = () => {
+    setIsUserlogoutModal(false);
+  }
 
   return (
     <>
       <div className="flex flex-col lg:flex-row items-center lg:items-end space-y-2 lg:space-y-0 lg:space-x-4">
         {actionItem.map((items, i) => (
           <div key={i}>
-            <a data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+            <a onClick={items.handleAction} data-modal-target="popup-modal" data-modal-toggle="popup-modal"
               className="flex text-gray-600 lg:text-white hover:text-black lg:hover:text-gray-300 transition-colors">
               <p className="flex lg:hidden">{items.actionItemsName}</p>
               <p className="mt-1.5">{items.actionIcon}</p>
@@ -36,13 +56,20 @@ const NavActions: React.FC = () => {
           </div>
         ))}
       </div>
+
+      {isUserlogoutModal && (
+        <div>
+          <UserLogout onUserLogoutModal={onUserLogoutModal} onUserLogoutCancel={onUserLogoutCancel} />
+        </div>
+      )}
     </>
   );
 }
 
 
+
 // here define usernav functional component
-const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
+const UserNav: React.FC = () => {
 
   // here declare nav list content
   const [chatNavItem] = useState<userNavListItem[]>([
@@ -66,30 +93,21 @@ const UserNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
 
   return (
     <>
-      {/* start ul for chat list nav content */}
-      <ul className={`lg:flex ${isOpen ? "block" : "hidden"} absolute lg:relative rounded-2xl shadow-lg 
-      lg:shadow-none lg:rounded-none h-auto bg-slate-100 lg:bg-transparent w-48 lg:w-auto text-base 
-      lg:text-lg lg:h-auto right-0 top-full lg:top-auto p-4 lg:p-0 space-y-2 lg:space-y-0 lg:space-x-4`}>
-
-        {/* here decalare chat navlink list items */}
-        {chatNavItem.map((items: any, i: any) => (
-          <li key={i} className="mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
-            <NavLink to={items.itemPath} className="flex text-gray-600 lg:text-white 
-           hover:text-black lg:hover:text-gray-300 transition-colors">
-              <p className="flex lg:hidden">{items.listItem}</p>
-              <p className="px-4 lg:px-[5px] mt-[0.4rem]">{items.listIcon}</p>
-            </NavLink>
-          </li>
-        ))}
-
-
-        {/* here can declare myProfile and logout buttons in one li */}
-        <li className="mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
-          <NavActions />
+      {chatNavItem.map((items: any, i: any) => (
+        <li key={i} className="mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
+          <NavLink to={items.itemPath} className={({ isActive }) => isActive ? `flex text-black lg:text-white 
+           hover:text-black lg:hover:text-gray-300 transition-colors`: `flex text-gray-600 lg:text-slate-300 
+           hover:text-black lg:hover:text-gray-300 transition-colors`} >
+            <p className="flex lg:hidden">{items.listItem}</p>
+            <p className="px-4 lg:px-[5px] mt-[0.4rem]">{items.listIcon}</p>
+          </NavLink>
         </li>
+      ))}
 
-      </ul>
-      {/* end ul */}
+
+      <li className="mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
+        <UserActionNav />
+      </li>
     </>
   );
 };

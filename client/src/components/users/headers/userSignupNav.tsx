@@ -1,10 +1,10 @@
 // here import some libraries methods and components
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { isOpenheaderProps, userSignupListItem, } from "../../models/userModel.tsx";
+import { userSignupListItem } from "../../models/userModel.tsx";
 
 // here define userSignupNav functional component
-const UserSignupNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
+const UserSignupNav: React.FC = () => {
 
   // here declare nav list items
   const [signupList] = useState<userSignupListItem[]>([
@@ -20,23 +20,13 @@ const UserSignupNav: React.FC<isOpenheaderProps> = ({ isOpen }) => {
 
   return (
     <>
-      {/* start ul for nav link */}
-      <ul
-        className={`lg:flex ${isOpen ? "block" : "hidden"
-          } absolute lg:relative rounded-2xl shadow-lg lg:shadow-none lg:rounded-none  
-          h-48 bg-slate-100 lg:bg-transparent w-48 lg:w-auto lg:h-auto right-0 top-full 
-          lg:top-auto p-4 lg:p-0 space-y-2 lg:space-y-0 lg:space-x-4`}
-      >
-        {/* here declare navlink list item */}
-        {signupList.map((items: any, i: any) => (
-          <li key={i} className=" mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
-            <NavLink to={items.itemPath} className="block text-gray-600 lg:text-white lg:text-base hover:text-black 
-                lg:hover:text-gray-300 transition-colors">{items.listItem}</NavLink>
-          </li>
-        ))}
-
-      </ul>
-      {/* end ul */}
+      {signupList.map((items: any, i: any) => (
+        <li key={i} className=" mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
+          <NavLink to={items.itemPath} className={({ isActive }) => isActive ? `block text-gray-700 lg:text-white lg:text-base 
+            hover:text-black lg:hover:text-gray-300 transition-colors`: `block text-gray-600 lg:text-slate-300 lg:text-base 
+            hover:text-black lg:hover:text-gray-300 transition-colors`}>{items.listItem}</NavLink>
+        </li>
+      ))}
     </>
   );
 };

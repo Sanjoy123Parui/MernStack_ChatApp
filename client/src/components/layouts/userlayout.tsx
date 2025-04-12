@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Headers from '../users/headers/userheader.tsx';
+import UserHeader from '../users/headers/userheader.tsx';
 
 
 // here define userLayout functionality
@@ -8,7 +8,7 @@ const Userlayout: React.FC = () => {
     return (
         <>
             {/* It is a headers component */}
-            <Headers />
+            <UserHeader />
 
             {/* start main */}
             <main>
