@@ -5,7 +5,7 @@ import { MdOutlineChatBubble, MdGroups } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { userNavListItem, actionListItems } from "../../models/userModel.ts";
-import UserLogout from "../signup/userlogout.tsx";
+import UserLogout from "../signup/userLogout.tsx";
 
 const UserActionNav: React.FC = () => {
 
@@ -25,7 +25,6 @@ const UserActionNav: React.FC = () => {
       actionItemsName: "Logout",
       actionIcon: <FiLogOut className="mx-1" />,
       handleAction: () => {
-        console.log("Log out");
         setIsUserlogoutModal(true);
       }
 

@@ -1,6 +1,6 @@
 import Headings from "./contents/headings.tsx";
 import ContentLists from "./contents/contentLists.tsx";
-import MessageHeading from "./contents/messgaeHeading.tsx";
+import MessagesHeading from "./contents/messagesHeading.tsx";
 import Messages from "./contents/messages.tsx";
 import Conversations from "./contents/conversations.tsx";
 // import EmptyContent from "./contents/emptyContent.tsx";
@@ -26,7 +26,7 @@ const Chats: React.FC = () => {
 
         <section className="col-span-1 border w-full h-[668px] lg:col-span-5">
           <div>
-            <MessageHeading />
+            <MessagesHeading />
           </div>
           <div className="w-full h-[530px]">
             <Messages />
