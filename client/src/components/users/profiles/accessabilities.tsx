@@ -4,9 +4,10 @@ import { IoMdClose } from "react-icons/io";
 import { MdBrightness6 } from "react-icons/md";
 import { IoMdNotifications } from "react-icons/io";
 import { BiSolidConversation } from "react-icons/bi";
-import { MdDelete } from "react-icons/md";
+import { AiFillSound } from "react-icons/ai";
 import { userAccessbilityItems } from "../../models/accessModel.ts";
 import { Switch } from "../../ui/switch.tsx";
+import UserAccounts from "../signup/userAccounts.tsx";
 
 
 // here was define anothere contents of settings
@@ -22,17 +23,17 @@ const Settings: React.FC = () => {
         {
             itemIcon: <IoMdNotifications className="w-8 h-12 text-sm text-gray-400 p-[2px] mx-1" />,
             itemName: "Incomming notification",
-            itemDesc: "Incomming notification sound"
+            itemDesc: "Incomming notification sound changes"
         },
         {
             itemIcon: <BiSolidConversation className="w-8 h-12 text-sm text-gray-400 p-[2px] mx-1" />,
             itemName: "Converation notification",
-            itemDesc: "Conversation notification sounds"
+            itemDesc: "Conversation notification sound changes"
         },
         {
-            itemIcon: <MdDelete className="w-8 h-12 text-sm text-gray-400 p-[2px] mx-1" />,
-            itemName: "Remove Accounts",
-            itemDesc: "Accounts was deletes"
+            itemIcon: <AiFillSound className="w-8 h-12 text-sm text-gray-400 p-[2px] mx-1" />,
+            itemName: "Typing Sound",
+            itemDesc: "Text typing sound into the chats"
         },
     ]);
 
@@ -49,7 +50,7 @@ const Settings: React.FC = () => {
                                 </div>
                             </div>
                             <div className="flex-1 min-w-0">
-                                <p className="text-sm md:text-base font-medium truncate dark:text-black">
+                                <p className="text-sm md:text-base font-medium truncate text-gray-800 dark:text-black">
                                     {items.itemName}
                                 </p>
                                 <p className="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -67,6 +68,8 @@ const Settings: React.FC = () => {
         </>
     );
 }
+
+
 
 // here define Accessabilities functional component
 const Accessabilities: React.FC = () => {
@@ -106,6 +109,12 @@ const Accessabilities: React.FC = () => {
                         <Settings />
                     </div>
                     {/* end div for settings component content */}
+
+                    {/* start div for remove account from user component */}
+                    <div className="py-8">
+                        <UserAccounts />
+                    </div>
+                    {/* end div for remove user account component */}
                 </div>
             </div>
         </>
