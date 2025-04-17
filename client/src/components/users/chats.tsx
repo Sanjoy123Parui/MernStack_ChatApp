@@ -30,7 +30,6 @@ const Chats: React.FC = () => {
           </div> */}
         </section>
 
-
         <section className="col-span-1 border w-full h-[668px] lg:col-span-5">
           <div>
             <div>
@@ -43,8 +42,6 @@ const Chats: React.FC = () => {
               <Conversations />
             </div>
           </div>
-
-
 
           {/* <div className="bg-slate-50">
             <EmptyContent />

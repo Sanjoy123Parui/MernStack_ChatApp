@@ -58,12 +58,12 @@ const UserRegister: React.FC = () => {
                     {/* start div are content for navigate route in user login form component */}
                     <div className="flex items-center justify-center p-1">
                       <p className="text-base">
-                        Please click here to{" "}
+                        Please click here to?{" "}
                         <Link
-                          to="/"
+                          to="/user/change-password"
                           className="text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700"
                         >
-                          Login
+                          forgot Password
                         </Link>{" "}
                       </p>
                     </div>

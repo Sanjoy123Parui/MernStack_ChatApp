@@ -3,9 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Userlayout from "./userlayout.tsx";
 
 // here was define and import all children components
-const UserLogin: any = lazy(
-  () => import("../users/signup/userLogin.tsx")
-);
+const UserLogin: any = lazy(() => import("../users/signup/userLogin.tsx"));
 const UserRegister: any = lazy(
   () => import("../users/signup/userRegister.tsx")
 );
@@ -18,18 +16,10 @@ const UserCreateProfile: any = lazy(
 const UserViewProfile: any = lazy(
   () => import("../users/profiles/userViewProfile.tsx")
 );
-const Chat: any = lazy(
-  () => import("../users/chats.tsx")
-);
-const Stories: any = lazy(
-  () => import("../users/stories.tsx")
-);
-const Groups: any = lazy(
-  () => import("../users/groups.tsx")
-);
-const Notfound: any = lazy(
-  () => import("../layouts/notfound.tsx")
-);
+const Chat: any = lazy(() => import("../users/chats.tsx"));
+const Stories: any = lazy(() => import("../users/stories.tsx"));
+const Groups: any = lazy(() => import("../users/groups.tsx"));
+const Notfound: any = lazy(() => import("../layouts/notfound.tsx"));
 
 // here was create routerlayout functional component
 const Routerlayout: React.FC = () => {

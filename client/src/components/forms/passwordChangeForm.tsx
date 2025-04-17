@@ -1,6 +1,4 @@
 // here import all libraries and functional components
-import { useState } from "react";
-
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { Form, FormField, FormItem, FormControl } from "../ui/form.tsx";
@@ -9,19 +7,16 @@ import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
 import { changePasswordFormProps } from "../models/signupModel.ts";
+import { useUserTogglePassword } from "../hooks/signup.ts";
 
 // here define change paasrd form functional component
 const PasswordChangeForm: React.FC<changePasswordFormProps> = ({
   form,
   onSubmit,
 }) => {
-  // declare useState hook for show/hide password
-  const [toggleShowPassword, setToggleShowPassword] = useState<boolean>(false);
-
-  // define function for toggle show/hide password
-  const visibilityChangepassword = () => {
-    setToggleShowPassword(!toggleShowPassword);
-  };
+  // here was declare custom hooks of toggle password
+  const { isTogglePassword, togglePasswordVisiblity }: any =
+    useUserTogglePassword(false);
 
   return (
     <>
@@ -83,7 +78,7 @@ const PasswordChangeForm: React.FC<changePasswordFormProps> = ({
                   </Label>
                   <FormControl>
                     <Input
-                      type={toggleShowPassword ? "text" : "password"}
+                      type={isTogglePassword ? "text" : "password"}
                       {...field}
                       className={`shadow appearance-none border-[1px]
                                         ${
@@ -98,10 +93,10 @@ const PasswordChangeForm: React.FC<changePasswordFormProps> = ({
                   </FormControl>
                   <button
                     type="button"
-                    onClick={visibilityChangepassword}
+                    onClick={togglePasswordVisiblity}
                     className="absolute top-8 md:top-11 lg:top-12 right-3 mt-4 transform -translate-y-1/2 text-gray-500"
                   >
-                    {toggleShowPassword ? <FaEye /> : <FaEyeSlash />}
+                    {isTogglePassword ? <FaEye /> : <FaEyeSlash />}
                   </button>
 
                   {fieldState?.error && (
@@ -129,7 +124,7 @@ const PasswordChangeForm: React.FC<changePasswordFormProps> = ({
                   </Label>
                   <FormControl>
                     <Input
-                      type={toggleShowPassword ? "text" : "password"}
+                      type={isTogglePassword ? "text" : "password"}
                       {...field}
                       className={`shadow appearance-none border-[1px]
                                                 ${
@@ -144,10 +139,10 @@ const PasswordChangeForm: React.FC<changePasswordFormProps> = ({
                   </FormControl>
                   <button
                     type="button"
-                    onClick={visibilityChangepassword}
+                    onClick={togglePasswordVisiblity}
                     className="absolute top-8 md:top-11 lg:top-12 right-3 mt-4 transform -translate-y-1/2 text-gray-500"
                   >
-                    {toggleShowPassword ? <FaEye /> : <FaEyeSlash />}
+                    {isTogglePassword ? <FaEye /> : <FaEyeSlash />}
                   </button>
 
                   {fieldState?.error && (

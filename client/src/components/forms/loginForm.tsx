@@ -1,5 +1,4 @@
 // here import all library og packeges which are using in login form
-import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { Form, FormField, FormItem, FormControl } from "../ui/form.tsx";
@@ -8,16 +7,13 @@ import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
 import { loginFormProps } from "../models/signupModel.ts";
+import { useUserTogglePassword } from "../hooks/signup.ts";
 
 // here define LoginForm functional component
 const LoginForm: React.FC<loginFormProps> = ({ form, onSubmit }) => {
-  // here declare useState hooks
-  const [istoggleLogin, setIstoggleLogin] = useState<boolean>(false);
-
-  // here define function is password is show or hide
-  const loginPasswordVisiblity = () => {
-    setIstoggleLogin(!istoggleLogin);
-  };
+  // here was declare custom hooks of toggle password
+  const { isTogglePassword, togglePasswordVisiblity }: any =
+    useUserTogglePassword(false);
 
   return (
     <>
@@ -80,7 +76,7 @@ const LoginForm: React.FC<loginFormProps> = ({ form, onSubmit }) => {
                   </Label>
                   <FormControl>
                     <Input
-                      type={istoggleLogin ? "text" : "password"}
+                      type={isTogglePassword ? "text" : "password"}
                       {...field}
                       className={`shadow appearance-none border-[1px]
                                         ${
@@ -95,10 +91,10 @@ const LoginForm: React.FC<loginFormProps> = ({ form, onSubmit }) => {
                   </FormControl>
                   <button
                     type="button"
-                    onClick={loginPasswordVisiblity}
+                    onClick={togglePasswordVisiblity}
                     className="absolute top-8 md:top-11 lg:top-12 right-3 mt-4 transform -translate-y-1/2 text-gray-500"
                   >
-                    {istoggleLogin ? <FaEye /> : <FaEyeSlash />}
+                    {isTogglePassword ? <FaEye /> : <FaEyeSlash />}
                   </button>
 
                   {/* error message of password input trigger */}

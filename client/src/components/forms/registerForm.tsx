@@ -1,5 +1,5 @@
 // here import all form packages of libraries
-import { useState } from "react";
+// import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { Form, FormField, FormItem, FormControl } from "../ui/form.tsx";
@@ -8,17 +8,13 @@ import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
 import { registerFormProps } from "../models/signupModel.ts";
+import { useUserTogglePassword } from "../hooks/signup.ts";
 
 // here was define register form functional component
 const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
-  // declare useState hook for show/hide password
-  const [toggleRegisterPassword, setToggleRegisterPassword] =
-    useState<boolean>(false);
-
-  // define function for toggle show/hide password
-  const visibilityRegister = () => {
-    setToggleRegisterPassword(!toggleRegisterPassword);
-  };
+  // here was declare custom hooks of toggle password
+  const { isTogglePassword, togglePasswordVisiblity }: any =
+    useUserTogglePassword(false);
 
   return (
     <>
@@ -79,7 +75,7 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
                   </Label>
                   <FormControl>
                     <Input
-                      type={toggleRegisterPassword ? "text" : "password"}
+                      type={isTogglePassword ? "text" : "password"}
                       {...field}
                       className={`shadow appearance-none border-[1px]
                                         ${
@@ -94,10 +90,10 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
                   </FormControl>
                   <button
                     type="button"
-                    onClick={visibilityRegister}
+                    onClick={togglePasswordVisiblity}
                     className="absolute top-8 md:top-11 lg:top-12 right-3 mt-4 transform -translate-y-1/2 text-gray-500"
                   >
-                    {toggleRegisterPassword ? <FaEye /> : <FaEyeSlash />}
+                    {isTogglePassword ? <FaEye /> : <FaEyeSlash />}
                   </button>
                   {fieldState?.error && (
                     <p className="text-red-500 text-sm lg:text-base">
@@ -124,7 +120,7 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
                   </Label>
                   <FormControl>
                     <Input
-                      type={toggleRegisterPassword ? "text" : "password"}
+                      type={isTogglePassword ? "text" : "password"}
                       {...field}
                       className={`shadow appearance-none border-[1px]
                                                 ${
@@ -139,10 +135,10 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
                   </FormControl>
                   <button
                     type="button"
-                    onClick={visibilityRegister}
+                    onClick={togglePasswordVisiblity}
                     className="absolute top-8 md:top-11 lg:top-12 right-3 mt-4 transform -translate-y-1/2 text-gray-500"
                   >
-                    {toggleRegisterPassword ? <FaEye /> : <FaEyeSlash />}
+                    {isTogglePassword ? <FaEye /> : <FaEyeSlash />}
                   </button>
                   {fieldState?.error && (
                     <p className="text-red-500 text-sm lg:text-base">
