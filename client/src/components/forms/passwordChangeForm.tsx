@@ -7,7 +7,7 @@ import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
 import { changePasswordFormProps } from "../models/signupModel.ts";
-import { useUserTogglePassword } from "../hooks/signup.ts";
+import { useUserTogglePassword } from "../hooks/signuphooks.ts";
 
 // here define change paasrd form functional component
 const PasswordChangeForm: React.FC<changePasswordFormProps> = ({

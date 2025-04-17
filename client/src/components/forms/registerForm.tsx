@@ -8,7 +8,7 @@ import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
 import { registerFormProps } from "../models/signupModel.ts";
-import { useUserTogglePassword } from "../hooks/signup.ts";
+import { useUserTogglePassword } from "../hooks/signuphooks.ts";
 
 // here was define register form functional component
 const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {

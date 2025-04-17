@@ -7,7 +7,7 @@ import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
 import { loginFormProps } from "../models/signupModel.ts";
-import { useUserTogglePassword } from "../hooks/signup.ts";
+import { useUserTogglePassword } from "../hooks/signuphooks.ts";
 
 // here define LoginForm functional component
 const LoginForm: React.FC<loginFormProps> = ({ form, onSubmit }) => {

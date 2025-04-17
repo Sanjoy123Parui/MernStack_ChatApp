@@ -6,36 +6,35 @@ import { FiLogOut } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { userNavListItem, actionListItems } from "../../models/userModel.ts";
 import UserLogout from "../signup/userLogout.tsx";
+import { useUserLogoutModal } from "../../hooks/signuphooks.ts";
 
 const UserActionNav: React.FC = () => {
-  // declare useState hook
-  const [isUserlogoutModal, setIsUserlogoutModal] = useState<any>(false);
+  const { isLogoutModal, openLogoutModal, closeLogoutModal }: any =
+    useUserLogoutModal();
 
   const [actionItem] = useState<actionListItems[]>([
     {
       actionItemsName: "Accounts",
       actionIcon: <CgProfile className="mx-1" />,
       handleAction: () => {
-        console.log("Navigate page");
+        console.log("Navigation");
       },
     },
     {
       actionItemsName: "Logout",
       actionIcon: <FiLogOut className="mx-1" />,
-      handleAction: () => {
-        setIsUserlogoutModal(true);
-      },
+      handleAction: openLogoutModal,
     },
   ]);
 
   // here was define userLogout modal close
   const onUserLogoutModal = () => {
-    setIsUserlogoutModal(false);
+    closeLogoutModal();
   };
 
   // here was define userLogout  cancel
   const onUserLogoutCancel = () => {
-    setIsUserlogoutModal(false);
+    closeLogoutModal();
   };
 
   return (
@@ -56,7 +55,7 @@ const UserActionNav: React.FC = () => {
         ))}
       </div>
 
-      {isUserlogoutModal && (
+      {isLogoutModal && (
         <div>
           <UserLogout
             onUserLogoutModal={onUserLogoutModal}
