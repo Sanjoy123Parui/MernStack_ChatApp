@@ -1,13 +1,13 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Routerlayout from "./components/layouts/routerlayout.tsx";
 import "./App.css";
+import Routerlayout from "./components/layouts/routerlayout.tsx";
+import { AppProvider } from "./components/providers/contextproviders.tsx";
 
 const App: React.FC = () => {
   return (
     <>
-      <QueryClientProvider client={new QueryClient()}>
+      <AppProvider>
         <Routerlayout />
-      </QueryClientProvider>
+      </AppProvider>
     </>
   );
 };

@@ -7,18 +7,20 @@ import { CgProfile } from "react-icons/cg";
 import { userNavListItem, actionListItems } from "../../models/userModel.ts";
 import UserLogout from "../signup/userLogout.tsx";
 import { useUserLogoutModal } from "../../hooks/signuphooks.ts";
+import { useSettingUserContext } from "../../hooks/settinghooks.ts";
 
 const UserActionNav: React.FC = () => {
+  // here was declare custom hooks
+  const { showUserAccessories }: any = useSettingUserContext();
   const { isLogoutModal, openLogoutModal, closeLogoutModal }: any =
     useUserLogoutModal();
 
+  // here declare custom hooks
   const [actionItem] = useState<actionListItems[]>([
     {
       actionItemsName: "Accounts",
       actionIcon: <CgProfile className="mx-1" />,
-      handleAction: () => {
-        console.log("Navigation");
-      },
+      handleAction: showUserAccessories,
     },
     {
       actionItemsName: "Logout",

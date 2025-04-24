@@ -8,6 +8,7 @@ import { AiFillSound } from "react-icons/ai";
 import { userAccessbilityItems } from "../../models/accessModel.ts";
 import { Switch } from "../../ui/switch.tsx";
 import UserAccounts from "../signup/userAccounts.tsx";
+import { useSettingUserContext } from "../../hooks/settinghooks.ts";
 
 
 // here was define anothere contents of settings
@@ -73,6 +74,10 @@ const Settings: React.FC = () => {
 
 // here define Accessabilities functional component
 const Accessabilities: React.FC = () => {
+
+    // here was destruct custom hooks data
+    const { hideUserAccessories }: any = useSettingUserContext()
+
     return (
         <>
             {/* start div for all accessories content */}
@@ -80,7 +85,7 @@ const Accessabilities: React.FC = () => {
                 <div className="mb-0 px-8">
 
                     {/* start close button of accessories setting */}
-                    <a className="text-gray-600 text-lg p-2 justify-end flex lg:text-2xl font-bold mb-2 mx-auto">
+                    <a onClick={hideUserAccessories} className="text-gray-600 text-lg p-2 justify-end flex lg:text-2xl font-bold mb-2 mx-auto">
                         <IoMdClose />
                     </a>
                     {/* end close button */}

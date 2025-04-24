@@ -67,7 +67,7 @@ const Routerlayout: React.FC = () => {
         {
           path: "/user/content/groups",
           element: <Groups />,
-        },
+        }
       ],
     },
 
