@@ -40,11 +40,10 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
                       type="number"
                       {...field}
                       className={`shadow appearance-none border-[1px]
-                                            ${
-                                              fieldState.error
-                                                ? "border-red-500"
-                                                : "border-gray-300"
-                                            }  
+                                            ${fieldState.error
+                          ? "border-red-500"
+                          : "border-gray-300"
+                        }  
                                             rounded w-full py-2 px-3 text-gray-900 leading-tight 
                                             focus:outline-none focus:ring focus:ring-gray-700`}
                       placeholder="Phone"
@@ -78,11 +77,10 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
                       type={isTogglePassword ? "text" : "password"}
                       {...field}
                       className={`shadow appearance-none border-[1px]
-                                        ${
-                                          fieldState.error
-                                            ? "border-red-500"
-                                            : "border-gray-300"
-                                        }
+                                        ${fieldState.error
+                          ? "border-red-500"
+                          : "border-gray-300"
+                        }
                                         rounded w-full py-2 px-3 text-gray-900 leading-tight
                                         focus:outline-none focus:ring focus:ring-gray-700`}
                       placeholder="Password"
@@ -123,11 +121,10 @@ const RegisterForm: React.FC<registerFormProps> = ({ form, onSubmit }) => {
                       type={isTogglePassword ? "text" : "password"}
                       {...field}
                       className={`shadow appearance-none border-[1px]
-                                                ${
-                                                  fieldState.error
-                                                    ? "border-red-500"
-                                                    : "border-gray-300"
-                                                }
+                                                ${fieldState.error
+                          ? "border-red-500"
+                          : "border-gray-300"
+                        }
                                                 rounded w-full py-2 px-3 text-gray-900 leading-tight
                                                 focus:outline-none focus:ring focus:ring-gray-700`}
                       placeholder="Confirm Password"

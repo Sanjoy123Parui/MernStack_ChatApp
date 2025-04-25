@@ -19,6 +19,7 @@ const UserViewProfile: any = lazy(
 const Chat: any = lazy(() => import("../users/chats.tsx"));
 const Stories: any = lazy(() => import("../users/stories.tsx"));
 const Groups: any = lazy(() => import("../users/groups.tsx"));
+const Supports: any = lazy(() => import("../users/supports.tsx"));
 const Notfound: any = lazy(() => import("../layouts/notfound.tsx"));
 
 // here was create routerlayout functional component
@@ -67,6 +68,11 @@ const Routerlayout: React.FC = () => {
         {
           path: "/user/content/groups",
           element: <Groups />,
+        },
+
+        {
+          path: "/user/customer/support",
+          element: <Supports />
         }
       ],
     },

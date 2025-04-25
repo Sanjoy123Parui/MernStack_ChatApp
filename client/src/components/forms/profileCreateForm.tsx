@@ -81,11 +81,10 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                       <Input
                         type="text"
                         {...field}
-                        className={`shadow appearance-none border-[1px] ${
-                          fieldState.error
-                            ? "border-red-500"
-                            : "border-gray-500"
-                        } rounded-xl w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`}
+                        className={`shadow appearance-none border-[1px] ${fieldState.error
+                          ? "border-red-500"
+                          : "border-gray-500"
+                          } rounded-xl w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`}
                         placeholder="Full name"
                       />
                     </FormControl>
@@ -118,11 +117,10 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                           field.onChange(e.currentTarget.files?.[0]);
                           handleFileChange(e);
                         }}
-                        className={`shadow appearance-none border-[1px] ${
-                          fieldState.error
-                            ? "border-red-500"
-                            : "border-gray-500"
-                        } rounded-xl w-full py-0 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`}
+                        className={`shadow appearance-none border-[1px] ${fieldState.error
+                          ? "border-red-500"
+                          : "border-gray-500"
+                          } rounded-xl w-full py-0 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`}
                       />
                     </FormControl>
 
@@ -198,11 +196,10 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                       <Input
                         type="date"
                         {...field}
-                        className={`shadow appearance-none border-[1px] ${
-                          fieldState.error
-                            ? "border-red-500"
-                            : "border-gray-500"
-                        } rounded-xl w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`}
+                        className={`shadow appearance-none border-[1px] ${fieldState.error
+                          ? "border-red-500"
+                          : "border-gray-500"
+                          } rounded-xl w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`}
                       />
                     </FormControl>
 
@@ -230,11 +227,10 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
                     <FormControl>
                       <Textarea
                         {...field}
-                        className={`shadow appearance-none border-[1px] ${
-                          fieldState.error
-                            ? "border-red-500"
-                            : "border-gray-500"
-                        } rounded-xl w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`}
+                        className={`shadow appearance-none border-[1px] ${fieldState.error
+                          ? "border-red-500"
+                          : "border-gray-500"
+                          } rounded-xl w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`}
                         placeholder="Please gives us abouts"
                       />
                     </FormControl>
@@ -254,7 +250,8 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({ form, onSubmit }) => {
             <div className="flex items-center justify-between">
               <Button
                 type="submit"
-                className="w-full bg-gray-700 hover:bg-gray-950 text-white font-bold rounded-2xl py-2 px-4 focus:outline-none focus:shadow-outline"
+                className="w-full bg-gray-700 hover:bg-gray-950 text-white font-bold rounded-2xl py-2 px-4 
+                focus:outline-none focus:shadow-outline"
               >
                 Create
               </Button>
