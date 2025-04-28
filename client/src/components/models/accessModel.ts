@@ -5,9 +5,16 @@ export interface userAccessbilityItems {
   itemDesc: String;
 }
 
-// here define interface model of user settings contextProps
+// here declare interface model of user settings contextProps
 export interface userSettingContextProps {
   isAccounts: boolean;
   showUserAccessories: () => void;
   hideUserAccessories: () => void;
+}
+
+// decalare interface model user Remove account contextProps
+export interface userRemoveAccountProps {
+  isUserRemoveAccount: boolean;
+  showUserAccountRemoveModal: () => void;
+  hideUserAccountRemoveModal: () => void;
 }

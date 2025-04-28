@@ -4,13 +4,17 @@ import MessagesHeading from "./contents/messagesHeading.tsx";
 import Messages from "./contents/messages.tsx";
 import Conversations from "./contents/conversations.tsx";
 import Accessabilities from "./profiles/accessabilities.tsx";
-import { useSettingUserContext } from "../hooks/settinghooks.ts"
+import { useSettingUserContext, useRemoveAccountModal } from "../hooks/contexts/userSettingContexts.ts";
+import UserRemoveAccounts from "./signup/userRemoveAccounts.tsx"
 // import EmptyContent from "./contents/emptyContent.tsx";
 
 // here define Chats functional components
 const Chats: React.FC = () => {
   // here was declare custom hooks
   const { isAccounts }: any = useSettingUserContext();
+  const { isUserRemoveAccount }: any = useRemoveAccountModal();
+
+
   // here was declare heading variables of Chats
   const headingTitle: string = "Chats";
 
@@ -54,6 +58,11 @@ const Chats: React.FC = () => {
         </section>
       </div>
       {/* end div */}
+
+      {/* here loaded User remove accounts modal */}
+      {isUserRemoveAccount && (
+        <UserRemoveAccounts />
+      )}
     </>
   );
 };

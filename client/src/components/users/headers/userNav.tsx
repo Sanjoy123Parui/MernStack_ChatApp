@@ -8,7 +8,7 @@ import { CgProfile } from "react-icons/cg";
 import { userNavListItem, actionListItems } from "../../models/userModel.ts";
 import UserLogout from "../signup/userLogout.tsx";
 import { useUserLogoutModal } from "../../hooks/signuphooks.ts";
-import { useSettingUserContext } from "../../hooks/settinghooks.ts";
+import { useSettingUserContext } from "../../hooks/contexts/userSettingContexts.ts";
 
 const UserActionNav: React.FC = () => {
   // here was declare custom hooks
