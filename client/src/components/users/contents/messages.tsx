@@ -1,4 +1,4 @@
-import Senders from "./senders.tsx";
+
 
 // define Messages component
 const Messages: React.FC = () => {
@@ -6,7 +6,7 @@ const Messages: React.FC = () => {
     <>
       {/* start div for all messages conversation content */}
       <div className="bg-slate-100 w-auto h-full">
-        <Senders />
+        <h1 className="text-lg font-medium p-4">Hii</h1>
       </div>
       {/* end div */}
     </>

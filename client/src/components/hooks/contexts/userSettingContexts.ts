@@ -26,7 +26,9 @@ export const UserAccountRemoveContext = createContext<
 export const useRemoveAccountModal = (): any => {
   const userAccountRemove: any = useContext(UserAccountRemoveContext);
   if (!userAccountRemove) {
-    throw new Error("useUserSetting must be used within a UserSettingProvider");
+    throw new Error(
+      "useRemoveAccountModal must be used within a UserSettingProvider"
+    );
   }
   return userAccountRemove;
 };

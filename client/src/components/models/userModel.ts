@@ -1,7 +1,8 @@
 // here userLogout modal popup modal props
 export interface userLogoutModalProps {
-  onUserLogoutModal: () => void;
-  onUserLogoutCancel: () => void;
+  isLogoutModal: boolean;
+  openLogoutModal: () => void;
+  closeLogoutModal: () => void;
 }
 
 // here define userSignupListItem content interface model

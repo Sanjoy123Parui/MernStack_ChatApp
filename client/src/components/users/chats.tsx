@@ -5,7 +5,9 @@ import Messages from "./contents/messages.tsx";
 import Conversations from "./contents/conversations.tsx";
 import Accessabilities from "./profiles/accessabilities.tsx";
 import { useSettingUserContext, useRemoveAccountModal } from "../hooks/contexts/userSettingContexts.ts";
+import { useUserLogoutModalContext } from "../hooks/contexts/userSignupContext.ts";
 import UserRemoveAccounts from "./signup/userRemoveAccounts.tsx"
+import UserLogout from "../users/signup/userLogout.tsx";
 // import EmptyContent from "./contents/emptyContent.tsx";
 
 // here define Chats functional components
@@ -13,7 +15,7 @@ const Chats: React.FC = () => {
   // here was declare custom hooks
   const { isAccounts }: any = useSettingUserContext();
   const { isUserRemoveAccount }: any = useRemoveAccountModal();
-
+  const { isLogoutModal }: any = useUserLogoutModalContext();
 
   // here was declare heading variables of Chats
   const headingTitle: string = "Chats";
@@ -59,10 +61,15 @@ const Chats: React.FC = () => {
       </div>
       {/* end div */}
 
-      {/* here loaded User remove accounts modal */}
-      {isUserRemoveAccount && (
-        <UserRemoveAccounts />
-      )}
+      <div>
+        {isUserRemoveAccount && (
+          <UserRemoveAccounts />
+        )}
+
+        {isLogoutModal && (
+          <UserLogout />
+        )}
+      </div>
     </>
   );
 };

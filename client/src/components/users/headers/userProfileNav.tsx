@@ -1,22 +1,9 @@
 import { FiLogOut } from "react-icons/fi";
-import UserLogout from "../signup/userLogout.tsx";
-import { useUserLogoutModal } from "../../hooks/signuphooks.ts";
+import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
 
 const UserProfileNav: React.FC = () => {
-  // here was declare custom hooks of logout modal popup
-  const { isLogoutModal, openLogoutModal, closeLogoutModal }: any =
-    useUserLogoutModal();
-
-  // here was define userLogout modal close
-  const onUserLogoutModal = () => {
-    closeLogoutModal();
-  };
-
-  // here was define userLogout cancel
-  const onUserLogoutCancel = () => {
-    closeLogoutModal();
-  };
-
+  // here was declare custom hooks
+  const { openLogoutModal }: any = useUserLogoutModalContext();
   return (
     <>
       <li className="mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
@@ -32,15 +19,6 @@ const UserProfileNav: React.FC = () => {
           </a>
         </div>
       </li>
-
-      {isLogoutModal && (
-        <div>
-          <UserLogout
-            onUserLogoutModal={onUserLogoutModal}
-            onUserLogoutCancel={onUserLogoutCancel}
-          />
-        </div>
-      )}
     </>
   );
 };

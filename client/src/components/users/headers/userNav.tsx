@@ -6,15 +6,13 @@ import { BiSupport } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { userNavListItem, actionListItems } from "../../models/userModel.ts";
-import UserLogout from "../signup/userLogout.tsx";
-import { useUserLogoutModal } from "../../hooks/signuphooks.ts";
 import { useSettingUserContext } from "../../hooks/contexts/userSettingContexts.ts";
+import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
 
 const UserActionNav: React.FC = () => {
   // here was declare custom hooks
   const { showUserAccessories }: any = useSettingUserContext();
-  const { isLogoutModal, openLogoutModal, closeLogoutModal }: any =
-    useUserLogoutModal();
+  const { openLogoutModal }: any = useUserLogoutModalContext();
 
   // here declare custom hooks
   const [actionItem] = useState<actionListItems[]>([
@@ -26,19 +24,11 @@ const UserActionNav: React.FC = () => {
     {
       actionItemsName: "Logout",
       actionIcon: <FiLogOut className="mx-1" />,
-      handleAction: openLogoutModal,
+      handleAction: openLogoutModal
     },
   ]);
 
-  // here was define userLogout modal close
-  const onUserLogoutModal = () => {
-    closeLogoutModal();
-  };
 
-  // here was define userLogout  cancel
-  const onUserLogoutCancel = () => {
-    closeLogoutModal();
-  };
 
   return (
     <>
@@ -57,15 +47,6 @@ const UserActionNav: React.FC = () => {
           </div>
         ))}
       </div>
-
-      {isLogoutModal && (
-        <div>
-          <UserLogout
-            onUserLogoutModal={onUserLogoutModal}
-            onUserLogoutCancel={onUserLogoutCancel}
-          />
-        </div>
-      )}
     </>
   );
 };
