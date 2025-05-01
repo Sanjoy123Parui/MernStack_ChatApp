@@ -39,7 +39,7 @@ const ContentLists: React.FC = () => {
         {/* end real ul */}
 
         {/* start demo ul of user list */}
-        <ul className="max-w-lg divide-y divide-gray-200 dark:divide-gray-700 ">
+        <ul className="max-w-lg divide-y divide-gray-200 dark:divide-gray-700">
           <li className="py-4 lg:py-3">
             <div className="flex items-center space-x-4 rtl:space-x-reverse">
               <div className="shrink-0">

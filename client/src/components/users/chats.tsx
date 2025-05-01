@@ -6,6 +6,8 @@ import Conversations from "./contents/conversations.tsx";
 import Accessabilities from "./profiles/accessabilities.tsx";
 import { useSettingUserContext, useRemoveAccountModal } from "../hooks/contexts/userSettingContexts.ts";
 import { useUserLogoutModalContext } from "../hooks/contexts/userSignupContext.ts";
+import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
+import UserViewProfile from "./profiles/userViewProfile.tsx";
 import UserRemoveAccounts from "./signup/userRemoveAccounts.tsx"
 import UserLogout from "../users/signup/userLogout.tsx";
 // import EmptyContent from "./contents/emptyContent.tsx";
@@ -16,6 +18,7 @@ const Chats: React.FC = () => {
   const { isAccounts }: any = useSettingUserContext();
   const { isUserRemoveAccount }: any = useRemoveAccountModal();
   const { isLogoutModal }: any = useUserLogoutModalContext();
+  const { isUserProfileView }: any = useUserProfileContexts();
 
   // here was declare heading variables of Chats
   const headingTitle: string = "Chats";
@@ -36,7 +39,15 @@ const Chats: React.FC = () => {
             </div>
           ) : (
             <div>
-              <Accessabilities />
+              {!isUserProfileView ? (
+                <div>
+                  <Accessabilities />
+                </div>
+              ) : (
+                <div className="pt-2">
+                  <UserViewProfile />
+                </div>
+              )}
             </div>
           )}
         </section>

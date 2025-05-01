@@ -9,23 +9,26 @@ import { userAccessbilityItems } from "../../models/accessModel.ts";
 // here was define user Settings functional component
 const Settings: React.FC = () => {
 
-    // here was declare useState hook
-    const [userAccessfierItem] = useState<userAccessbilityItems[]>([
+    // here was declare useState hooks
+    const [userAccessfierItems] = useState<userAccessbilityItems[]>([
         {
             itemIcon: <MdBrightness6 className="w-8 h-12 text-sm text-gray-400 p-[2px] mx-1" />,
             itemName: "Themes",
-            itemDesc: "System themes background color changes"
+            itemDesc: "Background theme color"
         },
+
         {
             itemIcon: <IoMdNotifications className="w-8 h-12 text-sm text-gray-400 p-[2px] mx-1" />,
             itemName: "Incomming notification",
-            itemDesc: "Incomming notification sound changes"
+            itemDesc: "Incomming notification sound"
         },
+
         {
             itemIcon: <BiSolidConversation className="w-8 h-12 text-sm text-gray-400 p-[2px] mx-1" />,
             itemName: "Converation notification",
-            itemDesc: "Conversation notification sound changes"
+            itemDesc: "Conversation notification sound"
         },
+
         {
             itemIcon: <AiFillSound className="w-8 h-12 text-sm text-gray-400 p-[2px] mx-1" />,
             itemName: "Typing Sound",
@@ -33,34 +36,39 @@ const Settings: React.FC = () => {
         },
     ]);
 
+
     return (
         <>
-            {/* here was start list content */}
-            <ul className="max-w-lg ">
-                {userAccessfierItem.map((items, i) => (
-                    <li key={i} className="py-4 lg:py-6">
-                        <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                            <div className="shrink-0">
-                                <div className="w-10 h-10 overflow-hidden">
-                                    {items.itemIcon}
-                                </div>
-                            </div>
-                            <div className="flex-1 min-w-0">
-                                <p className="text-sm md:text-base font-medium truncate text-gray-800 dark:text-black">
-                                    {items.itemName}
-                                </p>
-                                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                                    {items.itemDesc}
-                                </p>
-                            </div>
-                            <div>
-                                <Switch className="data-[state=checked]:bg-emerald-400 data-[state=unchecked]:bg-gray-400" />
+            {userAccessfierItems.map((items, i) => (
+                <li key={i} className="py-4 lg:py-3 mt-8">
+                    <div className="flex items-center space-x-4 rtl:space-x-reverse">
+                        {/* start this div for icons */}
+                        <div className="shrink-0">
+                            <div className="w-10 h-10 overflow-hidden">
+                                {items.itemIcon}
                             </div>
                         </div>
-                    </li>
-                ))}
-            </ul>
-            {/* end list content */}
+                        {/* end div for icons */}
+
+                        {/* start div for settings content name and abouts */}
+                        <div className="flex-1 min-w-0">
+                            <p className="text-sm md:text-base font-medium truncate dark:text-black">
+                                {items.itemName}
+                            </p>
+                            <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                {items.itemDesc}
+                            </p>
+                        </div>
+                        {/* start div for settings content name and abouts */}
+
+                        {/* start div for toggle buttons */}
+                        <div className="inline-flex">
+                            <Switch className="data-[state=checked]:bg-emerald-400 data-[state=unchecked]:bg-gray-400" />
+                        </div>
+                        {/* end div for toggle buttons */}
+                    </div>
+                </li>
+            ))}
         </>
     );
 }

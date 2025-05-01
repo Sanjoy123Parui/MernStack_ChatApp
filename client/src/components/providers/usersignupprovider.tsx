@@ -9,7 +9,9 @@ export const UserLogoutModalContextProvider: React.FC<{ children: React.ReactNod
 
     return (
         <>
-            <UserLogoutContext.Provider value={userLogoutdata}>{children}</UserLogoutContext.Provider>
+            <UserLogoutContext.Provider value={userLogoutdata}>
+                {children}
+            </UserLogoutContext.Provider>
         </>
     );
 }
