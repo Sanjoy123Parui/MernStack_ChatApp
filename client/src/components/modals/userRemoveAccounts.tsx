@@ -1,6 +1,6 @@
 import { IoMdClose } from "react-icons/io";
 import { CiCircleAlert } from "react-icons/ci";
-import { useRemoveAccountModal } from "../../hooks/contexts/userSettingContexts.ts";
+import { useRemoveAccountModal } from "../hooks/contexts/userSettingContexts.ts";
 
 // define remove accounts  modal popup component
 const UserRemoveAccounts: React.FC = () => {

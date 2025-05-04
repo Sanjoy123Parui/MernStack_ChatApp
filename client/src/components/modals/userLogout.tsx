@@ -1,6 +1,6 @@
 import { IoMdClose } from "react-icons/io";
 import { CiCircleAlert } from "react-icons/ci";
-import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
+import { useUserLogoutModalContext } from "../hooks/contexts/userSignupContext.ts";
 
 const UserLogout: React.FC = () => {
 
