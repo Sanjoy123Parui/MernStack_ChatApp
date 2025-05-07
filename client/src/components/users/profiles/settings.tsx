@@ -62,7 +62,7 @@ const Settings: React.FC = () => {
                         {/* start div for settings content name and abouts */}
 
                         {/* start div for toggle buttons */}
-                        <div className="inline-flex">
+                        <div className="inline-flex px-4">
                             <Switch className="data-[state=checked]:bg-emerald-400 data-[state=unchecked]:bg-gray-400" />
                         </div>
                         {/* end div for toggle buttons */}

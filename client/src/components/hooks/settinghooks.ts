@@ -18,6 +18,9 @@ export const useToggleAccountSettings = (): userSettingContextProps => {
 
 // here was declare and export custom hooks of useContext in user remove accounts modal
 export const useUserRemoveAccounts = (): userRemoveAccountProps => {
+  // here declare alert message varibales of user account modal
+  let userAccountAlertMessage: string = `Are you confirm to Remove Account?`;
+
   // here declare useState hooks for user remove account modal
   const [isUserRemoveAccount, setIsUserRemoveAccount] =
     useState<boolean>(false);
@@ -27,6 +30,7 @@ export const useUserRemoveAccounts = (): userRemoveAccountProps => {
   const hideUserAccountRemoveModal = () => setIsUserRemoveAccount(false);
 
   return {
+    userAccountAlertMessage,
     isUserRemoveAccount,
     showUserAccountRemoveModal,
     hideUserAccountRemoveModal,

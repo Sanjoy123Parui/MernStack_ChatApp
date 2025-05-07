@@ -11,11 +11,19 @@ export const useUserTogglePassword = (defaultValue: any): any => {
 
 // here was declare user logout modal popup custom hook
 export const useUserLogoutModal = (): userLogoutModalProps => {
+  // here declare alert message varibales of user account modal
+  let userLogoutAlertMessage: string = `Are you sure you want to log out?`;
+
   // here declare useState hooks
   const [isLogoutModal, setIsLogoutModal] = useState<boolean>(false);
   // define function for logout modal open
   const openLogoutModal = () => setIsLogoutModal(true);
   // define function for logout modal close
   const closeLogoutModal = () => setIsLogoutModal(false);
-  return { isLogoutModal, openLogoutModal, closeLogoutModal };
+  return {
+    userLogoutAlertMessage,
+    isLogoutModal,
+    openLogoutModal,
+    closeLogoutModal,
+  };
 };

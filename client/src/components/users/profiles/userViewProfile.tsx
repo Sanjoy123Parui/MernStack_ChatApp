@@ -24,17 +24,20 @@ const UserViewProfile: React.FC = () => {
         {/* start user profile main content */}
         <div className="flex flex-col items-center text-center py-8">
 
+          {/* avatar */}
           {/* <img
             src={userProfile?.avatar || "https://via.placeholder.com/150"}
             alt="User Avatar"
             className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-gray-300 mb-4"
           /> */}
-          {/* avatar */}
+
           <div className="w-24 h-24 overflow-hidden rounded-full lg:w-32 lg:h-32 bg-gray-100 dark:bg-gray-600 border-2 mb-4">
             <FaUser className="w-16 h-20 lg:w-20 lg:h-24 text-gray-400 mt-7 lg:mt-8 mx-4 lg:mx-[23px]" />
           </div>
+
           <h2 className="text-xl lg:text-2xl font-medium text-gray-800">Sanjoy Parui</h2>
           <p className="text-gray-600 text-md md:text-lg mt-1">8927219178</p>
+
         </div>
         {/* end userprofile main content */}
 

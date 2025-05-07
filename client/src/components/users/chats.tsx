@@ -8,9 +8,8 @@ import { useSettingUserContext, useRemoveAccountModal } from "../hooks/contexts/
 import { useUserLogoutModalContext } from "../hooks/contexts/userSignupContext.ts";
 import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
 import UserViewProfile from "./profiles/userViewProfile.tsx";
-import UserRemoveAccounts from "../modals/userRemoveAccounts.tsx";
 import UserLogout from "../modals/userLogout.tsx";
-import UserRemoveProfile from "../modals/userRemoveProfile.tsx";
+import UserRemoveModal from "../modals/userRemoveModal.tsx";
 // import EmptyContent from "./contents/emptyContent.tsx";
 
 // here define Chats functional components
@@ -74,17 +73,19 @@ const Chats: React.FC = () => {
       {/* end div */}
 
       <div>
-        {isUserRemoveAccount && (
-          <UserRemoveAccounts />
-        )}
 
         {isLogoutModal && (
           <UserLogout />
         )}
 
-        {isUserRemoveProfile && (
-          <UserRemoveProfile />
+        {isUserRemoveAccount && (
+          <UserRemoveModal />
         )}
+
+        {isUserRemoveProfile && (
+          <UserRemoveModal />
+        )}
+
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 // here userLogout modal popup modal props
 export interface userLogoutModalProps {
+  userLogoutAlertMessage: string;
   isLogoutModal: boolean;
   openLogoutModal: () => void;
   closeLogoutModal: () => void;

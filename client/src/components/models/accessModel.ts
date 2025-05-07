@@ -14,6 +14,7 @@ export interface userSettingContextProps {
 
 // decalare interface model user Remove account contextProps
 export interface userRemoveAccountProps {
+  userAccountAlertMessage: string;
   isUserRemoveAccount: boolean;
   showUserAccountRemoveModal: () => void;
   hideUserAccountRemoveModal: () => void;
