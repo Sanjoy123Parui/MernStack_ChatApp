@@ -30,7 +30,7 @@ const Accessabilities: React.FC = () => {
                             {/* start div for user Profile image content */}
                             <div className="shrink-0">
                                 <div className="w-10 h-10 sm:w-12 sm:h-12 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                                    <FaUser className="w-8 h-8 sm:w-10 sm:h-10 text-gray-400 p-[2px] mx-[3px]" />
+                                    <FaUser className="w-8 h-12 sm:w-10 sm:h-16 text-gray-400 p-[2px] mx-[5px]" />
                                 </div>
                             </div>
                             {/* end div for user profile image content */}
