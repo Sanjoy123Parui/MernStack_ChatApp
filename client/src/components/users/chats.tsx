@@ -17,8 +17,7 @@ const Chats: React.FC = () => {
   // here was declare custom hooks
   const { isAccounts }: any = useSettingUserContext();
   const { isLogoutModal }: any = useUserLogoutModalContext();
-  const { isUserProfileView, isUserRemoveProfile }: any =
-    useUserProfileContexts();
+  const { isUserProfileView, isUserRemove }: any = useUserProfileContexts();
 
   // here was declare heading variables of Chats
   const headingTitle: string = "Chats";
@@ -75,7 +74,7 @@ const Chats: React.FC = () => {
       <div>
         {isLogoutModal && <UserLogout />}
 
-        {isUserRemoveProfile && <UserRemoveModal />}
+        {isUserRemove && <UserRemoveModal />}
       </div>
     </>
   );

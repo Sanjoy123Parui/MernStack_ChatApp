@@ -24,11 +24,11 @@ export interface imageCropProps {
 
 // here was define and export interface model of profile content
 export interface userProfilesContents {
-  userProfileAlertMessage: string;
+  userRemoveAlertMessage: string;
   isUserProfileView: boolean;
-  isUserRemoveProfile: boolean;
+  isUserRemove: boolean;
   openUserProfile: () => void;
   closeUserProfile: () => void;
-  openUserRemoveProfile: () => void;
-  closeUserRemoveProfile: () => void;
+  openUserRemove: () => void;
+  closeUserRemove: () => void;
 }
