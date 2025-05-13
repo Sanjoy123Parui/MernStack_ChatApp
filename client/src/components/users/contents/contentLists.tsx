@@ -1,14 +1,13 @@
 // import { Avatar, AvatarImage } from "../../ui/avatar.tsx";
 import { FaUser } from "react-icons/fa";
+import { IoMdPersonAdd } from "react-icons/io";
+import { Button } from "../../ui/button.tsx";
 
 // here was ContentLists functional components
 const ContentLists: React.FC = () => {
-
   return (
     <>
-      {/* start div for chat list content */}
       <div className="border-t px-4">
-
         {/* start real ul of user list */}
         {/* <ul className="max-w-lg divide-y divide-gray-200 dark:divide-gray-700">
           <li className="py-4 lg:py-3">
@@ -38,14 +37,11 @@ const ContentLists: React.FC = () => {
         </ul> */}
         {/* end real ul */}
 
-        {/* start demo ul of user list */}
+        {/* start  ul of user chatList list */}
         <ul className="max-w-lg divide-y divide-gray-200 dark:divide-gray-700">
           <li className="py-4 lg:py-3">
             <div className="flex items-center space-x-4 rtl:space-x-reverse">
               <div className="shrink-0">
-                {/* <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                  <FaUser className="absolute w-8 h-12 text-gray-400 left-[4px]" />
-                </div> */}
                 <div className="w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                   <FaUser className="w-8 h-12 text-gray-400 p-[2px] mx-1" />
                 </div>
@@ -61,9 +57,23 @@ const ContentLists: React.FC = () => {
             </div>
           </li>
         </ul>
-        {/* end demo */}
+        {/* end ul of user chat list */}
+
+        {/* start div for contact button action content */}
+        {/* <div className="sticky z-0 top-[35rem] sm:left-[20rem]"> */}
+        <div className="relative">
+          <div className="absolute -bottom-72 right-4  md:-bottom-80 md:right-8 z-50">
+            <Button
+              className="flex w-14 h-14 items-center [&_svg]:size-7 [&_svg]:mx-2 text-white justify-center bg-gradient-to-r 
+            from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
+            focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg rounded-full transition-colors"
+            >
+              <IoMdPersonAdd />
+            </Button>
+          </div>
+        </div>
+        {/* end div */}
       </div>
-      {/* end div */}
     </>
   );
 };

@@ -27,14 +27,14 @@ const RecieverVoiceMessage: React.FC = () => {
         <div className="flex items-center space-x-2 py-1">
           {/* voice message button start */}
           <button className="inline-flex self-center items-center p-2">
-            <BsPlayFill className="text-sm md:text-xl font-normal" />
+            <BsPlayFill className="text-sm md:text-3xl font-normal" />
           </button>
           {/* voice message button end */}
 
           {/* start voice effect wave */}
           <div className="flex items-center space-x-[-4px]">
             {Array.from({ length: 5 }).map((_, i) => (
-              <LuAudioLines key={i} className="text-sm md:text-xl" />
+              <LuAudioLines key={i} className="text-sm md:text-3xl" />
             ))}
           </div>
           {/* end voice effect wave */}
@@ -45,7 +45,7 @@ const RecieverVoiceMessage: React.FC = () => {
         {/* end voice message content */}
 
         {/* delivery content start */}
-        <div className="flex items-center justify-end w-full space-x-2 rtl:space-x-reverse mt-2">
+        <div className="flex items-center justify-end w-full space-x-2 rtl:space-x-reverse">
           <span className="text-xs md:text-sm font-normal">07:35 PM</span>
         </div>
         {/* delivery content end */}

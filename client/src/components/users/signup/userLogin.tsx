@@ -13,17 +13,17 @@ const UserLogin: React.FC = () => {
   const navigate: any = useNavigate();
 
   // here was declare useState hooks
-  const routeList = useState<routeNavigateList[]>([
+  const [routeList] = useState<routeNavigateList[]>([
     {
       desc: "Forgot Password?",
       links: "/user/change-password",
-      linkName: "Change Password "
+      linkName: "Change Password ",
     },
     {
       desc: "Don't have any account?",
       links: "/user/register",
-      linkName: "Register"
-    }
+      linkName: "Register",
+    },
   ]);
 
   // here declare login form headin variable
@@ -78,11 +78,19 @@ const UserLogin: React.FC = () => {
                     {/* start div for links route */}
                     <div>
                       {routeList.map((listItem: any, i: any) => (
-                        <div key={i} className="flex items-center justify-center p-1">
+                        <div
+                          key={i}
+                          className="flex items-center justify-center p-1"
+                        >
                           <p className="text-base">
                             {listItem.desc}
-                            <Link to={listItem.links} className="text-indigo-500 transition duration-100 
-                          hover:text-indigo-600 active:text-indigo-700">{listItem.linkName}</Link>
+                            <Link
+                              to={listItem.links}
+                              className="text-indigo-500 transition duration-100 
+                          hover:text-indigo-600 active:text-indigo-700"
+                            >
+                              {listItem.linkName}
+                            </Link>
                           </p>
                         </div>
                       ))}

@@ -4,7 +4,7 @@ import MessagesHeading from "./contents/messagesHeading.tsx";
 import Messages from "./contents/messages.tsx";
 import Conversations from "./contents/conversations.tsx";
 import Accessabilities from "./profiles/accessabilities.tsx";
-import { useSettingUserContext, useRemoveAccountModal } from "../hooks/contexts/userSettingContexts.ts";
+import { useSettingUserContext } from "../hooks/contexts/userSettingContexts.ts";
 import { useUserLogoutModalContext } from "../hooks/contexts/userSignupContext.ts";
 import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
 import UserViewProfile from "./profiles/userViewProfile.tsx";
@@ -16,9 +16,9 @@ import UserRemoveModal from "../modals/userRemoveModal.tsx";
 const Chats: React.FC = () => {
   // here was declare custom hooks
   const { isAccounts }: any = useSettingUserContext();
-  const { isUserRemoveAccount }: any = useRemoveAccountModal();
   const { isLogoutModal }: any = useUserLogoutModalContext();
-  const { isUserProfileView, isUserRemoveProfile }: any = useUserProfileContexts();
+  const { isUserProfileView, isUserRemoveProfile }: any =
+    useUserProfileContexts();
 
   // here was declare heading variables of Chats
   const headingTitle: string = "Chats";
@@ -73,19 +73,9 @@ const Chats: React.FC = () => {
       {/* end div */}
 
       <div>
+        {isLogoutModal && <UserLogout />}
 
-        {isLogoutModal && (
-          <UserLogout />
-        )}
-
-        {isUserRemoveAccount && (
-          <UserRemoveModal />
-        )}
-
-        {isUserRemoveProfile && (
-          <UserRemoveModal />
-        )}
-
+        {isUserRemoveProfile && <UserRemoveModal />}
       </div>
     </>
   );
