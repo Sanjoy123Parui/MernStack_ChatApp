@@ -44,7 +44,7 @@ const LoginForm: React.FC<loginFormProps> = ({ form, onSubmit }) => {
                                             ? "border-red-500"
                                             : "border-gray-300"
                                         }  
-                                        rounded w-full py-2 px-3 text-gray-900 leading-tight 
+                                        rounded w-full h-10 py-2 px-3 text-gray-900 leading-tight 
                                         focus:outline-none focus:ring focus:ring-gray-700`}
                       placeholder="Phone"
                     />
@@ -84,7 +84,7 @@ const LoginForm: React.FC<loginFormProps> = ({ form, onSubmit }) => {
                                             ? "border-red-500"
                                             : "border-gray-300"
                                         }
-                                        rounded w-full py-2 px-3 text-gray-900 leading-tight
+                                        rounded w-full h-10 py-2 px-3 text-gray-900 leading-tight
                                         focus:outline-none focus:ring focus:ring-gray-700`}
                       placeholder="Password"
                     />
@@ -112,8 +112,8 @@ const LoginForm: React.FC<loginFormProps> = ({ form, onSubmit }) => {
           <div className="flex items-center justify-between">
             <Button
               type="submit"
-              className="w-full bg-blue-700 hover:bg-blue-950 
-                        text-white font-bold py-2 px-4 rounded-3xl focus:outline-none focus:shadow-outline"
+              className="w-full h-10 bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4  focus:ring-blue-300 dark:focus:ring-blue-800 text-sm md:text-lg font-medium  
+                        text-white py-2 px-4 rounded-3xl focus:outline-none focus:shadow-outline"
             >
               Login
             </Button>

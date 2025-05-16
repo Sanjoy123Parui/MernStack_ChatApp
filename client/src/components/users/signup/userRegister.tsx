@@ -60,10 +60,10 @@ const UserRegister: React.FC = () => {
                       <p className="text-base">
                         Please click here to?{" "}
                         <Link
-                          to="/user/change-password"
+                          to="/"
                           className="text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700"
                         >
-                          forgot Password
+                          Login
                         </Link>{" "}
                       </p>
                     </div>

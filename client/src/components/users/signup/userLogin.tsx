@@ -15,9 +15,9 @@ const UserLogin: React.FC = () => {
   // here was declare useState hooks
   const [routeList] = useState<routeNavigateList[]>([
     {
-      desc: "Forgot Password?",
+      desc: "Please click here to?",
       links: "/user/change-password",
-      linkName: "Change Password ",
+      linkName: "Forgot Password",
     },
     {
       desc: "Don't have any account?",
@@ -86,7 +86,7 @@ const UserLogin: React.FC = () => {
                             {listItem.desc}
                             <Link
                               to={listItem.links}
-                              className="text-indigo-500 transition duration-100 
+                              className="text-indigo-500 px-2 py-1 transition duration-100 
                           hover:text-indigo-600 active:text-indigo-700"
                             >
                               {listItem.linkName}

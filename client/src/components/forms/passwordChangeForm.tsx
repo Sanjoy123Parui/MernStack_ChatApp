@@ -47,7 +47,7 @@ const PasswordChangeForm: React.FC<changePasswordFormProps> = ({
                                                 ? "border-red-500"
                                                 : "border-gray-300"
                                             }  
-                                            rounded w-full py-2 px-3 text-gray-900 leading-tight 
+                                            rounded w-full h-10 py-2 px-3 text-gray-900 leading-tight 
                                             focus:outline-none focus:ring focus:ring-gray-700`}
                       placeholder="Phone"
                     />
@@ -86,7 +86,7 @@ const PasswordChangeForm: React.FC<changePasswordFormProps> = ({
                                             ? "border-red-500"
                                             : "border-gray-300"
                                         }
-                                        rounded w-full py-2 px-3 text-gray-900 leading-tight
+                                        rounded w-full h-10 py-2 px-3 text-gray-900 leading-tight
                                         focus:outline-none focus:ring focus:ring-gray-700`}
                       placeholder="Password"
                     />
@@ -132,7 +132,7 @@ const PasswordChangeForm: React.FC<changePasswordFormProps> = ({
                                                     ? "border-red-500"
                                                     : "border-gray-300"
                                                 }
-                                                rounded w-full py-2 px-3 text-gray-900 leading-tight
+                                                rounded w-full h-10 py-2 px-3 text-gray-900 leading-tight
                                                 focus:outline-none focus:ring focus:ring-gray-700`}
                       placeholder="confirmPassword"
                     />
@@ -157,7 +157,11 @@ const PasswordChangeForm: React.FC<changePasswordFormProps> = ({
 
           {/* here declare save button content */}
           <div className="flex items-center justify-between">
-            <Button className="w-full bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-3xl focus:outline-none focus:shadow-outline">
+            <Button
+              className="w-full h-10 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br 
+              focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 text-sm md:text-lg 
+             text-white font-medium py-2 px-4 rounded-3xl focus:shadow-outline"
+            >
               Save
             </Button>
           </div>

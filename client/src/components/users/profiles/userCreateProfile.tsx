@@ -10,7 +10,6 @@ import { createProfileValidatorSchema } from "../../validations/profileValidator
 
 // define userCreate functional component
 const UserCreateProfile: React.FC = () => {
-
   // here declare useNavigate hook
   const navigate: any = useNavigate();
 

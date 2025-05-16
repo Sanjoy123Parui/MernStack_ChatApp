@@ -9,6 +9,14 @@ export interface profileFormdata {
   abouts: string;
 }
 
+// declare and export instance of edit profile form data interface model schema
+export interface editProfileFormdata {
+  full_name: string;
+  gender: "";
+  dob: "";
+  abouts: "";
+}
+
 // define interface for instance of passing props of profile form data
 export interface profileFormProps {
   form: UseFormReturn<any>;
@@ -22,13 +30,17 @@ export interface imageCropProps {
   onClose: () => void;
 }
 
-// here was define and export interface model of profile content
+// here was define and export interface model of user profile content
 export interface userProfilesContents {
   userRemoveAlertMessage: string;
+  userProfileHeading: string;
   isUserProfileView: boolean;
+  isUserProfileEdit: boolean;
   isUserRemove: boolean;
   openUserProfile: () => void;
   closeUserProfile: () => void;
+  openUserEdit: () => void;
+  closeUserEdit: () => void;
   openUserRemove: () => void;
   closeUserRemove: () => void;
 }

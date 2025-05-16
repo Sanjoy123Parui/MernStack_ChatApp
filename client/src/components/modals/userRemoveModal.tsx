@@ -5,7 +5,7 @@ import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts"
 // define UserRemoveModal component
 const UserRemoveModal: React.FC = () => {
   // declare some custom hooks which are destruct data
-  const { userRemoveAlertMessage, isUserRemove, closeUserRemove } =
+  const { userRemoveAlertMessage, isUserRemove, closeUserRemove }: any =
     useUserProfileContexts();
 
   return (
@@ -20,7 +20,6 @@ const UserRemoveModal: React.FC = () => {
             className="absolute top-3 right-3 text-gray-400 bg-transparent 
                         hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex justify-center 
                         items-center dark:hover:bg-gray-600 dark:hover:text-white"
-            data-modal-hide="popup-modal"
           >
             <IoMdClose />
           </button>
@@ -39,7 +38,7 @@ const UserRemoveModal: React.FC = () => {
               <button
                 type="button"
                 className="px-4 py-2 bg-red-500 text-base md:text-sm text-white 
-                            rounded hover:bg-red-600 w-full sm:w-auto"
+                            rounded hover:bg-red-600 h-10 md:h-12 w-full sm:w-auto"
               >
                 Yes, I'am confirm
               </button>
@@ -47,7 +46,7 @@ const UserRemoveModal: React.FC = () => {
                 type="button"
                 onClick={closeUserRemove}
                 className="px-4 py-2 bg-blue-500 text-base md:text-sm text-white 
-                            rounded hover:bg-blue-600 w-full sm:w-auto"
+                            rounded hover:bg-blue-600 h-10 md:h-12 w-full sm:w-auto"
               >
                 No cancel
               </button>

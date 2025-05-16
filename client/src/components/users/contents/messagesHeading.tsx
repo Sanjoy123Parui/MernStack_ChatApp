@@ -28,8 +28,10 @@ const MessagesHeading: React.FC = () => {
                 <FaUser className="absolute w-8 h-12 text-gray-400 left-[3px]" />
               </div> */}
 
-              <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 
-              rounded-full dark:bg-gray-600">
+              <div
+                className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 
+              rounded-full dark:bg-gray-600"
+              >
                 <FaUser className="w-8 h-12 text-gray-400 p-[2px] mx-[3px]" />
               </div>
             </div>

@@ -7,7 +7,8 @@ import { useUserProfileContexts } from "../../hooks/contexts/userProfileContext.
 // UserViewProfile functional components
 const UserViewProfile: React.FC = () => {
   // declare custom hooks for destruct user profile data
-  const { closeUserProfile, openUserRemove }: any = useUserProfileContexts();
+  const { closeUserProfile, openUserEdit, openUserRemove }: any =
+    useUserProfileContexts();
 
   return (
     <>
@@ -82,7 +83,8 @@ const UserViewProfile: React.FC = () => {
           {/* start edit button */}
           <Button
             type="button"
-            className="flex items-center justify-center bg-green-500 text-white rounded-lg px-4 py-2 hover:bg-green-600 
+            onClick={openUserEdit}
+            className="flex items-center h-10 w-auto text-center justify-center bg-green-500 text-white rounded-lg px-4 py-2 hover:bg-green-600 
           transition duration-200"
           >
             <MdEdit className="mx-2" />
@@ -94,7 +96,7 @@ const UserViewProfile: React.FC = () => {
           <Button
             type="button"
             onClick={openUserRemove}
-            className="flex items-center justify-center bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-600 
+            className="flex items-center h-10 w-auto justify-center text-center bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-600 
           transition duration-200"
           >
             <MdDelete className="mx-2" />
