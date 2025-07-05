@@ -1,46 +1,62 @@
-import { UseFormReturn } from "react-hook-form";
-
-// here declare instance of login form data interface model
-export interface loginFormdata {
-  phone: string;
-  password: string;
-}
-
-// here declare instance of register form data interface model
-export interface registerFormdata {
-  phone: string;
-  password: string;
-  confirmPassword: string;
-}
-
 // here was declare instance of link interface model
-export interface routeNavigateList {
+export interface routeSignupNavigateList {
   desc: string;
   links: string;
   linkName: string;
 }
 
-// here declare instance of change password form data interface model
-export interface changePasswordFormdata {
+// here was declare and export instance of userSignupFormErrors interface model
+export interface userSignupFormErrors {
   phone: string;
   password: string;
   confirmPassword: string;
 }
 
-// define interface for instance of passing props of login form data
-export interface loginFormProps {
-  form: UseFormReturn<any>;
-  onSubmit: (data: any) => void;
+// here was declare and export instance of  userSignupFormdata interface model
+export interface userSignupFormdata {
+  phone: string;
+  password: string;
+  confirmPassword: string;
+  errors?: userSignupFormErrors;
+  success?: boolean;
+  error?: string;
+  message?: string;
 }
 
-// define interface for instance of passing props of regiter form data
-export interface registerFormProps {
-  form: UseFormReturn<any>;
-  onSubmit: (data: any) => void;
+// here was declare and export instance of userSignupFormprops interface model
+export interface userSignupFormprops {
+  stateValues: any;
+  formAction: (formData: FormData) => unknown;
+  isPending: boolean;
 }
 
-// define interface for instance of passing props of change password form data
-export interface changePasswordFormProps {
-  form: UseFormReturn<any>;
-  onSubmit: (data: any) => void;
+// here was declare and export instance of userSigninFormErrors interface model
+export interface userSigninFormErrors {
+  phone: string;
+  password: string;
+}
+
+// here was declare and export instance of  userSigninFormdata interface model
+export interface userSigninFormdata {
+  phone: string;
+  password: string;
+  errors?: userSigninFormErrors;
+  success?: boolean;
+  error: string;
+  message?: string;
+}
+
+// here was declare and export instance of userSigninFormprops interface model
+export interface userSigninFormprops {
+  stateValues: any;
+  formAction: (formData: FormData) => unknown;
+  isPending: boolean;
+}
+
+// here userLogout modal popup modal props
+export interface userLogoutModalProps {
+  userLogoutAlertMessage: string;
+  isLogoutModal: boolean;
+  openLogoutModal: () => void;
+  closeLogoutModal: () => void;
 }

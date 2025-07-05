@@ -1,31 +1,12 @@
 import { Link } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import UserLanding from "./userLanding.tsx";
 import PasswordChangeForm from "../../forms/passwordChangeForm.tsx";
-import { changePasswordFormdata } from "../../models/signupModel.ts";
-import { passwordChangeValidatorSchema } from "../../validations/signupValidator.ts";
+
 
 // here define use changepassword functional component
 const UserChangePassword: React.FC = () => {
   // here was declare heading
   const changeHeading: string = "Change Password";
-
-  // declare useForm hook for user change password form data model handle
-  const form = useForm<changePasswordFormdata>({
-    resolver: zodResolver(passwordChangeValidatorSchema),
-    defaultValues: {
-      phone: "",
-      password: "",
-      confirmPassword: "",
-    },
-  });
-
-  // declare function of handle password change form submit
-  let userPasswordSave: SubmitHandler<changePasswordFormdata> = (data: any) => {
-    console.log(data);
-    form.reset();
-  };
 
   return (
     <>
@@ -48,10 +29,7 @@ const UserChangePassword: React.FC = () => {
                     </h1>
 
                     {/*  here define password change functional component */}
-                    <PasswordChangeForm
-                      form={form}
-                      onSubmit={form.handleSubmit(userPasswordSave)}
-                    />
+                    <PasswordChangeForm />
 
                     {/* start div are content for navigate route in user login form component */}
                     <div className="flex items-center justify-center p-1">

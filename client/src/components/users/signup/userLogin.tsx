@@ -1,19 +1,15 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import LoginForm from "../../forms/loginForm.tsx";
-import { loginFormdata, routeNavigateList } from "../../models/signupModel.ts";
-import { loginValidatorSchema } from "../../validations/signupValidator.ts";
+import { routeSignupNavigateList } from "../../models/signupModel.ts";
+
 
 // here define UserLogin component
 const UserLogin: React.FC = () => {
-  // here was declare useNaviagte hook
-  const navigate: any = useNavigate();
 
   // here was declare useState hooks
-  const [routeList] = useState<routeNavigateList[]>([
+  const [routeList] = useState<routeSignupNavigateList[]>([
     {
       desc: "Please click here to?",
       links: "/user/change-password",
@@ -29,25 +25,6 @@ const UserLogin: React.FC = () => {
   // here declare login form headin variable
   const loginHeading: string = " Login";
 
-  // here declae useForm hook for login form handling
-  const form: any = useForm<loginFormdata>({
-    resolver: zodResolver(loginValidatorSchema),
-    defaultValues: {
-      phone: "",
-      password: "",
-    },
-  });
-
-  // here was declare action of event trigger after form fillup
-  const userhandleLoginSubmit: SubmitHandler<loginFormdata> = (data: any) => {
-    // here declare userSignup dummy id
-    const userSignup: any = "jifpoefief54657dwegqihdeifhaghgbjxj";
-    // here was set in localstorage item
-    localStorage.setItem("userSignup", userSignup);
-    navigate("/user/create-profile");
-    console.log(data);
-    form.reset();
-  };
 
   return (
     <>
@@ -70,10 +47,7 @@ const UserLogin: React.FC = () => {
                     </h1>
 
                     {/* here login Login Form component */}
-                    <LoginForm
-                      form={form}
-                      onSubmit={form.handleSubmit(userhandleLoginSubmit)}
-                    />
+                    <LoginForm />
 
                     {/* start div for links route */}
                     <div>

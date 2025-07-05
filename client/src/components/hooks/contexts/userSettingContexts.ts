@@ -1,5 +1,5 @@
 // here import some context hooks library
-import { createContext, useContext } from "react";
+import { createContext, use } from "react";
 import { userSettingContextProps } from "../../models/accessModel.ts";
 
 // declare Context custom hook for  accountSettings content with export
@@ -8,7 +8,8 @@ export const SettingsContext = createContext<
 >(undefined);
 
 export const useSettingUserContext = (): any => {
-  const userAccountsContext: any = useContext(SettingsContext);
+  // declare usehook for passing data of userAccountsContext content
+  const userAccountsContext: any = use(SettingsContext);
   if (!userAccountsContext) {
     throw new Error("useUserSetting must be used within a UserSettingProvider");
   }

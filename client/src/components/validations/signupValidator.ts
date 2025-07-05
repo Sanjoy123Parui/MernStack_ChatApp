@@ -1,63 +1,61 @@
-// here import zod  library
-import * as z from "zod";
+import {
+  userSignupFormErrors,
+  userSigninFormErrors,
+} from "../models/signupModel.ts";
 
-// define login input field validation wth zod
-export const loginValidatorSchema = z.object({
+// here define and export of userSignupForms validation function
+export const userValidateSignup = (values: {
+  phone: string;
+  password: string;
+  confirmPassword: string;
+}): userSignupFormErrors => {
+  // declae variables of Validation errors
+  let errors: any = {
+    phone: !values.phone
+      ? "Phone number field is required"
+      : !/^((\\+91-?)|0)?[0-9]{10}$/.test(values.phone)
+      ? "Phone number must be a valid 10 digit number"
+      : "",
 
-    phone: z.string()
-        .min(1, { message: 'Phone number is required' })
-        .max(10, { message: 'Phone number atleast 10 digits' })
-        .regex(/^((\\+91-?)|0)?[0-9]{10}$/, { message: 'Phone must be 10 digits' }),
+    password: !values.password
+      ? "Password field is required"
+      : !/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}$/.test(
+          values.password
+        )
+      ? "Password must be 8-15 chars, include upper, lower, number, and special character"
+      : "",
 
-    password: z.string()
-        .min(1, { message: 'Password is required' })
-        .max(15, { message: 'Password atleast 8 to 15 words' })
-        .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}$/, { message: 'Password must be letters, special charracters and numbers' })
+    confirmPassword: !values.confirmPassword
+      ? "Confirm password field is required"
+      : values.password !== values.confirmPassword
+      ? "Passwords do not match"
+      : "",
+  };
 
-});
+  return { ...errors };
+};
 
+// here define and export of userSigninForms validation function
+export const userValidateSignin = (values: {
+  phone: string;
+  password: string;
+}): userSigninFormErrors => {
+  // declae variables of Validation errors
+  let errors: any = {
+    phone: !values.phone
+      ? "Phone number field is required"
+      : !/^((\\+91-?)|0)?[0-9]{10}$/.test(values.phone)
+      ? "Phone number must be a valid 10 digit number"
+      : "",
 
+    password: !values.password
+      ? "Password field is required"
+      : !/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}$/.test(
+          values.password
+        )
+      ? "Password must be 8-15 chars, include upper, lower, number, and special character"
+      : "",
+  };
 
-// define register input field validation with zod
-export const registerValidatorSchema = z.object({
-
-    phone: z.string()
-        .min(1, { message: 'Phone number is required' })
-        .max(10, { message: 'Phone number atleast 10 digits' })
-        .regex(/^((\\+91-?)|0)?[0-9]{10}$/, { message: 'Phone must be 10 digits' }),
-
-    password: z.string()
-        .min(1, { message: 'Password is required' })
-        .max(15, { message: 'Password atleast 8 to 15 words' })
-        .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}$/, { message: 'Password must be letters, special charracters and numbers' }),
-
-    confirmPassword: z.string()
-        .min(1, { message: 'Confirm Password is required' })
-
-}).refine((data: any) => data.password === data.confirmPassword, {
-    path: ['confirmPassword'],
-    message: 'Confirm password are not matching with password'
-});
-
-
-
-// define password change input field validation with zod
-export const passwordChangeValidatorSchema = z.object({
-
-    phone: z.string()
-        .min(1, { message: 'Phone number is required' })
-        .max(10, { message: 'Phone number atleast 10 digits' })
-        .regex(/^((\\+91-?)|0)?[0-9]{10}$/, { message: 'Phone must be 10 digits' }),
-
-    password: z.string()
-        .min(1, { message: 'Password is required' })
-        .max(15, { message: 'Password atleast 8 to 15 words' })
-        .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}$/, { message: 'Password must be letters, special charracters and numbers' }),
-
-    confirmPassword: z.string()
-        .min(1, { message: 'Confirm Password is required' })
-
-}).refine((data: any) => data.password === data.confirmPassword, {
-    path: ['confirmPassword'],
-    message: 'Confirm password are not matching with password'
-});
+  return { ...errors };
+};

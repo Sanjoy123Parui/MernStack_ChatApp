@@ -1,33 +1,11 @@
 // import many more functional components and libraries of packages
 import { Link } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import UserLanding from "./userLanding.tsx";
 import RegisterForm from "../../forms/registerForm.tsx";
-import { registerFormdata } from "../../models/signupModel.ts";
-import { registerValidatorSchema } from "../../validations/signupValidator.ts";
 
 const UserRegister: React.FC = () => {
   // here was declare register heading
   const registerHeading: string = "Register";
-
-  // declare useForm hook for user register data model handle
-  const form = useForm<registerFormdata>({
-    resolver: zodResolver(registerValidatorSchema),
-    defaultValues: {
-      phone: "",
-      password: "",
-      confirmPassword: "",
-    },
-  });
-
-  // declare function of handle register form submit
-  const userhandleRegisterSubmit: SubmitHandler<registerFormdata> = (
-    res: any
-  ) => {
-    console.log(res);
-    form.reset();
-  };
 
   return (
     <>
@@ -50,10 +28,7 @@ const UserRegister: React.FC = () => {
                     </h1>
 
                     {/* RegisterForm component */}
-                    <RegisterForm
-                      form={form}
-                      onSubmit={form.handleSubmit(userhandleRegisterSubmit)}
-                    />
+                    <RegisterForm />
 
                     {/* start div are content for navigate route in user login form component */}
                     <div className="flex items-center justify-center p-1">
