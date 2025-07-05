@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import PasswordChangeForm from "../../forms/passwordChangeForm.tsx";
+import { useChangePasswordUserContext } from "../../hooks/contexts/userSignupContext.ts";
 
 
 // here define use changepassword functional component
 const UserChangePassword: React.FC = () => {
   // here was declare heading
   const changeHeading: string = "Change Password";
+
+  // here destruct custom hooks data
+  const { stateValues, formAction, isPending }: any = useChangePasswordUserContext();
 
   return (
     <>
@@ -29,7 +33,7 @@ const UserChangePassword: React.FC = () => {
                     </h1>
 
                     {/*  here define password change functional component */}
-                    <PasswordChangeForm />
+                    <PasswordChangeForm stateValues={stateValues} formAction={formAction} isPending={isPending} />
 
                     {/* start div are content for navigate route in user login form component */}
                     <div className="flex items-center justify-center p-1">

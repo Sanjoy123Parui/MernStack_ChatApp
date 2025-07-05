@@ -4,20 +4,18 @@ import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
 import { useUserTogglePassword } from "../hooks/signuphooks.ts";
-import { useSignupUserContext } from "../hooks/contexts/userSignupContext.ts";
+import { signinFormprops } from "../models/signupModel.ts";
 
 // here define change paasrd form functional component
-const PasswordChangeForm: React.FC = () => {
+const PasswordChangeForm: React.FC<signinFormprops> = ({ stateValues, formAction, isPending }) => {
   // here was declare custom hooks of toggle password
   const { isTogglePassword, togglePasswordVisiblity }: any =
     useUserTogglePassword(false);
 
-  const { stateValues, formAction, isPending }: any = useSignupUserContext();
-
   const { phone, password, confirmPassword, errors }: any = stateValues;
 
   // defined here function was handled getErrorsfield
-  const getValidateFieldErrors = (fieldName: any) => stateValues.errors[fieldName] || "";
+  const getChangePasswordValidateFieldErrors = (fieldName: any) => stateValues.errors[fieldName] || "";
 
   if (phone !== "" && password !== "" && confirmPassword !== "") {
 
@@ -28,7 +26,9 @@ const PasswordChangeForm: React.FC = () => {
     <>
 
       {/* start change password form */}
-      <form action={formAction} className="space-y-8 px-8 pt-6 pb-8 mb-4">
+      <form action={(formData: FormData) => {
+        formAction(formData);
+      }} className="space-y-8 px-8 pt-6 pb-8 mb-4">
         {/* here declare phone input content */}
         <div className="mb-4">
           <Label className="block text-gray-700 sm:text-md md:text-base lg:text-lg font-bold mb-2">
@@ -42,7 +42,7 @@ const PasswordChangeForm: React.FC = () => {
             text-gray-900 leading-tight focus:outline-none focus:ring`}
             placeholder="Phone"
           />
-          {getValidateFieldErrors("phone") && (
+          {getChangePasswordValidateFieldErrors("phone") && (
             <p className="text-red-500 text-sm lg:text-base">{errors?.phone}</p>
           )}
         </div>
@@ -67,7 +67,7 @@ const PasswordChangeForm: React.FC = () => {
           >
             {isTogglePassword ? <FaEye /> : <FaEyeSlash />}
           </button>
-          {getValidateFieldErrors("password") && (
+          {getChangePasswordValidateFieldErrors("password") && (
             <p className="text-red-500 text-sm lg:text-base">{errors?.password}</p>
           )}
         </div>
@@ -92,7 +92,7 @@ const PasswordChangeForm: React.FC = () => {
           >
             {isTogglePassword ? <FaEye /> : <FaEyeSlash />}
           </button>
-          {getValidateFieldErrors("confirmPassword") && (
+          {getChangePasswordValidateFieldErrors("confirmPassword") && (
             <p className="text-red-500 text-sm lg:text-base">{errors?.confirmPassword}</p>
           )}
         </div>

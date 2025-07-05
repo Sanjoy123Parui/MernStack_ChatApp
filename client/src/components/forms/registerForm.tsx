@@ -3,33 +3,31 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
+import { signupFormprops } from "../models/signupModel.ts";
 import { useUserTogglePassword } from "../hooks/signuphooks.ts";
-import { useSignupUserContext } from "../hooks/contexts/userSignupContext.ts";
 
 // here was define register form functional component
-const RegisterForm: React.FC = () => {
+const RegisterForm: React.FC<signupFormprops> = ({ stateValues, formAction, isPending }) => {
   // here was declare custom hooks of toggle password
   const { isTogglePassword, togglePasswordVisiblity }: any =
     useUserTogglePassword(false);
 
-  const { stateValues, formAction, isPending }: any = useSignupUserContext();
-
   const { phone, password, confirmPassword, errors }: any = stateValues;
 
   // defined here function was handled getErrorsfield
-  const getValidateFieldErrors = (fieldName: any) => stateValues.errors[fieldName] || "";
+  const getRegisterValidateFieldErrors = (fieldName: any) => stateValues.errors[fieldName] || "";
 
   if (phone !== "" && password !== "" && confirmPassword !== "") {
 
     console.log(stateValues);
   }
 
-
-
   return (
     <>
       {/* start register form */}
-      <form action={formAction} className="space-y-8 px-8 pt-6 pb-8 mb-4">
+      <form action={(formData: FormData) => {
+        formAction(formData);
+      }} className="space-y-8 px-8 pt-6 pb-8 mb-4">
         {/* start register form phone input content */}
         <div className="mb-4">
           <Label className="block text-gray-700 sm:text-md md:text-base lg:text-lg font-bold mb-2">
@@ -43,7 +41,7 @@ const RegisterForm: React.FC = () => {
             text-gray-900 leading-tight focus:outline-none focus:ring`}
             placeholder="Phone"
           />
-          {getValidateFieldErrors("phone") && (
+          {getRegisterValidateFieldErrors("phone") && (
             <p className="text-red-500 text-sm lg:text-base">{errors?.phone}</p>
           )}
         </div>
@@ -68,7 +66,7 @@ const RegisterForm: React.FC = () => {
             className="absolute top-6 md:top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500">
             {isTogglePassword ? <FaEye /> : <FaEyeSlash />}
           </button>
-          {getValidateFieldErrors("password") && (
+          {getRegisterValidateFieldErrors("password") && (
             <p className="text-red-500 text-sm lg:text-base">{errors?.password}</p>
           )}
         </div>
@@ -93,7 +91,7 @@ const RegisterForm: React.FC = () => {
             className="absolute top-6 md:top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500">
             {isTogglePassword ? <FaEye /> : <FaEyeSlash />}
           </button>
-          {getValidateFieldErrors("confirmPassword") && (
+          {getRegisterValidateFieldErrors("confirmPassword") && (
             <p className="text-red-500 text-sm lg:text-base">{errors?.confirmPassword}</p>
           )}
         </div>

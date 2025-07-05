@@ -5,49 +5,49 @@ export interface routeSignupNavigateList {
   linkName: string;
 }
 
-// here was declare and export instance of userSignupFormErrors interface model
-export interface userSignupFormErrors {
+// here was declare and export instance of signupFormErrors interface model
+export interface signupFormErrors {
   phone: string;
   password: string;
   confirmPassword: string;
 }
 
-// here was declare and export instance of  userSignupFormdata interface model
-export interface userSignupFormdata {
+// here was declare and export instance of  signupFormdata interface model
+export interface signupFormdata {
   phone: string;
   password: string;
   confirmPassword: string;
-  errors?: userSignupFormErrors;
+  errors?: signupFormErrors;
   success?: boolean;
   error?: string;
   message?: string;
 }
 
-// here was declare and export instance of userSignupFormprops interface model
-export interface userSignupFormprops {
+// here was declare and export instance of signupFormprops interface model
+export interface signupFormprops {
   stateValues: any;
   formAction: (formData: FormData) => unknown;
   isPending: boolean;
 }
 
-// here was declare and export instance of userSigninFormErrors interface model
-export interface userSigninFormErrors {
+// here was declare and export instance of signinFormErrors interface model
+export interface signinFormErrors {
   phone: string;
   password: string;
 }
 
-// here was declare and export instance of  userSigninFormdata interface model
-export interface userSigninFormdata {
+// here was declare and export instance of  signinFormdata interface model
+export interface signinFormdata {
   phone: string;
   password: string;
-  errors?: userSigninFormErrors;
+  errors?: signinFormErrors;
   success?: boolean;
   error: string;
   message?: string;
 }
 
-// here was declare and export instance of userSigninFormprops interface model
-export interface userSigninFormprops {
+// here was declare and export instance of signinFormprops interface model
+export interface signinFormprops {
   stateValues: any;
   formAction: (formData: FormData) => unknown;
   isPending: boolean;

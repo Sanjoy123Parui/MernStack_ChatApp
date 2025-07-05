@@ -1,8 +1,8 @@
 import { createContext, use } from "react";
 import {
   userLogoutModalProps,
-  userSignupFormprops,
-  userSigninFormprops,
+  signupFormprops,
+  signinFormprops,
 } from "../../models/signupModel.ts";
 
 // here was custom hooks of useContext and create context for defined values and it can export
@@ -23,7 +23,7 @@ export const useUserLogoutModalContext = (): any => {
 };
 
 // declare createContext for UserSignupContext with export
-export const UserSignupContext = createContext<userSignupFormprops | undefined>(
+export const UserSignupContext = createContext<signupFormprops | undefined>(
   undefined
 );
 
@@ -40,7 +40,7 @@ export const useSignupUserContext = (): any => {
 };
 
 // declare createContext for UserSigninContext with export
-export const UserSigninContext = createContext<userSigninFormprops | undefined>(
+export const UserSigninContext = createContext<signinFormprops | undefined>(
   undefined
 );
 
@@ -54,4 +54,21 @@ export const useSigninUserContext = (): any => {
   }
 
   return userSigninformdata;
+};
+
+// declare createContext for UserChangePasswordContext with export
+export const UserChangePasswordContext = createContext<
+  signupFormprops | undefined
+>(undefined);
+
+// declare and export custom hook of useChangePasswordUserContext
+export const useChangePasswordUserContext = (): any => {
+  // declare usehook for passing data of userSignup content
+  const userPasswordchange: any = use(UserChangePasswordContext);
+
+  if (!userPasswordchange) {
+    throw new Error("An error occured");
+  }
+
+  return userPasswordchange;
 };

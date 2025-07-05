@@ -5,11 +5,11 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
+import { signinFormprops } from "../models/signupModel.ts";
 import { useUserTogglePassword } from "../hooks/signuphooks.ts";
-import { useSigninUserContext } from "../hooks/contexts/userSignupContext.ts";
 
 // here define LoginForm functional component
-const LoginForm: React.FC = () => {
+const LoginForm: React.FC<signinFormprops> = ({ stateValues, formAction, isPending }) => {
 
   // here declare useNavigate hook
   const navigate: any = useNavigate();
@@ -18,7 +18,6 @@ const LoginForm: React.FC = () => {
   const { isTogglePassword, togglePasswordVisiblity }: any =
     useUserTogglePassword(false);
 
-  const { stateValues, formAction, isPending }: any = useSigninUserContext();
 
   const { phone, password, errors }: any = stateValues;
 
@@ -29,16 +28,18 @@ const LoginForm: React.FC = () => {
   // here declare useEffect hook
   useEffect(() => {
     if (phone !== "" && password !== "") {
-      console.log({ phone, password });
+      console.log(stateValues);
       navigate("/user/create-profile");
     }
-  }, [phone, password, navigate]);
+  }, [phone, password, navigate, stateValues]);
 
 
   return (
     <>
       {/* start login form */}
-      <form action={formAction} className="space-y-8 px-8 pt-6 pb-8 mb-4">
+      <form action={(formData: FormData) => {
+        formAction(formData);
+      }} className="space-y-8 px-8 pt-6 pb-8 mb-4">
         {/* start login form phone input */}
         <div className="mb-4">
           <Label className="block text-gray-700 sm:text-md md:text-base lg:text-lg font-bold mb-2">

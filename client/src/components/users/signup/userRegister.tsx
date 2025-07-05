@@ -2,10 +2,14 @@
 import { Link } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import RegisterForm from "../../forms/registerForm.tsx";
+import { useSignupUserContext } from "../../hooks/contexts/userSignupContext.ts";
 
 const UserRegister: React.FC = () => {
   // here was declare register heading
   const registerHeading: string = "Register";
+
+  // here destruct data from custom hooks
+  const { stateValues, formAction, isPending }: any = useSignupUserContext();
 
   return (
     <>
@@ -28,7 +32,7 @@ const UserRegister: React.FC = () => {
                     </h1>
 
                     {/* RegisterForm component */}
-                    <RegisterForm />
+                    <RegisterForm stateValues={stateValues} formAction={formAction} isPending={isPending} />
 
                     {/* start div are content for navigate route in user login form component */}
                     <div className="flex items-center justify-center p-1">

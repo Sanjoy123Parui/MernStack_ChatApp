@@ -2,10 +2,10 @@ import { useState, useActionState } from "react";
 
 import {
   userLogoutModalProps,
-  userSignupFormdata,
-  userSignupFormprops,
-  userSigninFormdata,
-  userSigninFormprops,
+  signupFormdata,
+  signupFormprops,
+  signinFormdata,
+  signinFormprops,
 } from "../models/signupModel.ts";
 import {
   userValidateSignup,
@@ -40,12 +40,12 @@ export const useUserLogoutModal = (): userLogoutModalProps => {
 };
 
 // declare and export useSignupUser custom hook
-export const useSignupUser = (): userSignupFormprops => {
+export const useSignupUser = (): signupFormprops => {
   // here define function where as userSignup form handling operation
   const userActionSignup = async (
-    prevData: userSignupFormdata,
+    prevData: signupFormdata,
     formData: FormData
-  ): Promise<userSignupFormdata> => {
+  ): Promise<signupFormdata> => {
     try {
       // here was get formData
       let formValues: any = {
@@ -103,7 +103,7 @@ export const useSignupUser = (): userSignupFormprops => {
   };
 
   // declare initialStateValues
-  const initialStateValues: userSignupFormdata = {
+  const initialStateValues: signupFormdata = {
     phone: "",
     password: "",
     confirmPassword: "",
@@ -115,7 +115,7 @@ export const useSignupUser = (): userSignupFormprops => {
 
   // here was declare useActionState hook
   const [stateValues, formAction, isPending] = useActionState<
-    userSignupFormdata,
+    signupFormdata,
     FormData
   >(userActionSignup, initialStateValues);
 
@@ -123,12 +123,12 @@ export const useSignupUser = (): userSignupFormprops => {
 };
 
 // declare and export useSigninUser custom hook
-export const useSigninUser = (): userSigninFormprops => {
+export const useSigninUser = (): signinFormprops => {
   // here define function where as userLogin action form handling operation
   const userActionLogin = async (
-    prevData: userSigninFormdata,
+    prevData: signinFormdata,
     formData: FormData
-  ): Promise<userSigninFormdata> => {
+  ): Promise<signinFormdata> => {
     try {
       // here get FormData
       let formValues: any = {
@@ -187,7 +187,7 @@ export const useSigninUser = (): userSigninFormprops => {
   };
 
   // here declare initialStateValues
-  const initialStateValues: userSigninFormdata = {
+  const initialStateValues: signinFormdata = {
     phone: "",
     password: "",
     errors: { phone: "", password: "" },
@@ -198,9 +198,92 @@ export const useSigninUser = (): userSigninFormprops => {
 
   // declare useActionState hook
   const [stateValues, formAction, isPending] = useActionState<
-    userSigninFormdata,
+    signinFormdata,
     FormData
   >(userActionLogin, initialStateValues);
+
+  return { stateValues, formAction, isPending };
+};
+
+// declare and export useChangePasswordUser custom hook
+export const useChangePasswordUser = (): signupFormprops => {
+  // here define function where as userSignup form handling operation
+  const userChangePassword = async (
+    prevData: signupFormdata,
+    formData: FormData
+  ): Promise<signupFormdata> => {
+    try {
+      // here was get formData
+      let formValues: any = {
+        phone: formData.get("phone")?.toString()?.trim() || "",
+        password: formData.get("password")?.toString()?.trim() || "",
+        confirmPassword:
+          formData.get("confirmPassword")?.toString()?.trim() || "",
+      };
+
+      // declare and call validationfunction
+      let errors = await userValidateSignup({
+        phone: formValues.phone,
+        password: formValues.password,
+        confirmPassword: formValues.confirmPassword,
+      });
+
+      // here was preloading request and response data
+      await new Promise((resolve: any) => setTimeout(resolve, 2000));
+
+      // here was declare filtered validation errors
+      let filteredValidationErrors: any = Object.entries(errors).reduce(
+        (acc: any, [key, value]: any) => {
+          return value ? { ...acc, [key]: value } : acc;
+        },
+        {}
+      );
+
+      // check condition of validation errors
+      if (Object.keys(filteredValidationErrors).length > 0) {
+        return {
+          ...prevData,
+          errors: { ...filteredValidationErrors },
+          success: false,
+          error: "",
+          message: "",
+        };
+      }
+
+      return {
+        ...formValues,
+        errors: { phone: "", password: "", confirmPassword: "" },
+        success: true,
+        error: "",
+        message: "Password can changed successfully",
+      };
+    } catch (error) {
+      return {
+        ...prevData,
+        errors: { phone: "", password: "", confirmPassword: "" },
+        success: false,
+        error: "An error occured is server are not found",
+        message: "",
+      };
+    }
+  };
+
+  // declare initialStateValues
+  const initialStateValues: signupFormdata = {
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    errors: { phone: "", password: "", confirmPassword: "" },
+    success: false,
+    error: "",
+    message: "",
+  };
+
+  // here was declare useActionState hook
+  const [stateValues, formAction, isPending] = useActionState<
+    signupFormdata,
+    FormData
+  >(userChangePassword, initialStateValues);
 
   return { stateValues, formAction, isPending };
 };

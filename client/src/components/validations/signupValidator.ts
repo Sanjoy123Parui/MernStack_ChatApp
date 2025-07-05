@@ -1,14 +1,11 @@
-import {
-  userSignupFormErrors,
-  userSigninFormErrors,
-} from "../models/signupModel.ts";
+import { signupFormErrors, signinFormErrors } from "../models/signupModel.ts";
 
 // here define and export of userSignupForms validation function
 export const userValidateSignup = (values: {
   phone: string;
   password: string;
   confirmPassword: string;
-}): userSignupFormErrors => {
+}): signupFormErrors => {
   // declae variables of Validation errors
   let errors: any = {
     phone: !values.phone
@@ -39,7 +36,7 @@ export const userValidateSignup = (values: {
 export const userValidateSignin = (values: {
   phone: string;
   password: string;
-}): userSigninFormErrors => {
+}): signinFormErrors => {
   // declae variables of Validation errors
   let errors: any = {
     phone: !values.phone
