@@ -1,7 +1,5 @@
-import { UseFormReturn } from "react-hook-form";
-
-// here define instance of profile form data interface model
-export interface profileFormdata {
+// here declare instance of profileformErrors interface model
+export interface profileFormErrors {
   full_name: string;
   avatar: string;
   gender: string;
@@ -9,18 +7,21 @@ export interface profileFormdata {
   abouts: string;
 }
 
-// declare and export instance of edit profile form data interface model schema
-export interface editProfileFormdata {
+// here declare instance of profile form data interface model
+export interface profileFormdata {
   full_name: string;
-  gender: "";
-  dob: "";
-  abouts: "";
+  avatar: string;
+  gender: string;
+  dob: string;
+  abouts: string;
+  errors?: profileFormErrors;
 }
 
-// define interface for instance of passing props of profile form data
+// declare interface for instance of passing props of profile form data
 export interface profileFormProps {
-  form: UseFormReturn<any>;
-  onSubmit: (data: any) => void;
+  stateValues: any;
+  formAction: (formData: FormData) => unknown;
+  isPending: boolean;
 }
 
 // define interface for instance of passing props of profile form data
@@ -30,8 +31,32 @@ export interface imageCropProps {
   onClose: () => void;
 }
 
-// here was define and export interface model of user profile content
-export interface userProfilesContents {
+// define and export instance of interface model editProfileFormErrors
+export interface editProfileFormErrors {
+  full_name: string;
+  gender: string;
+  dob: string;
+  abouts: string;
+}
+
+// define and export instance of interface model editProfileFormdata
+export interface editProfileFormdata {
+  full_name: string;
+  gender: string;
+  dob: string;
+  abouts: string;
+  errors?: editProfileFormErrors;
+}
+
+// define and export instance of interface model editProfileFormprops
+export interface editProfileFormprops {
+  stateValues: any;
+  formAction: (formData: FormData) => unknown;
+  isPending: boolean;
+}
+
+// here was define and export interface model of profile content
+export interface profilesContents {
   userRemoveAlertMessage: string;
   userProfileHeading: string;
   isUserProfileView: boolean;

@@ -38,7 +38,7 @@ const PasswordChangeForm: React.FC<signinFormprops> = ({ stateValues, formAction
             type="number"
             name="phone"
             className={`shadow appearance-none border-[1px] rounded w-full h-10 py-2 px-3
-            ${errors?.phone ? "border-red-300 focus:ring-red-700" : "border-gray-300 focus:ring-gray-700"}
+            ${errors?.phone ? `border-red-300 focus:ring-red-700` : `border-gray-300 focus:ring-gray-700`}
             text-gray-900 leading-tight focus:outline-none focus:ring`}
             placeholder="Phone"
           />
@@ -56,7 +56,7 @@ const PasswordChangeForm: React.FC<signinFormprops> = ({ stateValues, formAction
             type={isTogglePassword ? "text" : "password"}
             name="password"
             className={`shadow appearance-none border-[1px] border-gray-300 rounded w-full h-10 py-2 px-3 
-            ${errors?.password ? "border-red-300 focus:ring-red-700" : "border-gray-300 focus:ring-gray-700"}
+            ${errors?.password ? `border-red-300 focus:ring-red-700` : `border-gray-300 focus:ring-gray-700`}
             text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`}
             placeholder="Password"
           />
@@ -81,7 +81,7 @@ const PasswordChangeForm: React.FC<signinFormprops> = ({ stateValues, formAction
             type={isTogglePassword ? "text" : "password"}
             name="confirmPassword"
             className={`shadow appearance-none border-[1px] border-gray-300 rounded w-full h-10 py-2 px-3
-            ${errors?.confirmPassword ? "border-red-300 focus:ring-red-700" : "border-gray-300 focus:ring-gray-700"} 
+            ${errors?.confirmPassword ? `border-red-300 focus:ring-red-700` : `border-gray-300 focus:ring-gray-700`} 
           text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`}
             placeholder="confirmPassword"
           />

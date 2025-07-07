@@ -49,7 +49,7 @@ const LoginForm: React.FC<signinFormprops> = ({ stateValues, formAction, isPendi
             type="number"
             name="phone"
             className={`shadow appearance-none border-[1px] rounded w-full h-10 py-2 px-3
-            ${errors?.phone ? "border-red-300 focus:ring-red-700" : "border-gray-300 focus:ring-gray-700"}
+            ${errors?.phone ? `border-red-300 focus:ring-red-700` : `border-gray-300 focus:ring-gray-700`}
           text-gray-900 leading-tight focus:outline-none focus:ring`}
             placeholder="Phone"
           />
@@ -68,7 +68,7 @@ const LoginForm: React.FC<signinFormprops> = ({ stateValues, formAction, isPendi
             type={isTogglePassword ? "text" : "password"}
             name="password"
             className={`shadow appearance-none border-[1px] rounded w-full h-10 py-2 px-3
-              ${errors?.password ? "border-red-300 focus:ring-red-700" : "border-gray-300 focus:ring-gray-700"}
+              ${errors?.password ? `border-red-300 focus:ring-red-700` : `border-gray-300 focus:ring-gray-700`}
               text-gray-900 leading-tight focus:outline-none focus:ring`}
             placeholder="Password"
           />

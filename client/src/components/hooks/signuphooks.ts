@@ -222,7 +222,7 @@ export const useChangePasswordUser = (): signupFormprops => {
       };
 
       // declare and call validationfunction
-      let errors = await userValidateSignup({
+      let errors: any = await userValidateSignup({
         phone: formValues.phone,
         password: formValues.password,
         confirmPassword: formValues.confirmPassword,

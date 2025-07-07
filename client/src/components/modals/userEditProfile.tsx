@@ -1,16 +1,17 @@
 import { IoMdClose } from "react-icons/io";
-import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
 import ProfileEditForm from "../forms/profileEditForm.tsx";
+import { useUserProfileContexts, useUpdateUserProfileContext } from "../hooks/contexts/userProfileContext.ts";
 
 // It is UserEditProfile component
 const UserEditProfile: React.FC = () => {
   // here destruct data for custom hooks
   const { userProfileHeading, closeUserEdit }: any = useUserProfileContexts();
+  const { stateValues, formAction, isPending }: any = useUpdateUserProfileContext();
 
   return (
     <>
       <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
-        <div className="relative w-full max-w-[90%] md:max-w-2xl mx-4">
+        <div className="relative w-full max-w-[90%] bottom-0 md:bottom-40 lg:bottom-0 md:max-w-2xl mx-4">
           {/* start modal content */}
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl border dark:border-gray-700">
             {/* start modal header */}
@@ -30,7 +31,7 @@ const UserEditProfile: React.FC = () => {
 
             {/* start div form content */}
             <div className="p-4 sm:p-6">
-              <ProfileEditForm />
+              <ProfileEditForm stateValues={stateValues} formAction={formAction} isPending={isPending} />
             </div>
             {/* end div */}
           </div>

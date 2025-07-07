@@ -1,31 +1,50 @@
-// here import zod library
-import * as z from "zod";
+import {
+  profileFormErrors,
+  editProfileFormErrors,
+} from "../models/profileModel.ts";
 
-// define create profiel input field validation wth zod
-export const createProfileValidatorSchema = z.object({
+// export and define function of userCreateProfileValidations
+export const userCreateProfileValidator = (values: any): profileFormErrors => {
+  // declare variables of error validations
+  let errors: any = {
+    full_name: !values.full_name ? "Full name field is required" : "",
 
-    full_name: z.string()
-        .min(1, { message: "Full name is required" })
-        .max(100, { message: "Full name cannot exceed 100 characters" }),
+    avatar:
+      !values.avatar && values.avatar.size > 2 * 1024 * 1024
+        ? "Avatar must be less than 2MB"
+        : !["image/jpeg", "image/png", "image/webp", "image/gif"].includes(
+            values.avatar.type
+          )
+        ? "Avatar must be a JPG, PNG, WEBP, or GIF file"
+        : "",
 
-    avatar: z.any()
-        .optional()
-        .refine((file: any) => file === undefined || file instanceof File, {
-            message: "Avatar must be a file"
-        }),
+    gender:
+      !values.gender && !["Male", "Female", "Other"].includes(values.gender)
+        ? "Gender must be Male, Female, or Other"
+        : "",
 
-    gender: z.enum(["Male", "Female"], {
-        errorMap: () => ({ message: "Please select a valid gender" })
-    }),
+    dob: !values.dob ? "Please choose your date of birth" : "",
 
-    dob: z.string()
-        .min(1, { message: "DateOfBirth is required" })
-        .refine((value: any) => !isNaN(Date.parse(value)), {
-            message: "Please enter a valid date"
-        }),
+    abouts: !values.abouts ? "Abouts field is required" : "",
+  };
 
-    abouts: z.string()
-        .min(1, { message: "Abouts is required" })
-        .max(50, { message: "About cannot exceed 50 characters" })
+  return { ...errors };
+};
 
-});
+// export and define updateProfileUserValidator function
+export const updateProfileUserValidator = (
+  values: any
+): editProfileFormErrors => {
+  // declare variables of validation errors
+  let errors: any = {
+    full_name: !values.full_name ? "Full name field is required" : "",
+    gender:
+      !values.gender && !["Male", "Female", "Other"].includes(values.gender)
+        ? "Gender must be Male, Female, or Other"
+        : "",
+    dob: !values.dob ? "Please choose your date of birth" : "",
+    abouts: !values.abouts ? "Abouts field is required" : "",
+  };
+
+  return { ...errors };
+};
