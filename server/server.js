@@ -18,6 +18,7 @@ import {
 
 import { corsOption } from "./src/lib/optionconfig.js";
 import { checkError } from "./src/middlewares/errors.middleware.js";
+
 // here import all routes
 import { userSignupRouter } from "./src/routes/userSignup.route.js";
 import { userprofileRouter } from "./src/routes/userProfile.route.js";
@@ -25,8 +26,7 @@ import { contactRouter } from "./src/routes/contact.route.js";
 import { adminSignupRouter } from "./src/routes/adminSignup.route.js";
 import { adminProfileRouter } from "./src/routes/adminProfile.route.js";
 import { adminDashboardRouter } from "./src/routes/adminDashboard.route.js";
-// here import all socket events namspace functions
-import { socketUsers } from "./src/seeders/usersConversation.js";
+
 // import database path
 import { databaseConnection } from "./src/config/conncectdb.js";
 
@@ -66,9 +66,6 @@ if (cluster.isPrimary) {
   app.use("/admin/api", adminSignupRouter);
   app.use("/admin/api", adminProfileRouter);
   app.use("/admin/dashboard/api", adminDashboardRouter);
-
-  // here call all namespace events function
-  socketUsers();
 
   // use error middlewares
   app.use(checkError);

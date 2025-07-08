@@ -6,7 +6,11 @@ import { userSignupModel } from "../models/userSignup.model.js";
 import { userProfileModel } from "../models/userProfile.model.js";
 import { asyncHandler } from "../helpers/try-catch.helper.js";
 import { errorHandler } from "../utils/utility.js";
-import { sendUserToken, cookieOptions } from "../utils/features.js";
+import {
+  sendUserToken,
+  sendUserTokenAuth,
+  cookieOptions,
+} from "../utils/features.js";
 
 // there are define user signup controllers
 
@@ -73,18 +77,18 @@ export const userLogin = asyncHandler(async (req, res, next) => {
   let { phone, password } = req.body;
 
   // there was declare phone are valid for exist user
-  let existUser = await userSignupModel
+  let userSignupId = await userSignupModel
     .findOne({
       phone,
     })
     .exec();
 
   // condition are check user are valid or not
-  if (!existUser) {
+  if (!userSignupId) {
     return next(errorHandler("Please required the correct phone", 400));
   } else {
     // passwor synchronise compare
-    let isMatchPassword = bcyptjs.compareSync(password, existUser.password);
+    let isMatchPassword = bcyptjs.compareSync(password, userSignupId.password);
 
     // here declare cache variables
     let myProfile, contactId;
@@ -104,7 +108,22 @@ export const userLogin = asyncHandler(async (req, res, next) => {
     if (!isMatchPassword) {
       return next(errorHandler("Invalid password", 404));
     } else {
-      return sendUserToken(res, existUser, 201, "Logged in Successfully");
+      // declare userProfileId
+      let userProfileId = await userProfileModel
+        .findOne({ userSignup: userSignupId._id })
+        .exec();
+
+      // here check condition for userProfileId are exist or not
+      if (!userProfileId) {
+        return sendUserToken(res, userSignupId, 201, "Logged in Successfully");
+      }
+      return sendUserTokenAuth(
+        res,
+        userSignupId,
+        userProfileId,
+        201,
+        "Logged in Successfully"
+      );
     }
   }
 });
@@ -122,7 +141,10 @@ export const userRecover = asyncHandler(async (req, res, next) => {
     let decodedData = jwt.verify(userRefresh, process.env.JWT_REFRESH_SCKEY);
 
     // there was retrive user _id from database
-    let user = await userSignupModel.findById(decodedData._id).exec();
+    let userSignup = await userSignupModel.findById(decodedData._id).exec();
+    let userProfile = await userProfileModel
+      .findOne({ userSignup: userSignup._id })
+      .exec();
 
     // here declare cache variables
     let myProfile, contactId;
@@ -139,14 +161,20 @@ export const userRecover = asyncHandler(async (req, res, next) => {
     cache.del(cacheKey);
 
     // there can check right user are authorized
-    if (!user) {
+    if (!userSignup) {
       return next(errorHandler("Invalid user", 401));
     } else {
       // here condition will be check to the matched refresh token from user
-      if (userRefresh !== user.refresh_userToken) {
+      if (userRefresh !== userSignup.refresh_userToken) {
         return next(errorHandler("Auth was expired or not used", 404));
       } else {
-        return sendUserToken(res, user, 200, "User authenticated successfully");
+        return sendUserTokenAuth(
+          res,
+          userSignup,
+          userProfile,
+          200,
+          "User authenticated successfully"
+        );
       }
     }
   }

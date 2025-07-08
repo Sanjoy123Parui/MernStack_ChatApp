@@ -5,7 +5,11 @@ import { adminSignupModel } from "../models/adminSignup.model.js";
 import { adminProfileModel } from "../models/adminProfile.model.js";
 import { asyncHandler } from "../helpers/try-catch.helper.js";
 import { errorHandler } from "../utils/utility.js";
-import { sendAdminToken, cookieOptions } from "../utils/features.js";
+import {
+  sendAdminToken,
+  sendAdminTokenAuth,
+  cookieOptions,
+} from "../utils/features.js";
 
 // there create all admin signup controllers
 
@@ -69,18 +73,18 @@ export const adminLogin = asyncHandler(async (req, res, next) => {
   let { phone, password } = req.body;
 
   // there was check exist phone of user in payload
-  let existAdmin = await adminSignupModel
+  let adminSignup = await adminSignupModel
     .findOne({
       phone,
     })
     .exec();
 
   // condition can be check there phone number is correct or not
-  if (!existAdmin) {
+  if (!adminSignup) {
     return next(errorHandler("Please required the correct admin", 400));
   } else {
     // there was comparison of admin password with bcryptjs
-    let isMatchPassword = bcryptjs.compareSync(password, existAdmin.password);
+    let isMatchPassword = bcryptjs.compareSync(password, adminSignup.password);
 
     // declare delete cache key admin
     let userId, page, limit;
@@ -98,7 +102,23 @@ export const adminLogin = asyncHandler(async (req, res, next) => {
     if (!isMatchPassword) {
       return next(errorHandler("Invalid admin", 404));
     } else {
-      return sendAdminToken(res, existAdmin, 201, "Logged in Successfully");
+      // here was check adminProfile are find into the database
+      let adminProfile = await adminProfileModel
+        .findOne({ adminSignup: adminSignup._id })
+        .exec();
+
+      // check condition
+      if (!adminProfile) {
+        return sendAdminToken(res, adminSignup, 201, "Logged in Successfully");
+      }
+
+      return sendAdminTokenAuth(
+        res,
+        adminSignup,
+        adminProfile,
+        201,
+        "Logged in successfully"
+      );
     }
   }
 });
@@ -150,7 +170,10 @@ export const adminRecover = asyncHandler(async (req, res, next) => {
     let decodedData = jwt.verify(adminRefresh, process.env.JWT_REFRESH_SCKEY);
 
     // there was retrive admin _id from database
-    let admin = await adminSignupModel.findById(decodedData._id).exec();
+    let adminSignup = await adminSignupModel.findById(decodedData._id).exec();
+    let adminProfile = await adminProfileModel
+      .findOne({ adminSignup: adminSignup._id })
+      .exec();
 
     // declare delete cache key admin
     let userId, page, limit;
@@ -165,16 +188,17 @@ export const adminRecover = asyncHandler(async (req, res, next) => {
     cache.del(admincacheKey);
 
     // there can check right admin are authorized
-    if (!admin) {
+    if (!adminSignup) {
       return next(errorHandler("Invalid admin", 401));
     } else {
       // here condition will be check to the matched refresh token from admin
       if (adminRefresh !== admin.refresh_adminToken) {
         return next(errorHandler("Auth was expired or not used", 404));
       } else {
-        return sendAdminToken(
+        return sendAdminTokenAuth(
           res,
-          admin,
+          adminSignup,
+          adminProfile,
           200,
           "Admin authenticated successfully"
         );
