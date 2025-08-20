@@ -39,10 +39,13 @@ const Userheader: React.FC = () => {
           {/* end button */}
 
           {/* start list content */}
-          <ul className={`lg:flex ${isOpen ? "block" : "hidden"} absolute lg:relative rounded-2xl shadow-lg 
+          <ul
+            className={`lg:flex ${
+              isOpen ? "block" : "hidden"
+            } absolute lg:relative rounded-2xl shadow-lg 
           lg:shadow-none lg:rounded-none h-auto bg-slate-100 lg:bg-transparent w-48 lg:w-auto text-base 
-          lg:text-lg lg:h-auto right-0 top-full lg:top-auto p-4 lg:p-0 space-y-2 lg:space-y-0 lg:space-x-4`}>
-
+          lg:text-lg lg:h-auto right-0 top-full lg:top-auto p-4 lg:p-0 space-y-2 lg:space-y-0 lg:space-x-4`}
+          >
             {/* here loaded navbar menus component */}
             {/* <UserSignupNav isOpen={isOpen} /> */}
             {/* <UserProfileNav isOpen={isOpen} /> */}
@@ -61,7 +64,6 @@ const Userheader: React.FC = () => {
         {/* end div container */}
       </nav>
       {/* end nav */}
-
     </>
   );
 };
