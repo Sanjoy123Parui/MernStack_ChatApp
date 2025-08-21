@@ -22,29 +22,34 @@ const Userheader: React.FC = () => {
   return (
     <>
       {/* start nav */}
-      <nav className="bg-gradient-to-r from-pink-400 to-purple-500 sticky shadow-md font-sans top-0 z-0 p-4">
+      <nav className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 sticky shadow-lg font-sans top-0 z-10 p-4 transition-all duration-500">
         {/* start div container */}
-        <div className="container mx-auto relative flex justify-between px-0 md:px-8 items-center">
+        <div className="container mx-auto relative flex justify-between px-2 md:px-8 items-center">
           {/* brand name */}
-          <h1 className="text-white text-lg font-bold">hiChat</h1>
+          <h1 className="text-white text-2xl font-extrabold tracking-wide drop-shadow-lg select-none">
+            hiChat
+          </h1>
 
           {/* start button for open drop-down */}
           <button
-            className="text-white lg:hidden"
+            className="text-white lg:hidden p-2 rounded-full hover:bg-white/20 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle Menu"
           >
-            <BsThreeDotsVertical />
+            <BsThreeDotsVertical size={24} />
           </button>
           {/* end button */}
 
           {/* start list content */}
           <ul
-            className={`lg:flex ${
-              isOpen ? "block" : "hidden"
-            } absolute lg:relative rounded-2xl shadow-lg 
-          lg:shadow-none lg:rounded-none h-auto bg-slate-100 lg:bg-transparent w-48 lg:w-auto text-base 
-          lg:text-lg lg:h-auto right-0 top-full lg:top-auto p-4 lg:p-0 space-y-2 lg:space-y-0 lg:space-x-4`}
+            className={`absolute lg:relative rounded-2xl shadow-2xl lg:shadow-none lg:rounded-none h-auto bg-white/80 lg:bg-transparent w-56 lg:w-auto text-base lg:text-lg lg:h-auto right-0 top-full lg:top-auto p-4 lg:p-0 space-y-2 lg:space-y-0 lg:space-x-4 transition-all duration-500 backdrop-blur-md
+              ${
+                isOpen
+                  ? "opacity-100 translate-y-0 pointer-events-auto"
+                  : "opacity-0 -translate-y-2 pointer-events-none"
+              }
+              lg:opacity-100 lg:translate-y-0 lg:pointer-events-auto lg:flex
+            `}
           >
             {/* here loaded navbar menus component */}
             {/* <UserSignupNav isOpen={isOpen} /> */}
@@ -64,6 +69,7 @@ const Userheader: React.FC = () => {
         {/* end div container */}
       </nav>
       {/* end nav */}
+      {/* Removed custom style tag, using Tailwind for animation */}
     </>
   );
 };

@@ -5,31 +5,43 @@ import { userSignupListItem } from "../../models/userModel.tsx";
 
 // here define userSignupNav functional component
 const UserSignupNav: React.FC = () => {
-
   // here declare nav list items
   const [signupList] = useState<userSignupListItem[]>([
     {
       listItem: "Login",
-      itemPath: "/"
+      itemPath: "/",
     },
     {
       listItem: "Register",
-      itemPath: "/user/Register"
+      itemPath: "/user/Register",
     },
   ]);
 
   return (
     <>
-      {signupList.map((items: any, i: any) => (
-        <li key={i} className=" mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
-          <NavLink to={items.itemPath} className={({ isActive }) => isActive ? `block text-gray-700 lg:text-white lg:text-base 
-            hover:text-black lg:hover:text-gray-300 transition-colors`: `block text-gray-600 lg:text-slate-300 lg:text-base 
-            hover:text-black lg:hover:text-gray-300 transition-colors`}>{items.listItem}</NavLink>
-        </li>
-      ))}
+      <ul
+        className="flex flex-col lg:flex-row items-stretch lg:items-center gap-2 lg:gap-4 p-2 rounded-2xl shadow-md 
+      bg-white/80 lg:bg-transparent backdrop-blur-md transition-all duration-500"
+      >
+        {signupList.map((items: any, i: any) => (
+          <li key={i}>
+            <NavLink
+              to={items.itemPath}
+              className={({ isActive }) =>
+                isActive
+                  ? `flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-400 to-pink-400 shadow-md text-white font-semibold hover:bg-purple-500 transition-all duration-300`
+                  : `flex items-center gap-2 px-4 py-2 rounded-xl bg-white/60 lg:bg-transparent text-gray-700 lg:text-slate-300 hover:bg-purple-100 lg:hover:bg-white/20 hover:text-purple-700 lg:hover:text-white font-semibold transition-all duration-300`
+              }
+            >
+              <span className="font-semibold tracking-wide">
+                {items.listItem}
+              </span>
+            </NavLink>
+          </li>
+        ))}
+      </ul>
     </>
   );
 };
 
-// export UserSigupNav functional component
 export default UserSignupNav;

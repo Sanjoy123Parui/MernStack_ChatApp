@@ -6,19 +6,21 @@ const UserProfileNav: React.FC = () => {
   const { openLogoutModal }: any = useUserLogoutModalContext();
   return (
     <>
-      <li className="mx-6 lg:mx-auto p-[5px] lg:p-0 lg:text-right">
-        <div className="flex flex-col lg:flex-row items-center lg:items-end space-y-2 lg:space-y-0 lg:space-x-4">
+      <ul className="flex flex-col lg:flex-row items-stretch lg:items-center gap-2 lg:gap-4 p-2 rounded-2xl shadow-xl bg-white/80 lg:bg-transparent backdrop-blur-md transition-all duration-500">
+        <li>
           <a
             onClick={openLogoutModal}
-            className="flex text-gray-600 lg:text-white hover:text-black lg:hover:text-gray-300 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl shadow-md bg-white/80 lg:bg-transparent hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-400 lg:hover:bg-white/20 transition-all duration-300 text-gray-700 lg:text-white hover:text-white lg:hover:text-gray-300 backdrop-blur-md cursor-pointer font-semibold"
           >
-            <p className="flex lg:hidden">Logout</p>
-            <p className="mt-1.5">
+            <span className="flex lg:hidden font-semibold tracking-wide">
+              Logout
+            </span>
+            <span className="mt-1.5 text-xl">
               <FiLogOut />
-            </p>
+            </span>
           </a>
-        </div>
-      </li>
+        </li>
+      </ul>
     </>
   );
 };
