@@ -7,7 +7,11 @@ import { useUserTogglePassword } from "../hooks/signuphooks.ts";
 import { signinFormprops } from "../models/signupModel.ts";
 
 // here define change paasrd form functional component
-const PasswordChangeForm: React.FC<signinFormprops> = ({ stateValues, formAction, isPending }) => {
+const PasswordChangeForm: React.FC<signinFormprops> = ({
+  stateValues,
+  formAction,
+  isPending,
+}) => {
   // here was declare custom hooks of toggle password
   const { isTogglePassword, togglePasswordVisiblity }: any =
     useUserTogglePassword(false);
@@ -15,98 +19,96 @@ const PasswordChangeForm: React.FC<signinFormprops> = ({ stateValues, formAction
   const { phone, password, confirmPassword, errors }: any = stateValues;
 
   // defined here function was handled getErrorsfield
-  const getChangePasswordValidateFieldErrors = (fieldName: any) => stateValues.errors[fieldName] || "";
+  const getChangePasswordValidateFieldErrors = (fieldName: any) =>
+    stateValues.errors[fieldName] || "";
 
   if (phone !== "" && password !== "" && confirmPassword !== "") {
-
     console.log(stateValues);
   }
 
+  // declare changePasswordFormfield as dynamic input field
+  const changePasswordFormfield: any = [
+    {
+      fieldLabel: "Phone",
+      fieldType: "number",
+      fieldName: "phone",
+    },
+    {
+      fieldLabel: "Password",
+      fieldType: isTogglePassword ? "text" : "password",
+      fieldName: "password",
+    },
+    {
+      fieldLabel: "Confirm Password",
+      fieldType: isTogglePassword ? "text" : "password",
+      fieldName: "confirmPassword",
+    },
+  ];
+
   return (
     <>
-
       {/* start change password form */}
-      <form action={(formData: FormData) => {
-        formAction(formData);
-      }} className="space-y-8 px-8 pt-6 pb-8 mb-4">
-        {/* here declare phone input content */}
-        <div className="mb-4">
-          <Label className="block text-gray-700 sm:text-md md:text-base lg:text-lg font-bold mb-2">
-            Phone
-          </Label>
-          <Input
-            type="number"
-            name="phone"
-            className={`shadow appearance-none border-[1px] rounded w-full h-10 py-2 px-3
-            ${errors?.phone ? `border-red-300 focus:ring-red-700` : `border-gray-300 focus:ring-gray-700`}
-            text-gray-900 leading-tight focus:outline-none focus:ring`}
-            placeholder="Phone"
-          />
-          {getChangePasswordValidateFieldErrors("phone") && (
-            <p className="text-red-500 text-sm lg:text-base">{errors?.phone}</p>
-          )}
-        </div>
+      <form
+        action={(formData: FormData) => {
+          formAction(formData);
+        }}
+        className="space-y-6 px-2 sm:px-6 md:px-8 pt-2 pb-4"
+      >
+        {changePasswordFormfield.map((field: any, i: any) => {
+          let { fieldLabel, fieldType, fieldName }: any = field;
+          return (
+            <div key={i} className="relative mb-4">
+              <Label className="block text-gray-700 text-base md:text-lg font-semibold mb-2">
+                {fieldLabel}
+              </Label>
+              <div className="relative">
+                <Input
+                  type={fieldType}
+                  name={fieldName}
+                  className={`appearance-none border-[1.5px] w-full h-10 sm:h-11 md:h-12 py-2 px-3 md:px-4 rounded-lg
+                  ${
+                    errors?.[fieldName]
+                      ? `border-red-300 focus:ring-red-700`
+                      : `border-indigo-300 focus:ring-indigo-400`
+                  }
+                text-gray-900 leading-tight focus:outline-none focus:ring transition-all duration-200 bg-white text-base md:text-lg pr-10`}
+                  placeholder={fieldLabel}
+                />
+                {fieldLabel !== "Phone" && (
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisiblity}
+                    className="absolute top-1/2 right-3 -translate-y-1/2 flex items-center text-indigo-400 
+                    hover:text-indigo-600 transition-all duration-200"
+                  >
+                    {isTogglePassword ? (
+                      <FaEye className="w-5 h-5" />
+                    ) : (
+                      <FaEyeSlash className="w-5 h-5" />
+                    )}
+                  </button>
+                )}
+              </div>
+              {getChangePasswordValidateFieldErrors(fieldName) && (
+                <p className="text-red-500 text-xs sm:text-sm md:text-base mt-1">
+                  {errors?.[fieldName]}
+                </p>
+              )}
+            </div>
+          );
+        })}
 
-        {/* here declare password input content */}
-        <div className="relative mb-4">
-          <Label className="block text-gray-700 sm:text-md md:text-base lg:text-lg font-bold mb-2">
-            Password
-          </Label>
-          <Input
-            type={isTogglePassword ? "text" : "password"}
-            name="password"
-            className={`shadow appearance-none border-[1px] border-gray-300 rounded w-full h-10 py-2 px-3 
-            ${errors?.password ? `border-red-300 focus:ring-red-700` : `border-gray-300 focus:ring-gray-700`}
-            text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`}
-            placeholder="Password"
-          />
-          <button
-            type="button"
-            onClick={togglePasswordVisiblity}
-            className="absolute top-6 md:top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500"
-          >
-            {isTogglePassword ? <FaEye /> : <FaEyeSlash />}
-          </button>
-          {getChangePasswordValidateFieldErrors("password") && (
-            <p className="text-red-500 text-sm lg:text-base">{errors?.password}</p>
-          )}
-        </div>
-
-        {/* here declare confirmPassword input content */}
-        <div className="relative mb-4">
-          <Label className="block text-gray-700 sm:text-md md:text-base lg:text-lg font-bold mb-2">
-            Confirm Password
-          </Label>
-          <Input
-            type={isTogglePassword ? "text" : "password"}
-            name="confirmPassword"
-            className={`shadow appearance-none border-[1px] border-gray-300 rounded w-full h-10 py-2 px-3
-            ${errors?.confirmPassword ? `border-red-300 focus:ring-red-700` : `border-gray-300 focus:ring-gray-700`} 
-          text-gray-900 leading-tight focus:outline-none focus:ring focus:ring-gray-700`}
-            placeholder="confirmPassword"
-          />
-          <button
-            type="button"
-            onClick={togglePasswordVisiblity}
-            className="absolute top-6 md:top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500"
-          >
-            {isTogglePassword ? <FaEye /> : <FaEyeSlash />}
-          </button>
-          {getChangePasswordValidateFieldErrors("confirmPassword") && (
-            <p className="text-red-500 text-sm lg:text-base">{errors?.confirmPassword}</p>
-          )}
-        </div>
-
-        {/* here declare save button content */}
-        <div className="flex items-center justify-between">
+        {/*start change password form  button content */}
+        <div className="flex items-center justify-between mt-4">
           <Button
-            className="w-full h-10 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br 
-              focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 text-sm md:text-lg 
-             text-white font-medium py-2 px-4 rounded-3xl focus:shadow-outline"
+            type="submit"
+            disabled={isPending}
+            className="w-full h-10 sm:h-11 md:h-12 bg-gradient-to-br from-emerald-600 to-green-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 text-base md:text-lg font-semibold text-white py-2 px-4 rounded-full focus:outline-none transition-all duration-200"
           >
             {isPending ? "...Loading" : "Save"}
           </Button>
         </div>
+        {/*end change password form  button content */}
       </form>
       {/* end form */}
     </>

@@ -3,51 +3,62 @@ import UserLanding from "./userLanding.tsx";
 import PasswordChangeForm from "../../forms/passwordChangeForm.tsx";
 import { useChangePasswordUserContext } from "../../hooks/contexts/userSignupContext.ts";
 
-
 // here define use changepassword functional component
 const UserChangePassword: React.FC = () => {
   // here was declare heading
   const changeHeading: string = "Change Password";
 
   // here destruct custom hooks data
-  const { stateValues, formAction, isPending }: any = useChangePasswordUserContext();
+  const { stateValues, formAction, isPending }: any =
+    useChangePasswordUserContext();
 
   return (
     <>
-      {/* start div flex */}
-      <div className="flex gap-3 flex-col mx-auto md:mx-11 mb-8">
-        <div className="bg-gray-50 border-[2px] rounded-2xl shadow-lg mx-2 md:mx-0 p-6 md:p-8 mt-8">
-          {/* start section content for user change passowrd form and brand,logo */}
-          <section className="body-font overflow-hidden">
-            <div className="container px-5 py-7 mx-auto">
-              <div className="flex flex-wrap -m-12">
-                {/* here was load user landing component */}
-                <UserLanding />
+      <div className="flex flex-col min-h-screen justify-center items-center bg-gradient-to-br from-zinc-100 via-white to-indigo-50 px-2 md:px-8 py-8 md:pb-96 lg:py-8">
+        <div
+          className="w-full max-w-5xl bg-white border-[1.5px] border-zinc-200 rounded-3xl shadow-2xl p-0 md:p-0 flex 
+        flex-col lg:flex-row overflow-hidden"
+        >
+          {/* start section for user change password content*/}
+          <section className="w-full flex flex-col lg:flex-row">
+            {/* left: landing */}
+            <div className="hidden lg:flex w-full lg:w-1/2 items-center justify-center bg-zinc-50 p-8 md:p-12">
+              <UserLanding />
+            </div>
 
-                {/* start div content of user change password form  */}
-                <div className="p-8 lg:p-4 mb-0 lg:mb-12 w-full lg:w-1/2 flex flex-col items-start">
-                  <div className="w-full max-w-[30rem] mx-auto">
-                    {/* here is declare user change password form heading */}
-                    <h1 className="text-2xl text-center font-bold text-blue-950 mb-6">
-                      {changeHeading}
-                    </h1>
+            {/* right: changePassword form */}
+            <div
+              className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12 min-h-[60vh] 
+            md:min-h-[70vh]"
+            >
+              <div
+                className="w-full max-w-md md:max-w-lg bg-white rounded-2xl shadow-lg p-6 md:p-12 flex flex-col 
+              justify-center mx-auto"
+              >
+                {/* heading of login form */}
+                <h1 className="text-3xl text-center font-extrabold text-indigo-700 mb-8 tracking-tight drop-shadow-sm transition-all duration-300">
+                  {changeHeading}
+                </h1>
 
-                    {/*  here define password change functional component */}
-                    <PasswordChangeForm stateValues={stateValues} formAction={formAction} isPending={isPending} />
+                {/*  here define password change functional component */}
+                <PasswordChangeForm
+                  stateValues={stateValues}
+                  formAction={formAction}
+                  isPending={isPending}
+                />
 
-                    {/* start div are content for navigate route in user login form component */}
-                    <div className="flex items-center justify-center p-1">
-                      <p className="text-base">
-                        Please click here to?{" "}
-                        <Link
-                          to="/"
-                          className="text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700"
-                        >
-                          Login
-                        </Link>{" "}
-                      </p>
-                    </div>
-                    {/* end div */}
+                {/* start div for links route */}
+                <div className="mt-6 flex flex-col gap-3">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-2 p-1">
+                    <span className="text-base text-gray-700 font-medium">
+                      Please click here to?{" "}
+                    </span>
+                    <Link
+                      to="/"
+                      className="text-indigo-600 font-semibold px-3 py-1 rounded focus:outline-none focus:underline hover:text-indigo-800 transition-all duration-200"
+                    >
+                      Login
+                    </Link>{" "}
                   </div>
                 </div>
                 {/* end div */}
@@ -57,7 +68,6 @@ const UserChangePassword: React.FC = () => {
           {/* end section */}
         </div>
       </div>
-      {/* end div */}
     </>
   );
 };

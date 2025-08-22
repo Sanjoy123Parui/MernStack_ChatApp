@@ -26,6 +26,25 @@ const RegisterForm: React.FC<signupFormprops> = ({
     console.log(stateValues);
   }
 
+  // declare registerFormfield as dynamic
+  const registerFormfield: any = [
+    {
+      fieldLabel: "Phone",
+      fieldType: "number",
+      fieldName: "phone",
+    },
+    {
+      fieldLabel: "Password",
+      fieldType: isTogglePassword ? "text" : "password",
+      fieldName: "password",
+    },
+    {
+      fieldLabel: "Confirm Password",
+      fieldType: isTogglePassword ? "text" : "password",
+      fieldName: "confirmPassword",
+    },
+  ];
+
   return (
     <>
       {/* start register form */}
@@ -33,58 +52,45 @@ const RegisterForm: React.FC<signupFormprops> = ({
         action={(formData: FormData) => {
           formAction(formData);
         }}
-        className="space-y-8 px-8 pt-6 pb-8 mb-4"
+        className="space-y-6 px-2 sm:px-6 md:px-8 pt-2 pb-4"
       >
-        {[
-          {
-            fieldLabel: "Phone",
-            fieldType: "number",
-            fieldName: "phone",
-          },
-          {
-            fieldLabel: "Password",
-            fieldType: isTogglePassword ? "text" : "password",
-            fieldName: "password",
-          },
-          {
-            fieldLabel: "Confirm Password",
-            fieldType: isTogglePassword ? "text" : "password",
-            fieldName: "confirmPassword",
-          },
-        ].map((field: any, i: any) => {
+        {registerFormfield.map((field: any, i: any) => {
           let { fieldLabel, fieldType, fieldName }: any = field;
           return (
             <div key={i} className="relative mb-4">
-              <Label className="block text-gray-700 sm:text-md md:text-base lg:text-lg font-bold mb-2">
+              <Label className="block text-gray-700 text-base md:text-lg font-semibold mb-2">
                 {fieldLabel}
               </Label>
-              <Input
-                type={fieldType}
-                name={fieldName}
-                className={`shadow appearance-none border-[1px] rounded w-full h-10 py-2 px-3
+              <div className="relative">
+                <Input
+                  type={fieldType}
+                  name={fieldName}
+                  className={`appearance-none border-[1.5px] w-full h-10 sm:h-11 md:h-12 py-2 px-3 md:px-4 rounded-lg
                   ${
                     errors?.[fieldName]
                       ? `border-red-300 focus:ring-red-700`
-                      : `border-gray-300 focus:ring-gray-700`
+                      : `border-indigo-300 focus:ring-indigo-400`
                   }
-                text-gray-900 leading-tight focus:outline-none focus:ring`}
-                placeholder={fieldLabel}
-              />
-              {fieldLabel !== "Phone" && (
-                <button
-                  type="button"
-                  onClick={togglePasswordVisiblity}
-                  className="absolute top-6 md:top-10 right-3 mt-4 transform -translate-y-1/2 text-gray-500"
-                >
-                  {isTogglePassword ? (
-                    <FaEye className="w-4 h-4" />
-                  ) : (
-                    <FaEyeSlash className="w-4 h-4" />
-                  )}
-                </button>
-              )}
+                text-gray-900 leading-tight focus:outline-none focus:ring transition-all duration-200 bg-white text-base md:text-lg pr-10`}
+                  placeholder={fieldLabel}
+                />
+                {fieldLabel !== "Phone" && (
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisiblity}
+                    className="absolute top-1/2 right-3 -translate-y-1/2 flex items-center text-indigo-400 
+                    hover:text-indigo-600 transition-all duration-200"
+                  >
+                    {isTogglePassword ? (
+                      <FaEye className="w-5 h-5" />
+                    ) : (
+                      <FaEyeSlash className="w-5 h-5" />
+                    )}
+                  </button>
+                )}
+              </div>
               {getRegisterValidateFieldErrors(fieldName) && (
-                <p className="text-red-500 text-sm lg:text-base">
+                <p className="text-red-500 text-xs sm:text-sm md:text-base mt-1">
                   {errors?.[fieldName]}
                 </p>
               )}
@@ -93,13 +99,11 @@ const RegisterForm: React.FC<signupFormprops> = ({
         })}
 
         {/*start register form register button content */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-4">
           <Button
             type="submit"
             disabled={isPending}
-            className="w-full h-10 bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 
-            focus:ring-blue-300 dark:focus:ring-blue-800 text-sm md:text-lg font-medium text-white py-2 px-4 rounded-3xl 
-            focus:outline-none focus:shadow-outline"
+            className="w-full h-10 sm:h-11 md:h-12 bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-800 text-base md:text-lg font-semibold text-white py-2 px-4 rounded-full focus:outline-none transition-all duration-200"
           >
             {isPending ? "...Loading" : "Register"}
           </Button>
