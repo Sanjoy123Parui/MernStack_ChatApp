@@ -113,7 +113,7 @@ const LoginForm: React.FC<signinFormprops> = ({
             disabled={isPending}
             className="w-full h-10 sm:h-11 md:h-12 bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-800 text-base md:text-lg font-semibold text-white py-2 px-4 rounded-full focus:outline-none transition-all duration-200"
           >
-            {isPending ? "...Loading" : "Login"}
+            {isPending ? "Loading..." : "Login"}
           </Button>
         </div>
         {/* end Login button */}

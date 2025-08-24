@@ -42,7 +42,10 @@ const UserLogin: React.FC = () => {
             </div>
 
             {/* right: login form */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12 min-h-[60vh] md:min-h-[70vh]">
+            <div
+              className="w-full lg:w-1/2 flex items-center bg-slate-100 justify-center p-6 md:p-12 min-h-[60vh] 
+            md:min-h-[70vh]"
+            >
               <div
                 className="w-full max-w-md md:max-w-lg bg-white rounded-2xl shadow-lg p-6 md:p-12 flex flex-col 
               justify-center mx-auto"

@@ -27,7 +27,7 @@ const UserRegister: React.FC = () => {
 
             {/* right: register form */}
             <div
-              className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12 min-h-[60vh] 
+              className="w-full lg:w-1/2 flex items-center bg-slate-100 justify-center p-6 md:p-12 min-h-[60vh] 
             md:min-h-[70vh]"
             >
               <div

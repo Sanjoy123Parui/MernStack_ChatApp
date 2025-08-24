@@ -60,7 +60,9 @@ export const useCreateuserprofile = (): profileFormProps => {
     try {
       // declare variables of formValues
       let formValues: any = {
-        full_name: formData.get("full_name")?.toString()?.trim() || "",
+        // full_name: formData.get("full_name")?.toString()?.trim() || "",
+        first_name: formData.get("first_name")?.toString()?.trim() || "",
+        last_name: formData.get("last_name")?.toString()?.trim() || "",
         avatar: (formData.get("avatar") as File) || "",
         gender: formData.get("gender")?.toString()?.trim() || "",
         dob: formData.get("dob")?.toString()?.trim() || "",
@@ -69,7 +71,9 @@ export const useCreateuserprofile = (): profileFormProps => {
 
       // declare validation error
       let errors: any = await userCreateProfileValidator({
-        full_name: formValues.full_name,
+        // full_name: formValues.full_name,
+        first_name: formValues.first_name,
+        last_name: formValues.last_name,
         avatar: formValues.avatar,
         gender: formValues.gender,
         dob: formValues.dob,
@@ -100,24 +104,50 @@ export const useCreateuserprofile = (): profileFormProps => {
 
       return {
         ...formValues,
-        errors: { full_name: "", avatar: "", gender: "", dob: "", abouts: "" },
+        // errors: { full_name: "", avatar: "", gender: "", dob: "", abouts: "" },
+        errors: {
+          first_name: "",
+          last_name: "",
+          avatar: "",
+          gender: "",
+          dob: "",
+          abouts: "",
+        },
       };
     } catch (error) {
       return {
         ...prevData,
-        errors: { full_name: "", avatar: "", gender: "", dob: "", abouts: "" },
+        // errors: { full_name: "", avatar: "", gender: "", dob: "", abouts: "" },
+        errors: {
+          first_name: "",
+          last_name: "",
+          avatar: "",
+          gender: "",
+          dob: "",
+          abouts: "",
+        },
       };
     }
   };
 
   // here declare initialStateValues
   const initialStateValues: profileFormdata = {
-    full_name: "",
+    // full_name: "",
+    first_name: "",
+    last_name: "",
     avatar: "",
     gender: "",
     dob: "",
     abouts: "",
-    errors: { full_name: "", avatar: "", gender: "", dob: "", abouts: "" },
+    errors: {
+      // full_name: "",
+      first_name: "",
+      last_name: "",
+      avatar: "",
+      gender: "",
+      dob: "",
+      abouts: "",
+    },
   };
 
   // declare useActionState hook
@@ -139,7 +169,9 @@ export const useEditUserProfile = (): editProfileFormprops => {
     try {
       // get formData
       let formValues: any = {
-        full_name: formData.get("full_name")?.toString()?.trim() || "",
+        // full_name: formData.get("full_name")?.toString()?.trim() || "",
+        first_name: formData.get("first_name")?.toString()?.trim() || "",
+        last_name: formData.get("last_name")?.toString()?.trim() || "",
         gender: formData.get("gender")?.toString()?.trim() || "",
         dob: formData.get("dob")?.toString()?.trim() || "",
         abouts: formData.get("abouts")?.toString()?.trim() || "",
@@ -147,7 +179,9 @@ export const useEditUserProfile = (): editProfileFormprops => {
 
       // declare variables of validation errors
       let errors: any = await updateProfileUserValidator({
-        full_name: formValues.full_name,
+        // full_name: formValues.full_name,
+        first_name: formValues.first_name,
+        last_name: formValues.last_name,
         gender: formValues.gender,
         dob: formValues.dob,
         abouts: formValues.abouts,
@@ -175,7 +209,9 @@ export const useEditUserProfile = (): editProfileFormprops => {
       return {
         ...formValues,
         errors: {
-          full_name: "",
+          // full_name: "",
+          first_name: "",
+          last_name: "",
           gender: "",
           dob: "",
           abouts: "",
@@ -185,7 +221,9 @@ export const useEditUserProfile = (): editProfileFormprops => {
       return {
         ...prevData,
         errors: {
-          full_name: "",
+          // full_name: "",
+          first_name: "",
+          last_name: "",
           gender: "",
           dob: "",
           abouts: "",
@@ -196,12 +234,16 @@ export const useEditUserProfile = (): editProfileFormprops => {
 
   // declare initialStateValues
   const initialStateValues: editProfileFormdata = {
-    full_name: "",
+    // full_name: "",
+    first_name: "",
+    last_name: "",
     gender: "",
     dob: "",
     abouts: "",
     errors: {
-      full_name: "",
+      // full_name: "",
+      first_name: "",
+      last_name: "",
       gender: "",
       dob: "",
       abouts: "",

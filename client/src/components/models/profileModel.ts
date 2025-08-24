@@ -1,6 +1,8 @@
 // here declare instance of profileformErrors interface model
 export interface profileFormErrors {
-  full_name: string;
+  // full_name: string;
+  first_name: string;
+  last_name: string;
   avatar: string;
   gender: string;
   dob: string;
@@ -9,7 +11,9 @@ export interface profileFormErrors {
 
 // here declare instance of profile form data interface model
 export interface profileFormdata {
-  full_name: string;
+  // full_name: string;
+  first_name: string;
+  last_name: string;
   avatar: string;
   gender: string;
   dob: string;
@@ -33,7 +37,9 @@ export interface imageCropProps {
 
 // define and export instance of interface model editProfileFormErrors
 export interface editProfileFormErrors {
-  full_name: string;
+  // full_name: string;
+  first_name: string;
+  last_name: string;
   gender: string;
   dob: string;
   abouts: string;
@@ -41,7 +47,9 @@ export interface editProfileFormErrors {
 
 // define and export instance of interface model editProfileFormdata
 export interface editProfileFormdata {
-  full_name: string;
+  // full_name: string;
+  first_name: string;
+  last_name: string;
   gender: string;
   dob: string;
   abouts: string;

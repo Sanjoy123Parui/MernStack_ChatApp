@@ -7,7 +7,9 @@ import {
 export const userCreateProfileValidator = (values: any): profileFormErrors => {
   // declare variables of error validations
   let errors: any = {
-    full_name: !values.full_name ? "Full name field is required" : "",
+    // full_name: !values.full_name ? "Full name field is required" : "",
+    first_name: !values.first_name ? "First name field is required" : "",
+    last_name: !values.last_name ? "Last name field is required" : "",
 
     avatar:
       !values.avatar && values.avatar.size > 2 * 1024 * 1024
@@ -37,7 +39,9 @@ export const updateProfileUserValidator = (
 ): editProfileFormErrors => {
   // declare variables of validation errors
   let errors: any = {
-    full_name: !values.full_name ? "Full name field is required" : "",
+    // full_name: !values.full_name ? "Full name field is required" : "",
+    first_name: !values.first_name ? "First name field is required" : "",
+    last_name: !values.last_name ? "Last name field is required" : "",
     gender:
       !values.gender && !["Male", "Female", "Other"].includes(values.gender)
         ? "Gender must be Male, Female, or Other"
