@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import PasswordChangeForm from "../../forms/passwordChangeForm.tsx";
-import { useChangePasswordUserContext } from "../../hooks/contexts/userSignupContext.ts";
+import { useUserforgetPassword } from "../../hooks/usersAccounthooks.ts";
 
 // here define use changepassword functional component
 const UserChangePassword: React.FC = () => {
@@ -9,8 +9,8 @@ const UserChangePassword: React.FC = () => {
   const changeHeading: string = "Change Password";
 
   // here destruct custom hooks data
-  const { stateValues, formAction, isPending }: any =
-    useChangePasswordUserContext();
+  const { forgetStateValues, forgetFormAction, forgetIsPending }: any =
+    useUserforgetPassword();
 
   return (
     <>
@@ -42,9 +42,9 @@ const UserChangePassword: React.FC = () => {
 
                 {/*  here define password change functional component */}
                 <PasswordChangeForm
-                  stateValues={stateValues}
-                  formAction={formAction}
-                  isPending={isPending}
+                  forgetStateValues={forgetStateValues}
+                  forgetFormAction={forgetFormAction}
+                  forgetIsPending={forgetIsPending}
                 />
 
                 {/* start div for links route */}

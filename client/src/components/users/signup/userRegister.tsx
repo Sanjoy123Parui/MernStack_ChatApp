@@ -2,14 +2,15 @@
 import { Link } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import RegisterForm from "../../forms/registerForm.tsx";
-import { useSignupUserContext } from "../../hooks/contexts/userSignupContext.ts";
+import { useUserRegister } from "../../hooks/usersAccounthooks.ts";
 
 const UserRegister: React.FC = () => {
   // here was declare register heading
   const registerHeading: string = "Register";
 
   // here destruct data from custom hooks
-  const { stateValues, formAction, isPending }: any = useSignupUserContext();
+  const { signupStateValues, singupFormAction, signupIsPending }: any =
+    useUserRegister();
 
   return (
     <>
@@ -40,10 +41,11 @@ const UserRegister: React.FC = () => {
                 </h1>
 
                 {/* here register  Form component */}
+
                 <RegisterForm
-                  stateValues={stateValues}
-                  formAction={formAction}
-                  isPending={isPending}
+                  signupStateValues={signupStateValues}
+                  singupFormAction={singupFormAction}
+                  signupIsPending={signupIsPending}
                 />
 
                 {/* start div for links route */}

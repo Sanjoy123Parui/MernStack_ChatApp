@@ -1,52 +1,32 @@
 // import libraries of packages
-import { useState, useEffect } from "react";
-import { FiUpload } from "react-icons/fi";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FiUpload } from "react-icons/fi";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group.tsx";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Textarea } from "../ui/textarea.tsx";
 import { Button } from "../ui/button.tsx";
-import { profileFormProps } from "../models/profileModel.ts";
+import { createProfilesFormprops } from "../models/accountsModel.ts";
 import ImageCrop from "./imageCrop.tsx";
+import { useProfileImageContext } from "../hooks/contexts/userContentContext.ts";
 
 // here define ProfileCreateForm functional component
-const ProfileCreateForm: React.FC<profileFormProps> = ({
-  stateValues,
-  formAction,
-  isPending,
+const ProfileCreateForm: React.FC<createProfilesFormprops> = ({
+  createProfileStateValues,
+  createProfileFormAction,
+  createProfileIsPending,
 }) => {
   // here declare useNavigate hook
   let navigate: any = useNavigate();
 
-  // declare useState hooks
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const [showCropDialog, setShowCropDialog] = useState<boolean>(false);
-  const [fileName, setFileName] = useState<string>("");
+  // declare customhooks for destruct data
+  const { imageSrc, showCropDialog, fileName, handleFileChange }: any =
+    useProfileImageContext();
 
   // here destruct data from stateValues
   const { first_name, last_name, avatar, gender, dob, abouts, errors }: any =
-    stateValues;
-
-  // define function  of select profile image file
-  const handleFileChange = (e: any) => {
-    let file: any = e.currentTarget.files?.[0];
-    if (file) {
-      setFileName(file.name);
-      let reader = new FileReader();
-      reader.onload = () => {
-        setImageSrc(reader.result as string);
-        setShowCropDialog(true);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  // define crop image function
-  const handleCropComplete = (croppedArea: any) => {
-    setShowCropDialog(false);
-    return croppedArea;
-  };
+    createProfileStateValues;
 
   // declare useEffect hook for render user create profile content data
   useEffect(() => {
@@ -58,7 +38,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({
       dob !== "" &&
       abouts !== ""
     ) {
-      console.log(stateValues);
+      console.log(createProfileStateValues);
       navigate("/user/content/chat");
     }
   }, [
@@ -69,12 +49,11 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({
     dob,
     abouts,
     navigate,
-    stateValues,
+    createProfileStateValues,
   ]);
 
   // here was handle getUserCreateProfileValidationError
-  const getUserCreateProfileValidationError = (fieldName: any) =>
-    errors[fieldName] || "";
+  const getNewUserProfile = (fieldName: any) => errors[fieldName] || "";
 
   // declare variables of profileFormfield
   const profileFormFields: any = [
@@ -118,17 +97,11 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({
 
   return (
     <>
-      {showCropDialog && imageSrc && (
-        <ImageCrop
-          imageSrc={imageSrc}
-          onCropComplete={handleCropComplete}
-          onClose={() => setShowCropDialog(false)}
-        />
-      )}
+      {showCropDialog && imageSrc && <ImageCrop />}
 
       <form
         action={(formData: FormData) => {
-          formAction(formData);
+          createProfileFormAction(formData);
         }}
         className="space-y-6 px-2 sm:px-6 md:px-8 pt-2 pb-4"
       >
@@ -156,7 +129,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({
                     placeholder={fieldPlaceholder}
                   />
                 </div>
-                {getUserCreateProfileValidationError(fieldName) && (
+                {getNewUserProfile(fieldName) && (
                   <p className="text-red-500 text-xs sm:text-sm md:text-base mt-1">
                     {errors?.[fieldName]}
                   </p>
@@ -210,7 +183,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({
                       />
                     </label>
                   </div>
-                  {getUserCreateProfileValidationError(fieldName) && (
+                  {getNewUserProfile(fieldName) && (
                     <p className="text-red-500 text-xs sm:text-sm md:text-base mt-1">
                       {errors?.[fieldName]}
                     </p>
@@ -237,7 +210,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({
                       </div>
                     ))}
                   </RadioGroup>
-                  {getUserCreateProfileValidationError(fieldName) && (
+                  {getNewUserProfile(fieldName) && (
                     <p className="text-red-500 text-xs sm:text-sm md:text-base mt-1">
                       {errors?.[fieldName]}
                     </p>
@@ -262,7 +235,7 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({
                       } text-gray-900 leading-tight focus:outline-none focus:ring transition-all duration-200 bg-white text-base md:text-lg`}
                     />
                   </div>
-                  {getUserCreateProfileValidationError(fieldName) && (
+                  {getNewUserProfile(fieldName) && (
                     <p className="text-red-500 text-xs sm:text-sm md:text-base mt-1">
                       {errors?.[fieldName]}
                     </p>
@@ -287,7 +260,8 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({
                     rows={4}
                     placeholder={fieldPlaceholder}
                   />
-                  {getUserCreateProfileValidationError(fieldName) && (
+
+                  {getNewUserProfile(fieldName) && (
                     <p className="text-red-500 text-xs sm:text-sm md:text-base mt-1">
                       {errors?.[fieldName]}
                     </p>
@@ -303,11 +277,11 @@ const ProfileCreateForm: React.FC<profileFormProps> = ({
         <div className="flex items-center justify-between mt-4">
           <Button
             type="submit"
-            disabled={isPending}
+            disabled={createProfileIsPending}
             className={`w-full h-10 sm:h-11 md:h-12 bg-gradient-to-br from-sky-500 via-teal-500 to-cyan-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 text-base 
               md:text-lg font-semibold text-white py-2 px-4 rounded-full focus:outline-none transition-all duration-200`}
           >
-            {isPending ? "Loading..." : "Create"}
+            {createProfileIsPending ? "Loading..." : "Create"}
           </Button>
         </div>
         {/* end create button content */}

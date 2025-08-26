@@ -5,35 +5,35 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
-import { signinFormprops } from "../models/signupModel.ts";
-import { useUserTogglePassword } from "../hooks/signuphooks.ts";
+import { signinFormprops } from "../models/accountsModel.ts";
+import { useTogglePasswordContext } from "../hooks/contexts/userContentContext.ts";
 
 // here define LoginForm functional component
 const LoginForm: React.FC<signinFormprops> = ({
-  stateValues,
-  formAction,
-  isPending,
+  signinStateValues,
+  singinFormAction,
+  signinIsPending,
 }) => {
   // here declare useNavigate hook
   const navigate: any = useNavigate();
 
   // here was declare custom hooks of toggle password
   const { isTogglePassword, togglePasswordVisiblity }: any =
-    useUserTogglePassword(false);
+    useTogglePasswordContext();
 
-  const { phone, password, errors }: any = stateValues;
+  // const { phone, password, errors }: any = stateValues;
+  const { phone, password, errors }: any = signinStateValues;
 
   // define function for getLoginValidateError
-  const getLoginValidateFieldErrors = (fieldName: any) =>
-    stateValues.errors[fieldName] || "";
+  const getUserLogin = (fieldName: any) => errors[fieldName] || "";
 
   // here declare useEffect hook
   useEffect(() => {
     if (phone !== "" && password !== "") {
-      console.log(stateValues);
+      console.log(signinStateValues);
       navigate("/user/create-profile");
     }
-  }, [phone, password, navigate, stateValues]);
+  }, [phone, password, navigate, signinStateValues]);
 
   // declare login form input field as dynamic
   const loginFormfield: any = [
@@ -54,7 +54,7 @@ const LoginForm: React.FC<signinFormprops> = ({
       {/* start login form */}
       <form
         action={(formData: FormData) => {
-          formAction(formData);
+          singinFormAction(formData);
         }}
         className="space-y-6 px-2 sm:px-6 md:px-8 pt-2 pb-4"
       >
@@ -78,6 +78,7 @@ const LoginForm: React.FC<signinFormprops> = ({
                   } text-gray-900 leading-tight focus:outline-none focus:ring transition-all duration-200 bg-white text-base md:text-lg pr-10`}
                   placeholder={fieldLabel}
                 />
+
                 {fieldLabel === "Password" && (
                   <button
                     type="button"
@@ -96,7 +97,7 @@ const LoginForm: React.FC<signinFormprops> = ({
                   </button>
                 )}
               </div>
-              {getLoginValidateFieldErrors(fieldName) && (
+              {getUserLogin(fieldName) && (
                 <p className="text-red-500 text-xs sm:text-sm md:text-base mt-1">
                   {errors?.[fieldName]}
                 </p>
@@ -110,10 +111,10 @@ const LoginForm: React.FC<signinFormprops> = ({
         <div className="flex items-center justify-between mt-4">
           <Button
             type="submit"
-            disabled={isPending}
+            disabled={signinIsPending}
             className="w-full h-10 sm:h-11 md:h-12 bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-800 text-base md:text-lg font-semibold text-white py-2 px-4 rounded-full focus:outline-none transition-all duration-200"
           >
-            {isPending ? "Loading..." : "Login"}
+            {signinIsPending ? "Loading..." : "Login"}
           </Button>
         </div>
         {/* end Login button */}

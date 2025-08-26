@@ -1,12 +1,15 @@
 import ProfileCreateForm from "../../forms/profileCreateForm.tsx";
-import { useCreateUserContext } from "../../hooks/contexts/userProfileContext.ts";
+import { useUserCreateProfile } from "../../hooks/usersAccounthooks.ts";
 
 // define userCreate functional component
 const UserCreateProfile: React.FC = () => {
-  // here destruct datat form user create profile context
-  const { stateValues, formAction, isPending }: any = useCreateUserContext();
   const createProfileHeading: string = "Create Your Profile";
-
+  // here destruct datat form user create profile context
+  const {
+    createProfileStateValues,
+    createProfileFormAction,
+    createProfileIsPending,
+  }: any = useUserCreateProfile();
   return (
     <>
       <div className="flex flex-col min-h-screen justify-center items-center bg-gradient-to-br from-zinc-100 via-white to-indigo-50 px-2 md:px-8 py-8 md:pb-96 lg:py-8">
@@ -32,9 +35,9 @@ const UserCreateProfile: React.FC = () => {
 
                 {/* here create profile Form component */}
                 <ProfileCreateForm
-                  stateValues={stateValues}
-                  formAction={formAction}
-                  isPending={isPending}
+                  createProfileStateValues={createProfileStateValues}
+                  createProfileFormAction={createProfileFormAction}
+                  createProfileIsPending={createProfileIsPending}
                 />
               </div>
             </div>

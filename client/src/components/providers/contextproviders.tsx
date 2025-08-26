@@ -1,12 +1,15 @@
 // here import some children Context Provider component
-import { UserAccessoriesProvider } from "./usersettingproviders.tsx";
 import {
-  UserLogoutModalContextProvider,
-  UserSignupContextProvider,
-  UserSigninContextProvider,
-  UserPasswordContextProvider
-} from "./usersignupprovider.tsx";
-import { UserProfileProvider, UserCreateProvider, UpdateProfileUserProvider } from "./userprofileproviders.tsx";
+  TogglePasswordProvider,
+  AvatarProvider,
+} from "./usercontentproviders.tsx";
+import { UserAccessoriesProvider } from "./usersettingproviders.tsx";
+import { UserLogoutModalContextProvider } from "./usersignupprovider.tsx";
+import {
+  UserProfileProvider,
+  // UserCreateProvider,
+  UpdateProfileUserProvider,
+} from "./userprofileproviders.tsx";
 
 // define and export AppProvider component
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -14,23 +17,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   return (
     <>
-      <UserAccessoriesProvider>
-        <UserLogoutModalContextProvider>
-          <UserSignupContextProvider>
-            <UserPasswordContextProvider>
-              <UserSigninContextProvider>
-                <UserProfileProvider>
-                  <UserCreateProvider>
-                    <UpdateProfileUserProvider>
-                      {children}
-                    </UpdateProfileUserProvider>
-                  </UserCreateProvider>
-                </UserProfileProvider>
-              </UserSigninContextProvider>
-            </UserPasswordContextProvider>
-          </UserSignupContextProvider>
-        </UserLogoutModalContextProvider>
-      </UserAccessoriesProvider>
+      <TogglePasswordProvider>
+        <UserAccessoriesProvider>
+          <UserLogoutModalContextProvider>
+            <UserProfileProvider>
+              {/* <UserCreateProvider> */}
+              <UpdateProfileUserProvider>
+                <AvatarProvider>{children}</AvatarProvider>
+              </UpdateProfileUserProvider>
+              {/* </UserCreateProvider> */}
+            </UserProfileProvider>
+          </UserLogoutModalContextProvider>
+        </UserAccessoriesProvider>
+      </TogglePasswordProvider>
     </>
   );
 };

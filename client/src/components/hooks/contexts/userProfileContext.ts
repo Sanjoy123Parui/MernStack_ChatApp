@@ -1,7 +1,7 @@
 import { createContext, use } from "react";
 import {
   profilesContents,
-  profileFormProps,
+  // profileFormProps,
   editProfileFormprops,
 } from "../../models/profileModel.ts";
 
@@ -22,22 +22,22 @@ export const useUserProfileContexts = (): any => {
 };
 
 // here was create context and create also custom hook for use hook of user profile create
-export const UserCreateProfileContext = createContext<
-  profileFormProps | undefined
->(undefined);
+// export const UserCreateProfileContext = createContext<
+//   profileFormProps | undefined
+// >(undefined);
 
 // export and declare custom hook of user profile create context
-export const useCreateUserContext = (): any => {
-  // declare variables of user create profile context
-  const userCreateprofiledata: any = use(UserCreateProfileContext);
+// export const useCreateUserContext = (): any => {
+//   // declare variables of user create profile context
+//   const userCreateprofiledata: any = use(UserCreateProfileContext);
 
-  // here check condition of context data
-  if (!userCreateprofiledata) {
-    throw new Error("An error occured");
-  }
+//   // here check condition of context data
+//   if (!userCreateprofiledata) {
+//     throw new Error("An error occured");
+//   }
 
-  return userCreateprofiledata;
-};
+//   return userCreateprofiledata;
+// };
 
 // here was declare and export a createContext hook for update user profile
 export const UpdateProfileUserContext = createContext<

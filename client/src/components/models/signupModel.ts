@@ -1,10 +1,3 @@
-// here was declare instance of link interface model
-export interface routeSignupNavigateList {
-  desc: string;
-  links: string;
-  linkName: string;
-}
-
 // here was declare and export instance of signupFormErrors interface model
 export interface signupFormErrors {
   phone: string;

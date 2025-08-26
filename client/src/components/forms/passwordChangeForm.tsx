@@ -3,27 +3,27 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
-import { useUserTogglePassword } from "../hooks/signuphooks.ts";
-import { signinFormprops } from "../models/signupModel.ts";
+import { useTogglePasswordContext } from "../hooks/contexts/userContentContext.ts";
+import { forgetPasswordFormprops } from "../models/accountsModel.ts";
 
 // here define change paasrd form functional component
-const PasswordChangeForm: React.FC<signinFormprops> = ({
-  stateValues,
-  formAction,
-  isPending,
+const PasswordChangeForm: React.FC<forgetPasswordFormprops> = ({
+  forgetStateValues,
+  forgetFormAction,
+  forgetIsPending,
 }) => {
   // here was declare custom hooks of toggle password
   const { isTogglePassword, togglePasswordVisiblity }: any =
-    useUserTogglePassword(false);
+    useTogglePasswordContext();
 
-  const { phone, password, confirmPassword, errors }: any = stateValues;
+  // const { phone, password, confirmPassword, errors }: any = stateValues;
+  const { phone, password, confirmPassword, errors }: any = forgetStateValues;
 
   // defined here function was handled getErrorsfield
-  const getChangePasswordValidateFieldErrors = (fieldName: any) =>
-    stateValues.errors[fieldName] || "";
+  const getUserforgetPassword = (fieldName: any) => errors[fieldName] || "";
 
   if (phone !== "" && password !== "" && confirmPassword !== "") {
-    console.log(stateValues);
+    console.log(forgetStateValues);
   }
 
   // declare changePasswordFormfield as dynamic input field
@@ -50,7 +50,7 @@ const PasswordChangeForm: React.FC<signinFormprops> = ({
       {/* start change password form */}
       <form
         action={(formData: FormData) => {
-          formAction(formData);
+          forgetFormAction(formData);
         }}
         className="space-y-6 px-2 sm:px-6 md:px-8 pt-2 pb-4"
       >
@@ -74,6 +74,7 @@ const PasswordChangeForm: React.FC<signinFormprops> = ({
                 text-gray-900 leading-tight focus:outline-none focus:ring transition-all duration-200 bg-white text-base md:text-lg pr-10`}
                   placeholder={fieldLabel}
                 />
+
                 {fieldLabel !== "Phone" && (
                   <button
                     type="button"
@@ -89,7 +90,7 @@ const PasswordChangeForm: React.FC<signinFormprops> = ({
                   </button>
                 )}
               </div>
-              {getChangePasswordValidateFieldErrors(fieldName) && (
+              {getUserforgetPassword(fieldName) && (
                 <p className="text-red-500 text-xs sm:text-sm md:text-base mt-1">
                   {errors?.[fieldName]}
                 </p>
@@ -102,10 +103,10 @@ const PasswordChangeForm: React.FC<signinFormprops> = ({
         <div className="flex items-center justify-between mt-4">
           <Button
             type="submit"
-            disabled={isPending}
+            disabled={forgetIsPending}
             className="w-full h-10 sm:h-11 md:h-12 bg-gradient-to-br from-emerald-600 to-green-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 text-base md:text-lg font-semibold text-white py-2 px-4 rounded-full focus:outline-none transition-all duration-200"
           >
-            {isPending ? "Loading..." : "Save"}
+            {forgetIsPending ? "Loading..." : "Save"}
           </Button>
         </div>
         {/*end change password form  button content */}

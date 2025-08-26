@@ -3,27 +3,26 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
-import { signupFormprops } from "../models/signupModel.ts";
-import { useUserTogglePassword } from "../hooks/signuphooks.ts";
+import { signupFormprops } from "../models/accountsModel.ts";
+import { useTogglePasswordContext } from "../hooks/contexts/userContentContext.ts";
 
 // here was define register form functional component
 const RegisterForm: React.FC<signupFormprops> = ({
-  stateValues,
-  formAction,
-  isPending,
+  signupStateValues,
+  singupFormAction,
+  signupIsPending,
 }) => {
   // here was declare custom hooks of toggle password
   const { isTogglePassword, togglePasswordVisiblity }: any =
-    useUserTogglePassword(false);
+    useTogglePasswordContext();
 
-  const { phone, password, confirmPassword, errors }: any = stateValues;
+  const { phone, password, confirmPassword, errors }: any = signupStateValues;
 
   // defined here function was handled getErrorsfield
-  const getRegisterValidateFieldErrors = (fieldName: any) =>
-    stateValues.errors[fieldName] || "";
+  const getRegisterValidation = (fieldName: any) => errors[fieldName] || "";
 
   if (phone !== "" && password !== "" && confirmPassword !== "") {
-    console.log(stateValues);
+    console.log(signupStateValues);
   }
 
   // declare registerFormfield as dynamic
@@ -50,7 +49,7 @@ const RegisterForm: React.FC<signupFormprops> = ({
       {/* start register form */}
       <form
         action={(formData: FormData) => {
-          formAction(formData);
+          singupFormAction(formData);
         }}
         className="space-y-6 px-2 sm:px-6 md:px-8 pt-2 pb-4"
       >
@@ -74,6 +73,7 @@ const RegisterForm: React.FC<signupFormprops> = ({
                 text-gray-900 leading-tight focus:outline-none focus:ring transition-all duration-200 bg-white text-base md:text-lg pr-10`}
                   placeholder={fieldLabel}
                 />
+
                 {fieldLabel !== "Phone" && (
                   <button
                     type="button"
@@ -89,7 +89,7 @@ const RegisterForm: React.FC<signupFormprops> = ({
                   </button>
                 )}
               </div>
-              {getRegisterValidateFieldErrors(fieldName) && (
+              {getRegisterValidation(fieldName) && (
                 <p className="text-red-500 text-xs sm:text-sm md:text-base mt-1">
                   {errors?.[fieldName]}
                 </p>
@@ -102,10 +102,10 @@ const RegisterForm: React.FC<signupFormprops> = ({
         <div className="flex items-center justify-between mt-4">
           <Button
             type="submit"
-            disabled={isPending}
+            disabled={signupIsPending}
             className="w-full h-10 sm:h-11 md:h-12 bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-800 text-base md:text-lg font-semibold text-white py-2 px-4 rounded-full focus:outline-none transition-all duration-200"
           >
-            {isPending ? "Loading..." : "Register"}
+            {signupIsPending ? "Loading..." : "Register"}
           </Button>
         </div>
         {/*end register form register button content */}

@@ -12,7 +12,7 @@ export const userCreateProfileValidator = (values: any): profileFormErrors => {
     last_name: !values.last_name ? "Last name field is required" : "",
 
     avatar:
-      !values.avatar && values.avatar.size > 2 * 1024 * 1024
+      !values.avatar && values.avatar.size >= 5 * 1024 * 1024
         ? "Avatar must be less than 2MB"
         : !["image/jpeg", "image/png", "image/webp", "image/gif"].includes(
             values.avatar.type
