@@ -7,7 +7,6 @@ import { UserAccessoriesProvider } from "./usersettingproviders.tsx";
 import { UserLogoutModalContextProvider } from "./usersignupprovider.tsx";
 import {
   UserProfileProvider,
-  // UserCreateProvider,
   UpdateProfileUserProvider,
 } from "./userprofileproviders.tsx";
 
@@ -21,11 +20,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
         <UserAccessoriesProvider>
           <UserLogoutModalContextProvider>
             <UserProfileProvider>
-              {/* <UserCreateProvider> */}
               <UpdateProfileUserProvider>
                 <AvatarProvider>{children}</AvatarProvider>
               </UpdateProfileUserProvider>
-              {/* </UserCreateProvider> */}
             </UserProfileProvider>
           </UserLogoutModalContextProvider>
         </UserAccessoriesProvider>

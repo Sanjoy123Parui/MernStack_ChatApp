@@ -1,12 +1,10 @@
 import {
   useUserProfileContents,
-  // useCreateuserprofile,
   useEditUserProfile,
 } from "../hooks/profilehooks.ts";
 
 import {
   UserProfileContext,
-  // UserCreateProfileContext,
   UpdateProfileUserContext,
 } from "../hooks/contexts/userProfileContext.ts";
 
@@ -25,21 +23,6 @@ export const UserProfileProvider: React.FC<{ children: React.ReactNode }> = ({
     </>
   );
 };
-
-// here declare and export UserCreateProvider component
-// export const UserCreateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-
-//     // here destruct custom hook data
-//     const userProfilecreates: any = useCreateuserprofile();
-
-//     return (
-//         <>
-//             <UserCreateProfileContext.Provider value={userProfilecreates}>
-//                 {children}
-//             </UserCreateProfileContext.Provider>
-//         </>
-//     );
-// }
 
 // here declare and export UpdateProfileUserProvider component for update profile
 export const UpdateProfileUserProvider: React.FC<{
