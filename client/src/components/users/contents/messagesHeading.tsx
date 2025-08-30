@@ -2,6 +2,7 @@
 import { FaUser } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
+
 // define MessageHeading component
 const MessagesHeading: React.FC = () => {
   return (

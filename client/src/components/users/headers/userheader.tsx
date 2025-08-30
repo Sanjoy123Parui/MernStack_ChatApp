@@ -1,23 +1,26 @@
-import { useState, useEffect } from "react";
+import {
+  useState,
+  // useEffect
+} from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import UserSignupNav from "./userSignupNav.tsx";
-import UserProfileNav from "./userProfileNav.tsx";
+// import UserSignupNav from "./userSignupNav.tsx";
+// import UserProfileNav from "./userProfileNav.tsx";
 import UserNav from "../../users/headers/userNav.tsx";
 
 // here was define Header component
 const Userheader: React.FC = () => {
   // here declare useState hook
   const [isOpen, setIsOpen] = useState<any>(false);
-  const [hasUserSignup, setHasUserSignup] = useState<any>(false);
-  const [hasUserProfile, setHasUserProfile] = useState<any>(false);
+  // const [hasUserSignup, setHasUserSignup] = useState<any>(false);
+  // const [hasUserProfile, setHasUserProfile] = useState<any>(false);
 
-  const userSignup = localStorage.getItem("userSignup");
-  const userProfile = localStorage.getItem("userProfile");
+  // const userSignup = localStorage.getItem("userSignup");
+  // const userProfile = localStorage.getItem("userProfile");
 
-  useEffect(() => {
-    setHasUserSignup(userSignup);
-    setHasUserProfile(userProfile);
-  }, []);
+  // useEffect(() => {
+  //   setHasUserSignup(userSignup);
+  //   setHasUserProfile(userProfile);
+  // }, []);
 
   return (
     <>
@@ -56,13 +59,13 @@ const Userheader: React.FC = () => {
             {/* <UserProfileNav isOpen={isOpen} /> */}
             {/* <UserNav isOpen={isOpen} /> */}
 
-            {hasUserSignup && hasUserProfile ? (
-              <UserNav />
-            ) : hasUserSignup && !hasUserProfile ? (
-              <UserProfileNav />
-            ) : (
-              <UserSignupNav />
-            )}
+            {/* {hasUserSignup && hasUserProfile ? ( */}
+            <UserNav />
+            {/* ) : hasUserSignup && !hasUserProfile ? ( */}
+            {/* <UserProfileNav /> */}
+            {/* ) : ( */}
+            {/* <UserSignupNav /> */}
+            {/* )} */}
           </ul>
           {/* end list content */}
         </div>

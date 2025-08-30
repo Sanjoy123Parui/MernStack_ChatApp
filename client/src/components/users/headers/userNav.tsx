@@ -55,10 +55,16 @@ const UserActionNav: React.FC = () => {
 const UserNav: React.FC = () => {
   // here declare nav list content
   const [chatNavItem] = useState<userNavListItem[]>([
+    // {
+    //   listIcon: <MdOutlineChatBubble />,
+    //   listItem: "Chat",
+    //   itemPath: "/user/content/chat",
+    // },
+
     {
       listIcon: <MdOutlineChatBubble />,
       listItem: "Chat",
-      itemPath: "/user/content/chat",
+      itemPath: "/",
     },
 
     {
