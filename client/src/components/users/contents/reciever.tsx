@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { FaUser } from "react-icons/fa";
-import { BsThreeDotsVertical } from "react-icons/bs";
+// import { useState } from "react";
+// import { FaUser } from "react-icons/fa";
+// import { BsThreeDotsVertical } from "react-icons/bs";
 // import { BsPlayFill } from "react-icons/bs";
 // import { LuAudioLines } from "react-icons/lu";
 // import { MdOutlineFileDownload } from "react-icons/md";
@@ -311,14 +311,139 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 //   );
 // };
 
+/*RecieverImagesGallery component*/
+// const RecieverImagesGallery: React.FC<any> = ({ recieverdropDownMenu }) => {
+//   const [recieverImageGalleryMenu, setRecieverImageGalleryMenu] =
+//     useState<boolean>(false);
+//   const handleRecieverImageGalleryMenu = (): any =>
+//     setRecieverImageGalleryMenu((prev: any) => !prev);
+
+//   // here declare images array of object
+//   const images: any = [
+//     {
+//       id: 1,
+//       src: "../../src/assets/images/human1.jpg",
+//       alt: "image 1",
+//     },
+//     {
+//       id: 2,
+//       src: "../../src/assets/images/women2.jpg",
+//       alt: "image 2",
+//     },
+//     {
+//       id: 3,
+//       src: "../../src/assets/images/human1.jpg",
+//       alt: "image 3",
+//     },
+//     {
+//       id: 4,
+//       src: "../../src/assets/images/women2.jpg",
+//       alt: "image 4",
+//     },
+//     // {
+//     //   id: 5,
+//     //   src: "../../src/assets/images/human1.jpg",
+//     //   alt: "image 5",
+//     // },
+//     // {
+//     //   id: 6,
+//     //   src: "../../src/assets/images/women2.jpg",
+//     //   alt: "image 6",
+//     // },
+//   ];
+//   return (
+//     <>
+//       <div className="flex items-start gap-2.5">
+//         <div
+//           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
+//         rounded-full dark:bg-gray-700"
+//         >
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+//         </div>
+
+//         {/* start reciever image gallery content */}
+//         <div
+//           className="relative bg-white text-black p-4 border shadow-md
+//         rounded-lg max-w-xs sm:max-w-sm md:max-w-md"
+//         >
+//           {/*Reciever phone or name */}
+//           <div className="flex items-center justify-between">
+//             <h2 className="text-sm md:text-base font-medium">You</h2>
+//             <button
+//               type="button"
+//               className="p-1 rounded-full hover:bg-gray-300"
+//               onClick={handleRecieverImageGalleryMenu}
+//             >
+//               <BsThreeDotsVertical className="w-5 h-5" />
+//             </button>
+//           </div>
+
+//           {/* image gallery content */}
+//           <div className="py-1">
+//             <div className="grid grid-cols-2 gap-1 rounded-lg">
+//               {images.slice(0, 3).map((image: any, index: any) => (
+//                 <img
+//                   key={index}
+//                   src={image.src}
+//                   alt={image.alt}
+//                   // className="w-28 h-28 object-cover rounded-lg"
+//                   className="w-full h-28 object-cover rounded-lg"
+//                 />
+//               ))}
+//               {images.length > 3 && (
+//                 <div className="relative">
+//                   <img
+//                     src={images[3].src}
+//                     alt={images[3].alt}
+//                     // className="w-28 h-28 object-cover rounded-lg"
+//                     className="w-full h-28 object-cover rounded-lg"
+//                   />
+//                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
+//                     <p className="text-white text-lg font-medium">
+//                       +{images.length - 3}
+//                     </p>
+//                   </div>
+//                 </div>
+//               )}
+//             </div>
+//             <p className="py-1 text-sm md:text-base font-normal">
+//               This is a caption for the image gallery.
+//             </p>
+//           </div>
+
+//           {/* start dropdown menu of reciever image gallery content */}
+//           {recieverImageGalleryMenu && (
+//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//                 {recieverdropDownMenu.map((item: any, index: any) => (
+//                   <li key={index}>
+//                     <a
+//                       onClick={() => console.log(item)}
+//                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+//                     >
+//                       {item}
+//                     </a>
+//                   </li>
+//                 ))}
+//               </ul>
+//             </div>
+//           )}
+//           {/* end dropdown menu reciver image gallery */}
+//         </div>
+//         {/* end image gallery */}
+//       </div>
+//     </>
+//   );
+// };
+
 const Reciever: React.FC = () => {
-  const recieverdropDownMenu: any = [
-    "Reply",
-    "Forward",
-    "Copy",
-    "Paste",
-    "Delete",
-  ];
+  // const recieverdropDownMenu: any = [
+  //   "Reply",
+  //   "Forward",
+  //   "Copy",
+  //   "Paste",
+  //   "Delete",
+  // ];
 
   return (
     <>
@@ -327,6 +452,7 @@ const Reciever: React.FC = () => {
         {/* <RecieverVoiceMessage recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverImages recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverVideos recieverdropDownMenu={recieverdropDownMenu} /> */}
+        {/* <RecieverImagesGallery recieverdropDownMenu={recieverdropDownMenu} /> */}
       </div>
     </>
   );
