@@ -286,11 +286,11 @@ const SenderVideos: React.FC<any> = ({ senderdropDownMenu }) => {
 
           {/* videos content */}
           <div className="py-1 relative">
-            <video
+            {/* <video
               src={"../../src/assets/videos/production.mp4"}
               controls
               className="w-full h-auto object-cover max-h-72 min-h-72 rounded-lg"
-            />
+            /> */}
             <p className="py-1 text-sm md:text-base font-normal">
               This is a caption for the video.
             </p>
@@ -307,13 +307,17 @@ const SenderVideos: React.FC<any> = ({ senderdropDownMenu }) => {
 
           {/* start dropdown menu of sender image content */}
           {senderVideoMenu && (
-            <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <div
+              className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 
+            rounded-lg shadow w-44 dark:bg-gray-700"
+            >
               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                 {senderdropDownMenu.map((item: any, index: any) => (
                   <li key={index}>
                     <a
                       onClick={() => console.log(item)}
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 
+                      dark:hover:text-white"
                     >
                       {item}
                     </a>
