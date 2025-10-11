@@ -175,88 +175,10 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 // };
 
 /* SenderImages component*/
-// const SenderImages: React.FC<any> = ({ senderdropDownMenu }) => {
-//   const [senderImageMenu, setSenderImageMenu] = useState<boolean>(false);
-//   const handleSenderImageMenu = (): any =>
-//     setSenderImageMenu((prev: any) => !prev);
-//   return (
-//     <>
-//       <div className="flex items-start gap-2.5">
-//         <div
-//           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
-//         rounded-full dark:bg-gray-700"
-//         >
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
-
-//         {/* start sender image content */}
-//         <div
-//           className="relative bg-indigo-500 text-white p-4 border shadow-md
-//         rounded-lg max-w-xs sm:max-w-sm md:max-w-md"
-//         >
-//           {/*Sender phone or name */}
-//           <div className="flex items-center justify-between">
-//             <h2 className="text-sm md:text-base font-medium">You</h2>
-//             <button
-//               type="button"
-//               className="p-1 rounded-full hover:bg-indigo-600"
-//               onClick={handleSenderImageMenu}
-//             >
-//               <BsThreeDotsVertical className="w-5 h-5" />
-//             </button>
-//           </div>
-
-//           {/* image content */}
-//           <div className="py-1 relative">
-//             <img
-//               src={"../../src/assets/images/human1.jpg"}
-//               alt="image"
-//               className="w-full h-auto object-cover max-h-72 min-h-72 rounded-lg"
-//             />
-//             <p className="py-1 text-sm md:text-base font-normal">
-//               This is a caption for the image.
-//             </p>
-//           </div>
-
-//           {/* start sender image dilivery time */}
-//           <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
-//             <span className="text-xs md:text-sm font-medium">11:46 PM</span>
-//             <span className="text-base font-medium">
-//               <BiCheckDouble />
-//             </span>
-//           </div>
-//           {/* end sender image dilivery time */}
-
-//           {/* start dropdown menu of sender image content */}
-//           {senderImageMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-//                 {senderdropDownMenu.map((item: any, index: any) => (
-//                   <li key={index}>
-//                     <a
-//                       onClick={() => console.log(item)}
-//                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-//                     >
-//                       {item}
-//                     </a>
-//                   </li>
-//                 ))}
-//               </ul>
-//             </div>
-//           )}
-//           {/* end dropdown menu sender image */}
-//         </div>
-//         {/* end image */}
-//       </div>
-//     </>
-//   );
-// };
-
-/* SenderVideos component */
-const SenderVideos: React.FC<any> = ({ senderdropDownMenu }) => {
-  const [senderVideoMenu, setSenderVideoMenu] = useState<boolean>(false);
-  const handleSenderVideoMenu = (): any =>
-    setSenderVideoMenu((prev: any) => !prev);
+const SenderImages: React.FC<any> = ({ senderdropDownMenu }) => {
+  const [senderImageMenu, setSenderImageMenu] = useState<boolean>(false);
+  const handleSenderImageMenu = (): any =>
+    setSenderImageMenu((prev: any) => !prev);
   return (
     <>
       <div className="flex items-start gap-2.5">
@@ -267,7 +189,7 @@ const SenderVideos: React.FC<any> = ({ senderdropDownMenu }) => {
           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
         </div>
 
-        {/* start sender single videos attachement content */}
+        {/* start sender image content */}
         <div
           className="relative bg-indigo-500 text-white p-4 border shadow-md
         rounded-lg max-w-xs sm:max-w-sm md:max-w-md"
@@ -278,25 +200,25 @@ const SenderVideos: React.FC<any> = ({ senderdropDownMenu }) => {
             <button
               type="button"
               className="p-1 rounded-full hover:bg-indigo-600"
-              onClick={handleSenderVideoMenu}
+              onClick={handleSenderImageMenu}
             >
               <BsThreeDotsVertical className="w-5 h-5" />
             </button>
           </div>
 
-          {/* videos content */}
+          {/* image content */}
           <div className="py-1 relative">
-            {/* <video
-              src={"../../src/assets/videos/production.mp4"}
-              controls
+            <img
+              src={"../../src/assets/images/human1.jpg"}
+              alt="image"
               className="w-full h-auto object-cover max-h-72 min-h-72 rounded-lg"
-            /> */}
+            />
             <p className="py-1 text-sm md:text-base font-normal">
-              This is a caption for the video.
+              This is a caption for the image.
             </p>
           </div>
 
-          {/* start sender video dilivery time */}
+          {/* start sender image dilivery time */}
           <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
             <span className="text-xs md:text-sm font-medium">11:46 PM</span>
             <span className="text-base font-medium">
@@ -306,18 +228,14 @@ const SenderVideos: React.FC<any> = ({ senderdropDownMenu }) => {
           {/* end sender image dilivery time */}
 
           {/* start dropdown menu of sender image content */}
-          {senderVideoMenu && (
-            <div
-              className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 
-            rounded-lg shadow w-44 dark:bg-gray-700"
-            >
+          {senderImageMenu && (
+            <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                 {senderdropDownMenu.map((item: any, index: any) => (
                   <li key={index}>
                     <a
                       onClick={() => console.log(item)}
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 
-                      dark:hover:text-white"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       {item}
                     </a>
@@ -333,6 +251,7 @@ const SenderVideos: React.FC<any> = ({ senderdropDownMenu }) => {
     </>
   );
 };
+
 
 /*SenderImagesGallery component*/
 // const SenderImagesGallery: React.FC<any> = ({ senderdropDownMenu }) => {
@@ -486,8 +405,7 @@ const Sender: React.FC = () => {
       <div className="flex flex-col items-end justify-end gap-y-2">
         {/* <SenderTextMessage senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderVoiceMessage senderdropDownMenu={senderdropDownMenu} /> */}
-        {/* <SenderImages senderdropDownMenu={senderdropDownMenu} /> */}
-        <SenderVideos senderdropDownMenu={senderdropDownMenu} />
+        <SenderImages senderdropDownMenu={senderdropDownMenu} />
         {/* <SenderImagesGallery senderdropDownMenu={senderdropDownMenu} /> */}
       </div>
       {/* end div */}
