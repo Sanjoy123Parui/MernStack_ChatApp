@@ -1,9 +1,10 @@
-// import { useState } from "react";
-// import { FaUser } from "react-icons/fa";
-// import { BsThreeDotsVertical } from "react-icons/bs";
-// import { BsPlayFill } from "react-icons/bs";
-// import { LuAudioLines } from "react-icons/lu";
-// import { MdOutlineFileDownload } from "react-icons/md";
+import { useState } from "react";
+import { FaUser } from "react-icons/fa";
+import { FaRegCirclePlay } from "react-icons/fa6";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { BsPlayFill } from "react-icons/bs";
+import { LuAudioLines } from "react-icons/lu";
+import { MdOutlineFileDownload } from "react-icons/md";
 
 /* RecieverTextMessage component*/
 // const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
@@ -235,67 +236,86 @@
 //   );
 // };
 
-/*RecieverVideos component*/
-// const RecieverVideos: React.FC<any> = ({ recieverdropDownMenu }) => {
-//   const [recieverVideosMenu, setRecieverVideosMenu] = useState<boolean>(false);
-//   const handleRecieverVideosMenu = (): any =>
-//     setRecieverVideosMenu((prev: any) => !prev);
+/*RecieverVideosPlayer component*/
+// const RecieverVideosPlayer: React.FC<any> = ({ recieverdropDownMenu }) => {
+//   const [recieverVideoPlayMenu, setRecieverVideoPlayMenu] =
+//     useState<boolean>(false);
+//   const handleRecieverVideoMenu = (): any =>
+//     setRecieverVideoPlayMenu((prev: any) => !prev);
+
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
 //         <div
-//           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
-//         rounded-full dark:bg-gray-700"
+//           className="w-10 h-10 overflow-hidden border-white
+//         border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700"
 //         >
 //           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 
-//         {/* start reciever image content */}
+//         {/* start reciever video player content */}
 //         <div
 //           className="relative bg-white text-black p-4 border shadow-md
-//         rounded-lg max-w-xs sm:max-w-sm md:max-w-md"
+//         rounded-lg max-w-72 sm:max-w-80 md:max-w-72 w-full"
 //         >
-//           {/* reciever text-message name or phone */}
+//           {/* reciever name or phone */}
 //           <div className="flex items-center justify-between">
 //             <h2 className="text-sm md:text-base font-medium">You</h2>
 //             <button
 //               type="button"
-//               onClick={handleRecieverVideosMenu}
+//               onClick={handleRecieverVideoMenu}
 //               className="p-1 rounded-full hover:bg-gray-300"
 //             >
 //               <BsThreeDotsVertical className="w-5 h-5" />
 //             </button>
 //           </div>
 
-//           {/* image content */}
-
-//           <div className="py-1 relative">
-//             <video
-//               // src={"../../src/assets/videos/production.mp4"}
-//               src={"../../src/assets/images/women2.jpg"}
-//               controls
-//               className="w-full h-auto object-cover max-h-72 min-h-72 rounded-lg"
-//             />
-//             <p className="py-1 text-sm md:text-base font-normal">
-//               This is a caption for the image.
+//           {/* reciver video player content */}
+//           <div className="py-1 relative flex flex-col items-center">
+//             <div className="relative w-full flex justify-center">
+//               <video
+//                 src={"../../src/assets/videos/nature.mp4"}
+//                 className="w-full h-auto object-cover max-h-72 min-h-72
+//                 rounded-lg border border-white"
+//                 controls={false}
+//                 tabIndex={-1}
+//               />
+//               <button
+//                 className="absolute inset-0 flex items-center
+//               justify-center focus:outline-none pointer-events-auto"
+//               >
+//                 <FaRegCirclePlay
+//                   className="w-16 h-16 text-white bg-black
+//                 bg-opacity-40 rounded-full p-2 transition-opacity duration-200 opacity-100"
+//                 />
+//               </button>
+//             </div>
+//             <p
+//               className="py-1 text-sm md:text-base font-normal mr-20
+//             sm:mr-20 md:mr-14"
+//             >
+//               This is the caption for video
 //             </p>
 //           </div>
 
-//           {/* start reciever text message dilivery time */}
+//           {/* reciever time zone */}
 //           <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
-//             <span className="text-xs md:text-sm font-medium">11:46 PM</span>
+//             <span className="text-xs md:text-sm font-medium">11:50 PM</span>
 //           </div>
-//           {/* end reciever text message dilivery time */}
 
-//           {/* reciever image content drop down */}
-//           {recieverVideosMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//           {/* reciever video player drop-down menu options */}
+//           {recieverVideoPlayMenu && (
+//             <div
+//               className="absolute top-12 right-4 z-10 bg-white divide-y
+//             divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+//             >
 //               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
 //                 {recieverdropDownMenu.map((item: any, index: any) => (
 //                   <li key={index}>
 //                     <a
-//                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
 //                       onClick={() => console.log(item)}
+//                       className="block px-4 py-2 hover:bg-gray-100
+//                       dark:hover:bg-gray-600 dark:hover:text-white"
 //                     >
 //                       {item}
 //                     </a>
@@ -305,7 +325,7 @@
 //             </div>
 //           )}
 //         </div>
-//         {/* end reciever image content */}
+//         {/* end reciever video player content */}
 //       </div>
 //     </>
 //   );
@@ -437,13 +457,14 @@
 // };
 
 const Reciever: React.FC = () => {
-  // const recieverdropDownMenu: any = [
-  //   "Reply",
-  //   "Forward",
-  //   "Copy",
-  //   "Paste",
-  //   "Delete",
-  // ];
+  // reciver drop down menu declare
+  const recieverdropDownMenu: any = [
+    "Reply",
+    "Forward",
+    "Copy",
+    "Paste",
+    "Delete",
+  ];
 
   return (
     <>
@@ -451,7 +472,7 @@ const Reciever: React.FC = () => {
         {/* <RecieverTextMessage recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverVoiceMessage recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverImages recieverdropDownMenu={recieverdropDownMenu} /> */}
-        {/* <RecieverVideos recieverdropDownMenu={recieverdropDownMenu} /> */}
+        {/* <RecieverVideosPlayer recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverImagesGallery recieverdropDownMenu={recieverdropDownMenu} /> */}
       </div>
     </>
