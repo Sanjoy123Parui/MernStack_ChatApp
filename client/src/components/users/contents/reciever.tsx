@@ -1,77 +1,77 @@
 import { useState } from "react";
 import { FaUser } from "react-icons/fa";
-import { FaRegCirclePlay } from "react-icons/fa6";
+// import { FaRegCirclePlay } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { BsPlayFill } from "react-icons/bs";
-import { LuAudioLines } from "react-icons/lu";
-import { MdOutlineFileDownload } from "react-icons/md";
+// import { BsPlayFill } from "react-icons/bs";
+// import { LuAudioLines } from "react-icons/lu";
+// import { MdOutlineFileDownload } from "react-icons/md";
 
 /* RecieverTextMessage component*/
-// const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
-//   const [recieverTextMenu, setRecieverTextMenu] = useState<boolean>(false);
-//   const handleRecieverTextMenu = (): void =>
-//     setRecieverTextMenu((prev) => !prev);
+const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
+  const [recieverTextMenu, setRecieverTextMenu] = useState<boolean>(false);
+  const handleRecieverTextMenu = (): void =>
+    setRecieverTextMenu((prev) => !prev);
 
-//   return (
-//     <>
-//       <div className="flex items-start gap-2.5">
-//         <div
-//           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
-//         rounded-full dark:bg-gray-700"
-//         >
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
+  return (
+    <>
+      <div className="flex items-start gap-2.5">
+        <div
+          className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
+        rounded-full dark:bg-gray-700"
+        >
+          <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+        </div>
 
-//         {/* start reciever text-message content */}
-//         <div className="relative bg-white text-black p-4 border shadow-md rounded-lg max-w-xs sm:max-w-sm md:max-w-md">
-//           {/* reciever text-message name or phone */}
-//           <div className="flex items-center justify-between">
-//             <h2 className="text-sm md:text-base font-medium">You</h2>
-//             <button
-//               type="button"
-//               onClick={handleRecieverTextMenu}
-//               className="p-1 rounded-full hover:bg-gray-300"
-//             >
-//               <BsThreeDotsVertical className="w-5 h-5" />
-//             </button>
-//           </div>
+        {/* start reciever text-message content */}
+        <div className="relative bg-white text-black p-4 border shadow-md rounded-lg max-w-xs sm:max-w-sm md:max-w-md">
+          {/* reciever text-message name or phone */}
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm md:text-base font-medium">You</h2>
+            <button
+              type="button"
+              onClick={handleRecieverTextMenu}
+              className="p-1 rounded-full hover:bg-gray-300"
+            >
+              <BsThreeDotsVertical className="w-5 h-5" />
+            </button>
+          </div>
 
-//           {/* reciever text messages messages */}
-//           <p className="font-normal text-sm md:text-base py-1">Hi</p>
+          {/* reciever text messages messages */}
+          <p className="font-normal text-sm md:text-base py-1">Hi</p>
 
-//           {/* start reciever text message dilivery time */}
-//           <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
-//             <span className="text-xs md:text-sm font-medium">11:46 PM</span>
-//           </div>
-//           {/* end reciever text message dilivery time */}
+          {/* start reciever text message dilivery time */}
+          <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
+            <span className="text-xs md:text-sm font-medium">11:46 PM</span>
+          </div>
+          {/* end reciever text message dilivery time */}
 
-//           {/* start dropdown menu */}
-//           {recieverTextMenu && (
-//             <div
-//               className="absolute top-12 left-0 z-10 bg-white divide-y divide-gray-100
-//               rounded-lg shadow w-44 dark:bg-gray-700"
-//             >
-//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-//                 {recieverdropDownMenu.map((item: any, index: any) => (
-//                   <li key={index}>
-//                     <a
-//                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-//                       onClick={() => console.log(item)}
-//                     >
-//                       {item}
-//                     </a>
-//                   </li>
-//                 ))}
-//               </ul>
-//             </div>
-//           )}
-//           {/* end dropdown menu */}
-//         </div>
-//         {/* end text-message */}
-//       </div>
-//     </>
-//   );
-// };
+          {/* start dropdown menu */}
+          {recieverTextMenu && (
+            <div
+              className="absolute top-12 left-0 z-10 bg-white divide-y divide-gray-100
+              rounded-lg shadow w-44 dark:bg-gray-700"
+            >
+              <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+                {recieverdropDownMenu.map((item: any, index: any) => (
+                  <li key={index}>
+                    <a
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      onClick={() => console.log(item)}
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {/* end dropdown menu */}
+        </div>
+        {/* end text-message */}
+      </div>
+    </>
+  );
+};
 
 /* RecieverVoiceMessage component*/
 // const RecieverVoiceMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
@@ -590,6 +590,66 @@ import { MdOutlineFileDownload } from "react-icons/md";
 //   );
 // };
 
+/* RecieverWebUrl component */
+// const RecieverWebUrl: React.FC<any> = ({ recieverdropDownMenu }) => {
+//   const url: any = "http://localhost:5173/user/content/story";
+//   const [recieverWebUrlMenu, setRecieverWebUrlMenu] = useState<boolean>(false);
+//   const handleRecieverUrlMenu = (): any =>
+//     setRecieverWebUrlMenu((prev: any) => !prev);
+//   return (
+//     <>
+//       <div className="flex items-start gap-2.5">
+//         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+//         </div>
+
+//         <div className="relative bg-white text-black p-4 border shadow-md rounded-lg max-w-xs sm:max-w-sm md:max-w-md">
+//           {/* reciever phone or name heading  */}
+//           <div className="flex items-center justify-between">
+//             <h2 className="text-sm md:text-base font-medium">You</h2>
+//             <button
+//               type="button"
+//               onClick={handleRecieverUrlMenu}
+//               className="p-1 rounded-full hover:bg-gray-300"
+//             >
+//               <BsThreeDotsVertical className="h-5 w-5" />
+//             </button>
+//           </div>
+
+//           <a
+//             href={url}
+//             target="_blank"
+//             rel="noopener noreferrer"
+//             className="font-normal text-blue-400 hover:text-blue-600 text-sm md:text-base py-1"
+//           >
+//             {url}
+//           </a>
+
+//           {/* reciever delivery time zone */}
+//           <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
+//             <span className="text-xs md:text-sm font-medium">11:46 AM</span>
+//           </div>
+
+//           {/* reciever web url dropdown menu options */}
+//           {recieverWebUrlMenu && (
+//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//                 {recieverdropDownMenu.map((item: any, index: any) => (
+//                   <li key={index}>
+//                     <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+//                       {item}
+//                     </a>
+//                   </li>
+//                 ))}
+//               </ul>
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
 const Reciever: React.FC = () => {
   // reciver drop down menu declare
   const recieverdropDownMenu: any = [
@@ -603,12 +663,13 @@ const Reciever: React.FC = () => {
   return (
     <>
       <div className="flex items-start justify-start">
-        {/* <RecieverTextMessage recieverdropDownMenu={recieverdropDownMenu} /> */}
+        <RecieverTextMessage recieverdropDownMenu={recieverdropDownMenu} />
         {/* <RecieverVoiceMessage recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverImages recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverVideosPlayer recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverImagesGallery recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverVideosGallery recieverdropDownMenu={recieverdropDownMenu} /> */}
+        {/* <RecieverWebUrl recieverdropDownMenu={recieverdropDownMenu} /> */}
       </div>
     </>
   );
