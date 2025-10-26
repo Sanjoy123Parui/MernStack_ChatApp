@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaUser } from "react-icons/fa";
 // import { FaRegCirclePlay } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
+// import { MdAudioFile } from "react-icons/md";
 // import { BsPlayFill } from "react-icons/bs";
 // import { LuAudioLines } from "react-icons/lu";
 // import { MdOutlineFileDownload } from "react-icons/md";
@@ -83,8 +84,8 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //     <>
 //       <div className="flex items-start gap-2.5">
 //         <div
-//           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
-//         rounded-full dark:bg-gray-700"
+//           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold
+//           bg-gray-100 rounded-full dark:bg-gray-700"
 //         >
 //           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
@@ -96,7 +97,7 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //         >
 //           {/* reciever name or phone */}
 //           <div className="flex items-center justify-between">
-//             <h2 className="text-sm md:text-lg font-medium">You</h2>
+//             <h2 className="text-sm md:text-base font-medium">You</h2>
 //             <button
 //               type="button"
 //               onClick={handleRecieverVoiceMenu}
@@ -326,6 +327,94 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //           )}
 //         </div>
 //         {/* end reciever video player content */}
+//       </div>
+//     </>
+//   );
+// };
+
+/* RecieverAudiosPlayer component */
+// const RecieverAudiosPlayer: React.FC<any> = ({ recieverdropDownMenu }) => {
+//   const [recieverAudioMenu, setRecieverAudioMenu] = useState<boolean>(false);
+//   const handleRecieverAudioMenu = (): any =>
+//     setRecieverAudioMenu((prev: any) => !prev);
+//   return (
+//     <>
+//       <div className="flex items-start gap-2.5">
+//         <div
+//           className="w-10 h-10 overflow-hidden border-white border-[2px]
+//         font-bold bg-gray-100 rounded-full dark:bg-gray-700"
+//         >
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+//         </div>
+
+//         <div
+//           className="relative bg-white text-black p-4 border shadow-md
+//         rounded-lg max-w-xs sm:max-w-sm md:max-w-md"
+//         >
+//           {/* reciever phone or name, drop-down option button */}
+//           <div className="flex items-center justify-between">
+//             <h2 className="text-sm md:text-base font-medium">You</h2>
+//             <button
+//               type="button"
+//               onClick={handleRecieverAudioMenu}
+//               className="p-1 rounded-full hover:bg-gray-300"
+//             >
+//               <BsThreeDotsVertical className="w-5 h-5" />
+//             </button>
+//           </div>
+
+//           {/* audio content of reciever */}
+//           <div className="flex items-center space-x-2 py-1">
+//             {/* audio songs file icon */}
+//             <div
+//               className="w-10 h-10 flex items-center justify-center
+//             text-black flex-shrink-0"
+//             >
+//               <MdAudioFile className="w-6 h-6 md:w-8 md:h-8 text-black" />
+//             </div>
+
+//             {/* audio play or pause button */}
+//             <button
+//               type="button"
+//               className="inline-flex self-center items-center p-2"
+//             >
+//               <BsPlayFill className="text-lg md:text-3xl font-normal" />
+//             </button>
+
+//             {/* audio effect wave line */}
+//             <div className="flex items-center space-x-[-4px]">
+//               {Array.from({ length: 5 }).map((_: any, i: any) => (
+//                 <LuAudioLines
+//                   key={i}
+//                   className="text-lg md:text-3xl font-normal"
+//                 />
+//               ))}
+//             </div>
+
+//             {/* duration */}
+//             <span className="text-xs md:text-sm font-normal">4:00</span>
+//           </div>
+
+//           {/* reciever delivery time zone */}
+//           <div className="flex items-center justify-end w-full space-x-2 rtl:space-x-reverse">
+//             <span className="text-xs md:text-sm font-normal">11:45 AM</span>
+//           </div>
+
+//           {/* reciever drop-down menu */}
+//           {recieverAudioMenu && (
+//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//                 {recieverdropDownMenu.map((item: any, index: any) => (
+//                   <li key={index}>
+//                     <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+//                       {item}
+//                     </a>
+//                   </li>
+//                 ))}
+//               </ul>
+//             </div>
+//           )}
+//         </div>
 //       </div>
 //     </>
 //   );
@@ -764,6 +853,7 @@ const Reciever: React.FC = () => {
         {/* <RecieverVoiceMessage recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverImages recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverVideosPlayer recieverdropDownMenu={recieverdropDownMenu} /> */}
+        {/* <RecieverAudiosPlayer recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverImagesGallery recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverVideosGallery recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverWebUrl recieverdropDownMenu={recieverdropDownMenu} /> */}
