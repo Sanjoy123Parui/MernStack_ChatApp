@@ -1,5 +1,15 @@
 import { useState } from "react";
-import { FaUser } from "react-icons/fa";
+import {
+  FaUser,
+  // FaFilePdf,
+  // FaFileWord,
+  // FaFileAlt,
+  // FaFileExcel,
+  // FaFilePowerpoint,
+  // FaFileCode,
+  // FaFileCsv,
+  // FaFileArchive,
+} from "react-icons/fa";
 // import { FaRegCirclePlay } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
 // import { MdAudioFile } from "react-icons/md";
@@ -367,10 +377,10 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //           <div className="flex items-center space-x-2 py-1">
 //             {/* audio songs file icon */}
 //             <div
-//               className="w-10 h-10 flex items-center justify-center
-//             text-black flex-shrink-0"
+//               className="w-10 h-10 flex items-center bg-white/40 rounded-lg
+//               justify-center text-red-600 flex-shrink-0"
 //             >
-//               <MdAudioFile className="w-6 h-6 md:w-8 md:h-8 text-black" />
+//               <MdAudioFile className="w-6 h-6 md:w-8 md:h-8 text-red-600" />
 //             </div>
 
 //             {/* audio play or pause button */}
@@ -394,6 +404,10 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //             {/* duration */}
 //             <span className="text-xs md:text-sm font-normal">4:00</span>
 //           </div>
+
+//           <p className="py-[2px] text-sm md:text-base font-normal">
+//             This is a caption for the audio.
+//           </p>
 
 //           {/* reciever delivery time zone */}
 //           <div className="flex items-center justify-end w-full space-x-2 rtl:space-x-reverse">
@@ -836,6 +850,93 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //   );
 // };
 
+/* RecieverFilesUpload component */
+// const RecieverFilesUpload: React.FC<any> = ({ recieverdropDownMenu }) => {
+//   const [recieverFileMenu, setRecieverFileMenu] = useState<boolean>(false);
+//   const handleRecieverFileMenu = (): any =>
+//     setRecieverFileMenu((prev: any) => !prev);
+//   return (
+//     <>
+//       <div className="flex items-start gap-2.5">
+//         <div
+//           className="w-10 h-10 overflow-hidden border-white border-[2px]
+//         font-bold bg-gray-100 rounded-full dark:bg-gray-700"
+//         >
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+//         </div>
+
+//         <div
+//           className="relative bg-white text-black p-4 border shadow-md
+//         rounded-lg max-w-xs sm:max-w-sm md:max-w-md"
+//         >
+//           {/* reciever phone or name, drop-down option button */}
+//           <div className="flex items-center justify-between">
+//             <h2 className="text-sm md:text-base font-medium">You</h2>
+//             <button
+//               type="button"
+//               onClick={handleRecieverFileMenu}
+//               className="p-1 rounded-full hover:bg-gray-300"
+//             >
+//               <BsThreeDotsVertical className="w-5 h-5" />
+//             </button>
+//           </div>
+
+//           {/* reciever file upload content */}
+//           <div className="flex items-center space-x-2 py-1">
+//             {/* upload file icons and file names */}
+//             <div className="w-10 h-10 flex items-center justify-center bg-white/40 rounded-lg flex-shrink-0">
+//               {/* <FaFilePdf className="w-6 h-6 md:w-8 md:h-8 text-red-600" /> */}
+//               {/* <FaFileWord className="w-6 h-6 md:w-8 md:h-8 text-blue-600" /> */}
+//               {/* <FaFileAlt className="w-6 h-6 md:w-8 md:h-8 text-blue-600" /> */}
+//               {/* <FaFileExcel className="w-6 h-6 md:w-8 md:h-8 text-green-600" /> */}
+//               {/* <FaFilePowerpoint className="w-6 h-6 md:w-8 md:h-8 text-red-600" /> */}
+//               {/* <FaFileCode className="w-6 h-6 md:w-8 md:h-8 text-yellow-600" /> */}
+//               {/* <FaFileCsv className="w-6 h-6 md:w-8 md:h-8 text-green-600" /> */}
+//               <FaFileArchive className="w-6 h-6 md:w-8 md:h-8 text-yellow-600" />
+//             </div>
+//             <div className="flex items-center space-x-[-4px]">
+//               {/* <p className="text-sm md:text-lg font-normal">text.pdf</p> */}
+//               {/* <p className="text-sm md:text-lg font-normal">text.docx</p> */}
+//               {/* <p className="text-sm md:text-lg font-normal">text.txt</p> */}
+//               {/* <p className="text-sm md:text-lg font-normal">text.excel</p> */}
+//               {/* <p className="text-sm md:text-lg font-normal">text.ppt</p> */}
+//               {/* <p className="text-sm md:text-lg font-normal">text.html</p> */}
+//               {/* <p className="text-sm md:text-lg font-normal">text.csv</p> */}
+//               <p className="text-sm md:text-lg font-normal">text.zip</p>
+//             </div>
+//           </div>
+
+//           {/* text for caption of reciever */}
+//           <p className="py-[2px] text-sm md:text-base font-normal">
+//             {" "}
+//             This is the caption of file uploads
+//           </p>
+
+//           {/* reciever delivery time zone */}
+//           <div className="flex items-center justify-end w-full space-x-2 rtl:space-x-reverse">
+//             <span className="text-xs md:text-sm font-normal">11:40 AM</span>
+//           </div>
+
+//           {/* reciever drop-down menu */}
+//           {recieverFileMenu && (
+//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//                 {recieverdropDownMenu.map((item: any, index: any) => (
+//                   <li key={index}>
+//                     <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+//                       {item}
+//                     </a>
+//                   </li>
+//                 ))}
+//               </ul>
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
 const Reciever: React.FC = () => {
   // reciver drop down menu declare
   const recieverdropDownMenu: any = [
@@ -858,6 +959,7 @@ const Reciever: React.FC = () => {
         {/* <RecieverVideosGallery recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverWebUrl recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverSocialMedia recieverdropDownMenu={recieverdropDownMenu} /> */}
+        {/* <RecieverFilesUpload recieverdropDownMenu={recieverdropDownMenu} /> */}
       </div>
     </>
   );
