@@ -851,27 +851,29 @@ const SenderTextMessage: React.FC<any> = ({ senderdropDownMenu }) => {
 
 //           {/* sender socialmedia thumbnail content */}
 //           <div className="py-1">
-//             <div className="relative w-full flex justify-center">
-//               <video
-//                 src="../../src/assets/videos/nature.mp4"
-//                 className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg border border-white"
-//                 controls={false}
-//                 muted
-//                 tabIndex={-1}
-//               />
-//               <button
-//                 type="button"
-//                 className="absolute inset-0 flex items-center
+//             <div className=" bg-white/10 p-1 rounded-md">
+//               <div className="relative w-full flex justify-center">
+//                 <video
+//                   src="../../src/assets/videos/nature.mp4"
+//                   className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg border border-white"
+//                   controls={false}
+//                   muted
+//                   tabIndex={-1}
+//                 />
+//                 <button
+//                   type="button"
+//                   className="absolute inset-0 flex items-center
 //               justify-center focus:outline-none pointer-events-auto"
-//               >
-//                 <FaRegCirclePlay className="text-white w-16 h-16 bg-black bg-opacity-40 rounded-full p-2 transition-opacity duration-200 opacity-100" />
-//               </button>
-//             </div>
+//                 >
+//                   <FaRegCirclePlay className="text-white w-16 h-16 bg-black bg-opacity-40 rounded-full p-2 transition-opacity duration-200 opacity-100" />
+//                 </button>
+//               </div>
 
-//             {/* sender social media description, title and channel name content */}
-//             <div className="mt-3">
-//               <p className="text-sm md:text-base font-medium">{title}</p>
-//               <p className="text-sm text-indigo-100  line-clamp-3">{desc}</p>
+//               {/* sender social media description, title and channel name content */}
+//               <div className="mt-3 p-2">
+//                 <p className="text-sm md:text-base font-medium">{title}</p>
+//                 <p className="text-sm text-indigo-100  line-clamp-3">{desc}</p>
+//               </div>
 //             </div>
 //             {/* url content */}
 //             <a
@@ -996,6 +998,82 @@ const SenderTextMessage: React.FC<any> = ({ senderdropDownMenu }) => {
 //   );
 // };
 
+/* SenderReply component */
+// const SenderReply: React.FC<any> = ({ senderdropDownMenu }) => {
+//   const [senderReplyMenu, setSenderReplyMenu] = useState<boolean>(false);
+//   const handleSenderReplyMenu = (): any =>
+//     setSenderReplyMenu((prev: any) => !prev);
+
+//   // declare varibles of reply
+//   const repliedTo: any = {
+//     userName: "Seimens",
+//     snippet: `Hey, here's the link to the doc we discussed earlier. Please review and comment.`,
+//   };
+
+//   const replyText: string = `Thanks — I've reviewed the doc and left a few comments. Looks good overall.`;
+//   return (
+//     <>
+//       <div className="flex items-start gap-2.5">
+//         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+//         </div>
+
+//         <div
+//           className="relative bg-indigo-500 text-white p-4 border shadow-md
+//         rounded-lg max-w-72 sm:max-w-80 md:max-w-72 w-full"
+//         >
+//           {/* sender phone or name, drop-down option button */}
+//           <div className="flex items-center justify-between">
+//             <h2 className="text-sm md:text-base font-medium">You</h2>
+//             <button
+//               type="button"
+//               onClick={handleSenderReplyMenu}
+//               className="p-1 rounded-full hover:bg-indigo-600"
+//             >
+//               <BsThreeDotsVertical className="w-5 h-5" />
+//             </button>
+//           </div>
+
+//           {/* sender replied preview content */}
+//           <div className="mt-2 bg-white/10 p-2 rounded-md">
+//             <h4 className="text-sm font-medium">{repliedTo.userName}</h4>
+//             <p className="text-xs font-normal">{repliedTo.snippet}</p>
+//           </div>
+
+//           {/* actual reply content */}
+//           <p className="font-normal text-sm md:text-base py-1">{replyText}</p>
+
+//           {/* sender delivery time & status */}
+//           <div className="flex items-center justify-end w-full sace-x-2 rtl:space-x-reverse">
+//             <span className="text-xs md:text-sm font-medium">11:45 AM</span>
+//             <span className="text-base font-medium">
+//               <BiCheckDouble className="w-5 h-5" />
+//             </span>
+//           </div>
+
+//           {/* sender drop-down menu options */}
+//           {senderReplyMenu && (
+//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//                 {senderdropDownMenu.map((item: any, index: any) => (
+//                   <li key={index}>
+//                     <a
+//                       className="block px-4 py-2 hover:bg-gray-100
+//                     dark:hover:bg-gray-600 dark:hover:text-white"
+//                     >
+//                       {item}
+//                     </a>
+//                   </li>
+//                 ))}
+//               </ul>
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
 /* here define Sender component for content of sender*/
 const Sender: React.FC = () => {
   // here declare variables of dropdown menu list of sender
@@ -1022,6 +1100,7 @@ const Sender: React.FC = () => {
         {/* <SenderWebUrl senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderSocialMedia senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderFilesUpload senderdropDownMenu={senderdropDownMenu} /> */}
+        {/* <SenderReply senderdropDownMenu={senderdropDownMenu} /> */}
       </div>
       {/* end div */}
     </>

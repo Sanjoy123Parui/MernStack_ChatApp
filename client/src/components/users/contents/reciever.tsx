@@ -789,29 +789,31 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 
 //           {/* reciever social media thumbnail */}
 //           <div className="py-1">
-//             <div className="relative w-full flex justify-center">
-//               <video
-//                 src={"../../src/assets/videos/nature.mp4"}
-//                 className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg border border-white"
-//                 controls={false}
-//                 muted
-//                 tabIndex={-1}
-//               />
-//               <button
-//                 type="button"
-//                 className="absolute inset-0 flex items-center justify-center focus:outline-none pointer-events-auto"
-//               >
-//                 <FaRegCirclePlay
-//                   className="text-white w-16 h-16 bg-black
-//                 bg-opacity-40 rounded-full p-2 transition-opacity duration-200 opacity-100"
+//             <div className=" bg-black/5 p-1 rounded-md">
+//               <div className="relative w-full flex justify-center">
+//                 <video
+//                   src={"../../src/assets/videos/nature.mp4"}
+//                   className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg border border-white"
+//                   controls={false}
+//                   muted
+//                   tabIndex={-1}
 //                 />
-//               </button>
-//             </div>
+//                 <button
+//                   type="button"
+//                   className="absolute inset-0 flex items-center justify-center focus:outline-none pointer-events-auto"
+//                 >
+//                   <FaRegCirclePlay
+//                     className="text-white w-16 h-16 bg-black
+//                 bg-opacity-40 rounded-full p-2 transition-opacity duration-200 opacity-100"
+//                   />
+//                 </button>
+//               </div>
 
-//             {/* reciever social media description, title and menu */}
-//             <div className="mt-3">
-//               <p className="text-sm md:text-base font-medium">{title}</p>
-//               <p className="text-sm text-gray-600 line-clamp-3">{desc}</p>
+//               {/* reciever social media description, title and menu */}
+//               <div className="mt-3 p-2">
+//                 <p className="text-sm md:text-base font-medium">{title}</p>
+//                 <p className="text-sm text-gray-600 line-clamp-3">{desc}</p>
+//               </div>
 //             </div>
 
 //             {/* reciever social media url content */}
@@ -937,6 +939,78 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //   );
 // };
 
+/* RecieverReply component */
+// const RecieverReply: React.FC<any> = ({ recieverdropDownMenu }) => {
+//   const [recieverReplyMenu, setRecieverReplyMenu] = useState<boolean>(false);
+//   const handleRecieverReplyMenu = (): any =>
+//     setRecieverReplyMenu((prev: any) => !prev);
+
+//   // declare variable for reply reciever
+//   const repliedTo: any = {
+//     userName: "You",
+//     snippet: `Hey, here's the link to the doc we discussed earlier. Please review and comment.`,
+//   };
+//   const replyText: string = `Thanks — I've reviewed the doc and left a few comments. Looks good overall.`;
+//   return (
+//     <>
+//       <div className="flex items-start gap-2.5">
+//         <div
+//           className="w-10 h-10 overflow-hidden border-white border-[2px]
+//         font-bold bg-gray-100 rounded-full dark:bg-gray-700"
+//         >
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+//         </div>
+
+//         {/* reciever phone or name, drop-down menu button */}
+//         <div
+//           className="relative bg-white text-black p-4 border shadow-md
+//         rounded-lg max-w-72 sm:max-w-80 md:max-w-72 w-full"
+//         >
+//           <div className="flex items-center justify-between">
+//             <h2 className="text-sm md:text-base font-medium">Neil Sims</h2>
+//             <button
+//               type="button"
+//               onClick={handleRecieverReplyMenu}
+//               className="p-1 rounded-full hover:bg-gray-300"
+//             >
+//               <BsThreeDotsVertical className="w-5 h-5" />
+//             </button>
+//           </div>
+
+//           {/* reciever reply preview content*/}
+//           <div className="mt-2 bg-black/5 p-2 rounded-md">
+//             <h4 className="text-sm font-medium">{repliedTo.userName}</h4>
+//             <p className="text-xs font-normal">{repliedTo.snippet}</p>
+//           </div>
+
+//           {/* actual reply content */}
+//           <p className="font-normal text-sm md:text-base py-1">{replyText}</p>
+
+//           {/* reciever delivery time zone */}
+//           <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
+//             <span className="text-xs md:text-sm font-medium">11:45 AM</span>
+//           </div>
+
+//           {/* reciever drop-down menu */}
+//           {recieverReplyMenu && (
+//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//                 {recieverdropDownMenu.map((item: any, index: any) => (
+//                   <li key={index}>
+//                     <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+//                       {item}
+//                     </a>
+//                   </li>
+//                 ))}
+//               </ul>
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
 const Reciever: React.FC = () => {
   // reciver drop down menu declare
   const recieverdropDownMenu: any = [
@@ -960,6 +1034,7 @@ const Reciever: React.FC = () => {
         {/* <RecieverWebUrl recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverSocialMedia recieverdropDownMenu={recieverdropDownMenu} /> */}
         {/* <RecieverFilesUpload recieverdropDownMenu={recieverdropDownMenu} /> */}
+        {/* <RecieverReply recieverdropDownMenu={recieverdropDownMenu} /> */}
       </div>
     </>
   );
