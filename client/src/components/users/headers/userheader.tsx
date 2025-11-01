@@ -2,13 +2,16 @@ import {
   useState,
   // useEffect
 } from "react";
+import { useNavigate } from "react-router-dom";
 import { BsThreeDotsVertical } from "react-icons/bs";
 // import UserSignupNav from "./userSignupNav.tsx";
 // import UserProfileNav from "./userProfileNav.tsx";
 import UserNav from "../../users/headers/userNav.tsx";
+import HiChatLogo from "../../../../public/hichat_favicon.svg";
 
 // here was define Header component
 const Userheader: React.FC = () => {
+  const navigate: any = useNavigate();
   // here declare useState hook
   const [isOpen, setIsOpen] = useState<any>(false);
   // const [hasUserSignup, setHasUserSignup] = useState<any>(false);
@@ -29,9 +32,25 @@ const Userheader: React.FC = () => {
         {/* start div container */}
         <div className="container mx-auto relative flex justify-between px-2 md:px-8 items-center">
           {/* brand name */}
-          <h1 className="text-white text-2xl font-extrabold tracking-wide drop-shadow-lg select-none">
+          {/* <h1 className="text-white text-2xl font-extrabold tracking-wide drop-shadow-lg select-none">
             hiChat
-          </h1>
+          </h1> */}
+
+          {/* logo brand only */}
+          <a
+            onClick={() => navigate("/")}
+            className="inline-flex items-center select-none"
+            aria-label="Go to home"
+            title="hiChat home"
+          >
+            <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+              <img
+                src={HiChatLogo}
+                alt="hiChat logo"
+                className="w-6 h-6 md:w-11 md:h-11 object-contain"
+              />
+            </div>
+          </a>
 
           {/* start button for open drop-down */}
           <button
