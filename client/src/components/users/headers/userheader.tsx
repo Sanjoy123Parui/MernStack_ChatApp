@@ -1,29 +1,26 @@
-import {
-  useState,
-  // useEffect
-} from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsThreeDotsVertical } from "react-icons/bs";
-// import UserSignupNav from "./userSignupNav.tsx";
-// import UserProfileNav from "./userProfileNav.tsx";
+import UserSignupNav from "./userSignupNav.tsx";
+import UserProfileNav from "./userProfileNav.tsx";
 import UserNav from "../../users/headers/userNav.tsx";
-import HiChatLogo from "../../../../public/hichat_favicon.svg";
+import HiChatLogo from "../../../assets/hichat_brand_logo.svg";
 
 // here was define Header component
 const Userheader: React.FC = () => {
   const navigate: any = useNavigate();
   // here declare useState hook
   const [isOpen, setIsOpen] = useState<any>(false);
-  // const [hasUserSignup, setHasUserSignup] = useState<any>(false);
-  // const [hasUserProfile, setHasUserProfile] = useState<any>(false);
+  const [hasUserSignup, setHasUserSignup] = useState<any>(false);
+  const [hasUserProfile, setHasUserProfile] = useState<any>(false);
 
-  // const userSignup = localStorage.getItem("userSignup");
-  // const userProfile = localStorage.getItem("userProfile");
+  const userSignup = localStorage.getItem("userSignup");
+  const userProfile = localStorage.getItem("userProfile");
 
-  // useEffect(() => {
-  //   setHasUserSignup(userSignup);
-  //   setHasUserProfile(userProfile);
-  // }, []);
+  useEffect(() => {
+    setHasUserSignup(userSignup);
+    setHasUserProfile(userProfile);
+  }, []);
 
   return (
     <>
@@ -31,11 +28,6 @@ const Userheader: React.FC = () => {
       <nav className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 sticky shadow-lg font-sans top-0 z-10 p-4 transition-all duration-500">
         {/* start div container */}
         <div className="container mx-auto relative flex justify-between px-2 md:px-8 items-center">
-          {/* brand name */}
-          {/* <h1 className="text-white text-2xl font-extrabold tracking-wide drop-shadow-lg select-none">
-            hiChat
-          </h1> */}
-
           {/* logo brand only */}
           <a
             onClick={() => navigate("/")}
@@ -78,13 +70,13 @@ const Userheader: React.FC = () => {
             {/* <UserProfileNav isOpen={isOpen} /> */}
             {/* <UserNav isOpen={isOpen} /> */}
 
-            {/* {hasUserSignup && hasUserProfile ? ( */}
-            <UserNav />
-            {/* ) : hasUserSignup && !hasUserProfile ? ( */}
-            {/* <UserProfileNav /> */}
-            {/* ) : ( */}
-            {/* <UserSignupNav /> */}
-            {/* )} */}
+            {hasUserSignup && hasUserProfile ? (
+              <UserNav />
+            ) : hasUserSignup && !hasUserProfile ? (
+              <UserProfileNav />
+            ) : (
+              <UserSignupNav />
+            )}
           </ul>
           {/* end list content */}
         </div>
