@@ -28,6 +28,7 @@ const Chats: React.FC = () => {
     <>
       {/* start div grid-layout */}
       <div className="grid gap-0 grid-cols-1 lg:grid-cols-8">
+        {/* start section for personal chat content */}
         <section className="col-span-1 w-full h-[668px] border lg:col-span-3">
           {!isAccounts ? (
             <div>
@@ -52,7 +53,9 @@ const Chats: React.FC = () => {
             </div>
           )}
         </section>
+        {/* end section */}
 
+        {/* start section for user personal chat conversation content */}
         <section className="col-span-1 border w-full h-[668px] lg:col-span-5">
           <div>
             <div>
@@ -70,6 +73,7 @@ const Chats: React.FC = () => {
             <EmptyContent />
           </div> */}
         </section>
+        {/* end section */}
       </div>
       {/* end div */}
 
