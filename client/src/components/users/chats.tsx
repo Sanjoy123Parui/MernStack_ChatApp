@@ -1,7 +1,8 @@
 import Headings from "./contents/headings.tsx";
 import ContentLists from "./contents/contentLists.tsx";
 import MessagesHeading from "./contents/messagesHeading.tsx";
-import Messages from "./contents/messages.tsx";
+import Sender from "./contents/sender.tsx";
+import Reciever from "./contents/reciever.tsx";
 import Conversations from "./contents/conversations.tsx";
 import Accessabilities from "./profiles/accessabilities.tsx";
 import { useSettingUserContext } from "../hooks/contexts/userSettingContexts.ts";
@@ -28,7 +29,7 @@ const Chats: React.FC = () => {
     <>
       {/* start div grid-layout */}
       <div className="grid gap-0 grid-cols-1 lg:grid-cols-8">
-        {/* start section for personal chat content */}
+        {/* start section for personal chat list content */}
         <section className="col-span-1 w-full h-[668px] border lg:col-span-3">
           {!isAccounts ? (
             <div>
@@ -61,9 +62,14 @@ const Chats: React.FC = () => {
             <div>
               <MessagesHeading />
             </div>
+            {/* start div for sender and reciever messages content of personal chat */}
             <div className="w-full h-[530px]">
-              <Messages />
+              <div className="flex gap-4 bg-slate-100 p-4 w-full h-full flex-col">
+                <Sender />
+                <Reciever />
+              </div>
             </div>
+            {/* end div */}
             <div>
               <Conversations />
             </div>
