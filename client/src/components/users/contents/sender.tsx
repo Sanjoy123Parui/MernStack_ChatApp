@@ -22,76 +22,76 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 // import { LuAudioLines } from "react-icons/lu";
 
 /*SenderTextMessage component*/
-const SenderTextMessage: React.FC<any> = ({ senderdropDownMenu }) => {
-  const [senderTextMenu, setSenderTextMenu] = useState<boolean>(false);
-  const handleSenderTextMenu = (): void => setSenderTextMenu((prev) => !prev);
+// const SenderTextMessage: React.FC<any> = ({ senderdropDownMenu }) => {
+//   const [senderTextMenu, setSenderTextMenu] = useState<boolean>(false);
+//   const handleSenderTextMenu = (): void => setSenderTextMenu((prev) => !prev);
 
-  return (
-    <>
-      <div className="flex items-start gap-2.5">
-        <div
-          className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
-        rounded-full dark:bg-gray-700"
-        >
-          <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-        </div>
+//   return (
+//     <>
+//       <div className="flex items-start gap-2.5">
+//         <div
+//           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
+//         rounded-full dark:bg-gray-700"
+//         >
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+//         </div>
 
-        {/* start sender text-message content */}
-        <div
-          className="relative bg-indigo-500 text-white p-4 border shadow-md
-        rounded-lg max-w-xs sm:max-w-sm md:max-w-md"
-        >
-          {/*Sender phone or name */}
-          <div className="flex items-center justify-between">
-            <h2 className="text-sm md:text-base font-medium">You</h2>
-            <button
-              type="button"
-              className="p-1 rounded-full hover:bg-indigo-600"
-              onClick={handleSenderTextMenu}
-            >
-              <BsThreeDotsVertical className="w-5 h-5" />
-            </button>
-          </div>
-          {/* text messages */}
-          <p className="font-normal text-sm md:text-base py-1">
-            {/* Hi Everyone today I will go to the NJP, So Have you any can meet me
-            in Station */}
-            Hi
-          </p>
+//         {/* start sender text-message content */}
+//         <div
+//           className="relative bg-indigo-500 text-white p-4 border shadow-md
+//         rounded-lg max-w-xs sm:max-w-sm md:max-w-md"
+//         >
+//           {/*Sender phone or name */}
+//           <div className="flex items-center justify-between">
+//             <h2 className="text-sm md:text-base font-medium">You</h2>
+//             <button
+//               type="button"
+//               className="p-1 rounded-full hover:bg-indigo-600"
+//               onClick={handleSenderTextMenu}
+//             >
+//               <BsThreeDotsVertical className="w-5 h-5" />
+//             </button>
+//           </div>
+//           {/* text messages */}
+//           <p className="font-normal text-sm md:text-base py-1">
+//             {/* Hi Everyone today I will go to the NJP, So Have you any can meet me
+//             in Station */}
+//             Hi
+//           </p>
 
-          {/* start sender text message dilivery time */}
-          <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
-            <span className="text-xs md:text-sm font-medium">11:46 PM</span>
-            <span className="text-base font-medium">
-              <BiCheckDouble />
-            </span>
-          </div>
-          {/* end sender text message dilivery time */}
+//           {/* start sender text message dilivery time */}
+//           <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
+//             <span className="text-xs md:text-sm font-medium">11:46 PM</span>
+//             <span className="text-base font-medium">
+//               <BiCheckDouble />
+//             </span>
+//           </div>
+//           {/* end sender text message dilivery time */}
 
-          {/* start dropdown menu of sender text message content */}
-          {senderTextMenu && (
-            <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-              <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-                {senderdropDownMenu.map((item: any, index: any) => (
-                  <li key={index}>
-                    <a
-                      onClick={() => console.log(item)}
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {/* end dropdown menu sender text message */}
-        </div>
-        {/* end text-message */}
-      </div>
-    </>
-  );
-};
+//           {/* start dropdown menu of sender text message content */}
+//           {senderTextMenu && (
+//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//                 {senderdropDownMenu.map((item: any, index: any) => (
+//                   <li key={index}>
+//                     <a
+//                       onClick={() => console.log(item)}
+//                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+//                     >
+//                       {item}
+//                     </a>
+//                   </li>
+//                 ))}
+//               </ul>
+//             </div>
+//           )}
+//           {/* end dropdown menu sender text message */}
+//         </div>
+//         {/* end text-message */}
+//       </div>
+//     </>
+//   );
+// };
 
 /* SenderVoiceMessage component*/
 // const SenderVoiceMessage: React.FC<any> = ({ senderdropDownMenu }) => {
@@ -822,9 +822,10 @@ const SenderTextMessage: React.FC<any> = ({ senderdropDownMenu }) => {
 //   const [senderSocialMediaMenu, setSenderSocialMediaMenu] =
 //     useState<boolean>(false);
 
-//   const url: any = `http://localhost:5173/user/content/story`;
-//   const title: string = `Nature Video | 2025 | London`;
-//   const desc: string = `#nature #ntl #video #gimmie #youtube`;
+//   const url: string = `https://youtu.be/asG7cwxi1sA?si=CK0Iigc857TEu9FF`;
+//   const srcUrl: string = `https://www.youtube.com/embed/asG7cwxi1sA?si=ao_gsCihSGRw6LsN`;
+//   const title: string = `Saiyaara Reprise - Female | Full Song | Ahaan, Aneet | Tanishk, Faheem, Arslan | Shreya | Irshad`;
+//   const desc: string = `#yrfnewreleases #saiyaarareprise #yrf #yashrajfilms #yrfmovies #yrfmusic #mohitsuri #akshayewidhani #ahaanpanday #aneetpadda #tanishkbagchi #faheemabdullah #arslannizami #shreyaghoshal #irshadkamil #newsong #bollywoodsong #saiyaara #femaleversion #hindisong #bollywoodsong #romanticsong`;
 
 //   const handleSenderSocialMediaMenu = (): any =>
 //     setSenderSocialMediaMenu((prev: any) => !prev);
@@ -853,26 +854,21 @@ const SenderTextMessage: React.FC<any> = ({ senderdropDownMenu }) => {
 //           <div className="py-1">
 //             <div className=" bg-white/10 p-1 rounded-md">
 //               <div className="relative w-full flex justify-center">
-//                 <video
-//                   src="../../src/assets/videos/nature.mp4"
+//                 <iframe
+//                   src={srcUrl}
+//                   title="YouTube video player"
 //                   className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg border border-white"
-//                   controls={false}
-//                   muted
-//                   tabIndex={-1}
+//                   frameBorder="0"
+//                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+//                   referrerPolicy="strict-origin-when-cross-origin"
+//                   allowFullScreen
 //                 />
-//                 <button
-//                   type="button"
-//                   className="absolute inset-0 flex items-center
-//               justify-center focus:outline-none pointer-events-auto"
-//                 >
-//                   <FaRegCirclePlay className="text-white w-16 h-16 bg-black bg-opacity-40 rounded-full p-2 transition-opacity duration-200 opacity-100" />
-//                 </button>
 //               </div>
 
 //               {/* sender social media description, title and channel name content */}
-//               <div className="mt-3 p-2">
-//                 <p className="text-sm md:text-base font-medium">{title}</p>
-//                 <p className="text-sm text-indigo-100  line-clamp-3">{desc}</p>
+//               <div className="p-2">
+//                 <p className="text-sm font-medium line-clamp-2">{title}</p>
+//                 <p className="text-sm text-indigo-100  line-clamp-1">{desc}</p>
 //               </div>
 //             </div>
 //             {/* url content */}
@@ -914,6 +910,100 @@ const SenderTextMessage: React.FC<any> = ({ senderdropDownMenu }) => {
 //     </>
 //   );
 // };
+
+/* SenderGeolocations component */
+const SenderGeolocations: React.FC<any> = ({ senderdropDownMenu }) => {
+  const [senderGeolocMenu, setSenderGeolocMenu] = useState<boolean>(false);
+
+  const url: string = `https://maps.app.goo.gl/mADPKC6tC2eExGtT9`;
+  const locationUrl: string = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3673.570070406127!2d88.09444907429992!3d22.966055518436782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f861004bc3a8eb%3A0xdaff3c39e52cdf6c!2sDhaniakhali%20bus%20stand!5e0!3m2!1sen!2sin!4v1762235974012!5m2!1sen!2sin`;
+
+  const locationAddress: string = `X38W+CRC, Dhaniakhali, West Bengal 712302`;
+
+  const handleSenderGeolocMenu = (): any =>
+    setSenderGeolocMenu((prev: any) => !prev);
+
+  return (
+    <>
+      <div className="flex items-start gap-2.5">
+        <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
+          <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+        </div>
+
+        <div
+          className="relative bg-indigo-500 text-white p-4 border
+        shadow-md rounded-lg max-w-72 sm:max-w-80 md:max-w-72 w-full"
+        >
+          {/* sender contact name or phone, drop-down menu button */}
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm md:text-base font-medium">You</h2>
+            <button
+              type="button"
+              onClick={handleSenderGeolocMenu}
+              className="p-1 rounded-full hover:bg-indigo-600"
+            >
+              <BsThreeDotsVertical className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* sender Geolocation content */}
+          <div className="py-1">
+            <div className="bg-white/10 p-1 rounded-md sm:">
+              <div className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg border border-white">
+                <iframe
+                  src={locationUrl}
+                  className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg border border-white"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+
+              <div className="p-2">
+                <p className="text-sm font-medium line-clamp-2">
+                  {locationAddress}
+                </p>
+              </div>
+            </div>
+
+            {/* url content */}
+            <a
+              href={url}
+              rel="_blank"
+              target="noopener noreferrer"
+              className="block mt-2 text-xs sm:text-sm md:text-base
+            text-indigo-100 break-words"
+            >
+              {url}
+            </a>
+          </div>
+
+          {/* sender delivery time zone */}
+          <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
+            <span className="text-xs md:text-sm font-medium">11:45 AM</span>
+            <span className="text-base font-medium">
+              <BiCheckDouble />
+            </span>
+          </div>
+
+          {senderGeolocMenu && (
+            <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+              <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+                {senderdropDownMenu.map((item: any, index: any) => (
+                  <li key={index}>
+                    <a className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:hover:text-white">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
 
 /* SenderFilesUpload component */
 // const SenderFilesUpload: React.FC<any> = ({ senderdropDownMenu }) => {
@@ -1090,7 +1180,7 @@ const Sender: React.FC = () => {
     <>
       {/* start div flex for sender all chat content */}
       <div className="flex flex-col items-end justify-end gap-y-2">
-        <SenderTextMessage senderdropDownMenu={senderdropDownMenu} />
+        {/* <SenderTextMessage senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderVoiceMessage senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderImages senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderVideosPlayer senderdropDownMenu={senderdropDownMenu} /> */}
@@ -1099,6 +1189,7 @@ const Sender: React.FC = () => {
         {/* <SenderVideosGallery senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderWebUrl senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderSocialMedia senderdropDownMenu={senderdropDownMenu} /> */}
+        <SenderGeolocations senderdropDownMenu={senderdropDownMenu} />
         {/* <SenderFilesUpload senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderReply senderdropDownMenu={senderdropDownMenu} /> */}
       </div>
