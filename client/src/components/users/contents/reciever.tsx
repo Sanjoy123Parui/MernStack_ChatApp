@@ -20,6 +20,8 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 
 /* RecieverTextMessage component*/
 const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
+  const messages: string = `Hi`;
+
   const [recieverTextMenu, setRecieverTextMenu] = useState<boolean>(false);
   const handleRecieverTextMenu = (): void =>
     setRecieverTextMenu((prev) => !prev);
@@ -27,13 +29,6 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
   return (
     <>
       <div className="flex items-start gap-2.5">
-        <div
-          className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
-        rounded-full dark:bg-gray-700"
-        >
-          <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-        </div>
-
         {/* start reciever text-message content */}
         <div className="relative bg-white text-black p-4 border shadow-md rounded-lg max-w-xs sm:max-w-sm md:max-w-md">
           {/* reciever text-message name or phone */}
@@ -49,7 +44,7 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
           </div>
 
           {/* reciever text messages messages */}
-          <p className="font-normal text-sm md:text-base py-1">Hi</p>
+          <p className="font-normal text-sm md:text-base py-1">{messages}</p>
 
           {/* start reciever text message dilivery time */}
           <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
@@ -57,10 +52,10 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
           </div>
           {/* end reciever text message dilivery time */}
 
-          {/* start dropdown menu */}
+          {/* reciever dropdown menu */}
           {recieverTextMenu && (
             <div
-              className="absolute top-12 left-0 z-10 bg-white divide-y divide-gray-100
+              className="absolute top-12 left-4 z-10 bg-white divide-y divide-gray-100
               rounded-lg shadow w-44 dark:bg-gray-700"
             >
               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
@@ -77,9 +72,16 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
               </ul>
             </div>
           )}
-          {/* end dropdown menu */}
         </div>
         {/* end text-message */}
+
+        {/* reciever avatar content */}
+        <div
+          className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
+        rounded-full dark:bg-gray-700"
+        >
+          <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+        </div>
       </div>
     </>
   );
@@ -94,13 +96,6 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
-//         <div
-//           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold
-//           bg-gray-100 rounded-full dark:bg-gray-700"
-//         >
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
-
 //         {/* start reciever voice-message content */}
 //         <div
 //           className="relative bg-white text-black p-4 border shadow-md
@@ -148,14 +143,18 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //           </div>
 //           {/* delivery content end */}
 
+//           {/* reciever voice drop-down menu */}
 //           {recieverVoiceMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//             <div
+//               className="absolute top-12 left-4 z-10 bg-white divide-y divide-gray-100
+//               rounded-lg shadow w-44 dark:bg-gray-700"
+//             >
 //               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
 //                 {recieverdropDownMenu.map((item: any, index: any) => (
 //                   <li key={index}>
 //                     <a
-//                       onClick={() => console.log(item)}
 //                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+//                       onClick={() => console.log(item)}
 //                     >
 //                       {item}
 //                     </a>
@@ -167,6 +166,14 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //           {/* end reciever voice dropdown menu */}
 //         </div>
 //         {/* end voice message */}
+
+//         {/* reciever avatar content */}
+//         <div
+//           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold
+//           bg-gray-100 rounded-full dark:bg-gray-700"
+//         >
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+//         </div>
 //       </div>
 //     </>
 //   );
@@ -174,6 +181,9 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 
 /*RecieverImages component*/
 // const RecieverImages: React.FC<any> = ({ recieverdropDownMenu }) => {
+//   const caption: string = `This is a caption for the image.`;
+//   const src: any = `../../src/assets/images/women2.jpg`;
+
 //   const [recieverImagesMenu, setRecieverImagesMenu] = useState<boolean>(false);
 //   const handleRecieverImagesMenu = (): any =>
 //     setRecieverImagesMenu((prev: any) => !prev);
@@ -181,13 +191,6 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
-//         <div
-//           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
-//         rounded-full dark:bg-gray-700"
-//         >
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
-
 //         {/* start reciever image content */}
 //         <div
 //           className="relative bg-white text-black p-4 border shadow-md
@@ -209,13 +212,11 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 
 //           <div className="py-1 relative">
 //             <img
-//               src={"../../src/assets/images/women2.jpg"}
+//               src={src}
 //               alt="image"
 //               className="w-full h-auto object-cover max-h-72 min-h-72 rounded-lg"
 //             />
-//             <p className="py-1 text-sm md:text-base font-normal">
-//               This is a caption for the image.
-//             </p>
+//             <p className="py-1 text-sm md:text-base font-normal">{caption}</p>
 //           </div>
 
 //           {/* start reciever text message dilivery time */}
@@ -226,7 +227,10 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 
 //           {/* reciever image content drop down */}
 //           {recieverImagesMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//             <div
+//               className="absolute top-12 left-4 z-10 bg-white divide-y divide-gray-100
+//               rounded-lg shadow w-44 dark:bg-gray-700"
+//             >
 //               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
 //                 {recieverdropDownMenu.map((item: any, index: any) => (
 //                   <li key={index}>
@@ -243,6 +247,14 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //           )}
 //         </div>
 //         {/* end reciever image content */}
+
+//         {/* reciever avatar content */}
+//         <div
+//           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
+//         rounded-full dark:bg-gray-700"
+//         >
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+//         </div>
 //       </div>
 //     </>
 //   );
@@ -250,6 +262,9 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 
 /*RecieverVideosPlayer component*/
 // const RecieverVideosPlayer: React.FC<any> = ({ recieverdropDownMenu }) => {
+//   const caption: string = `This is the caption for video`;
+//   const src: any = `../../src/assets/videos/nature.mp4`;
+
 //   const [recieverVideoPlayMenu, setRecieverVideoPlayMenu] =
 //     useState<boolean>(false);
 //   const handleRecieverVideoMenu = (): any =>
@@ -258,13 +273,6 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
-//         <div
-//           className="w-10 h-10 overflow-hidden border-white
-//         border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700"
-//         >
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
-
 //         {/* start reciever video player content */}
 //         <div
 //           className="relative bg-white text-black p-4 border shadow-md
@@ -286,7 +294,7 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //           <div className="py-1 relative flex flex-col items-center">
 //             <div className="relative w-full flex justify-center">
 //               <video
-//                 src={"../../src/assets/videos/nature.mp4"}
+//                 src={src}
 //                 className="w-full h-auto object-cover max-h-72 min-h-72
 //                 rounded-lg border border-white"
 //                 controls={false}
@@ -306,7 +314,7 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //               className="py-1 text-sm md:text-base font-normal mr-20
 //             sm:mr-20 md:mr-14"
 //             >
-//               This is the caption for video
+//               {caption}
 //             </p>
 //           </div>
 
@@ -318,16 +326,15 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //           {/* reciever video player drop-down menu options */}
 //           {recieverVideoPlayMenu && (
 //             <div
-//               className="absolute top-12 right-4 z-10 bg-white divide-y
-//             divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+//               className="absolute top-12 left-4 z-10 bg-white divide-y divide-gray-100
+//               rounded-lg shadow w-44 dark:bg-gray-700"
 //             >
 //               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
 //                 {recieverdropDownMenu.map((item: any, index: any) => (
 //                   <li key={index}>
 //                     <a
+//                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
 //                       onClick={() => console.log(item)}
-//                       className="block px-4 py-2 hover:bg-gray-100
-//                       dark:hover:bg-gray-600 dark:hover:text-white"
 //                     >
 //                       {item}
 //                     </a>
@@ -338,6 +345,14 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //           )}
 //         </div>
 //         {/* end reciever video player content */}
+
+//         {/* reciever avatar content */}
+//         <div
+//           className="w-10 h-10 overflow-hidden border-white
+//         border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700"
+//         >
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+//         </div>
 //       </div>
 //     </>
 //   );
@@ -345,19 +360,13 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 
 /* RecieverAudiosPlayer component */
 // const RecieverAudiosPlayer: React.FC<any> = ({ recieverdropDownMenu }) => {
+//   const caption: string = `This is a caption for the audio.`;
 //   const [recieverAudioMenu, setRecieverAudioMenu] = useState<boolean>(false);
 //   const handleRecieverAudioMenu = (): any =>
 //     setRecieverAudioMenu((prev: any) => !prev);
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
-//         <div
-//           className="w-10 h-10 overflow-hidden border-white border-[2px]
-//         font-bold bg-gray-100 rounded-full dark:bg-gray-700"
-//         >
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
-
 //         <div
 //           className="relative bg-white text-black p-4 border shadow-md
 //         rounded-lg max-w-xs sm:max-w-sm md:max-w-md"
@@ -406,9 +415,7 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //             <span className="text-xs md:text-sm font-normal">4:00</span>
 //           </div>
 
-//           <p className="py-[2px] text-sm md:text-base font-normal">
-//             This is a caption for the audio.
-//           </p>
+//           <p className="py-[2px] text-sm md:text-base font-normal">{caption}</p>
 
 //           {/* reciever delivery time zone */}
 //           <div className="flex items-center justify-end w-full space-x-2 rtl:space-x-reverse">
@@ -417,11 +424,17 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 
 //           {/* reciever drop-down menu */}
 //           {recieverAudioMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//             <div
+//               className="absolute top-12 left-4 z-10 bg-white divide-y divide-gray-100
+//               rounded-lg shadow w-44 dark:bg-gray-700"
+//             >
 //               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
 //                 {recieverdropDownMenu.map((item: any, index: any) => (
 //                   <li key={index}>
-//                     <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+//                     <a
+//                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+//                       onClick={() => console.log(item)}
+//                     >
 //                       {item}
 //                     </a>
 //                   </li>
@@ -429,6 +442,14 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //               </ul>
 //             </div>
 //           )}
+//         </div>
+
+//         {/* reciever avatar content */}
+//         <div
+//           className="w-10 h-10 overflow-hidden border-white border-[2px]
+//         font-bold bg-gray-100 rounded-full dark:bg-gray-700"
+//         >
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 //       </div>
 //     </>
@@ -464,27 +485,13 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //       src: "../../src/assets/images/women2.jpg",
 //       alt: "image 4",
 //     },
-//     // {
-//     //   id: 5,
-//     //   src: "../../src/assets/images/human1.jpg",
-//     //   alt: "image 5",
-//     // },
-//     // {
-//     //   id: 6,
-//     //   src: "../../src/assets/images/women2.jpg",
-//     //   alt: "image 6",
-//     // },
 //   ];
+
+//   const caption: string = `This is a caption for the image gallery.`;
+
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
-//         <div
-//           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
-//         rounded-full dark:bg-gray-700"
-//         >
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
-
 //         {/* start reciever image gallery content */}
 //         <div
 //           className="relative bg-white text-black p-4 border shadow-md
@@ -530,20 +537,26 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //                 </div>
 //               )}
 //             </div>
-//             <p className="py-1 text-sm md:text-base font-normal">
-//               This is a caption for the image gallery.
-//             </p>
+//             <p className="py-1 text-sm md:text-base font-normal">{caption}</p>
+//           </div>
+
+//           {/* reciever time zone content */}
+//           <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
+//             <span className="text-xs md:text-sm font-medium">11:50 AM</span>
 //           </div>
 
 //           {/* start dropdown menu of reciever image gallery content */}
 //           {recieverImageGalleryMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//             <div
+//               className="absolute top-12 left-4 z-10 bg-white divide-y divide-gray-100
+//               rounded-lg shadow w-44 dark:bg-gray-700"
+//             >
 //               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
 //                 {recieverdropDownMenu.map((item: any, index: any) => (
 //                   <li key={index}>
 //                     <a
-//                       onClick={() => console.log(item)}
 //                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+//                       onClick={() => console.log(item)}
 //                     >
 //                       {item}
 //                     </a>
@@ -555,6 +568,14 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //           {/* end dropdown menu reciver image gallery */}
 //         </div>
 //         {/* end image gallery */}
+
+//         {/* reciever avatar content */}
+//         <div
+//           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
+//         rounded-full dark:bg-gray-700"
+//         >
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+//         </div>
 //       </div>
 //     </>
 //   );
@@ -567,6 +588,8 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //   const handleRecieverVideosGalleryMenu = (): any =>
 //     setRecieverVideosGalleryMenu((prev: any) => !prev);
 
+//   const caption: string = `This is the caption for video`;
+
 //   const videos: any = [
 //     { id: 1, src: "../../src/assets/videos/nature.mp4" },
 //     { id: 2, src: "../../src/assets/videos/nature.mp4" },
@@ -576,13 +599,6 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
-//         <div
-//           className="w-10 h-10 overflow-hidden border-white
-//          border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700"
-//         >
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
-
 //         <div
 //           className="relative bg-white text-black p-4 border shadow-md
 //         rounded-lg max-w-72 sm:max-w-80 md:max-w-72 w-full"
@@ -658,7 +674,7 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //               className="py-1 text-sm md:text-base font-normal
 //             mr-20 sm:mr-20 md:mr-14"
 //             >
-//               This is the caption for video
+//               {caption}
 //             </p>
 //           </div>
 //           {/* end reciver video player gallery content */}
@@ -671,15 +687,15 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //           {/* reciever video gallery menu options */}
 //           {recieverVideosGalleryMenu && (
 //             <div
-//               className="absolute top-12 right-4 z-10 bg-white divide-y
-//             divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+//               className="absolute top-12 left-4 z-10 bg-white divide-y divide-gray-100
+//               rounded-lg shadow w-44 dark:bg-gray-700"
 //             >
 //               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
 //                 {recieverdropDownMenu.map((item: any, index: any) => (
 //                   <li key={index}>
 //                     <a
-//                       className="block px-4 py-2 hover:bg-gray-100
-//                     dark:hover:bg-gray-600 dark:hover:text-white"
+//                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+//                       onClick={() => console.log(item)}
 //                     >
 //                       {item}
 //                     </a>
@@ -688,6 +704,14 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //               </ul>
 //             </div>
 //           )}
+//         </div>
+
+//         {/* reciever avatar content */}
+//         <div
+//           className="w-10 h-10 overflow-hidden border-white
+//          border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700"
+//         >
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 //       </div>
 //     </>
@@ -703,10 +727,6 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
-//         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
-
 //         <div className="relative bg-white text-black p-4 border shadow-md rounded-lg max-w-xs sm:max-w-sm md:max-w-md">
 //           {/* reciever phone or name heading  */}
 //           <div className="flex items-center justify-between">
@@ -736,11 +756,17 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 
 //           {/* reciever web url dropdown menu options */}
 //           {recieverWebUrlMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//             <div
+//               className="absolute top-12 left-4 z-10 bg-white divide-y divide-gray-100
+//               rounded-lg shadow w-44 dark:bg-gray-700"
+//             >
 //               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
 //                 {recieverdropDownMenu.map((item: any, index: any) => (
 //                   <li key={index}>
-//                     <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+//                     <a
+//                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+//                       onClick={() => console.log(item)}
+//                     >
 //                       {item}
 //                     </a>
 //                   </li>
@@ -748,6 +774,11 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //               </ul>
 //             </div>
 //           )}
+//         </div>
+
+//         {/* reciever avatar content */}
+//         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 //       </div>
 //     </>
@@ -769,10 +800,6 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
-//         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
-
 //         <div
 //           className="relative bg-white text-black p-4 border shadow-md
 //         rounded-lg max-w-72 sm:max-w-80 md:max-w-72 w-full"
@@ -829,11 +856,17 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 
 //           {/* reciever drop-down menu */}
 //           {recieverSocialMediaMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//             <div
+//               className="absolute top-12 left-4 z-10 bg-white divide-y divide-gray-100
+//               rounded-lg shadow w-44 dark:bg-gray-700"
+//             >
 //               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
 //                 {recieverdropDownMenu.map((item: any, index: any) => (
 //                   <li key={index}>
-//                     <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+//                     <a
+//                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+//                       onClick={() => console.log(item)}
+//                     >
 //                       {item}
 //                     </a>
 //                   </li>
@@ -841,6 +874,11 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //               </ul>
 //             </div>
 //           )}
+//         </div>
+
+//         {/* reciever avatar content */}
+//         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 //       </div>
 //     </>
@@ -861,9 +899,6 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
-//         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
 //         <div className="relative bg-white text-black p-4 border shadow-md rounded-lg max-w-72 sm:max-w-80 md:max-w-72 w-full">
 //           {/* reciever contact phone or name, drop-down menu button */}
 //           <div className="flex items-center justify-between">
@@ -916,11 +951,17 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 
 //           {/* reciever drop-down menu options */}
 //           {recieverGeolocMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//             <div
+//               className="absolute top-12 left-4 z-10 bg-white divide-y divide-gray-100
+//               rounded-lg shadow w-44 dark:bg-gray-700"
+//             >
 //               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
 //                 {recieverdropDownMenu.map((item: any, index: any) => (
 //                   <li key={index}>
-//                     <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+//                     <a
+//                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+//                       onClick={() => console.log(item)}
+//                     >
 //                       {item}
 //                     </a>
 //                   </li>
@@ -928,6 +969,11 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //               </ul>
 //             </div>
 //           )}
+//         </div>
+
+//         {/* reciever avatar content */}
+//         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 //       </div>
 //     </>
@@ -939,16 +985,12 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //   const [recieverFileMenu, setRecieverFileMenu] = useState<boolean>(false);
 //   const handleRecieverFileMenu = (): any =>
 //     setRecieverFileMenu((prev: any) => !prev);
+
+//   const caption: string = `This is the caption of file uploads`;
+
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
-//         <div
-//           className="w-10 h-10 overflow-hidden border-white border-[2px]
-//         font-bold bg-gray-100 rounded-full dark:bg-gray-700"
-//         >
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
-
 //         <div
 //           className="relative bg-white text-black p-4 border shadow-md
 //         rounded-lg max-w-xs sm:max-w-sm md:max-w-md"
@@ -993,7 +1035,7 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //           {/* text for caption of reciever */}
 //           <p className="py-[2px] text-sm md:text-base font-normal">
 //             {" "}
-//             This is the caption of file uploads
+//             {caption}
 //           </p>
 
 //           {/* reciever delivery time zone */}
@@ -1003,11 +1045,17 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 
 //           {/* reciever drop-down menu */}
 //           {recieverFileMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//             <div
+//               className="absolute top-12 left-4 z-10 bg-white divide-y divide-gray-100
+//               rounded-lg shadow w-44 dark:bg-gray-700"
+//             >
 //               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
 //                 {recieverdropDownMenu.map((item: any, index: any) => (
 //                   <li key={index}>
-//                     <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+//                     <a
+//                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+//                       onClick={() => console.log(item)}
+//                     >
 //                       {item}
 //                     </a>
 //                   </li>
@@ -1015,6 +1063,14 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //               </ul>
 //             </div>
 //           )}
+//         </div>
+
+//         {/* reciever avatar content */}
+//         <div
+//           className="w-10 h-10 overflow-hidden border-white border-[2px]
+//         font-bold bg-gray-100 rounded-full dark:bg-gray-700"
+//         >
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 //       </div>
 //     </>
@@ -1036,13 +1092,6 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
-//         <div
-//           className="w-10 h-10 overflow-hidden border-white border-[2px]
-//         font-bold bg-gray-100 rounded-full dark:bg-gray-700"
-//         >
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
-
 //         {/* reciever phone or name, drop-down menu button */}
 //         <div
 //           className="relative bg-white text-black p-4 border shadow-md
@@ -1075,11 +1124,17 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 
 //           {/* reciever drop-down menu */}
 //           {recieverReplyMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//             <div
+//               className="absolute top-12 left-4 z-10 bg-white divide-y divide-gray-100
+//               rounded-lg shadow w-44 dark:bg-gray-700"
+//             >
 //               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
 //                 {recieverdropDownMenu.map((item: any, index: any) => (
 //                   <li key={index}>
-//                     <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+//                     <a
+//                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+//                       onClick={() => console.log(item)}
+//                     >
 //                       {item}
 //                     </a>
 //                   </li>
@@ -1087,6 +1142,14 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //               </ul>
 //             </div>
 //           )}
+//         </div>
+
+//         {/* reciever avatar content */}
+//         <div
+//           className="w-10 h-10 overflow-hidden border-white border-[2px]
+//         font-bold bg-gray-100 rounded-full dark:bg-gray-700"
+//         >
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 //       </div>
 //     </>
@@ -1109,10 +1172,6 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
-//         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
-
 //         <div
 //           className="relative bg-white text-black p-4 border
 //           shadow-md rounded-lg max-w-xs sm:max-w-sm md:max-w-md"
@@ -1151,7 +1210,9 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //               <div className="ml-4 flex items-center gap-2">
 //                 <button
 //                   type="button"
-//                   className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-md bg-blue-400 text-white font-semibold text-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-700"
+//                   className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-md bg-blue-400 text-white
+//                   font-semibold text-sm hover:bg-blue-600
+//                   focus:outline-none focus:ring-2 focus:ring-blue-700"
 //                 >
 //                   <FaUserPlus className="w-4 h-4" />
 //                   <span className="text-sm">Add</span>
@@ -1167,13 +1228,19 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 
 //           {/* reciever drop-down menu */}
 //           {recieverContactMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//             <div
+//               className="absolute top-12 left-4 z-10 bg-white divide-y divide-gray-100
+//               rounded-lg shadow w-44 dark:bg-gray-700"
+//             >
+//               <ul
+//                 className="py-2 text-sm text-gray-700
+//               dark:text-gray-200"
+//               >
 //                 {recieverdropDownMenu.map((item: any, index: any) => (
 //                   <li key={index}>
 //                     <a
-//                       className="block px-4 py-2 hover:bg-gray-100
-//                     dark:hover:bg-gray-600 dark:hover:text-white"
+//                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+//                       onClick={() => console.log(item)}
 //                     >
 //                       {item}
 //                     </a>
@@ -1182,6 +1249,11 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
 //               </ul>
 //             </div>
 //           )}
+//         </div>
+
+//         {/* reciever avatar content */}
+//         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 //       </div>
 //     </>

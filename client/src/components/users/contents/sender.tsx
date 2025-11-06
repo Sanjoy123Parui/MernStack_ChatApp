@@ -26,12 +26,15 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 
 /*SenderTextMessage component*/
 const SenderTextMessage: React.FC<any> = ({ senderdropDownMenu }) => {
+  const messages: string = `Hi`;
+
   const [senderTextMenu, setSenderTextMenu] = useState<boolean>(false);
   const handleSenderTextMenu = (): void => setSenderTextMenu((prev) => !prev);
 
   return (
     <>
       <div className="flex items-start gap-2.5">
+        {/* sender avatar content */}
         <div
           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
         rounded-full dark:bg-gray-700"
@@ -56,11 +59,7 @@ const SenderTextMessage: React.FC<any> = ({ senderdropDownMenu }) => {
             </button>
           </div>
           {/* text messages */}
-          <p className="font-normal text-sm md:text-base py-1">
-            {/* Hi Everyone today I will go to the NJP, So Have you any can meet me
-            in Station */}
-            Hi
-          </p>
+          <p className="font-normal text-sm md:text-base py-1">{messages}</p>
 
           {/* start sender text message dilivery time */}
           <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
