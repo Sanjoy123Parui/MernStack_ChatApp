@@ -6,102 +6,102 @@ import {
 
 import {
   FaUser,
-  FaUserPlus,
-  FaFilePdf,
-  FaFileWord,
-  FaFileAlt,
-  FaFileExcel,
-  FaFilePowerpoint,
-  FaFileCode,
-  FaFileCsv,
-  FaFileArchive,
+  // FaUserPlus,
+  // FaFilePdf,
+  // FaFileWord,
+  // FaFileAlt,
+  // FaFileExcel,
+  // FaFilePowerpoint,
+  // FaFileCode,
+  // FaFileCsv,
+  // FaFileArchive,
 } from "react-icons/fa";
-import { FaRegCirclePlay } from "react-icons/fa6";
+// import { FaRegCirclePlay } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AiFillLike } from "react-icons/ai";
-import { MdAudioFile } from "react-icons/md";
-import { BsPlayFill } from "react-icons/bs";
-import { LuAudioLines } from "react-icons/lu";
+// import { MdAudioFile } from "react-icons/md";
+// import { BsPlayFill } from "react-icons/bs";
+// import { LuAudioLines } from "react-icons/lu";
 
 /*SenderTextMessage component*/
-// const SenderTextMessage: React.FC<any> = ({ senderdropDownMenu }) => {
-//   const messages: string = `Hi`;
+const SenderTextMessage: React.FC<any> = ({ senderdropDownMenu }) => {
+  const messages: string = `Hi`;
 
-//   const [senderTextMenu, setSenderTextMenu] = useState<boolean>(false);
-//   const handleSenderTextMenu = (): void => setSenderTextMenu((prev) => !prev);
+  const [senderTextMenu, setSenderTextMenu] = useState<boolean>(false);
+  const handleSenderTextMenu = (): void => setSenderTextMenu((prev) => !prev);
 
-//   return (
-//     <>
-//       <div className="flex items-start gap-2.5">
-//         {/* sender avatar content */}
-//         <div
-//           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
-//         rounded-full dark:bg-gray-700"
-//         >
-//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-//         </div>
+  return (
+    <>
+      <div className="flex items-start gap-2.5">
+        {/* sender avatar content */}
+        <div
+          className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
+        rounded-full dark:bg-gray-700"
+        >
+          <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+        </div>
 
-//         {/* start div for wrapper */}
-//         <div className="relative flex-shrink-0">
-//           {/* start sender text-message content */}
-//           <div
-//             className="relative bg-indigo-500 text-white p-4 border
-//           shadow-md rounded-lg max-w-xs sm:max-w-sm md:max-w-md"
-//           >
-//             {/*Sender phone or name */}
-//             <div className="flex items-center justify-between">
-//               <h2 className="text-sm md:text-base font-medium">You</h2>
-//               <button
-//                 type="button"
-//                 className="p-1 rounded-full hover:bg-indigo-600"
-//                 onClick={handleSenderTextMenu}
-//               >
-//                 <BsThreeDotsVertical className="w-5 h-5" />
-//               </button>
-//             </div>
-//             {/* text messages */}
-//             <p className="font-normal text-sm md:text-base py-1">{messages}</p>
+        {/* start div for wrapper */}
+        <div className="relative flex-shrink-0">
+          {/* start sender text-message content */}
+          <div
+            className="relative bg-indigo-500 text-white p-4 border
+          shadow-md rounded-lg max-w-xs sm:max-w-sm md:max-w-md"
+          >
+            {/*Sender phone or name */}
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm md:text-base font-medium">You</h2>
+              <button
+                type="button"
+                className="p-1 rounded-full hover:bg-indigo-600"
+                onClick={handleSenderTextMenu}
+              >
+                <BsThreeDotsVertical className="w-5 h-5" />
+              </button>
+            </div>
+            {/* text messages */}
+            <p className="font-normal text-sm md:text-base py-1">{messages}</p>
 
-//             {/* start sender text message dilivery time */}
-//             <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
-//               <span className="text-xs md:text-sm font-medium">11:46 PM</span>
-//               <span className="text-base font-medium">
-//                 <BiCheckDouble className="w-5 h-5" />
-//               </span>
-//             </div>
-//             {/* end sender text message dilivery time */}
+            {/* start sender text message dilivery time */}
+            <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
+              <span className="text-xs md:text-sm font-medium">11:46 PM</span>
+              <span className="text-base font-medium">
+                <BiCheckDouble className="w-5 h-5" />
+              </span>
+            </div>
+            {/* end sender text message dilivery time */}
 
-//             {/* start dropdown menu of sender text message content */}
-//             {senderTextMenu && (
-//               <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-//                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-//                   {senderdropDownMenu.map((item: any, index: any) => (
-//                     <li key={index}>
-//                       <a
-//                         onClick={() => console.log(item)}
-//                         className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-//                       >
-//                         {item}
-//                       </a>
-//                     </li>
-//                   ))}
-//                 </ul>
-//               </div>
-//             )}
-//             {/* end dropdown menu sender text message */}
-//           </div>
-//           {/* end text-message */}
+            {/* start dropdown menu of sender text message content */}
+            {senderTextMenu && (
+              <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+                  {senderdropDownMenu.map((item: any, index: any) => (
+                    <li key={index}>
+                      <a
+                        onClick={() => console.log(item)}
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        {item}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {/* end dropdown menu sender text message */}
+          </div>
+          {/* end text-message */}
 
-//           {/* sender like content */}
-//           <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-white ring-2 shadow-md ring-white">
-//             <AiFillLike className="w-4 h-4 text-blue-700 mx-auto" />
-//           </span>
-//         </div>
-//         {/* end div for wrapper */}
-//       </div>
-//     </>
-//   );
-// };
+          {/* sender like content */}
+          <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-white ring-2 shadow-md ring-white">
+            <AiFillLike className="w-4 h-4 text-blue-700 mx-auto" />
+          </span>
+        </div>
+        {/* end div for wrapper */}
+      </div>
+    </>
+  );
+};
 
 /* SenderVoiceMessage component*/
 // const SenderVoiceMessage: React.FC<any> = ({ senderdropDownMenu }) => {
@@ -112,6 +112,7 @@ import { LuAudioLines } from "react-icons/lu";
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
+//         {/* sender avatar content */}
 //         <div
 //           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
 //         rounded-full dark:bg-gray-700"
@@ -215,6 +216,7 @@ import { LuAudioLines } from "react-icons/lu";
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
+//         {/* sender avatar content */}
 //         <div
 //           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold
 //           bg-gray-100 rounded-full dark:bg-gray-700"
@@ -307,6 +309,7 @@ import { LuAudioLines } from "react-icons/lu";
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
+//         {/* sender avatar content */}
 //         <div
 //           className="w-10 h-10 overflow-hidden border-white border-[2px]
 //         font-bold bg-gray-100 rounded-full dark:bg-gray-700"
@@ -414,6 +417,7 @@ import { LuAudioLines } from "react-icons/lu";
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
+//         {/* sender avatar content */}
 //         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
 //           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
@@ -546,6 +550,7 @@ import { LuAudioLines } from "react-icons/lu";
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
+//         {/* sender avatar content */}
 //         <div
 //           className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold
 //           bg-gray-100
@@ -653,161 +658,162 @@ import { LuAudioLines } from "react-icons/lu";
 // };
 
 /* SenderVideosGallery component */
-const SenderVideosGallery: React.FC<any> = ({ senderdropDownMenu }) => {
-  const [senderVideosGalleryMenu, setSenderVideosGalleryMenu] =
-    useState<boolean>(false);
-  const handleSenderVideoGalleryMenu = (): any =>
-    setSenderVideosGalleryMenu((prev: any) => !prev);
+// const SenderVideosGallery: React.FC<any> = ({ senderdropDownMenu }) => {
+//   const [senderVideosGalleryMenu, setSenderVideosGalleryMenu] =
+//     useState<boolean>(false);
+//   const handleSenderVideoGalleryMenu = (): any =>
+//     setSenderVideosGalleryMenu((prev: any) => !prev);
 
-  const caption: string = `This is the caption for the video`;
+//   const caption: string = `This is the caption for the video`;
 
-  const videos: any = [
-    {
-      id: 1,
-      src: "../../src/assets/videos/nature.mp4",
-    },
-    {
-      id: 2,
-      src: "../../src/assets/videos/nature.mp4",
-    },
-    {
-      id: 3,
-      src: "../../src/assets/videos/nature.mp4",
-    },
-    {
-      id: 4,
-      src: "../../src/assets/videos/nature.mp4",
-    },
-  ];
+//   const videos: any = [
+//     {
+//       id: 1,
+//       src: "../../src/assets/videos/nature.mp4",
+//     },
+//     {
+//       id: 2,
+//       src: "../../src/assets/videos/nature.mp4",
+//     },
+//     {
+//       id: 3,
+//       src: "../../src/assets/videos/nature.mp4",
+//     },
+//     {
+//       id: 4,
+//       src: "../../src/assets/videos/nature.mp4",
+//     },
+//   ];
 
-  return (
-    <>
-      <div className="flex items-start gap-2.5">
-        <div
-          className="w-10 h-10 overflow-hidden border-white border-[2px]
-        font-bold bg-gray-100 rounded-full dark:bg-gray-700"
-        >
-          <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
-        </div>
+//   return (
+//     <>
+//       <div className="flex items-start gap-2.5">
+//         {/* sender avatar content */}
+//         <div
+//           className="w-10 h-10 overflow-hidden border-white border-[2px]
+//         font-bold bg-gray-100 rounded-full dark:bg-gray-700"
+//         >
+//           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
+//         </div>
 
-        {/* start div for wrapper */}
-        <div className="relative flex-shrink-0">
-          <div
-            className="relative bg-indigo-500 text-white p-4 border
-        shadow-md rounded-lg max-w-72 sm:max-w-80 md:max-w-72 w-full"
-          >
-            {/* sender option button, phone or name */}
-            <div className="flex items-center justify-between">
-              <h2 className="text-sm md:text-base font-medium">You</h2>
-              <button
-                type="button"
-                onClick={handleSenderVideoGalleryMenu}
-                className="p-1 rounded-full hover:bg-indigo-600"
-              >
-                <BsThreeDotsVertical className="w-5 h-5" />
-              </button>
-            </div>
+//         {/* start div for wrapper */}
+//         <div className="relative flex-shrink-0">
+//           <div
+//             className="relative bg-indigo-500 text-white p-4 border
+//         shadow-md rounded-lg max-w-72 sm:max-w-80 md:max-w-72 w-full"
+//           >
+//             {/* sender option button, phone or name */}
+//             <div className="flex items-center justify-between">
+//               <h2 className="text-sm md:text-base font-medium">You</h2>
+//               <button
+//                 type="button"
+//                 onClick={handleSenderVideoGalleryMenu}
+//                 className="p-1 rounded-full hover:bg-indigo-600"
+//               >
+//                 <BsThreeDotsVertical className="w-5 h-5" />
+//               </button>
+//             </div>
 
-            {/* sender videos gallery */}
-            <div className="py-1 relative flex flex-col items-center">
-              <div className="grid grid-cols-2 gap-1 rounded-lg">
-                {videos.slice(0, 3).map((vid: any) => (
-                  <div
-                    key={vid.id}
-                    className="relative w-full flex justify-center"
-                  >
-                    <video
-                      src={vid.src}
-                      className="w-full h-28 object-cover rounded-lg"
-                      controls={false}
-                      tabIndex={-1}
-                    />
-                    <button
-                      type="button"
-                      className="absolute inset-0 flex items-center justify-center focus:outline-none pointer-events-none"
-                    >
-                      <FaRegCirclePlay
-                        className="w-12 h-12 text-white bg-black
-                    bg-opacity-40 rounded-full p-2 transition-opacity
-                    duration-200 opacity-100"
-                      />
-                    </button>
-                  </div>
-                ))}
-                {videos.length > 3 && (
-                  <div className="relative w-full flex justify-center">
-                    <video
-                      src={videos[3].src}
-                      className="w-full h-28 object-cover rounded-lg"
-                      controls={false}
-                      tabIndex={-1}
-                    />
-                    <button
-                      type="button"
-                      className="absolute inset-0 flex items-center justify-center focus:outline-none pointer-events-none"
-                    >
-                      <FaRegCirclePlay
-                        className="w-12 h-12 text-white bg-black
-                    bg-opacity-40 rounded-full p-2 transition-opacity
-                    duration-200 opacity-100"
-                      />
-                    </button>
-                    <div
-                      className="absolute inset-0 bg-black bg-opacity-50
-                  flex items-center justify-center rounded-lg"
-                    >
-                      <p className="text-white text-lg font-medium">
-                        +{videos.length - 3}
-                      </p>
-                    </div>
-                  </div>
-                )}
-              </div>
-              <p className="py-1 text-sm md:text-base font-normal mr-14 sm:mr-14 md:mr-8">
-                {caption}{" "}
-              </p>
-            </div>
+//             {/* sender videos gallery */}
+//             <div className="py-1 relative flex flex-col items-center">
+//               <div className="grid grid-cols-2 gap-1 rounded-lg">
+//                 {videos.slice(0, 3).map((vid: any) => (
+//                   <div
+//                     key={vid.id}
+//                     className="relative w-full flex justify-center"
+//                   >
+//                     <video
+//                       src={vid.src}
+//                       className="w-full h-28 object-cover rounded-lg"
+//                       controls={false}
+//                       tabIndex={-1}
+//                     />
+//                     <button
+//                       type="button"
+//                       className="absolute inset-0 flex items-center justify-center focus:outline-none pointer-events-none"
+//                     >
+//                       <FaRegCirclePlay
+//                         className="w-12 h-12 text-white bg-black
+//                     bg-opacity-40 rounded-full p-2 transition-opacity
+//                     duration-200 opacity-100"
+//                       />
+//                     </button>
+//                   </div>
+//                 ))}
+//                 {videos.length > 3 && (
+//                   <div className="relative w-full flex justify-center">
+//                     <video
+//                       src={videos[3].src}
+//                       className="w-full h-28 object-cover rounded-lg"
+//                       controls={false}
+//                       tabIndex={-1}
+//                     />
+//                     <button
+//                       type="button"
+//                       className="absolute inset-0 flex items-center justify-center focus:outline-none pointer-events-none"
+//                     >
+//                       <FaRegCirclePlay
+//                         className="w-12 h-12 text-white bg-black
+//                     bg-opacity-40 rounded-full p-2 transition-opacity
+//                     duration-200 opacity-100"
+//                       />
+//                     </button>
+//                     <div
+//                       className="absolute inset-0 bg-black bg-opacity-50
+//                   flex items-center justify-center rounded-lg"
+//                     >
+//                       <p className="text-white text-lg font-medium">
+//                         +{videos.length - 3}
+//                       </p>
+//                     </div>
+//                   </div>
+//                 )}
+//               </div>
+//               <p className="py-1 text-sm md:text-base font-normal mr-14 sm:mr-14 md:mr-8">
+//                 {caption}{" "}
+//               </p>
+//             </div>
 
-            {/* start div content of sender video gallery delivery time zone */}
-            <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
-              <span className="text-xs md:text-sm font-medium">11:40 AM</span>
-              <span className="text-base font-medium">
-                <BiCheckDouble className="w-5 h-5" />
-              </span>
-            </div>
-            {/* end div content */}
+//             {/* start div content of sender video gallery delivery time zone */}
+//             <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
+//               <span className="text-xs md:text-sm font-medium">11:40 AM</span>
+//               <span className="text-base font-medium">
+//                 <BiCheckDouble className="w-5 h-5" />
+//               </span>
+//             </div>
+//             {/* end div content */}
 
-            {/* sender video gallery dropdown menu content */}
-            {senderVideosGalleryMenu && (
-              <div
-                className="absolute top-12 right-4 z-10 bg-white divide-y
-            divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-              >
-                <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-                  {senderdropDownMenu.map((item: any, index: any) => (
-                    <li key={index}>
-                      <a
-                        className="block px-4 py-2 hover:bg-gray-100
-                    dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
+//             {/* sender video gallery dropdown menu content */}
+//             {senderVideosGalleryMenu && (
+//               <div
+//                 className="absolute top-12 right-4 z-10 bg-white divide-y
+//             divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+//               >
+//                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//                   {senderdropDownMenu.map((item: any, index: any) => (
+//                     <li key={index}>
+//                       <a
+//                         className="block px-4 py-2 hover:bg-gray-100
+//                     dark:hover:bg-gray-600 dark:hover:text-white"
+//                       >
+//                         {item}
+//                       </a>
+//                     </li>
+//                   ))}
+//                 </ul>
+//               </div>
+//             )}
+//           </div>
 
-          <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-white ring-2 shadow-md ring-white">
-            <AiFillLike className="w-4 h-4 text-blue-700  mx-auto" />
-          </span>
-        </div>
-        {/* end div */}
-      </div>
-    </>
-  );
-};
+//           <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-white ring-2 shadow-md ring-white">
+//             <AiFillLike className="w-4 h-4 text-blue-700  mx-auto" />
+//           </span>
+//         </div>
+//         {/* end div */}
+//       </div>
+//     </>
+//   );
+// };
 
 /* SenderWebUrl component */
 // const SenderWebUrl: React.FC<any> = ({ senderdropDownMenu }) => {
@@ -826,51 +832,59 @@ const SenderVideosGallery: React.FC<any> = ({ senderdropDownMenu }) => {
 //           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 
-//         <div className="relative bg-indigo-500 text-white p-4 border shadow-md rounded-lg max-w-xs sm:max-w-screen-sm md:max-w-md">
-//           {/* sender phone or name */}
-//           <div className="flex items-center justify-between">
-//             <h2 className="text-sm md:text-base font-medium">You</h2>
-//             <button
-//               type="button"
-//               onClick={handleSenderUrlMenu}
-//               className="p-1 rounded-full hover:bg-indigo-600"
-//             >
-//               <BsThreeDotsVertical className="w-5 h-5" />
-//             </button>
-//           </div>
-
-//           <a
-//             href={url}
-//             target="_blank"
-//             rel="noopener noreferrer"
-//             className="font-normal text-sm md:text-base py-1"
-//           >
-//             {url}
-//           </a>
-
-//           {/* sender delivery time zone */}
-//           <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
-//             <span className="text-xs md:text-sm font-medium">12:00 PM</span>
-//             <span className="text-base font-medium">
-//               <BiCheckDouble />
-//             </span>
-//           </div>
-
-//           {/* sender weburl dropdown menu */}
-//           {senderUrlMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-//                 {senderdropDownMenu.map((item: any, index: any) => (
-//                   <li key={index}>
-//                     <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-//                       {item}
-//                     </a>
-//                   </li>
-//                 ))}
-//               </ul>
+//         {/* start div for wrapper */}
+//         <div className="relative flex-shrink-0">
+//           <div className="relative bg-indigo-500 text-white p-4 border shadow-md rounded-lg max-w-xs sm:max-w-screen-sm md:max-w-md">
+//             {/* sender phone or name */}
+//             <div className="flex items-center justify-between">
+//               <h2 className="text-sm md:text-base font-medium">You</h2>
+//               <button
+//                 type="button"
+//                 onClick={handleSenderUrlMenu}
+//                 className="p-1 rounded-full hover:bg-indigo-600"
+//               >
+//                 <BsThreeDotsVertical className="w-5 h-5" />
+//               </button>
 //             </div>
-//           )}
+
+//             <a
+//               href={url}
+//               target="_blank"
+//               rel="noopener noreferrer"
+//               className="font-normal text-sm md:text-base py-1"
+//             >
+//               {url}
+//             </a>
+
+//             {/* sender delivery time zone */}
+//             <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
+//               <span className="text-xs md:text-sm font-medium">12:00 PM</span>
+//               <span className="text-base font-medium">
+//                 <BiCheckDouble className="w-5 h-5" />
+//               </span>
+//             </div>
+
+//             {/* sender weburl dropdown menu */}
+//             {senderUrlMenu && (
+//               <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//                   {senderdropDownMenu.map((item: any, index: any) => (
+//                     <li key={index}>
+//                       <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+//                         {item}
+//                       </a>
+//                     </li>
+//                   ))}
+//                 </ul>
+//               </div>
+//             )}
+//           </div>
+
+//           <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-white ring-2 shadow-md ring-white">
+//             <AiFillLike className="w-4 h-4 text-blue-700  mx-auto" />
+//           </span>
 //         </div>
+//         {/* end div */}
 //       </div>
 //     </>
 //   );
@@ -892,79 +906,90 @@ const SenderVideosGallery: React.FC<any> = ({ senderdropDownMenu }) => {
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
+//         {/* sender avatar content */}
 //         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
 //           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 
-//         <div className="relative bg-indigo-500 text-white p-4 border shadow-md rounded-lg max-w-72 sm:max-w-80 md:max-w-72 w-full">
-//           {/* sender socialmedia phone or name, menu button content */}
-//           <div className="flex items-center justify-between">
-//             <h2 className="text-sm md:text-base font-medium">You</h2>
-//             <button
-//               type="button"
-//               onClick={handleSenderSocialMediaMenu}
-//               className="p-1 rounded-full hover:bg-indigo-600"
-//             >
-//               <BsThreeDotsVertical className="w-5 h-5" />
-//             </button>
-//           </div>
-
-//           {/* sender socialmedia thumbnail content */}
-//           <div className="py-1">
-//             <div className=" bg-white/10 p-1 rounded-md">
-//               <div className="relative w-full flex justify-center">
-//                 <iframe
-//                   src={srcUrl}
-//                   title="YouTube video player"
-//                   className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg border border-white"
-//                   frameBorder="0"
-//                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-//                   referrerPolicy="strict-origin-when-cross-origin"
-//                   allowFullScreen
-//                 />
-//               </div>
-
-//               {/* sender social media description, title and channel name content */}
-//               <div className="p-2">
-//                 <p className="text-sm font-medium line-clamp-2">{title}</p>
-//                 <p className="text-sm text-indigo-100  line-clamp-1">{desc}</p>
-//               </div>
+//         {/* start div for wrapper */}
+//         <div className="relative flex-shrink-0">
+//           <div className="relative bg-indigo-500 text-white p-4 border shadow-md rounded-lg max-w-72 sm:max-w-80 md:max-w-72 w-full">
+//             {/* sender socialmedia phone or name, menu button content */}
+//             <div className="flex items-center justify-between">
+//               <h2 className="text-sm md:text-base font-medium">You</h2>
+//               <button
+//                 type="button"
+//                 onClick={handleSenderSocialMediaMenu}
+//                 className="p-1 rounded-full hover:bg-indigo-600"
+//               >
+//                 <BsThreeDotsVertical className="w-5 h-5" />
+//               </button>
 //             </div>
-//             {/* url content */}
-//             <a
-//               href={url}
-//               rel="_blank"
-//               target="noopener noreferrer"
-//               className="block mt-2 text-xs sm:text-sm md:text-base
+
+//             {/* sender socialmedia thumbnail content */}
+//             <div className="py-1">
+//               <div className=" bg-white/10 p-1 rounded-md">
+//                 <div className="relative w-full flex justify-center">
+//                   <iframe
+//                     src={srcUrl}
+//                     title="YouTube video player"
+//                     className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg border border-white"
+//                     frameBorder="0"
+//                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+//                     referrerPolicy="strict-origin-when-cross-origin"
+//                     allowFullScreen
+//                   />
+//                 </div>
+
+//                 {/* sender social media description, title and channel name content */}
+//                 <div className="p-2">
+//                   <p className="text-sm font-medium line-clamp-2">{title}</p>
+//                   <p className="text-sm text-indigo-100  line-clamp-1">
+//                     {desc}
+//                   </p>
+//                 </div>
+//               </div>
+//               {/* url content */}
+//               <a
+//                 href={url}
+//                 rel="_blank"
+//                 target="noopener noreferrer"
+//                 className="block mt-2 text-xs sm:text-sm md:text-base
 //             text-indigo-100 break-words"
-//             >
-//               {url}
-//             </a>
-//           </div>
-
-//           {/* sender delivery time zone */}
-//           <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
-//             <span className="text-xs md:text-sm font-medium">10:51 AM</span>
-//             <span className="text-base font-medium">
-//               <BiCheckDouble />
-//             </span>
-//           </div>
-
-//           {/* sender social media dropdown menu */}
-//           {senderSocialMediaMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-//                 {senderdropDownMenu.map((item: any, index: any) => (
-//                   <li key={index}>
-//                     <a className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:hover:text-white">
-//                       {item}
-//                     </a>
-//                   </li>
-//                 ))}
-//               </ul>
+//               >
+//                 {url}
+//               </a>
 //             </div>
-//           )}
+
+//             {/* sender delivery time zone */}
+//             <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
+//               <span className="text-xs md:text-sm font-medium">10:51 AM</span>
+//               <span className="text-base font-medium">
+//                 <BiCheckDouble className="w-5 h-5" />
+//               </span>
+//             </div>
+
+//             {/* sender social media dropdown menu */}
+//             {senderSocialMediaMenu && (
+//               <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//                   {senderdropDownMenu.map((item: any, index: any) => (
+//                     <li key={index}>
+//                       <a className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:hover:text-white">
+//                         {item}
+//                       </a>
+//                     </li>
+//                   ))}
+//                 </ul>
+//               </div>
+//             )}
+//           </div>
+
+//           <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-white ring-2 shadow-md ring-white">
+//             <AiFillLike className="w-4 h-4 text-blue-700  mx-auto" />
+//           </span>
 //         </div>
+//         {/* end div */}
 //       </div>
 //     </>
 //   );
@@ -985,80 +1010,90 @@ const SenderVideosGallery: React.FC<any> = ({ senderdropDownMenu }) => {
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
+//         {/* sender avatar content */}
 //         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
 //           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 
-//         <div
-//           className="relative bg-indigo-500 text-white p-4 border
+//         {/* start div for wrapper */}
+//         <div className="relative flex-shrink-0">
+//           <div
+//             className="relative bg-indigo-500 text-white p-4 border
 //         shadow-md rounded-lg max-w-72 sm:max-w-80 md:max-w-72 w-full"
-//         >
-//           {/* sender contact name or phone, drop-down menu button */}
-//           <div className="flex items-center justify-between">
-//             <h2 className="text-sm md:text-base font-medium">You</h2>
-//             <button
-//               type="button"
-//               onClick={handleSenderGeolocMenu}
-//               className="p-1 rounded-full hover:bg-indigo-600"
-//             >
-//               <BsThreeDotsVertical className="w-5 h-5" />
-//             </button>
-//           </div>
-
-//           {/* sender Geolocation content */}
-//           <div className="py-1">
-//             <div className="bg-white/10 p-1 rounded-md sm:">
-//               <div className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg border border-white">
-//                 <iframe
-//                   src={locationUrl}
-//                   className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg border border-white"
-//                   allowFullScreen
-//                   loading="lazy"
-//                   referrerPolicy="no-referrer-when-downgrade"
-//                 />
-//               </div>
-
-//               <div className="p-2">
-//                 <p className="text-sm font-medium line-clamp-2">
-//                   {locationAddress}
-//                 </p>
-//               </div>
+//           >
+//             {/* sender contact name or phone, drop-down menu button */}
+//             <div className="flex items-center justify-between">
+//               <h2 className="text-sm md:text-base font-medium">You</h2>
+//               <button
+//                 type="button"
+//                 onClick={handleSenderGeolocMenu}
+//                 className="p-1 rounded-full hover:bg-indigo-600"
+//               >
+//                 <BsThreeDotsVertical className="w-5 h-5" />
+//               </button>
 //             </div>
 
-//             {/* url content */}
-//             <a
-//               href={url}
-//               rel="_blank"
-//               target="noopener noreferrer"
-//               className="block mt-2 text-xs sm:text-sm md:text-base
+//             {/* sender Geolocation content */}
+//             <div className="py-1">
+//               <div className="bg-white/10 p-1 rounded-md sm:">
+//                 <div className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg border border-white">
+//                   <iframe
+//                     src={locationUrl}
+//                     className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg border border-white"
+//                     allowFullScreen
+//                     loading="lazy"
+//                     referrerPolicy="no-referrer-when-downgrade"
+//                   />
+//                 </div>
+
+//                 <div className="p-2">
+//                   <p className="text-sm font-medium line-clamp-2">
+//                     {locationAddress}
+//                   </p>
+//                 </div>
+//               </div>
+
+//               {/* url content */}
+//               <a
+//                 href={url}
+//                 rel="_blank"
+//                 target="noopener noreferrer"
+//                 className="block mt-2 text-xs sm:text-sm md:text-base
 //             text-indigo-100 break-words"
-//             >
-//               {url}
-//             </a>
-//           </div>
-
-//           {/* sender delivery time zone */}
-//           <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
-//             <span className="text-xs md:text-sm font-medium">11:45 AM</span>
-//             <span className="text-base font-medium">
-//               <BiCheckDouble />
-//             </span>
-//           </div>
-
-//           {senderGeolocMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-//                 {senderdropDownMenu.map((item: any, index: any) => (
-//                   <li key={index}>
-//                     <a className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:hover:text-white">
-//                       {item}
-//                     </a>
-//                   </li>
-//                 ))}
-//               </ul>
+//               >
+//                 {url}
+//               </a>
 //             </div>
-//           )}
+
+//             {/* sender delivery time zone */}
+//             <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse">
+//               <span className="text-xs md:text-sm font-medium">11:45 AM</span>
+//               <span className="text-base font-medium">
+//                 <BiCheckDouble className="w-5 h-5" />
+//               </span>
+//             </div>
+
+//             {senderGeolocMenu && (
+//               <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//                   {senderdropDownMenu.map((item: any, index: any) => (
+//                     <li key={index}>
+//                       <a className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:hover:text-white">
+//                         {item}
+//                       </a>
+//                     </li>
+//                   ))}
+//                 </ul>
+//               </div>
+//             )}
+//           </div>
+
+//           {/* sender like content */}
+//           <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-white ring-2 shadow-md ring-white">
+//             <AiFillLike className="w-4 h-4 text-blue-700  mx-auto" />
+//           </span>
 //         </div>
+//         {/* end div */}
 //       </div>
 //     </>
 //   );
@@ -1066,6 +1101,8 @@ const SenderVideosGallery: React.FC<any> = ({ senderdropDownMenu }) => {
 
 /* SenderFilesUpload component */
 // const SenderFilesUpload: React.FC<any> = ({ senderdropDownMenu }) => {
+//   const caption: string = `This is the caption of file uploads`;
+
 //   const [senderFileMenu, setSenderFileMenu] = useState<boolean>(false);
 //   const handleSenderFileMenu = (): any =>
 //     setSenderFileMenu((prev: any) => !prev);
@@ -1073,75 +1110,84 @@ const SenderVideosGallery: React.FC<any> = ({ senderdropDownMenu }) => {
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
+//         {/* sender avatar content */}
 //         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
 //           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 
-//         <div className="relative bg-indigo-500 text-white p-4 border shadow-md rounded-lg max-w-xs sm:max-w-sm md:max-w-md">
-//           {/* sender phone or name and drop-down option button */}
-//           <div className="flex items-center justify-between">
-//             <h2 className="text-sm md:text-base font-medium">You</h2>
-//             <button
-//               type="button"
-//               onClick={handleSenderFileMenu}
-//               className="p-1 rounded-full hover:bg-indigo-600"
-//             >
-//               <BsThreeDotsVertical className="w-5 h-5" />
-//             </button>
+//         {/* start div for wrapper */}
+//         <div className="relative flex-shrink-0">
+//           <div className="relative bg-indigo-500 text-white p-4 border shadow-md rounded-lg max-w-xs sm:max-w-sm md:max-w-md">
+//             {/* sender phone or name and drop-down option button */}
+//             <div className="flex items-center justify-between">
+//               <h2 className="text-sm md:text-base font-medium">You</h2>
+//               <button
+//                 type="button"
+//                 onClick={handleSenderFileMenu}
+//                 className="p-1 rounded-full hover:bg-indigo-600"
+//               >
+//                 <BsThreeDotsVertical className="w-5 h-5" />
+//               </button>
+//             </div>
+
+//             {/* sender file uploader content */}
+//             <div className="flex items-center space-x-2 py-1">
+//               <div className="w-10 h-10 flex items-center justify-center bg-white rounded-lg flex-shrink-0">
+//                 {/* <FaFilePdf className="w-6 h-6 md:w-8 md:h-8 text-red-600" /> */}
+//                 {/* <FaFileWord className="w-6 h-6 md:w-8 md:h-8 text-blue-600" /> */}
+//                 {/* <FaFileAlt className="w-6 h-6 md:w-8 md:h-8 text-blue-600" /> */}
+//                 {/* <FaFileExcel className="w-6 h-6 md:w-8 md:h-8 text-green-600" /> */}
+//                 {/* <FaFilePowerpoint className="w-6 h-6 md:w-8 md:h-8 text-red-600" /> */}
+//                 {/* <FaFileCode className="w-6 h-6 md:w-8 md:h-8 text-yellow-600" /> */}
+//                 {/* <FaFileCsv className="w-6 h-6 md:w-8 md:h-8 text-green-600" /> */}
+//                 <FaFileArchive className="w-6 h-6 md:w-8 md:h-8 text-yellow-600" />
+//               </div>
+//               <div className="flex items-center space-x-[-4px]">
+//                 {/* <p className="text-sm md:text-lg font-normal">test.pdf</p> */}
+//                 {/* <p className="text-sm md:text-lg font-normal">test.docx</p> */}
+//                 {/* <p className="text-sm md:text-lg font-normal">test.txt</p> */}
+//                 {/* <p className="text-sm md:text-lg font-normal">test.excel</p> */}
+//                 {/* <p className="text-sm md:text-lg font-normal">test.ppt</p> */}
+//                 {/* <p className="text-sm md:text-lg font-normal">test.html</p> */}
+//                 {/* <p className="text-sm md:text-lg font-normal">test.csv</p> */}
+//                 <p className="text-sm md:text-lg font-normal">test.zip</p>
+//               </div>
+//             </div>
+
+//             {/* text for caption  */}
+//             <p className="py-[2px] text-sm md:text-base font-normal">
+//               {caption}
+//             </p>
+
+//             {/* sender delivery time zone */}
+//             <div className="flex items-center justify-end w-full sace-x-2 rtl:space-x-reverse">
+//               <span className="text-xs md:text-sm font-normal">11:40 AM</span>
+//               <span className="text-base font-normal">
+//                 <BiCheckDouble className="w-5 h-5" />
+//               </span>
+//             </div>
+
+//             {/* drop-down menu options */}
+//             {senderFileMenu && (
+//               <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//                   {senderdropDownMenu.map((item: any, index: any) => (
+//                     <li key={index}>
+//                       <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+//                         {item}
+//                       </a>
+//                     </li>
+//                   ))}
+//                 </ul>
+//               </div>
+//             )}
 //           </div>
 
-//           {/* sender file uploader content */}
-//           <div className="flex items-center space-x-2 py-1">
-//             <div className="w-10 h-10 flex items-center justify-center bg-white rounded-lg flex-shrink-0">
-//               {/* <FaFilePdf className="w-6 h-6 md:w-8 md:h-8 text-red-600" /> */}
-//               {/* <FaFileWord className="w-6 h-6 md:w-8 md:h-8 text-blue-600" /> */}
-//               {/* <FaFileAlt className="w-6 h-6 md:w-8 md:h-8 text-blue-600" /> */}
-//               {/* <FaFileExcel className="w-6 h-6 md:w-8 md:h-8 text-green-600" /> */}
-//               {/* <FaFilePowerpoint className="w-6 h-6 md:w-8 md:h-8 text-red-600" /> */}
-//               {/* <FaFileCode className="w-6 h-6 md:w-8 md:h-8 text-yellow-600" /> */}
-//               {/* <FaFileCsv className="w-6 h-6 md:w-8 md:h-8 text-green-600" /> */}
-//               <FaFileArchive className="w-6 h-6 md:w-8 md:h-8 text-yellow-600" />
-//             </div>
-//             <div className="flex items-center space-x-[-4px]">
-//               {/* <p className="text-sm md:text-lg font-normal">test.pdf</p> */}
-//               {/* <p className="text-sm md:text-lg font-normal">test.docx</p> */}
-//               {/* <p className="text-sm md:text-lg font-normal">test.txt</p> */}
-//               {/* <p className="text-sm md:text-lg font-normal">test.excel</p> */}
-//               {/* <p className="text-sm md:text-lg font-normal">test.ppt</p> */}
-//               {/* <p className="text-sm md:text-lg font-normal">test.html</p> */}
-//               {/* <p className="text-sm md:text-lg font-normal">test.csv</p> */}
-//               <p className="text-sm md:text-lg font-normal">test.zip</p>
-//             </div>
-//           </div>
-
-//           {/* text for caption  */}
-//           <p className="py-[2px] text-sm md:text-base font-normal">
-//             This is the caption of file uploads
-//           </p>
-
-//           {/* sender delivery time zone */}
-//           <div className="flex items-center justify-end w-full sace-x-2 rtl:space-x-reverse">
-//             <span className="text-xs md:text-sm font-normal">11:40 AM</span>
-//             <span className="text-base font-normal">
-//               <BiCheckDouble />
-//             </span>
-//           </div>
-
-//           {/* drop-down menu options */}
-//           {senderFileMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-//                 {senderdropDownMenu.map((item: any, index: any) => (
-//                   <li key={index}>
-//                     <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-//                       {item}
-//                     </a>
-//                   </li>
-//                 ))}
-//               </ul>
-//             </div>
-//           )}
+//           <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-white ring-2 shadow-md ring-white">
+//             <AiFillLike className="w-4 h-4 text-blue-700  mx-auto" />
+//           </span>
 //         </div>
+//         {/* end div */}
 //       </div>
 //     </>
 //   );
@@ -1163,61 +1209,71 @@ const SenderVideosGallery: React.FC<any> = ({ senderdropDownMenu }) => {
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
+//         {/* sender avatar content */}
 //         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
 //           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 
-//         <div
-//           className="relative bg-indigo-500 text-white p-4 border shadow-md
-//         rounded-lg max-w-72 sm:max-w-80 md:max-w-72 w-full"
-//         >
-//           {/* sender phone or name, drop-down option button */}
-//           <div className="flex items-center justify-between">
-//             <h2 className="text-sm md:text-base font-medium">You</h2>
-//             <button
-//               type="button"
-//               onClick={handleSenderReplyMenu}
-//               className="p-1 rounded-full hover:bg-indigo-600"
-//             >
-//               <BsThreeDotsVertical className="w-5 h-5" />
-//             </button>
-//           </div>
-
-//           {/* sender replied preview content */}
-//           <div className="mt-2 bg-white/10 p-2 rounded-md">
-//             <h4 className="text-sm font-medium">{repliedTo.userName}</h4>
-//             <p className="text-xs font-normal">{repliedTo.snippet}</p>
-//           </div>
-
-//           {/* actual reply content */}
-//           <p className="font-normal text-sm md:text-base py-1">{replyText}</p>
-
-//           {/* sender delivery time & status */}
-//           <div className="flex items-center justify-end w-full sace-x-2 rtl:space-x-reverse">
-//             <span className="text-xs md:text-sm font-medium">11:45 AM</span>
-//             <span className="text-base font-medium">
-//               <BiCheckDouble className="w-5 h-5" />
-//             </span>
-//           </div>
-
-//           {/* sender drop-down menu options */}
-//           {senderReplyMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-//                 {senderdropDownMenu.map((item: any, index: any) => (
-//                   <li key={index}>
-//                     <a
-//                       className="block px-4 py-2 hover:bg-gray-100
-//                     dark:hover:bg-gray-600 dark:hover:text-white"
-//                     >
-//                       {item}
-//                     </a>
-//                   </li>
-//                 ))}
-//               </ul>
+//         {/* start div for wraper */}
+//         <div className="relative flex-shrink-0">
+//           <div
+//             className="relative bg-indigo-500 text-white p-4 border
+//           shadow-md rounded-lg max-w-72 sm:max-w-80 md:max-w-72 w-full"
+//           >
+//             {/* sender phone or name, drop-down option button */}
+//             <div className="flex items-center justify-between">
+//               <h2 className="text-sm md:text-base font-medium">You</h2>
+//               <button
+//                 type="button"
+//                 onClick={handleSenderReplyMenu}
+//                 className="p-1 rounded-full hover:bg-indigo-600"
+//               >
+//                 <BsThreeDotsVertical className="w-5 h-5" />
+//               </button>
 //             </div>
-//           )}
+
+//             {/* sender replied preview content */}
+//             <div className="mt-2 bg-white/10 p-2 rounded-md">
+//               <h4 className="text-sm font-medium">{repliedTo.userName}</h4>
+//               <p className="text-xs font-normal">{repliedTo.snippet}</p>
+//             </div>
+
+//             {/* actual reply content */}
+//             <p className="font-normal text-sm md:text-base py-1">{replyText}</p>
+
+//             {/* sender delivery time & status */}
+//             <div className="flex items-center justify-end w-full sace-x-2 rtl:space-x-reverse">
+//               <span className="text-xs md:text-sm font-medium">11:45 AM</span>
+//               <span className="text-base font-medium">
+//                 <BiCheckDouble className="w-5 h-5" />
+//               </span>
+//             </div>
+
+//             {/* sender drop-down menu options */}
+//             {senderReplyMenu && (
+//               <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//                   {senderdropDownMenu.map((item: any, index: any) => (
+//                     <li key={index}>
+//                       <a
+//                         className="block px-4 py-2 hover:bg-gray-100
+//                     dark:hover:bg-gray-600 dark:hover:text-white"
+//                       >
+//                         {item}
+//                       </a>
+//                     </li>
+//                   ))}
+//                 </ul>
+//               </div>
+//             )}
+//           </div>
+
+//           {/* sender like content */}
+//           <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-white ring-2 shadow-md ring-white">
+//             <AiFillLike className="w-4 h-4 text-blue-700  mx-auto" />
+//           </span>
 //         </div>
+//         {/* end div */}
 //       </div>
 //     </>
 //   );
@@ -1237,83 +1293,93 @@ const SenderVideosGallery: React.FC<any> = ({ senderdropDownMenu }) => {
 //   return (
 //     <>
 //       <div className="flex items-start gap-2.5">
+//         {/* sender avatar content */}
 //         <div className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100 rounded-full dark:bg-gray-700">
 //           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
 //         </div>
 
-//         <div
-//           className="relative bg-indigo-500 text-white p-4 border
+//         {/* start div for wrapper */}
+//         <div className="relative flex-shrink-0">
+//           <div
+//             className="relative bg-indigo-500 text-white p-4 border
 //           shadow-md rounded-lg max-w-xs sm:max-w-sm md:max-w-md"
-//         >
-//           {/* sender contact phone or name, drop-down menu button */}
-//           <div className="flex items-center justify-between">
-//             <h2 className="text-sm md:text-base font-medium">You</h2>
-//             <button
-//               type="button"
-//               onClick={handleSenderContactMenu}
-//               className="p-1 rounded-full hover:bg-indigo-600"
-//             >
-//               <BsThreeDotsVertical className="w-5 h-5" />
-//             </button>
-//           </div>
+//           >
+//             {/* sender contact phone or name, drop-down menu button */}
+//             <div className="flex items-center justify-between">
+//               <h2 className="text-sm md:text-base font-medium">You</h2>
+//               <button
+//                 type="button"
+//                 onClick={handleSenderContactMenu}
+//                 className="p-1 rounded-full hover:bg-indigo-600"
+//               >
+//                 <BsThreeDotsVertical className="w-5 h-5" />
+//               </button>
+//             </div>
 
-//           {/* sender addtocontact content */}
-//           <div className="mt-1">
-//             <div className="flex flex-row items-center bg-white/10 p-3 rounded-lg gap-3">
-//               {/* contact avatar (compact) */}
-//               <div className="w-12 h-12 sm:w-14 sm:h-14 overflow-hidden rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 dark:bg-gray-700">
-//                 <FaUser className="w-6 h-6 sm:w-7 sm:h-7 text-gray-400" />
-//               </div>
+//             {/* sender addtocontact content */}
+//             <div className="mt-1">
+//               <div className="flex flex-row items-center bg-white/10 p-3 rounded-lg gap-3">
+//                 {/* contact avatar (compact) */}
+//                 <div className="w-12 h-12 sm:w-14 sm:h-14 overflow-hidden rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 dark:bg-gray-700">
+//                   <FaUser className="w-6 h-6 sm:w-7 sm:h-7 text-gray-400" />
+//                 </div>
 
-//               {/* contact phone and name */}
-//               <div className="flex-1 min-w-0 ml-3">
-//                 <h4 className="text-sm md:text-lg font-semibold truncate">
-//                   {contactInfo.userName}
-//                 </h4>
-//                 <p className="text-xs md:text-sm font-medium truncate">
-//                   {contactInfo.userPhone}
-//                 </p>
-//               </div>
+//                 {/* contact phone and name */}
+//                 <div className="flex-1 min-w-0 ml-3">
+//                   <h4 className="text-sm md:text-lg font-semibold truncate">
+//                     {contactInfo.userName}
+//                   </h4>
+//                   <p className="text-xs md:text-sm font-medium truncate">
+//                     {contactInfo.userPhone}
+//                   </p>
+//                 </div>
 
-//               {/* contact add button content (compact, not full-width) */}
-//               <div className="ml-4 flex items-center gap-2">
-//                 <button
-//                   type="button"
-//                   className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-md bg-white text-indigo-600 font-semibold text-sm hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/30"
-//                 >
-//                   <FaUserPlus className="w-4 h-4" />
-//                   <span className="text-sm">Add</span>
-//                 </button>
+//                 {/* contact add button content (compact, not full-width) */}
+//                 <div className="ml-4 flex items-center gap-2">
+//                   <button
+//                     type="button"
+//                     className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-md bg-white text-indigo-600 font-semibold text-sm hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/30"
+//                   >
+//                     <FaUserPlus className="w-4 h-4" />
+//                     <span className="text-sm">Add</span>
+//                   </button>
+//                 </div>
 //               </div>
 //             </div>
-//           </div>
 
-//           {/* sender delivery time zone */}
-//           <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse mt-3">
-//             <span className="text-xs md:text-sm font-medium">11:45 AM</span>
-//             <span className="text-base font-medium">
-//               <BiCheckDouble className="w-5 h-5" />
-//             </span>
-//           </div>
+//             {/* sender delivery time zone */}
+//             <div className="flex items-center justify-end space-x-2 rtl:space-x-reverse mt-3">
+//               <span className="text-xs md:text-sm font-medium">11:45 AM</span>
+//               <span className="text-base font-medium">
+//                 <BiCheckDouble className="w-5 h-5" />
+//               </span>
+//             </div>
 
-//           {/* sender drop-down menu */}
-//           {senderContactMenu && (
-//             <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-//               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-//                 {senderdropDownMenu.map((item: any, index: any) => (
-//                   <li key={index}>
-//                     <a
-//                       className="block px-4 py-2 hover:bg-gray-100
+//             {/* sender drop-down menu */}
+//             {senderContactMenu && (
+//               <div className="absolute top-12 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+//                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+//                   {senderdropDownMenu.map((item: any, index: any) => (
+//                     <li key={index}>
+//                       <a
+//                         className="block px-4 py-2 hover:bg-gray-100
 //                     dark:hover:bg-gray-600 dark:hover:text-white"
-//                     >
-//                       {item}
-//                     </a>
-//                   </li>
-//                 ))}
-//               </ul>
-//             </div>
-//           )}
+//                       >
+//                         {item}
+//                       </a>
+//                     </li>
+//                   ))}
+//                 </ul>
+//               </div>
+//             )}
+//           </div>
+
+//           {/* sender like content */}
+//           <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-white ring-2 shadow-md ring-white">
+//             <AiFillLike className="w-4 h-4 text-blue-700  mx-auto" />
+//           </span>
 //         </div>
+//         {/* end div */}
 //       </div>
 //     </>
 //   );
@@ -1336,13 +1402,13 @@ const Sender: React.FC = () => {
     <>
       {/* start div flex for sender all chat content */}
       <div className="flex flex-col items-end justify-end gap-y-2">
-        {/* <SenderTextMessage senderdropDownMenu={senderdropDownMenu} /> */}
+        <SenderTextMessage senderdropDownMenu={senderdropDownMenu} />
         {/* <SenderVoiceMessage senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderImages senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderVideosPlayer senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderAudiosPlayer senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderImagesGallery senderdropDownMenu={senderdropDownMenu} /> */}
-        <SenderVideosGallery senderdropDownMenu={senderdropDownMenu} />
+        {/* <SenderVideosGallery senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderWebUrl senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderSocialMedia senderdropDownMenu={senderdropDownMenu} /> */}
         {/* <SenderGeolocations senderdropDownMenu={senderdropDownMenu} /> */}
