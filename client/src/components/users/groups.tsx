@@ -3,7 +3,7 @@ import ContentLists from "./contents/contentLists.tsx";
 import { useSettingUserContext } from "../hooks/contexts/userSettingContexts.ts";
 import { useUserLogoutModalContext } from "../hooks/contexts/userSignupContext.ts";
 import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
-import Accessabilities from "./profiles/accessabilities.tsx";
+import Userprofileaccessories from "./profiles/userprofileaccessories.tsx";
 import UserViewProfile from "./profiles/userViewProfile.tsx";
 import MessagesHeading from "./contents/messagesHeading.tsx";
 import Sender from "./contents/sender.tsx";
@@ -43,7 +43,8 @@ const Groups: React.FC = () => {
             <div>
               {!isUserProfileView ? (
                 <div>
-                  <Accessabilities />
+                  {/* <Accessabilities /> */}
+                  <Userprofileaccessories />
                 </div>
               ) : (
                 <div>

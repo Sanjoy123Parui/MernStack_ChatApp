@@ -1,10 +1,10 @@
 // here import some context hooks library
 import { createContext, use } from "react";
-import { userSettingContextProps } from "../../models/accessModel.ts";
+import { userSettingAccessories } from "../../models/settingsModel.ts";
 
 // declare Context custom hook for  accountSettings content with export
 export const SettingsContext = createContext<
-  userSettingContextProps | undefined
+  userSettingAccessories | undefined
 >(undefined);
 
 export const useSettingUserContext = (): any => {

@@ -4,7 +4,7 @@ import MessagesHeading from "./contents/messagesHeading.tsx";
 import Sender from "./contents/sender.tsx";
 import Reciever from "./contents/reciever.tsx";
 import Conversations from "./contents/conversations.tsx";
-import Accessabilities from "./profiles/accessabilities.tsx";
+import Userprofileaccessories from "./profiles/userprofileaccessories.tsx";
 import { useSettingUserContext } from "../hooks/contexts/userSettingContexts.ts";
 import { useUserLogoutModalContext } from "../hooks/contexts/userSignupContext.ts";
 import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
@@ -44,7 +44,7 @@ const Chats: React.FC = () => {
             <div>
               {!isUserProfileView ? (
                 <div>
-                  <Accessabilities />
+                  <Userprofileaccessories />
                 </div>
               ) : (
                 <div>
