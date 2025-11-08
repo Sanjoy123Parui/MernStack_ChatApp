@@ -12,6 +12,7 @@ import Conversations from "./contents/conversations.tsx";
 import UserLogout from "../modals/userLogout.tsx";
 import UserEditProfile from "../modals/userEditProfile.tsx";
 import UserRemoveModal from "../modals/userRemoveModal.tsx";
+import SearchBars from "./contents/searchBars.tsx";
 // import EmptyContent from "./contents/emptyContent.tsx";
 
 // Groups component of user groups chat
@@ -36,6 +37,9 @@ const Groups: React.FC = () => {
                 <Headings headingTitle={headingTitle} />
               </div>
               <div className="bg-slate-50">
+                <div className="p-4 shadow">
+                  <SearchBars />
+                </div>
                 <ContentLists />
               </div>
             </div>

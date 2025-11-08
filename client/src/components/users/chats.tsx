@@ -1,4 +1,5 @@
 import Headings from "./contents/headings.tsx";
+import SearchBars from "./contents/searchBars.tsx";
 import ContentLists from "./contents/contentLists.tsx";
 import MessagesHeading from "./contents/messagesHeading.tsx";
 import Sender from "./contents/sender.tsx";
@@ -30,13 +31,16 @@ const Chats: React.FC = () => {
       {/* start div grid-layout */}
       <div className="grid gap-0 grid-cols-1 lg:grid-cols-8">
         {/* start section for personal chat list content */}
-        <section className="col-span-1 w-full h-[668px] border lg:col-span-3">
+        <section className="col-span-1 w-full h-[676px] border lg:col-span-3">
           {!isAccounts ? (
             <div>
               <div>
                 <Headings headingTitle={headingTitle} />
               </div>
               <div className="bg-slate-50">
+                <div className="p-4 shadow">
+                  <SearchBars />
+                </div>
                 <ContentLists />
               </div>
             </div>

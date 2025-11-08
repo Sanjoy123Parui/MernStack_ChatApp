@@ -3,7 +3,10 @@ import {
   TogglePasswordProvider,
   AvatarProvider,
 } from "./usercontentproviders.tsx";
-import { UserAccessoriesProvider } from "./usersettingproviders.tsx";
+import {
+  UserAccessoriesProvider,
+  UserSettingsProvider,
+} from "./usersettingproviders.tsx";
 import { UserLogoutModalContextProvider } from "./usersignupprovider.tsx";
 import {
   UserProfileProvider,
@@ -21,7 +24,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
           <UserLogoutModalContextProvider>
             <UserProfileProvider>
               <UpdateProfileUserProvider>
-                <AvatarProvider>{children}</AvatarProvider>
+                <AvatarProvider>
+                  <UserSettingsProvider>{children}</UserSettingsProvider>
+                </AvatarProvider>
               </UpdateProfileUserProvider>
             </UserProfileProvider>
           </UserLogoutModalContextProvider>

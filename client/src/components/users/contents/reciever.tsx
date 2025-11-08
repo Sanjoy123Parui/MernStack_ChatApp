@@ -43,7 +43,7 @@ const RecieverTextMessage: React.FC<any> = ({ recieverdropDownMenu }) => {
               <button
                 type="button"
                 onClick={handleRecieverTextMenu}
-                className="p-1 rounded-full hover:bg-gray-300"
+                className="p-1 ml-4 rounded-full hover:bg-gray-300"
               >
                 <BsThreeDotsVertical className="w-5 h-5" />
               </button>

@@ -1,5 +1,6 @@
 import Headings from "./contents/headings.tsx";
 import ContentLists from "./contents/contentLists.tsx";
+import SearchBars from "./contents/searchBars.tsx";
 import EmptyContent from "./contents/emptyContent.tsx";
 
 // define Stories functional component
@@ -15,10 +16,12 @@ const Stories: React.FC = () => {
             <Headings headingTitle={headingTitle} />
           </div>
           <div className="bg-slate-50">
+            <div className="p-4 shadow">
+              <SearchBars />
+            </div>
             <ContentLists />
           </div>
         </section>
-
 
         <section className="col-span-1 border w-full h-[668px] lg:col-span-5">
           <div className="bg-slate-50">

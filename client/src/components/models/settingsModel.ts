@@ -11,3 +11,9 @@ export interface userSettingAccessories {
   showUserAccessories: () => void;
   hideUserAccessories: () => void;
 }
+
+// here declare and exporting interface model of userSettingsConfigProps
+export interface userSettingConfigProps {
+  isChatTheme: boolean;
+  handleUserThemes: () => void;
+}

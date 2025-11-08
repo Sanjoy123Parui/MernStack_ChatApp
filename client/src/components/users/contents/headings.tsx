@@ -1,5 +1,4 @@
 import { contentHeading } from "../../models/contentModel.ts";
-import SearchBars from "./searchBars.tsx";
 
 // here define heading functional component
 const Headings: React.FC<contentHeading> = ({ headingTitle }) => {
@@ -12,11 +11,6 @@ const Headings: React.FC<contentHeading> = ({ headingTitle }) => {
             {headingTitle}
           </h1>
         </div>
-      </div>
-      {/* end div */}
-      {/* start div for SearchBar components loaded */}
-      <div className="p-4 bg-slate-50 shadow">
-        <SearchBars />
       </div>
       {/* end div */}
     </>
