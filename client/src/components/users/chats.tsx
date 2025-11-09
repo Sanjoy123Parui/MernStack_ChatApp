@@ -28,19 +28,18 @@ const Chats: React.FC = () => {
 
   return (
     <>
-      {/* start div grid-layout */}
       <div className="grid gap-0 grid-cols-1 lg:grid-cols-8">
         {/* start section for personal chat list content */}
-        <section className="col-span-1 w-full h-[676px] border lg:col-span-3">
+        <section
+          className={`col-span-1 w-full bg-slate-50 h-[668px] border lg:col-span-3`}
+        >
           {!isAccounts ? (
             <div>
               <div>
                 <Headings headingTitle={headingTitle} />
               </div>
-              <div className="bg-slate-50">
-                <div className="p-4 shadow">
-                  <SearchBars />
-                </div>
+              <div>
+                <SearchBars />
                 <ContentLists />
               </div>
             </div>
@@ -61,14 +60,16 @@ const Chats: React.FC = () => {
         {/* end section */}
 
         {/* start section for user personal chat conversation content */}
-        <section className="col-span-1 border w-full h-[668px] lg:col-span-5">
+        <section
+          className={`col-span-1 border bg-slate-50 w-full h-[668px] lg:col-span-5`}
+        >
           <div>
             <div>
               <MessagesHeading />
             </div>
             {/* start div for sender and reciever messages content of personal chat */}
             <div className="w-full h-[530px]">
-              <div className="flex gap-4 bg-slate-100 p-4 w-full h-full flex-col">
+              <div className="flex gap-4 p-4 w-full h-full flex-col">
                 <Sender />
                 <Reciever />
               </div>
@@ -84,13 +85,12 @@ const Chats: React.FC = () => {
           </div> */}
         </section>
         {/* end section */}
-      </div>
-      {/* end div */}
 
-      <div>
-        {isLogoutModal && <UserLogout />}
-        {isUserProfileEdit && <UserEditProfile />}
-        {isUserRemove && <UserRemoveModal />}
+        <div>
+          {isLogoutModal && <UserLogout />}
+          {isUserProfileEdit && <UserEditProfile />}
+          {isUserRemove && <UserRemoveModal />}
+        </div>
       </div>
     </>
   );

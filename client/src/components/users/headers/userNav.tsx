@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { RiDonutChartFill } from "react-icons/ri";
 import { MdOutlineChatBubble, MdGroups } from "react-icons/md";
@@ -14,8 +14,8 @@ const UserActionNav: React.FC = () => {
   const { showUserAccessories }: any = useSettingUserContext();
   const { openLogoutModal }: any = useUserLogoutModalContext();
 
-  // here declare custom hooks
-  const [actionItem] = useState<actionListItems[]>([
+  // here declare navlist action items
+  const actionItem: actionListItems[] = [
     {
       actionItemsName: "Accounts",
       actionIcon: <CgProfile className="mx-1" />,
@@ -26,7 +26,7 @@ const UserActionNav: React.FC = () => {
       actionIcon: <FiLogOut className="mx-1" />,
       handleAction: openLogoutModal,
     },
-  ]);
+  ];
 
   return (
     <>
@@ -54,7 +54,7 @@ const UserActionNav: React.FC = () => {
 // here define usernav functional component
 const UserNav: React.FC = () => {
   // here declare nav list content
-  const [chatNavItem] = useState<userNavListItem[]>([
+  const chatNavItem: userNavListItem[] = [
     // {
     //   listIcon: <MdOutlineChatBubble />,
     //   listItem: "Chat",
@@ -84,7 +84,7 @@ const UserNav: React.FC = () => {
       listItem: "Supports",
       itemPath: "/user/customer/support",
     }, */
-  ]);
+  ];
 
   return (
     <>

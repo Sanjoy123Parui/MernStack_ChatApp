@@ -10,14 +10,26 @@ const UserViewProfile: React.FC = () => {
   const { closeUserProfile, openUserEdit, openUserRemove }: any =
     useUserProfileContexts();
 
+  let userProfiledetails: any = {
+    full_Name: `Sanjoy Parui`,
+    phone: `8927219178`,
+    abouts: `Hey there! I am using chat App`,
+    gender: `Male`,
+    dob: `07-08-1999`,
+  };
+
   return (
     <>
-      <section className="px-6 pt-4 pb-8 max-w-lg mx-auto bg-white lg:px-4 lg:pt-1 lg:pb-6">
+      <section
+        className="px-6 pt-4 pb-8 max-w-lg mx-auto bg-slate-50 
+      lg:px-4 lg:pt-1 lg:pb-6"
+      >
         {/* start div for close view user profile button content */}
         <div className="flex justify-end">
           <a
             onClick={closeUserProfile}
-            className="text-gray-600 text-2xl hover:text-gray-800 transition duration-200"
+            className="text-gray-600 text-2xl hover:text-gray-800 
+            transition duration-200"
           >
             <IoMdClose />
           </a>
@@ -34,7 +46,10 @@ const UserViewProfile: React.FC = () => {
           /> */}
           <div className="relative">
             <div className="w-24 h-24 overflow-hidden rounded-full lg:w-32 lg:h-32 bg-gray-100 dark:bg-gray-600 border-2 mb-4">
-              <FaUser className=" w-16 h-20 lg:w-20 lg:h-24 text-gray-400 mt-7 lg:mt-8 mx-4 lg:mx-[23px]" />
+              <FaUser
+                className=" w-16 h-20 lg:w-20 lg:h-24 
+              text-gray-400 mt-7 lg:mt-8 mx-4 lg:mx-[23px]"
+              />
             </div>
             <Button
               className="absolute h-4 w-4 lg:h-8 lg:w-8 bottom-2 right-0 bg-blue-500 text-white rounded-full p-4 lg:p-2 hover:bg-blue-600 
@@ -45,9 +60,11 @@ const UserViewProfile: React.FC = () => {
           </div>
 
           <h2 className="text-xl lg:text-2xl font-medium text-gray-800">
-            Sanjoy Parui
+            {userProfiledetails.full_Name}
           </h2>
-          <p className="text-gray-600 text-md md:text-lg mt-1">8927219178</p>
+          <p className="text-gray-600 text-md md:text-lg mt-1">
+            {userProfiledetails.phone}
+          </p>
         </div>
         {/* end userprofile main content */}
 
@@ -59,20 +76,24 @@ const UserViewProfile: React.FC = () => {
                 Abouts:
               </strong>
               <p className="mt-1 text-sm md:text-base">
-                Hey there! I am using chat App
+                {userProfiledetails.abouts}
               </p>
             </li>
             <li className="text-gray-700 py-2">
               <strong className="font-medium text-sm lg:text-lg">
                 Gender:
               </strong>
-              <p className="mt-1 text-sm md:text-base">Male</p>
+              <p className="mt-1 text-sm md:text-base">
+                {userProfiledetails.gender}
+              </p>
             </li>
             <li className="text-gray-700 py-2">
               <strong className="font-medium text-sm lg:text-lg">
                 Date Of Birth:
               </strong>
-              <p className="mt-1 text-sm md:text-base">07-08-1999</p>
+              <p className="mt-1 text-sm md:text-base">
+                {userProfiledetails.dob}
+              </p>
             </li>
           </ul>
         </div>

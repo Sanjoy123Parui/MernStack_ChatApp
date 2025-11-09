@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { MdBrightness6 } from "react-icons/md";
 import { IoMdNotifications } from "react-icons/io";
 import { BiSolidConversation } from "react-icons/bi";
@@ -9,7 +8,8 @@ import { userAccessoriesItems } from "../../models/settingsModel.ts";
 // here was define user Settings functional component
 const Settings: React.FC = () => {
   // here was declare useState hooks
-  const [userAccessfierItems] = useState<userAccessoriesItems[]>([
+
+  const userAccessfierItems: userAccessoriesItems[] = [
     {
       itemIcon: (
         <MdBrightness6 className="w-8 h-12 text-sm text-gray-400 p-[2px] mx-1" />
@@ -28,7 +28,10 @@ const Settings: React.FC = () => {
 
     {
       itemIcon: (
-        <BiSolidConversation className="w-8 h-12 text-sm text-gray-400 p-[2px] mx-1" />
+        <BiSolidConversation
+          className="w-8 h-12 text-sm text-gray-400 
+        p-[2px] mx-1"
+        />
       ),
       itemName: "Converation notification",
       itemDesc: "Conversation notification sound",
@@ -41,7 +44,7 @@ const Settings: React.FC = () => {
       itemName: "Typing Sound",
       itemDesc: "Text typing sound into the chats",
     },
-  ]);
+  ];
 
   return (
     <>

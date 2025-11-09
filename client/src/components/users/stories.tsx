@@ -16,9 +16,7 @@ const Stories: React.FC = () => {
             <Headings headingTitle={headingTitle} />
           </div>
           <div className="bg-slate-50">
-            <div className="p-4 shadow">
-              <SearchBars />
-            </div>
+            <SearchBars />
             <ContentLists />
           </div>
         </section>

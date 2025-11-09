@@ -1,12 +1,12 @@
 // here import some libraries methods and components
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { userSignupListItem } from "../../models/userModel.tsx";
 
 // here define userSignupNav functional component
 const UserSignupNav: React.FC = () => {
   // here declare nav list items
-  const [signupList] = useState<userSignupListItem[]>([
+
+  const signupList: userSignupListItem[] = [
     {
       listItem: "Login",
       itemPath: "/",
@@ -15,7 +15,7 @@ const UserSignupNav: React.FC = () => {
       listItem: "Register",
       itemPath: "/user/Register",
     },
-  ]);
+  ];
 
   return (
     <>

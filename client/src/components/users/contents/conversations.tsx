@@ -8,7 +8,7 @@ import { Button } from "../../ui/button.tsx";
 const Conversations: React.FC = () => {
   return (
     <>
-      <div className="flex p-4 items-center bg-slate-200 rounded-lg shadow-md">
+      <div className="flex p-4 items-center bg-slate-100 rounded-lg shadow-md">
         {/* start div for attachments and emojis content */}
         <div className="flex mr-2 items-center">
           <a className="text-[24px] md:text-[28px] text-gray-500 font-medium hover:text-gray-700 transition duration-200">
