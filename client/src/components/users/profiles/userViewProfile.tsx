@@ -3,35 +3,56 @@ import { FaUser, FaUpload } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Button } from "../../ui/button.tsx";
 import { useUserProfileContexts } from "../../hooks/contexts/userProfileContext.ts";
+import { useUserSettingToggleContext } from "../../hooks/contexts/userSettingContexts.ts";
 
 // UserViewProfile functional components
 const UserViewProfile: React.FC = () => {
   // declare custom hooks for destruct user profile data
   const { closeUserProfile, openUserEdit, openUserRemove }: any =
     useUserProfileContexts();
+  const { isThemes }: any = useUserSettingToggleContext();
 
-  let userProfiledetails: any = {
-    full_Name: `Sanjoy Parui`,
-    phone: `8927219178`,
-    abouts: `Hey there! I am using chat App`,
-    gender: `Male`,
-    dob: `07-08-1999`,
-  };
+  let full_Name: string = `Sanjoy Parui`;
+  let phone: any = `8927219178`;
+
+  let userProfiledetails: any = [
+    {
+      profileHeading: "Abouts",
+      content: `Hey there! I am using chat App`,
+    },
+    {
+      profileHeading: "Gender",
+      content: `Male`,
+    },
+    {
+      profileHeading: "Date Of Birth",
+      content: `07-08-1999`,
+    },
+  ];
 
   return (
     <>
       <section
-        className="px-6 pt-4 pb-8 max-w-lg mx-auto bg-slate-50 
+        className="px-6 pt-4 pb-8 max-w-lg mx-auto 
       lg:px-4 lg:pt-1 lg:pb-6"
       >
         {/* start div for close view user profile button content */}
         <div className="flex justify-end">
+          {/* <a
+            onClick={closeUserProfile}
+            className="text-gray-600 text-2xl font-semibold hover:text-gray-800 
+            transition duration-200"
+          > */}
           <a
             onClick={closeUserProfile}
-            className="text-gray-600 text-2xl hover:text-gray-800 
-            transition duration-200"
+            className={`text-2xl font-semibold ${
+              !isThemes
+                ? `text-gray-600 hover:text-gray-800`
+                : `text-slate-50 hover:text-white`
+            }  
+            transition duration-200`}
           >
-            <IoMdClose />
+            <IoMdClose className="w-4 h-4 md:w-6 md:h-6" />
           </a>
         </div>
         {/* end div for close view user profile button content */}
@@ -59,42 +80,43 @@ const UserViewProfile: React.FC = () => {
             </Button>
           </div>
 
-          <h2 className="text-xl lg:text-2xl font-medium text-gray-800">
-            {userProfiledetails.full_Name}
+          {/* <h2 className="text-xl lg:text-2xl font-medium text-gray-700"> */}
+          <h2
+            className={`text-xl lg:text-2xl ${
+              !isThemes ? `text-gray-700` : `text-slate-50`
+            } font-medium`}
+          >
+            {full_Name}
           </h2>
-          <p className="text-gray-600 text-md md:text-lg mt-1">
-            {userProfiledetails.phone}
+          {/* <p className="text-gray-700 font-medium text-md md:text-lg mt-1"> */}
+          <p
+            className={`font-medium ${
+              !isThemes ? `text-gray-700` : `text-slate-50`
+            } text-md md:text-lg mt-1`}
+          >
+            {phone}
           </p>
         </div>
         {/* end userprofile main content */}
 
         {/* start div for user profile additional content */}
         <div className="mt-2">
-          <ul className="p-4 space-y-4">
-            <li className="text-gray-700 py-2">
-              <strong className="font-medium text-sm lg:text-lg">
-                Abouts:
-              </strong>
-              <p className="mt-1 text-sm md:text-base">
-                {userProfiledetails.abouts}
-              </p>
-            </li>
-            <li className="text-gray-700 py-2">
-              <strong className="font-medium text-sm lg:text-lg">
-                Gender:
-              </strong>
-              <p className="mt-1 text-sm md:text-base">
-                {userProfiledetails.gender}
-              </p>
-            </li>
-            <li className="text-gray-700 py-2">
-              <strong className="font-medium text-sm lg:text-lg">
-                Date Of Birth:
-              </strong>
-              <p className="mt-1 text-sm md:text-base">
-                {userProfiledetails.dob}
-              </p>
-            </li>
+          {/* <ul className="p-4 text-gray-700 space-y-4"> */}
+          <ul
+            className={`p-4 ${
+              !isThemes ? `text-gray-700 ` : `text-slate-50`
+            } space-y-4`}
+          >
+            {userProfiledetails.map((items: any, i: any) => (
+              <li key={i} className="py-2">
+                <strong className="font-bold text-sm lg:text-lg">
+                  {items.profileHeading}
+                </strong>
+                <p className="mt-1 font-medium text-sm md:text-base">
+                  {items.content}
+                </p>
+              </li>
+            ))}
           </ul>
         </div>
         {/* end div for user profile additional content */}

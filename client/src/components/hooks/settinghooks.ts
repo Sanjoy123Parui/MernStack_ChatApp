@@ -2,7 +2,7 @@
 import { useState } from "react";
 import {
   userSettingAccessories,
-  userSettingConfigProps,
+  userSettingToggles,
 } from "../models/settingsModel.ts";
 
 // here was create custom hooks for toggleAccountssettings and exporting
@@ -13,9 +13,9 @@ export const useToggleAccountSettings = (): userSettingAccessories => {
   return { isAccounts, showUserAccessories, hideUserAccessories };
 };
 
-// here was create custom hooks for UserSettingsConfiguration and exporting
-export const useUserSettingsConfig = (): userSettingConfigProps => {
-  const [isChatTheme, setIsChatTheme] = useState<boolean>(false);
-  const handleUserThemes = () => setIsChatTheme((prev: any) => !prev);
-  return { isChatTheme, handleUserThemes };
+// here was create custom hooks for userSettingsToggle and exporting
+export const useSettingUserToggle = (): userSettingToggles => {
+  const [isThemes, setIsThemes] = useState<boolean>(false);
+  const handleThemes = () => setIsThemes((prev: any) => !prev);
+  return { isThemes, handleThemes };
 };

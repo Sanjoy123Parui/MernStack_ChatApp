@@ -3,6 +3,7 @@ export interface userAccessoriesItems {
   itemIcon: any;
   itemName: String;
   itemDesc: String;
+  itemEventOptions: any;
 }
 
 // here declare and export interface model of user Setting accessoris props
@@ -12,8 +13,8 @@ export interface userSettingAccessories {
   hideUserAccessories: () => void;
 }
 
-// here declare and exporting interface model of userSettingsConfigProps
-export interface userSettingConfigProps {
-  isChatTheme: boolean;
-  handleUserThemes: () => void;
+// here declare and export interface model of user Setting Toggling props
+export interface userSettingToggles {
+  isThemes: boolean;
+  handleThemes: () => void;
 }

@@ -1,10 +1,10 @@
 import {
   useToggleAccountSettings,
-  useUserSettingsConfig,
+  useSettingUserToggle,
 } from "../hooks/settinghooks.ts";
 import {
   SettingsContext,
-  SettingsConfigContext,
+  SettingToggleContext,
 } from "../hooks/contexts/userSettingContexts.ts";
 
 // here was define with export UserAccessoriesProvider component
@@ -26,12 +26,12 @@ export const UserAccessoriesProvider: React.FC<{
 export const UserSettingsProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const userSettingsConfigdata: any = useUserSettingsConfig();
+  const userSettingsConfigdata: any = useSettingUserToggle();
   return (
     <>
-      <SettingsConfigContext.Provider value={userSettingsConfigdata}>
+      <SettingToggleContext.Provider value={userSettingsConfigdata}>
         {children}
-      </SettingsConfigContext.Provider>
+      </SettingToggleContext.Provider>
     </>
   );
 };

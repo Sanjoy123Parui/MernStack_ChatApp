@@ -2,7 +2,7 @@
 import { createContext, use } from "react";
 import {
   userSettingAccessories,
-  userSettingConfigProps,
+  userSettingToggles,
 } from "../../models/settingsModel.ts";
 
 // declare Context custom hook for  accountSettings content with export
@@ -10,8 +10,8 @@ export const SettingsContext = createContext<
   userSettingAccessories | undefined
 >(undefined);
 
-export const SettingsConfigContext = createContext<
-  userSettingConfigProps | undefined
+export const SettingToggleContext = createContext<
+  userSettingToggles | undefined
 >(undefined);
 
 export const useSettingUserContext = (): any => {
@@ -23,13 +23,14 @@ export const useSettingUserContext = (): any => {
   return userAccountsContext;
 };
 
-export const useUserSettingsConfigContext = (): any => {
-  const userSettingsConfig: any = use(SettingsConfigContext);
-  if (!userSettingsConfig) {
+export const useUserSettingToggleContext = (): any => {
+  const userToggleSetting: any = use(SettingToggleContext);
+
+  if (!userToggleSetting) {
     throw new Error(
-      "useUserSettingsConfigContext must be used within a UserSettingProvider"
+      "userToggleSetting must be used within a UserSettingProvider"
     );
   }
 
-  return userSettingsConfig;
+  return userToggleSetting;
 };

@@ -6,7 +6,10 @@ import Sender from "./contents/sender.tsx";
 import Reciever from "./contents/reciever.tsx";
 import Conversations from "./contents/conversations.tsx";
 import Userprofileaccessories from "./profiles/userprofileaccessories.tsx";
-import { useSettingUserContext } from "../hooks/contexts/userSettingContexts.ts";
+import {
+  useSettingUserContext,
+  useUserSettingToggleContext,
+} from "../hooks/contexts/userSettingContexts.ts";
 import { useUserLogoutModalContext } from "../hooks/contexts/userSignupContext.ts";
 import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
 import UserViewProfile from "./profiles/userViewProfile.tsx";
@@ -19,6 +22,7 @@ import UserEditProfile from "../modals/userEditProfile.tsx";
 const Chats: React.FC = () => {
   // here was declare custom hooks
   const { isAccounts }: any = useSettingUserContext();
+  const { isThemes }: any = useUserSettingToggleContext();
   const { isLogoutModal }: any = useUserLogoutModalContext();
   const { isUserProfileView, isUserProfileEdit, isUserRemove }: any =
     useUserProfileContexts();
@@ -30,8 +34,13 @@ const Chats: React.FC = () => {
     <>
       <div className="grid gap-0 grid-cols-1 lg:grid-cols-8">
         {/* start section for personal chat list content */}
-        <section
+        {/* <section
           className={`col-span-1 w-full bg-slate-50 h-[668px] border lg:col-span-3`}
+        > */}
+        <section
+          className={`col-span-1 w-full ${
+            !isThemes ? `bg-slate-50` : `bg-slate-800`
+          } h-[668px] border lg:col-span-3`}
         >
           {!isAccounts ? (
             <div>
