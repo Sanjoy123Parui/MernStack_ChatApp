@@ -2,9 +2,15 @@
 import { FaUser } from "react-icons/fa";
 import { IoMdPersonAdd } from "react-icons/io";
 import { Button } from "../../ui/button.tsx";
+import { useUserSettingToggleContext } from "../../hooks/contexts/userSettingContexts.ts";
 
 // here was ContentLists functional components
 const ContentLists: React.FC = () => {
+  let chatUser: string = `Neil Sims`;
+  let messages: string = `Hii`;
+
+  // declare custom hooks for manage some states in this component
+  const { isThemes }: any = useUserSettingToggleContext();
   return (
     <>
       <div className="border-t px-4">
@@ -47,11 +53,23 @@ const ContentLists: React.FC = () => {
                 </div>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm md:text-base font-medium truncate dark:text-black">
-                  Neil Sims
-                </p>
-                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                  Hii
+                <h4
+                  className={`text-sm md:text-base ${
+                    !isThemes
+                      ? `text-black dark:text-black`
+                      : `text-white dark:text-white`
+                  }  font-medium truncate `}
+                >
+                  {chatUser}
+                </h4>
+                <p
+                  className={`text-sm ${
+                    !isThemes
+                      ? `text-gray-500 dark:text-gray-400`
+                      : `text-white dark:text-slate-100`
+                  }  truncate `}
+                >
+                  {messages}
                 </p>
               </div>
             </div>

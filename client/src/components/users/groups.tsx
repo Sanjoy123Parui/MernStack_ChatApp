@@ -30,6 +30,7 @@ const Groups: React.FC = () => {
     <>
       <div className="grid gap-0 grid-cols-1 lg:grid-cols-8">
         {/* start section for groups chat user list content */}
+        {/* <section className="col-span-1 w-full h-[668px] border lg:col-span-3"> */}
         <section className="col-span-1 w-full h-[668px] border lg:col-span-3">
           {!isAccounts ? (
             <div>
