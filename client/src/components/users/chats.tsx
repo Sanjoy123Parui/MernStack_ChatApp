@@ -39,7 +39,7 @@ const Chats: React.FC = () => {
         > */}
         <section
           className={`col-span-1 w-full ${
-            !isThemes ? `bg-slate-50` : `bg-slate-800`
+            !isThemes ? `bg-slate-50` : `bg-gray-800`
           } h-[668px]  lg:col-span-3`}
         >
           {!isAccounts ? (
@@ -70,7 +70,9 @@ const Chats: React.FC = () => {
 
         {/* start section for user personal chat conversation content */}
         <section
-          className={`col-span-1  bg-slate-50 w-full h-[668px] lg:col-span-5`}
+          className={`col-span-1 w-full ${
+            !isThemes ? `bg-slate-50` : `bg-gray-800`
+          } h-[668px] lg:col-span-5`}
         >
           <div>
             <div>

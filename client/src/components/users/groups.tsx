@@ -1,6 +1,9 @@
 import Headings from "./contents/headings.tsx";
 import ContentLists from "./contents/contentLists.tsx";
-import { useSettingUserContext } from "../hooks/contexts/userSettingContexts.ts";
+import {
+  useSettingUserContext,
+  useUserSettingToggleContext,
+} from "../hooks/contexts/userSettingContexts.ts";
 import { useUserLogoutModalContext } from "../hooks/contexts/userSignupContext.ts";
 import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
 import Userprofileaccessories from "./profiles/userprofileaccessories.tsx";
@@ -19,6 +22,7 @@ import SearchBars from "./contents/searchBars.tsx";
 const Groups: React.FC = () => {
   // here was declare some custom hooks
   const { isAccounts }: any = useSettingUserContext();
+  const { isThemes }: any = useUserSettingToggleContext();
   const { isLogoutModal }: any = useUserLogoutModalContext();
   const { isUserProfileView, isUserProfileEdit, isUserRemove }: any =
     useUserProfileContexts();
@@ -31,13 +35,17 @@ const Groups: React.FC = () => {
       <div className="grid gap-0 grid-cols-1 lg:grid-cols-8">
         {/* start section for groups chat user list content */}
         {/* <section className="col-span-1 w-full h-[668px] border lg:col-span-3"> */}
-        <section className="col-span-1 w-full h-[668px] border lg:col-span-3">
+        <section
+          className={`col-span-1 w-full ${
+            !isThemes ? `bg-slate-50` : `bg-gray-800`
+          } h-[668px] lg:col-span-3`}
+        >
           {!isAccounts ? (
             <div>
               <div>
                 <Headings headingTitle={headingTitle} />
               </div>
-              <div className="bg-slate-50">
+              <div>
                 <SearchBars />
                 <ContentLists />
               </div>
@@ -60,7 +68,11 @@ const Groups: React.FC = () => {
         {/* end section */}
 
         {/* start section for groups chat conversation content */}
-        <section className="col-span-1 border w-full h-[668px] lg:col-span-5">
+        <section
+          className={`col-span-1 w-full ${
+            !isThemes ? `bg-slate-50` : `bg-gray-800`
+          } h-[668px] lg:col-span-5`}
+        >
           <div>
             <div>
               <MessagesHeading />
@@ -68,7 +80,7 @@ const Groups: React.FC = () => {
 
             {/* start div for sender and reciever messages content of groups chat */}
             <div className="w-full h-[530px]">
-              <div className="flex gap-4 bg-slate-100 p-4 w-full h-full flex-col">
+              <div className="flex gap-4 p-4 w-full h-full flex-col">
                 <Sender />
                 <Reciever />
               </div>
@@ -85,12 +97,12 @@ const Groups: React.FC = () => {
           </div> */}
         </section>
         {/* end section */}
-      </div>
 
-      <div>
-        {isLogoutModal && <UserLogout />}
-        {isUserProfileEdit && <UserEditProfile />}
-        {isUserRemove && <UserRemoveModal />}
+        <div>
+          {isLogoutModal && <UserLogout />}
+          {isUserProfileEdit && <UserEditProfile />}
+          {isUserRemove && <UserRemoveModal />}
+        </div>
       </div>
     </>
   );
