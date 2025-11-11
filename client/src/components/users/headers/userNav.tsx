@@ -6,25 +6,40 @@ import { MdOutlineChatBubble, MdGroups } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { userNavListItem, actionListItems } from "../../models/userModel.ts";
-import { useSettingUserContext } from "../../hooks/contexts/userSettingContexts.ts";
+import {
+  useSettingUserContext,
+  useUserNavMenuContext,
+} from "../../hooks/contexts/userSettingContexts.ts";
 import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
 
 const UserActionNav: React.FC = () => {
   // here was declare custom hooks
+  const { handleNavMenuClose }: any = useUserNavMenuContext();
   const { showUserAccessories }: any = useSettingUserContext();
   const { openLogoutModal }: any = useUserLogoutModalContext();
+
+  // define functions for actions nav
+  const handleAccouts = (): any => {
+    showUserAccessories();
+    handleNavMenuClose();
+  };
+
+  const handleLogout = (): any => {
+    openLogoutModal();
+    handleNavMenuClose();
+  };
 
   // here declare navlist action items
   const actionItem: actionListItems[] = [
     {
       actionItemsName: "Accounts",
       actionIcon: <CgProfile className="mx-1" />,
-      handleAction: showUserAccessories,
+      handleAction: handleAccouts,
     },
     {
       actionItemsName: "Logout",
       actionIcon: <FiLogOut className="mx-1" />,
-      handleAction: openLogoutModal,
+      handleAction: handleLogout,
     },
   ];
 
@@ -53,36 +68,44 @@ const UserActionNav: React.FC = () => {
 
 // here define usernav functional component
 const UserNav: React.FC = () => {
+  // declare custom hooks for manage navbar
+  const { handleNavMenuClose }: any = useUserNavMenuContext();
+
   // here declare nav list content
   const chatNavItem: userNavListItem[] = [
     // {
     //   listIcon: <MdOutlineChatBubble />,
     //   listItem: "Chat",
     //   itemPath: "/user/content/chat",
+    // itemActions: handleNavMenuClose,
     // },
 
     {
       listIcon: <MdOutlineChatBubble />,
       listItem: "Chat",
       itemPath: "/",
+      itemActions: handleNavMenuClose,
     },
 
     {
       listIcon: <MdGroups />,
       listItem: "Groups",
       itemPath: "/user/content/groups",
+      itemActions: handleNavMenuClose,
     },
 
     {
       listIcon: <RiDonutChartFill />,
       listItem: "Stories",
       itemPath: "/user/content/story",
+      itemActions: handleNavMenuClose,
     },
 
     /* {
       listIcon: <BiSupport />,
       listItem: "Supports",
       itemPath: "/user/customer/support",
+      itemActions:handleNavMenuClose
     }, */
   ];
 
@@ -96,6 +119,7 @@ const UserNav: React.FC = () => {
           <li key={i}>
             <NavLink
               to={items.itemPath}
+              onClick={items.itemActions}
               className={({ isActive }) =>
                 isActive
                   ? `flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-400 to-pink-400 shadow-md text-white font-semibold hover:bg-purple-500 transition-all duration-300`

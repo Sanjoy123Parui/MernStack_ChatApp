@@ -1,13 +1,28 @@
 import {
+  useUsernavMenuActions,
   useToggleAccountSettings,
   useSettingUserToggle,
 } from "../hooks/settinghooks.ts";
 import {
+  NavMenuBarContext,
   SettingsContext,
   SettingToggleContext,
 } from "../hooks/contexts/userSettingContexts.ts";
 
 // here was define with export UserAccessoriesProvider component
+export const UserNavMenuProviders: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const userNavdata: any = useUsernavMenuActions();
+  return (
+    <>
+      <NavMenuBarContext.Provider value={userNavdata}>
+        {children}
+      </NavMenuBarContext.Provider>
+    </>
+  );
+};
+
 export const UserAccessoriesProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {

@@ -1,19 +1,23 @@
-import {
-  useState,
-  // useEffect
-} from "react";
+// import {
+//   useState,
+//   useEffect
+// } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsThreeDotsVertical } from "react-icons/bs";
 // import UserSignupNav from "./userSignupNav.tsx";
 // import UserProfileNav from "./userProfileNav.tsx";
-import UserNav from "../../users/headers/userNav.tsx";
 import HiChatLogo from "../../../assets/hichat_brand_logo.svg";
+import UserNav from "../../users/headers/userNav.tsx";
+import { useUserNavMenuContext } from "../../hooks/contexts/userSettingContexts.ts";
 
 // here was define Header component
 const Userheader: React.FC = () => {
   const navigate: any = useNavigate();
+
+  // declare custom hooks
+  const { isNavMenu, handleNavMenuOpen }: any = useUserNavMenuContext();
+
   // here declare useState hook
-  const [isOpen, setIsOpen] = useState<any>(false);
   // const [hasUserSignup, setHasUserSignup] = useState<any>(false);
   // const [hasUserProfile, setHasUserProfile] = useState<any>(false);
 
@@ -50,7 +54,7 @@ const Userheader: React.FC = () => {
           {/* start button for open drop-down */}
           <button
             className="text-white lg:hidden p-2 rounded-full hover:bg-white/20 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={handleNavMenuOpen}
             aria-label="Toggle Menu"
           >
             <BsThreeDotsVertical size={24} />
@@ -61,7 +65,7 @@ const Userheader: React.FC = () => {
           <ul
             className={`absolute lg:relative rounded-2xl shadow-2xl lg:shadow-none lg:rounded-none h-auto bg-white/80 lg:bg-transparent w-56 lg:w-auto text-base lg:text-lg lg:h-auto right-0 top-full lg:top-auto p-4 lg:p-0 space-y-2 lg:space-y-0 lg:space-x-4 transition-all duration-500 backdrop-blur-md
               ${
-                isOpen
+                isNavMenu
                   ? "opacity-100 translate-y-0 pointer-events-auto"
                   : "opacity-0 -translate-y-2 pointer-events-none"
               }
@@ -86,7 +90,6 @@ const Userheader: React.FC = () => {
         {/* end div container */}
       </nav>
       {/* end nav */}
-      {/* Removed custom style tag, using Tailwind for animation */}
     </>
   );
 };

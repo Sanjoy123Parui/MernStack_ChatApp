@@ -1,9 +1,15 @@
 // here import some context hooks library
 import { createContext, use } from "react";
 import {
+  userNavbarMenuActions,
   userSettingAccessories,
   userSettingToggles,
 } from "../../models/settingsModel.ts";
+
+// declare Context custom hook for user nav menu content with export
+export const NavMenuBarContext = createContext<
+  userNavbarMenuActions | undefined
+>(undefined);
 
 // declare Context custom hook for  accountSettings content with export
 export const SettingsContext = createContext<
@@ -13,6 +19,16 @@ export const SettingsContext = createContext<
 export const SettingToggleContext = createContext<
   userSettingToggles | undefined
 >(undefined);
+
+export const useUserNavMenuContext = (): any => {
+  const userNavContext: any = use(NavMenuBarContext);
+  if (!userNavContext) {
+    throw new Error(
+      "useUserNavMenuContext must be used within a UserSettingProvider"
+    );
+  }
+  return userNavContext;
+};
 
 export const useSettingUserContext = (): any => {
   // declare usehook for passing data of userAccountsContext content

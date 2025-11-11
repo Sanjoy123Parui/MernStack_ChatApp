@@ -9,9 +9,10 @@ export interface userNavListItem {
   listIcon: any;
   listItem: string;
   itemPath: string;
+  itemActions: any;
 }
 
-// here define nav action list item interface model
+// here define nav action list item interface model and exporting
 export interface actionListItems {
   actionItemsName: string;
   actionIcon: any;

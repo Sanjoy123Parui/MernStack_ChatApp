@@ -35,8 +35,8 @@ const SenderTextMessage: React.FC<any> = ({ senderdropDownMenu }) => {
       <div className="flex items-start gap-2.5">
         {/* sender avatar content */}
         <div
-          className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold bg-gray-100
-        rounded-full dark:bg-gray-700"
+          className="w-10 h-10 overflow-hidden border-white border-[2px] font-bold 
+          bg-gray-100 rounded-full dark:bg-gray-700"
         >
           <FaUser className="w-8 h-8 text-gray-400 p-[2px] mt-1 mx-auto" />
         </div>

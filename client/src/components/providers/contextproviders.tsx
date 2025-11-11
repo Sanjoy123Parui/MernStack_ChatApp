@@ -4,6 +4,7 @@ import {
   AvatarProvider,
 } from "./usercontentproviders.tsx";
 import {
+  UserNavMenuProviders,
   UserAccessoriesProvider,
   UserSettingsProvider,
 } from "./usersettingproviders.tsx";
@@ -19,19 +20,21 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   return (
     <>
-      <TogglePasswordProvider>
-        <UserAccessoriesProvider>
-          <UserLogoutModalContextProvider>
-            <UserProfileProvider>
-              <UpdateProfileUserProvider>
-                <AvatarProvider>
-                  <UserSettingsProvider>{children}</UserSettingsProvider>
-                </AvatarProvider>
-              </UpdateProfileUserProvider>
-            </UserProfileProvider>
-          </UserLogoutModalContextProvider>
-        </UserAccessoriesProvider>
-      </TogglePasswordProvider>
+      <UserNavMenuProviders>
+        <TogglePasswordProvider>
+          <UserAccessoriesProvider>
+            <UserLogoutModalContextProvider>
+              <UserProfileProvider>
+                <UpdateProfileUserProvider>
+                  <AvatarProvider>
+                    <UserSettingsProvider>{children}</UserSettingsProvider>
+                  </AvatarProvider>
+                </UpdateProfileUserProvider>
+              </UserProfileProvider>
+            </UserLogoutModalContextProvider>
+          </UserAccessoriesProvider>
+        </TogglePasswordProvider>
+      </UserNavMenuProviders>
     </>
   );
 };

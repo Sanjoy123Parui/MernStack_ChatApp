@@ -1,9 +1,18 @@
 // import some specific hooks which are using for custom hooks in accounts settings
 import { useState } from "react";
 import {
+  userNavbarMenuActions,
   userSettingAccessories,
   userSettingToggles,
 } from "../models/settingsModel.ts";
+
+// here was create custom hooks for userNavMenuActions and exporting
+export const useUsernavMenuActions = (): userNavbarMenuActions => {
+  const [isNavMenu, setIsNavMenu] = useState<boolean>(false);
+  const handleNavMenuOpen = () => setIsNavMenu(true);
+  const handleNavMenuClose = () => setIsNavMenu(false);
+  return { isNavMenu, handleNavMenuOpen, handleNavMenuClose };
+};
 
 // here was create custom hooks for toggleAccountssettings and exporting
 export const useToggleAccountSettings = (): userSettingAccessories => {

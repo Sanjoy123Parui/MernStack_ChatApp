@@ -6,6 +6,13 @@ export interface userAccessoriesItems {
   itemEventOptions: any;
 }
 
+// here declare and exporting user navItems which was use responsive device
+export interface userNavbarMenuActions {
+  isNavMenu: boolean;
+  handleNavMenuOpen: () => void;
+  handleNavMenuClose: () => void;
+}
+
 // here declare and export interface model of user Setting accessoris props
 export interface userSettingAccessories {
   isAccounts: boolean;

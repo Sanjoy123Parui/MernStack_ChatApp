@@ -1,6 +1,8 @@
 // import { Avatar, AvatarImage } from "../../ui/avatar.tsx";
-import { FaUser } from "react-icons/fa";
+import { useMatch } from "react-router-dom";
+import { FaUser, FaCamera } from "react-icons/fa";
 import { IoMdPersonAdd } from "react-icons/io";
+import { MdGroupAdd } from "react-icons/md";
 import { Button } from "../../ui/button.tsx";
 import { useUserSettingToggleContext } from "../../hooks/contexts/userSettingContexts.ts";
 
@@ -8,6 +10,11 @@ import { useUserSettingToggleContext } from "../../hooks/contexts/userSettingCon
 const ContentLists: React.FC = () => {
   let chatUser: string = `Neil Sims`;
   let messages: string = `Hii`;
+
+  // declare useMatch hooks for check url path are matched or not
+  const chatsPathMatch: any = useMatch("/");
+  const groupsPathMatch: any = useMatch("/user/content/groups");
+  const storiesPathMatch: any = useMatch("/user/content/story");
 
   // declare custom hooks for manage some states in this component
   const { isThemes }: any = useUserSettingToggleContext();
@@ -86,11 +93,13 @@ const ContentLists: React.FC = () => {
             from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
             focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg rounded-full transition-colors"
             >
-              <IoMdPersonAdd />
+              {chatsPathMatch && <IoMdPersonAdd className="w-5 h-5" />}
+              {groupsPathMatch && <MdGroupAdd className="w-5 h-5" />}
+              {storiesPathMatch && <FaCamera className="w-5 h-5" />}
             </Button>
           </div>
         </div>
-        {/* end div */}
+        {/* end div for button content */}
       </div>
     </>
   );
