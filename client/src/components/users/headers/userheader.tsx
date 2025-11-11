@@ -4,9 +4,9 @@
 // } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import HiChatLogo from "../../../assets/hichat_brand_logo.svg";
 // import UserSignupNav from "./userSignupNav.tsx";
 // import UserProfileNav from "./userProfileNav.tsx";
-import HiChatLogo from "../../../assets/hichat_brand_logo.svg";
 import UserNav from "../../users/headers/userNav.tsx";
 import { useUserNavMenuContext } from "../../hooks/contexts/userSettingContexts.ts";
 
@@ -53,6 +53,7 @@ const Userheader: React.FC = () => {
 
           {/* start button for open drop-down */}
           <button
+            type="button"
             className="text-white lg:hidden p-2 rounded-full hover:bg-white/20 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white"
             onClick={handleNavMenuOpen}
             aria-label="Toggle Menu"
@@ -73,9 +74,8 @@ const Userheader: React.FC = () => {
             `}
           >
             {/* here loaded navbar menus component */}
-            {/* <UserSignupNav isOpen={isOpen} /> */}
-            {/* <UserProfileNav isOpen={isOpen} /> */}
-            {/* <UserNav isOpen={isOpen} /> */}
+            {/* <UserSignupNav /> */}
+            {/* <UserProfileNav /> */}
             <UserNav />
             {/* {hasUserSignup && hasUserProfile ? (
               <UserNav />

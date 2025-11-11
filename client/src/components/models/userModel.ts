@@ -2,6 +2,7 @@
 export interface userSignupListItem {
   listItem: string;
   itemPath: string;
+  itemActions: any;
 }
 
 // here define userNavListItem content interface model
@@ -17,4 +18,11 @@ export interface actionListItems {
   actionItemsName: string;
   actionIcon: any;
   handleAction: () => void;
+}
+
+// here define user contact content actions interface model with exporting
+export interface usercontactactions {
+  isContactLists: boolean;
+  showUserContacts: () => void;
+  hideUserContacts: () => void;
 }

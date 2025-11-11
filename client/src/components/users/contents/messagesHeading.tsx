@@ -2,9 +2,13 @@
 import { FaUser } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { useUserChatContentToggleContext } from "../../hooks/contexts/userContentContext.ts";
 
 // define MessageHeading component
 const MessagesHeading: React.FC = () => {
+  //  declare custom hook for manage state
+  const { showContentOptions }: any = useUserChatContentToggleContext();
+
   return (
     <>
       {/* start div for message heading */}
@@ -46,11 +50,16 @@ const MessagesHeading: React.FC = () => {
             </div>
             {/* end div */}
 
-            {/* start div for menu button content */}
-            <div className="inline-flex items-center text-base lg:text-2xl text-white">
-              <BsThreeDotsVertical />
-            </div>
-            {/* end div */}
+            {/* start menu button content */}
+            <button
+              type="button"
+              onClick={showContentOptions}
+              className="text-white p-2 rounded-full hover:bg-white/20 
+            transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white"
+            >
+              <BsThreeDotsVertical className="w-5 h-5" />
+            </button>
+            {/* end menu button */}
           </div>
         </div>
       </div>

@@ -10,25 +10,36 @@ import {
   useSettingUserContext,
   useUserSettingToggleContext,
 } from "../hooks/contexts/userSettingContexts.ts";
+import { useUserChatContentToggleContext } from "../hooks/contexts/userContentContext.ts";
 import { useUserLogoutModalContext } from "../hooks/contexts/userSignupContext.ts";
 import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
 import UserViewProfile from "./profiles/userViewProfile.tsx";
 import UserLogout from "../modals/userLogout.tsx";
 import UserRemoveModal from "../modals/userRemoveModal.tsx";
 import UserEditProfile from "../modals/userEditProfile.tsx";
+import Contentoptions from "./contents/contentoptions.tsx";
 // import EmptyContent from "./contents/emptyContent.tsx";
 
 // here define Chats functional components
 const Chats: React.FC = () => {
+  // here was declare heading variables of Chats
+  const headingTitle: string = "Chats";
+
+  // declare list of options are messageheadingOptions
+  const messagesheadingOptions: any = [
+    "View Profile",
+    "Block",
+    "Report",
+    "Mute",
+  ];
+
   // here was declare custom hooks
   const { isAccounts }: any = useSettingUserContext();
   const { isThemes }: any = useUserSettingToggleContext();
   const { isLogoutModal }: any = useUserLogoutModalContext();
   const { isUserProfileView, isUserProfileEdit, isUserRemove }: any =
     useUserProfileContexts();
-
-  // here was declare heading variables of Chats
-  const headingTitle: string = "Chats";
+  const { isOptions }: any = useUserChatContentToggleContext();
 
   return (
     <>
@@ -40,7 +51,7 @@ const Chats: React.FC = () => {
         <section
           className={`col-span-1 w-full ${
             !isThemes ? `bg-slate-50` : `bg-gray-800`
-          } h-[668px]  lg:col-span-3`}
+          } h-[668px] border-r-2 lg:col-span-3`}
         >
           {!isAccounts ? (
             <div>
@@ -72,7 +83,7 @@ const Chats: React.FC = () => {
         <section
           className={`col-span-1 w-full ${
             !isThemes ? `bg-slate-50` : `bg-gray-800`
-          } h-[668px] lg:col-span-5`}
+          } h-[668px] border-l-0 lg:col-span-5`}
         >
           <div>
             <div>
@@ -94,6 +105,10 @@ const Chats: React.FC = () => {
           {/* <div className="bg-slate-50">
             <EmptyContent />
           </div> */}
+
+          {isOptions === true && (
+            <Contentoptions messagesheadingOptions={messagesheadingOptions} />
+          )}
         </section>
         {/* end section */}
 

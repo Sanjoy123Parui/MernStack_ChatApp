@@ -1,19 +1,24 @@
 // here import some libraries methods and components
 import { NavLink } from "react-router-dom";
 import { userSignupListItem } from "../../models/userModel.tsx";
+import { useUserNavMenuContext } from "../../hooks/contexts/userSettingContexts.ts";
 
 // here define userSignupNav functional component
 const UserSignupNav: React.FC = () => {
-  // here declare nav list items
+  // declare custom hook for navlist items close
+  const { handleNavMenuClose }: any = useUserNavMenuContext();
 
+  // here declare nav list items
   const signupList: userSignupListItem[] = [
     {
       listItem: "Login",
       itemPath: "/",
+      itemActions: handleNavMenuClose,
     },
     {
       listItem: "Register",
       itemPath: "/user/Register",
+      itemActions: handleNavMenuClose,
     },
   ];
 
@@ -24,7 +29,7 @@ const UserSignupNav: React.FC = () => {
       bg-white/80 lg:bg-transparent backdrop-blur-md transition-all duration-500"
       >
         {signupList.map((items: any, i: any) => (
-          <li key={i}>
+          <li key={i} onClick={handleNavMenuClose}>
             <NavLink
               to={items.itemPath}
               className={({ isActive }) =>

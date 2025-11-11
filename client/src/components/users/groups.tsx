@@ -4,6 +4,7 @@ import {
   useSettingUserContext,
   useUserSettingToggleContext,
 } from "../hooks/contexts/userSettingContexts.ts";
+import { useUserChatContentToggleContext } from "../hooks/contexts/userContentContext.ts";
 import { useUserLogoutModalContext } from "../hooks/contexts/userSignupContext.ts";
 import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
 import Userprofileaccessories from "./profiles/userprofileaccessories.tsx";
@@ -16,19 +17,29 @@ import UserLogout from "../modals/userLogout.tsx";
 import UserEditProfile from "../modals/userEditProfile.tsx";
 import UserRemoveModal from "../modals/userRemoveModal.tsx";
 import SearchBars from "./contents/searchBars.tsx";
+import Contentoptions from "./contents/contentoptions.tsx";
 // import EmptyContent from "./contents/emptyContent.tsx";
 
 // Groups component of user groups chat
 const Groups: React.FC = () => {
+  // here was declare heading variables of Groups
+  const headingTitle: string = "Groups";
+
+  // declare list of options are messageheadingOptions
+  const messagesheadingOptions: any = [
+    "View Profile",
+    "Block",
+    "Report",
+    "Mute",
+  ];
+
   // here was declare some custom hooks
   const { isAccounts }: any = useSettingUserContext();
   const { isThemes }: any = useUserSettingToggleContext();
   const { isLogoutModal }: any = useUserLogoutModalContext();
   const { isUserProfileView, isUserProfileEdit, isUserRemove }: any =
     useUserProfileContexts();
-
-  // here was declare heading variables of Groups
-  const headingTitle: string = "Groups";
+  const { isOptions }: any = useUserChatContentToggleContext();
 
   return (
     <>
@@ -38,7 +49,7 @@ const Groups: React.FC = () => {
         <section
           className={`col-span-1 w-full ${
             !isThemes ? `bg-slate-50` : `bg-gray-800`
-          } h-[668px] lg:col-span-3`}
+          } h-[668px] border-r-2 lg:col-span-3`}
         >
           {!isAccounts ? (
             <div>
@@ -54,7 +65,6 @@ const Groups: React.FC = () => {
             <div>
               {!isUserProfileView ? (
                 <div>
-                  {/* <Accessabilities /> */}
                   <Userprofileaccessories />
                 </div>
               ) : (
@@ -71,7 +81,7 @@ const Groups: React.FC = () => {
         <section
           className={`col-span-1 w-full ${
             !isThemes ? `bg-slate-50` : `bg-gray-800`
-          } h-[668px] lg:col-span-5`}
+          } h-[668px] border-l-0 lg:col-span-5`}
         >
           <div>
             <div>
@@ -95,6 +105,10 @@ const Groups: React.FC = () => {
           {/* <div className="bg-slate-50">
             <EmptyContent />
           </div> */}
+
+          {isOptions === true && (
+            <Contentoptions messagesheadingOptions={messagesheadingOptions} />
+          )}
         </section>
         {/* end section */}
 

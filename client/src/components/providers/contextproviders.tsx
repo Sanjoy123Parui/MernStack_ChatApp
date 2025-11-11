@@ -2,6 +2,7 @@
 import {
   TogglePasswordProvider,
   AvatarProvider,
+  UserToggleContentOptionProvider,
 } from "./usercontentproviders.tsx";
 import {
   UserNavMenuProviders,
@@ -13,6 +14,7 @@ import {
   UserProfileProvider,
   UpdateProfileUserProvider,
 } from "./userprofileproviders.tsx";
+import { UserContactActionProvider } from "./contactprovider.tsx";
 
 // define and export AppProvider component
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -27,7 +29,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
               <UserProfileProvider>
                 <UpdateProfileUserProvider>
                   <AvatarProvider>
-                    <UserSettingsProvider>{children}</UserSettingsProvider>
+                    <UserSettingsProvider>
+                      <UserToggleContentOptionProvider>
+                        <UserContactActionProvider>
+                          {children}
+                        </UserContactActionProvider>
+                      </UserToggleContentOptionProvider>
+                    </UserSettingsProvider>
                   </AvatarProvider>
                 </UpdateProfileUserProvider>
               </UserProfileProvider>

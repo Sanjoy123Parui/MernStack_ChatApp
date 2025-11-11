@@ -31,3 +31,15 @@ export interface profileImagesCropItems {
 export interface contentHeading {
   headingTitle: string;
 }
+
+export interface contentMessagesHeading {
+  messagesheadingOptions: any;
+}
+
+// here declare and exporting user chats heading options toggle content
+// interface model
+export interface userChatsHeadingToggle {
+  isOptions: boolean;
+  showContentOptions: () => void;
+  hideContentOptions: () => void;
+}

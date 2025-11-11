@@ -16,15 +16,15 @@ import EmptyContent from "./contents/emptyContent.tsx";
 
 // define Stories functional component
 const Stories: React.FC = () => {
+  // here was declare heading variables of Stories
+  const headingTitle: string = "Stories";
+
   // declare custom hooks for handle data
   const { isAccounts }: any = useSettingUserContext();
   const { isThemes }: any = useUserSettingToggleContext();
   const { isLogoutModal }: any = useUserLogoutModalContext();
   const { isUserProfileView, isUserProfileEdit, isUserRemove }: any =
     useUserProfileContexts();
-
-  // here was declare heading variables of Stories
-  const headingTitle: string = "Stories";
 
   return (
     <>
@@ -35,7 +35,7 @@ const Stories: React.FC = () => {
         <section
           className={`col-span-1 w-full ${
             !isThemes ? `bg-slate-50` : `bg-gray-800`
-          } h-[668px] lg:col-span-3`}
+          } h-[668px] border-r-2 lg:col-span-3`}
         >
           {!isAccounts ? (
             <div>
@@ -67,7 +67,7 @@ const Stories: React.FC = () => {
         <section
           className={`col-span-1 w-full ${
             !isThemes ? `bg-slate-50` : `bg-gray-800`
-          } h-[668px] lg:col-span-5`}
+          } h-[668px] border-l-0 lg:col-span-5`}
         >
           <div>
             <EmptyContent />

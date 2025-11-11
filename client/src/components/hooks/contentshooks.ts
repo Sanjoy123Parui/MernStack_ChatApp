@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import {
   togglePasswordprops,
   profileImagesCropItems,
+  userChatsHeadingToggle,
 } from "../models/contentModel.ts";
 
 // declare custom hook of useTogglePassword with export
@@ -74,4 +75,12 @@ export const useProfileAvtar = (): profileImagesCropItems => {
     handleZoomChange,
     handleCropCompleteHandler,
   };
+};
+
+// declare custom hook of chath heading toggle with export
+export const useUserContentHeadingOption = (): userChatsHeadingToggle => {
+  const [isOptions, setIsOptions] = useState<boolean>(false);
+  const showContentOptions = (): any => setIsOptions(true);
+  const hideContentOptions = (): any => setIsOptions(false);
+  return { isOptions, showContentOptions, hideContentOptions };
 };
