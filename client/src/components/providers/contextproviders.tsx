@@ -4,17 +4,21 @@ import {
   AvatarProvider,
   UserToggleContentOptionProvider,
 } from "./usercontentproviders.tsx";
+
 import {
   UserNavMenuProviders,
   UserAccessoriesProvider,
   UserSettingsProvider,
 } from "./usersettingproviders.tsx";
+
 import { UserLogoutModalContextProvider } from "./usersignupprovider.tsx";
+
 import {
   UserProfileProvider,
   UpdateProfileUserProvider,
 } from "./userprofileproviders.tsx";
-import { UserContactActionProvider } from "./contactprovider.tsx";
+
+import { UserContactActionProvider } from "./usercontactprovider.tsx";
 
 // define and export AppProvider component
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({

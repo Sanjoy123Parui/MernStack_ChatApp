@@ -13,17 +13,21 @@ import {
 import { useUserChatContentToggleContext } from "../hooks/contexts/userContentContext.ts";
 import { useUserLogoutModalContext } from "../hooks/contexts/userSignupContext.ts";
 import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
+import { useUserContactActionContext } from "../hooks/contexts/userContactContext.ts";
 import UserViewProfile from "./profiles/userViewProfile.tsx";
 import UserLogout from "../modals/userLogout.tsx";
 import UserRemoveModal from "../modals/userRemoveModal.tsx";
 import UserEditProfile from "../modals/userEditProfile.tsx";
 import Contentoptions from "./contents/contentoptions.tsx";
+import Contactheadings from "./contacts/contactheadings.tsx";
+import Contactlists from "./contacts/contactlists.tsx";
 // import EmptyContent from "./contents/emptyContent.tsx";
 
 // here define Chats functional components
 const Chats: React.FC = () => {
   // here was declare heading variables of Chats
   const headingTitle: string = "Chats";
+  const userContactHeading: string = "Contacts";
 
   // declare list of options are messageheadingOptions
   const messagesheadingOptions: any = [
@@ -40,6 +44,7 @@ const Chats: React.FC = () => {
   const { isUserProfileView, isUserProfileEdit, isUserRemove }: any =
     useUserProfileContexts();
   const { isOptions }: any = useUserChatContentToggleContext();
+  const { isContactsAction }: any = useUserContactActionContext();
 
   return (
     <>
@@ -55,13 +60,27 @@ const Chats: React.FC = () => {
         >
           {!isAccounts ? (
             <div>
-              <div>
-                <Headings headingTitle={headingTitle} />
-              </div>
-              <div>
-                <SearchBars />
-                <ContentLists />
-              </div>
+              {!isContactsAction ? (
+                <div>
+                  <div>
+                    <Headings headingTitle={headingTitle} />
+                  </div>
+                  <div>
+                    <SearchBars />
+                    <ContentLists />
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <div>
+                    <Contactheadings userContactHeading={userContactHeading} />
+                  </div>
+                  <div>
+                    <SearchBars />
+                    <Contactlists />
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <div>

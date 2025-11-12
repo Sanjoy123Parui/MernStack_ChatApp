@@ -1,16 +1,18 @@
 import { use, createContext } from "react";
-import { usercontactactions } from "../../models/userModel.ts";
+import { userContactActionProps } from "../../models/userModel.ts";
 
-// declare CreateContext objects of user contact related with exporting
+// declare create context for all contact related with exporting
+
 export const ContactActionContext = createContext<
-  usercontactactions | undefined
+  userContactActionProps | undefined
 >(undefined);
 
-// declare custom hooks context for user contact related with exporting
+// declare and exporting custom hooks context for user contacts
+
 export const useUserContactActionContext = (): any => {
-  let userContactactiondata: any = use(ContactActionContext);
-  if (!userContactactiondata) {
-    throw new Error("User contact actions are not provided");
+  const contactActiondata: any = use(ContactActionContext);
+  if (!contactActiondata) {
+    throw new Error("In this contact context custom hooks are not provided");
   }
-  return userContactactiondata;
+  return contactActiondata;
 };

@@ -20,9 +20,14 @@ export interface actionListItems {
   handleAction: () => void;
 }
 
-// here define user contact content actions interface model with exporting
-export interface usercontactactions {
-  isContactLists: boolean;
-  showUserContacts: () => void;
-  hideUserContacts: () => void;
+// here declare userContactHeadingItems interface model with exporting
+export interface userContactHeadingItems {
+  userContactHeading: string;
+}
+
+// here declare and exporting userContactActionProps interface model
+export interface userContactActionProps {
+  isContactsAction: boolean;
+  showContacts: () => void;
+  hideContacts: () => void;
 }

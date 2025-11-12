@@ -6,6 +6,8 @@ import { MdGroupAdd } from "react-icons/md";
 import { Button } from "../../ui/button.tsx";
 import { useUserSettingToggleContext } from "../../hooks/contexts/userSettingContexts.ts";
 
+import { useUserContactActionContext } from "../../hooks/contexts/userContactContext.ts";
+
 // here was ContentLists functional components
 const ContentLists: React.FC = () => {
   let chatUser: string = `Neil Sims`;
@@ -18,6 +20,8 @@ const ContentLists: React.FC = () => {
 
   // declare custom hooks for manage some states in this component
   const { isThemes }: any = useUserSettingToggleContext();
+  const { showContacts }: any = useUserContactActionContext();
+
   return (
     <>
       <div className="border-t px-4">
@@ -88,15 +92,39 @@ const ContentLists: React.FC = () => {
         {/* <div className="sticky z-0 top-[35rem] sm:left-[20rem]"> */}
         <div className="relative">
           <div className="absolute -bottom-72 right-4  md:-bottom-80 md:right-8 z-50">
-            <Button
-              className="flex w-14 h-14 items-center [&_svg]:size-7 [&_svg]:mx-2 text-white justify-center bg-gradient-to-r 
+            {chatsPathMatch && (
+              <Button
+                type="button"
+                onClick={showContacts}
+                className="flex w-14 h-14 items-center [&_svg]:size-7 [&_svg]:mx-2 text-white justify-center bg-gradient-to-r 
             from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
             focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg rounded-full transition-colors"
-            >
-              {chatsPathMatch && <IoMdPersonAdd className="w-5 h-5" />}
-              {groupsPathMatch && <MdGroupAdd className="w-5 h-5" />}
-              {storiesPathMatch && <FaCamera className="w-5 h-5" />}
-            </Button>
+              >
+                <IoMdPersonAdd className="w-5 h-5" />
+              </Button>
+            )}
+
+            {groupsPathMatch && (
+              <Button
+                type="button"
+                className="flex w-14 h-14 items-center [&_svg]:size-7 [&_svg]:mx-2 text-white justify-center bg-gradient-to-r 
+            from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
+            focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg rounded-full transition-colors"
+              >
+                <MdGroupAdd className="w-5 h-5" />
+              </Button>
+            )}
+
+            {storiesPathMatch && (
+              <Button
+                type="button"
+                className="flex w-14 h-14 items-center [&_svg]:size-7 [&_svg]:mx-2 text-white justify-center bg-gradient-to-r 
+            from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
+            focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg rounded-full transition-colors"
+              >
+                <FaCamera className="w-5 h-5" />
+              </Button>
+            )}
           </div>
         </div>
         {/* end div for button content */}

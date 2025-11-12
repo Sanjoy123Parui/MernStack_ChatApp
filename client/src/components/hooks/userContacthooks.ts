@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { usercontactactions } from "../models/userModel.ts";
+import { userContactActionProps } from "../models/userModel.ts";
 
-// here declare custom hook of userContactAction with exporting
-export const useUserContactActions = (): usercontactactions => {
-  const [isContactLists, setIsContactLists] = useState<boolean>(false);
-  const showUserContacts = (): any => setIsContactLists(true);
-  const hideUserContacts = (): any => setIsContactLists(false);
+// define custom hooks with exporting for user contact related
 
-  return { isContactLists, showUserContacts, hideUserContacts };
+export const useUserContactActions = (): userContactActionProps => {
+  const [isContactsAction, setIsContactsAction] = useState<boolean>(false);
+  const showContacts = () => setIsContactsAction(true);
+  const hideContacts = () => setIsContactsAction(false);
+
+  return { isContactsAction, showContacts, hideContacts };
 };
