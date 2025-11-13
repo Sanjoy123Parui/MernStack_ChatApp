@@ -24,6 +24,7 @@ import Contentoptions from "./contents/contentoptions.tsx";
 const Groups: React.FC = () => {
   // here was declare heading variables of Groups
   const headingTitle: string = "Groups";
+  const groupsHeading: string = "Coder gang";
 
   // declare list of options are messageheadingOptions
   const messagesheadingOptions: any = [
@@ -31,6 +32,9 @@ const Groups: React.FC = () => {
     "Block",
     "Report",
     "Mute",
+    "Left Groups",
+    "Create Admin",
+    "Add members",
   ];
 
   // here was declare some custom hooks
@@ -39,7 +43,11 @@ const Groups: React.FC = () => {
   const { isLogoutModal }: any = useUserLogoutModalContext();
   const { isUserProfileView, isUserProfileEdit, isUserRemove }: any =
     useUserProfileContexts();
-  const { isOptions }: any = useUserChatContentToggleContext();
+  const {
+    isGroupsOptions,
+    showGroupsContentOptions,
+    hideGroupsContentOptions,
+  }: any = useUserChatContentToggleContext();
 
   return (
     <>
@@ -85,7 +93,10 @@ const Groups: React.FC = () => {
         >
           <div>
             <div>
-              <MessagesHeading />
+              <MessagesHeading
+                headingTitle={groupsHeading}
+                showOptionAction={showGroupsContentOptions}
+              />
             </div>
 
             {/* start div for sender and reciever messages content of groups chat */}
@@ -106,8 +117,11 @@ const Groups: React.FC = () => {
             <EmptyContent />
           </div> */}
 
-          {isOptions === true && (
-            <Contentoptions messagesheadingOptions={messagesheadingOptions} />
+          {isGroupsOptions === true && (
+            <Contentoptions
+              messagesheadingOptions={messagesheadingOptions}
+              hideOptionAction={hideGroupsContentOptions}
+            />
           )}
         </section>
         {/* end section */}

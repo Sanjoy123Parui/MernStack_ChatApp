@@ -28,6 +28,7 @@ const Chats: React.FC = () => {
   // here was declare heading variables of Chats
   const headingTitle: string = "Chats";
   const userContactHeading: string = "Contacts";
+  const chatHeading = "Neil Sims";
 
   // declare list of options are messageheadingOptions
   const messagesheadingOptions: any = [
@@ -43,7 +44,8 @@ const Chats: React.FC = () => {
   const { isLogoutModal }: any = useUserLogoutModalContext();
   const { isUserProfileView, isUserProfileEdit, isUserRemove }: any =
     useUserProfileContexts();
-  const { isOptions }: any = useUserChatContentToggleContext();
+  const { isChatOptions, showChatContentOptions, hideChatContentOptions }: any =
+    useUserChatContentToggleContext();
   const { isContactsAction }: any = useUserContactActionContext();
 
   return (
@@ -106,7 +108,10 @@ const Chats: React.FC = () => {
         >
           <div>
             <div>
-              <MessagesHeading />
+              <MessagesHeading
+                headingTitle={chatHeading}
+                showOptionAction={showChatContentOptions}
+              />
             </div>
             {/* start div for sender and reciever messages content of personal chat */}
             <div className="w-full h-[530px]">
@@ -125,8 +130,11 @@ const Chats: React.FC = () => {
             <EmptyContent />
           </div> */}
 
-          {isOptions === true && (
-            <Contentoptions messagesheadingOptions={messagesheadingOptions} />
+          {isChatOptions === true && (
+            <Contentoptions
+              messagesheadingOptions={messagesheadingOptions}
+              hideOptionAction={hideChatContentOptions}
+            />
           )}
         </section>
         {/* end section */}

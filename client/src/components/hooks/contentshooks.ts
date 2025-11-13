@@ -79,8 +79,18 @@ export const useProfileAvtar = (): profileImagesCropItems => {
 
 // declare custom hook of chath heading toggle with export
 export const useUserContentHeadingOption = (): userChatsHeadingToggle => {
-  const [isOptions, setIsOptions] = useState<boolean>(false);
-  const showContentOptions = (): any => setIsOptions(true);
-  const hideContentOptions = (): any => setIsOptions(false);
-  return { isOptions, showContentOptions, hideContentOptions };
+  const [isChatOptions, setIsChatOptions] = useState<boolean>(false);
+  const [isGroupsOptions, setIsGroupsOptions] = useState<boolean>(false);
+  const showChatContentOptions = (): any => setIsChatOptions(true);
+  const hideChatContentOptions = (): any => setIsChatOptions(false);
+  const showGroupsContentOptions = (): any => setIsGroupsOptions(true);
+  const hideGroupsContentOptions = (): any => setIsGroupsOptions(false);
+  return {
+    isChatOptions,
+    isGroupsOptions,
+    showChatContentOptions,
+    hideChatContentOptions,
+    showGroupsContentOptions,
+    hideGroupsContentOptions,
+  };
 };

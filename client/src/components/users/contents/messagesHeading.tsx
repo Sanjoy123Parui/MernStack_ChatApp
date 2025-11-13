@@ -2,13 +2,13 @@
 import { FaUser } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { useUserChatContentToggleContext } from "../../hooks/contexts/userContentContext.ts";
+import { contentMessagesShowOption } from "../../models/contentModel.ts";
 
 // define MessageHeading component
-const MessagesHeading: React.FC = () => {
-  //  declare custom hook for manage state
-  const { showContentOptions }: any = useUserChatContentToggleContext();
-
+const MessagesHeading: React.FC<contentMessagesShowOption> = ({
+  headingTitle,
+  showOptionAction,
+}) => {
   return (
     <>
       {/* start div for message heading */}
@@ -45,7 +45,7 @@ const MessagesHeading: React.FC = () => {
             {/* start div flex from show which user profile are open */}
             <div className="flex-1 min-w-0">
               <a className="text-base md:text-lg font-medium truncate text-white">
-                Neil sims
+                {headingTitle}
               </a>
             </div>
             {/* end div */}
@@ -53,7 +53,7 @@ const MessagesHeading: React.FC = () => {
             {/* start menu button content */}
             <button
               type="button"
-              onClick={showContentOptions}
+              onClick={showOptionAction}
               className="text-white p-2 rounded-full hover:bg-white/20 
             transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white"
             >

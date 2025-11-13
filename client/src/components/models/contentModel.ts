@@ -34,12 +34,21 @@ export interface contentHeading {
 
 export interface contentMessagesHeading {
   messagesheadingOptions: any;
+  hideOptionAction: () => void;
+}
+
+export interface contentMessagesShowOption {
+  headingTitle: string;
+  showOptionAction: () => void;
 }
 
 // here declare and exporting user chats heading options toggle content
 // interface model
 export interface userChatsHeadingToggle {
-  isOptions: boolean;
-  showContentOptions: () => void;
-  hideContentOptions: () => void;
+  isChatOptions: boolean;
+  isGroupsOptions: boolean;
+  showChatContentOptions: () => void;
+  hideChatContentOptions: () => void;
+  showGroupsContentOptions: () => void;
+  hideGroupsContentOptions: () => void;
 }
