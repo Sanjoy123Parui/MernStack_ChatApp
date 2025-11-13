@@ -1,14 +1,14 @@
 import { Button } from "../../ui/button.tsx";
 import { FaUser } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
-import { useSettingUserContext } from "../../hooks/contexts/userSettingContexts.ts";
+import { useUserSettingToggleContext } from "../../hooks/contexts/userSettingContexts.ts";
 
 // define contactlist component
 const Contactlists: React.FC = () => {
   const userName = `Neil Sims`;
 
   // declare for consuming the custom hooks for manage state
-  const { isThemes }: any = useSettingUserContext();
+  const { isThemes }: any = useUserSettingToggleContext();
 
   return (
     <>
