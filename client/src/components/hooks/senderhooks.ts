@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { senderChatMenuProps } from "../models/senderModel.ts";
 
-// declare with exporting custom hooks for sender all content
+// declare with exporting custom hooks for sender all contents
 
 export const useSenderMenu = (): senderChatMenuProps => {
-  // declare all states
+  // declare all states hooks
   const [senderTextMenu, setSenderTextMenu] = useState<boolean>(false);
   const [senderVoiceMenu, setSenderVoiceMenu] = useState<boolean>(false);
   const [senderImagesMenu, setSenderImagesMenu] = useState<boolean>(false);
@@ -72,6 +72,7 @@ export const useSenderMenu = (): senderChatMenuProps => {
     senderFilesMenu,
     senderReplyMenu,
     senderContactfileMenu,
+
     showSenderTextMenu,
     hideSenderTextMenu,
     showSenderVoiceMenu,

@@ -18,6 +18,7 @@ export interface senderChatMenuProps {
   senderFilesMenu: boolean;
   senderReplyMenu: boolean;
   senderContactfileMenu: boolean;
+
   showSenderTextMenu: () => void;
   hideSenderTextMenu: () => void;
   showSenderVoiceMenu: () => void;
