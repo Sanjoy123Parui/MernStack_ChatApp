@@ -1,4 +1,4 @@
-import { mongoose } from "../connections/socketconnection.js";
+import { mongoose } from "../config/app.js";
 
 // create user profile schema model
 const userProfileSchema = new mongoose.Schema(

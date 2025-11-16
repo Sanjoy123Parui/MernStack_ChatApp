@@ -3,7 +3,7 @@ import { userProfileModel } from "../models/userProfile.model.js";
 import { userSignupModel } from "../models/userSignup.model.js";
 import { asyncHandler } from "../helpers/try-catch.helper.js";
 import { errorHandler } from "../utils/utility.js";
-import { cache } from "../connections/socketconnection.js";
+import { cache } from "../config/app.js";
 
 // define functionality of all contact controller operations perform
 
