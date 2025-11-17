@@ -27,7 +27,7 @@ import { conn } from "./src/config/dbc.js";
 // import { adminDashboardRouter } from "./src/routes/adminDashboard.route.js";
 
 // Consuming the errorMiddlware importing here for globally error handle
-import { checkError } from "./src/middlewares/errors.middleware.js";
+// import { checkError } from "./src/middlewares/errors.middleware.js";
 
 // here was declare variables of some specific configuration
 const dbPath = process.env.MONGODB_URI;
@@ -67,7 +67,7 @@ if (cluster.isPrimary) {
   // app.use("/admin/dashboard/api", adminDashboardRouter);
 
   //   here was handle error for use middleware
-  app.use(checkError);
+  // app.use(checkError);
 
   // server was restarting here
   app.listen(port, () => {
