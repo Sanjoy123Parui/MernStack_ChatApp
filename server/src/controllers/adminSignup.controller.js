@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
-import { cache } from "../config/app.js";
+import { cache } from "../connections/socketconnection.js";
 import { adminSignupModel } from "../models/adminSignup.model.js";
 import { adminProfileModel } from "../models/adminProfile.model.js";
 import { asyncHandler } from "../helpers/try-catch.helper.js";

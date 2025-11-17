@@ -1,5 +1,5 @@
 // here import all modules and libraies of packages
-import { express } from "../config/app.js";
+import { express } from "../connections/socketconnection.js";
 
 import {
   addContact,

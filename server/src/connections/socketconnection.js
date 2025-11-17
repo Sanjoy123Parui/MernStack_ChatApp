@@ -1,4 +1,4 @@
-// here import all libraries which are using for start server in root
+// here import all socket.io connection library packages and modules
 import http from "http";
 import express from "express";
 import cors from "cors";
@@ -9,48 +9,42 @@ import os from "os";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import NodeCache from "node-cache";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
 import { Server } from "socket.io";
 import { corsOption } from "../lib/optionconfig.js";
 
-// here was declare server Mode
+// here was declare server envMode
 const envMode = process.env.NODE_ENV.trim() || "PRODUCTION";
 
-// declare object of socketIds
+// here was declare userSocketIds
 const userSocketIds = new Map();
 
-// here was delare middleware object of express app
+// here was declare object of middleware in express server
 const app = express();
-
-// here was declare object where handle caching data
+// here create object of cache
 const cache = new NodeCache({
   stdTTL: 300,
   checkperiod: 60,
 });
-
-// create server of node.js & express.js application
+// here create server
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: corsOption,
 });
 
-// here can exporting all libraies of root
+// export all library packages of connection
 export {
   express,
   cors,
   mongoose,
-  app,
   path,
   cluster,
   os,
-  io,
-  jwt,
-  bcrypt,
   morgan,
   userSocketIds,
   cookieParser,
   cache,
+  io,
+  app,
   envMode,
   server,
 };

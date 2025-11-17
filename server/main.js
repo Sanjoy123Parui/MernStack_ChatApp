@@ -19,7 +19,7 @@ import { corsOption } from "./src/lib/optionconfig.js";
 import { conn } from "./src/config/dbc.js";
 
 // here importing the all routes of endpoints for rest api
-import { usersignupRouter } from "./src/routes/usersignup.route.js";
+// import { usersignupRouter } from "./src/routes/usersignup.route.js";
 
 // Consuming the errorMiddlware importing here for globally error handle
 import { checkErrors } from "./src/middlewares/errors.middleware.js";
@@ -54,7 +54,7 @@ if (cluster.isPrimary) {
   });
 
   //here was handle middlewares are use of routes
-  app.use("/usersignup/api", usersignupRouter);
+  // app.use("/usersignup/api", usersignupRouter);
 
   // here was handle error for use middleware
   app.use(checkErrors);

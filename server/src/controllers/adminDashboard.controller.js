@@ -1,4 +1,4 @@
-import { cache } from "../config/app.js";
+import { cache } from "../connections/socketconnection.js";
 import { asyncHandler } from "../helpers/try-catch.helper.js";
 import { errorHandler } from "../utils/utility.js";
 import { userSignupModel } from "../models/userSignup.model.js";

@@ -1,4 +1,4 @@
-import { mongoose } from "../config/app.js";
+import { mongoose } from "../connections/socketconnection.js";
 
 // create admin profile model schema
 const adminProfileSchema = new mongoose.Schema(
