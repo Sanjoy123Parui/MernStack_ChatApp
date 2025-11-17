@@ -20,7 +20,14 @@
     </style>
   </head>
 
-  <body>
-    <h1>Welcome To The Chat RestAPI</h1>
+  <body onload="fetchAPITest()">
+    <h1 id="msg"></h1>
+
+    <script>
+      function fetchAPITest() {
+        document.getElementById("msg").textContent =
+          "Welcome To The Chat RestAPI";
+      }
+    </script>
   </body>
 </html>

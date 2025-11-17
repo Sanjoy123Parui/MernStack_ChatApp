@@ -6,12 +6,16 @@ const userSignupSchema = new mongoose.Schema(
     phone: {
       type: String,
       unique: true,
-      required: true,
+      require: true,
     },
 
     password: {
       type: String,
-      required: true,
+      require: true,
+    },
+
+    otp: {
+      type: String,
     },
 
     refresh_userToken: {

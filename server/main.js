@@ -1,8 +1,8 @@
-// // here are import all libraries
+// here import dotEnv lib and configure also
 import dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
 
-// consuming to the import all modules from library of server root
+// Consuming here importing from app.js all lib of server started and also importing corsOption and database connectivity into root of server
 import {
   express,
   cors,
@@ -15,11 +15,10 @@ import {
   cookieParser,
   server,
 } from "./src/config/app.js";
-
 import { corsOption } from "./src/lib/optionconfig.js";
 import { conn } from "./src/config/dbc.js";
 
-// // here import all routes
+// here import all routes
 // import { userSignupRouter } from "./src/routes/userSignup.route.js";
 // import { userprofileRouter } from "./src/routes/userProfile.route.js";
 // import { contactRouter } from "./src/routes/contact.route.js";
@@ -27,34 +26,35 @@ import { conn } from "./src/config/dbc.js";
 // import { adminProfileRouter } from "./src/routes/adminProfile.route.js";
 // import { adminDashboardRouter } from "./src/routes/adminDashboard.route.js";
 
+// Consuming the errorMiddlware importing here for globally error handle
 import { checkError } from "./src/middlewares/errors.middleware.js";
 
 // here was declare variables of some specific configuration
-const totalCPUs = os.cpus().length;
 const dbPath = process.env.MONGODB_URI;
 const port = process.env.PORT || 5000;
+const totalCPUs = os.cpus().length;
 
-// here check condition for cluster handle when start server
+// here check condidition for cluster handle when start server
 if (cluster.isPrimary) {
-  // define loop for multithreads cluster
+  // defineing the loop for multithreads cluster
   for (let i = 0; i < totalCPUs; i++) {
     cluster.fork();
   }
 } else {
-  // here configure database connectivity
+  // database connectivity configure
   conn(dbPath);
 
-  // here can use all middlewares
+  // here can declare middleware are use
   app.use(cors(corsOption));
   app.use(morgan("dev"));
-  app.use(express.static("./src/.public"));
+  app.use(express.static("./src/public"));
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(cookieParser());
 
-  // endpoints of middlware for test
+  // declare base endpoints middleware which are testing for api can work at started
   app.get("/", (req, res) => {
-    const filePath = path.join(import.meta.dirname, "./src/public/index.html");
+    let filePath = path.join(import.meta.dirname, "./src/public/index.html");
     res.send(filePath);
   });
 
@@ -66,10 +66,11 @@ if (cluster.isPrimary) {
   // app.use("/admin/api", adminProfileRouter);
   // app.use("/admin/dashboard/api", adminDashboardRouter);
 
-  // here was handle error for use middleware
+  //   here was handle error for use middleware
   app.use(checkError);
 
-  server.listen(port, () => {
+  // server was restarting here
+  app.listen(port, () => {
     console.log(`Server has been started at ${port} in ${envMode} Mode`);
   });
 }
