@@ -18,16 +18,11 @@ import {
 import { corsOption } from "./src/lib/optionconfig.js";
 import { conn } from "./src/config/dbc.js";
 
-// here import all routes
-// import { userSignupRouter } from "./src/routes/userSignup.route.js";
-// import { userprofileRouter } from "./src/routes/userProfile.route.js";
-// import { contactRouter } from "./src/routes/contact.route.js";
-// import { adminSignupRouter } from "./src/routes/adminSignup.route.js";
-// import { adminProfileRouter } from "./src/routes/adminProfile.route.js";
-// import { adminDashboardRouter } from "./src/routes/adminDashboard.route.js";
+// here importing the all routes of endpoints for rest api
+import { usersignupRouter } from "./src/routes/usersignup.route.js";
 
 // Consuming the errorMiddlware importing here for globally error handle
-// import { checkError } from "./src/middlewares/errors.middleware.js";
+import { checkErrors } from "./src/middlewares/errors.middleware.js";
 
 // here was declare variables of some specific configuration
 const dbPath = process.env.MONGODB_URI;
@@ -58,16 +53,11 @@ if (cluster.isPrimary) {
     res.send(filePath);
   });
 
-  //declare all endpoints middlewares are use of routes
-  // app.use("/user/api", userSignupRouter);
-  // app.use("/user/api", userprofileRouter);
-  // app.use("/contact/api", contactRouter);
-  // app.use("/admin/api", adminSignupRouter);
-  // app.use("/admin/api", adminProfileRouter);
-  // app.use("/admin/dashboard/api", adminDashboardRouter);
+  //here was handle middlewares are use of routes
+  app.use("/usersignup/api", usersignupRouter);
 
-  //   here was handle error for use middleware
-  // app.use(checkError);
+  // here was handle error for use middleware
+  app.use(checkErrors);
 
   // server was restarting here
   app.listen(port, () => {

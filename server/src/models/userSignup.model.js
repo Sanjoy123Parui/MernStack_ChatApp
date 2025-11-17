@@ -1,24 +1,20 @@
+// Consuming to the import lib of database ORM technique
 import { mongoose } from "../config/app.js";
 
-// create userSignup model schema
-const userSignupSchema = new mongoose.Schema(
+// define user signup schema model
+const usersignupSchema = new mongoose.Schema(
   {
     phone: {
       type: String,
       unique: true,
       require: true,
     },
-
     password: {
       type: String,
+      unique: true,
       require: true,
     },
-
-    otp: {
-      type: String,
-    },
-
-    refresh_userToken: {
+    refresh_usertoken: {
       type: String,
     },
   },
@@ -28,5 +24,5 @@ const userSignupSchema = new mongoose.Schema(
   }
 );
 
-// export userSignup model schema
-export const userSignupModel = mongoose.model("usersignups", userSignupSchema);
+// exporting to the usersignup schema model
+export const usersignupModel = mongoose.model("usersignups", usersignupSchema);

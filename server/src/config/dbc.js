@@ -7,12 +7,8 @@ export const conn = async (dbURI) => {
   const dbPath = await mongoose.connect(dbURI);
 
   try {
-    // check condition
-    if (!dbPath) {
-      console.log("Some issue are not connect to the database");
-    } else {
-      console.log("Database are connected successfully");
-    }
+    console.log("Database are connected successfully");
+    return dbPath;
   } catch (error) {
     console.log(`While error are not connect to the database :${error}`);
   }

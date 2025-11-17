@@ -1,5 +1,5 @@
-// there import jwt library packages
-import jwt from "jsonwebtoken";
+// Consuming to the import some lib
+import { jwt } from "../config/app.js";
 
 // there are define user access token functionality
 export const accessUserToken = (user) => {

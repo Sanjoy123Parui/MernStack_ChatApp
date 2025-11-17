@@ -9,6 +9,8 @@ import os from "os";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import NodeCache from "node-cache";
+import jwt from "jsonwebtoken";
+import bcryptjs from "bcryptjs";
 import { Server } from "socket.io";
 import { corsOption } from "../lib/optionconfig.js";
 
@@ -43,6 +45,8 @@ export {
   cluster,
   os,
   io,
+  jwt,
+  bcryptjs,
   morgan,
   userSocketIds,
   cookieParser,

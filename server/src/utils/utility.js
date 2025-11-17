@@ -42,7 +42,7 @@ export const forbiddenError = (message = "Forbidden access") => {
 };
 
 // define function of database connection error with exporting
-export const dbConnectionError = (message = "Database Error") => {
-  let dbConnection = baseAppError(message, 500);
-  return dbConnection;
-};
+// export const dbConnectionError = (message = "Database Error") => {
+//   let dbConnection = baseAppError(message, 500);
+//   return dbConnection;
+// };
