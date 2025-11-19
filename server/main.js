@@ -27,9 +27,11 @@ import { conn } from "./src/config/dbc.js";
 // import { adminDashboardRouter } from "./src/routes/adminDashboard.route.js";
 
 // here importing the all routes of endpoints for rest api
+import { usersignupRouter } from "./src/routes/usersignup.route.js";
 
 // Consuming the errorMiddlware importing here for globally error handle
 // import { checkError } from "./src/middlewares/errors.middleware.js";
+import { checkErrors } from "./src/middlewares/errors.middleware.js";
 
 // here was declare variables of some specific configuration
 const dbPath = process.env.MONGODB_URI;
@@ -69,9 +71,11 @@ if (cluster.isPrimary) {
   // app.use("/admin/dashboard/api", adminDashboardRouter);
 
   //here was handle middlewares are use of routes
+  app.use("/usersignup/api", usersignupRouter);
 
   // here was handle error for use middleware
   // app.use(checkError);
+  app.use(checkErrors);
 
   // server was restarting here
   server.listen(port, () => {

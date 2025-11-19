@@ -152,7 +152,7 @@ import {
   }
 }; */
 
-// define and exporting for authenticate features function where as send token with usersignupId
+// define and exporting for authenticate features function where as send token when user register
 export const sendUserToken = trycatchWrapper(
   async (res, next, userSignup, statusCode, message) => {
     // here declare variable for stored usersignupId
@@ -183,7 +183,7 @@ export const sendUserToken = trycatchWrapper(
   }
 );
 
-// define and exporting for authenticate features function where as send token with usersignupId & userprofileId
+// define and exporting for authenticate features function where as send token when user login
 export const sendUserTokenAuth = trycatchWrapper(
   async (res, next, userSignup, userProfile, statusCode, message) => {
     // here declare variable for stored usersignupId & userprofileId

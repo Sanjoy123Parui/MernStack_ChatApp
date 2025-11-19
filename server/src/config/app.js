@@ -11,6 +11,7 @@ import cookieParser from "cookie-parser";
 import NodeCache from "node-cache";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
+import { z } from "zod";
 import { Server } from "socket.io";
 import { corsOption } from "../lib/optionconfig.js";
 
@@ -44,6 +45,7 @@ export {
   path,
   cluster,
   os,
+  z,
   io,
   jwt,
   bcryptjs,

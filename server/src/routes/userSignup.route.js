@@ -1,3 +1,17 @@
+// Consuming to the importing some modules & lib for using in usersignup routes
+import { express } from "../config/app.js";
+import { trycatchWrapper } from "../helpers/try-catch.helper.js";
+import { badRequestError } from "../utils/utility.js";
+import { usersignupRegister } from "../controllers/usersignup.controller.js";
+import {
+  userRegisterValidator,
+  userLoginValidator,
+} from "../validators/usersignup.validator.js";
+import { validateHandler } from "../middlewares/validator.middleware.js";
+
+// declare the variables instance object of usersignupRouter
+const usersignupRouter = express.Router();
+
 // here import all modules and libraies of packages
 // import { express } from "../connections/socketconnection.js";
 
@@ -66,3 +80,24 @@
 
 // export user signup router
 // export { userSignupRouter };
+
+// here define all are the usersignup routes endpoints methods
+
+// usersignup registration account routes with post method
+usersignupRouter.route("/register").post(
+  validateHandler(userRegisterValidator),
+  trycatchWrapper(async (req, res, next) => {
+    // declare variables for accessing the controller function data
+    let userInfo = await usersignupRegister(req);
+
+    // check the condition for existing user
+    if (!userInfo) {
+      return next(badRequestError("Failed to create new account"));
+    } else {
+      return res.status(201).send({ msg: "Account created successfully" });
+    }
+  })
+);
+
+// exporting the usersignupRouter routes
+export { usersignupRouter };

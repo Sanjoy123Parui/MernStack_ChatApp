@@ -4,56 +4,53 @@ import { baseAppError } from "../utils/utility.js";
 // define some specific error handler funtion
 const handleDuplicateError = (err) => {
   let field = Object.keys(err.keyPattern).join(",");
-  let error = new baseAppError(`Duplicate field:${field} already exist`, 400);
+  let error = baseAppError(`Duplicate field:${field} already exist`, 400);
   return error;
 };
 
 const handleCastError = (err) => {
   let errorPath = err.path;
   let errorValue = err.value;
-  let error = new baseAppError(
-    `Invalid format of ${errorPath}:${errorValue}`,
-    400
-  );
+  let error = baseAppError(`Invalid format of ${errorPath}:${errorValue}`, 400);
   return error;
 };
 
 const handleValidationError = (err) => {
   let errorObj = Object.values(err.errors).map((e) => e.message);
   let errorMsg = errorObj.join(", ");
-  let error = new baseAppError(`Validation error:${errorMsg}`, 422);
+  let error = baseAppError(`Validation error:${errorMsg}`, 422);
   return error;
 };
 
 const handleJWTError = () => {
-  let error = new baseAppError("Invalid token. Please login again", 401);
+  let error = baseAppError("Invalid token. Please login again", 401);
   return error;
 };
 
 const handleJWTExpiredError = () => {
-  let error = new baseAppError("Token expired. Please login again", 401);
+  let error = baseAppError("Token expired. Please login again", 401);
   return error;
 };
 
 // here define with exporting error middleware function for use globally errors handle
 export const checkErrors = (err, req, res, next) => {
   // declare variables for access globall error
-  let error = { ...err };
-  error.message ||= "Internal server error as something went wrong";
-  error.status ||= "error";
-  error.statusCode ||= 500;
+  // let error = { ...err };
+  err.message ||= "Internal server error as something went wrong";
+  err.status ||= "error";
+  err.statusCode ||= 500;
 
   // check the condition for specific errors
-  if (err.code === 11000) error = handleDuplicateError(err);
-  if (err.name === "CastError") error = handleCastError(err);
-  if (err.name === "ValidationError") error = handleValidationError(err);
-  if (err.name === "JsonWebTokenError") error = handleJWTError();
-  if (err.name === "TokenExpiredError") error = handleJWTExpiredError();
+  if (err.code === 11000) err = handleDuplicateError(err);
+  if (err.name === "CastError") err = handleCastError(err);
+  if (err.name === "ValidationError") err = handleValidationError(err);
+  if (err.name === "JsonWebTokenError") err = handleJWTError();
+  if (err.name === "TokenExpiredError") err = handleJWTExpiredError();
 
-  return res.status(error.statusCode).json({
+  return res.status(err.statusCode).json({
     success: false,
-    status: error.status,
-    message: error.message,
+    status: err.status,
+    message: err.message,
   });
 };
 

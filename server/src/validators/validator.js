@@ -1,12 +1,14 @@
+// import zode library for validations
+
 // import zod library
-import { z } from "zod";
+// import { z } from "zod";
 
 // here was define all validation schema
 
 // adminSignup validation
 
 // adminRegisterValidator
-const adminRegisterValidator = z.object({
+/* const adminRegisterValidator = z.object({
   phone: z
     .string({ required_error: "Phone is required type string" })
     .trim()
@@ -19,10 +21,10 @@ const adminRegisterValidator = z.object({
   confirmPassword: z
     .string({ required_error: "Confirm password is required type string" })
     .min(1, { message: "Confirm password is required" }),
-});
+}); */
 
 // adminLoginValidator
-const adminLoginValidator = z.object({
+/* const adminLoginValidator = z.object({
   phone: z
     .string({ required_error: "Phone is required type string" })
     .trim()
@@ -31,10 +33,10 @@ const adminLoginValidator = z.object({
   password: z
     .string({ required_error: "Password is required type string" })
     .min(1, { message: "Password is required" }),
-});
+}); */
 
 // adminRegisterValidator
-const adminChangePassValidator = z.object({
+/* const adminChangePassValidator = z.object({
   phone: z
     .string({ required_error: "Phone is required type string" })
     .trim()
@@ -47,12 +49,12 @@ const adminChangePassValidator = z.object({
   confirmPassword: z
     .string({ required_error: "Confirm password is required type string" })
     .min(1, { message: "Confirm password is required" }),
-});
+}); */
 
 // adminProfile validations
 
 // adminNewProfileValidator schema
-const adminNewProfileValidator = z
+/* const adminNewProfileValidator = z
   .object({
     full_name: z
       .string({ required_error: "Admin name is required type string" })
@@ -86,10 +88,10 @@ const adminNewProfileValidator = z
   .refine((data) => !!data.avatar, {
     message: "Avatar are not required",
     path: ["avatar"],
-  });
+  }); */
 
 // adminProfileImageValidator schema
-const adminProfileImageValidator = z
+/* const adminProfileImageValidator = z
   .object({
     avatar: z
       .object({
@@ -103,10 +105,10 @@ const adminProfileImageValidator = z
   .refine((data) => !!data.avatar, {
     message: "Avatar are not required",
     path: ["avatar"],
-  });
+  }); */
 
 // adminProfileUpdateValidator schema
-const adminProfileUpdateValidator = z.object({
+/* const adminProfileUpdateValidator = z.object({
   full_name: z
     .string({ required_error: "Admin name is required type string" })
     .trim()
@@ -126,12 +128,12 @@ const adminProfileUpdateValidator = z.object({
     .string({ required_error: "Abouts is required type string" })
     .trim()
     .min(1, { message: "Abouts is required" }),
-});
+}); */
 
 // userSignup validations
 
 // userRegisterValidator schema
-const userRegisterValidator = z.object({
+/* const userRegisterValidator = z.object({
   phone: z
     .string({ required_error: "Phone is required type string" })
     .trim()
@@ -144,10 +146,10 @@ const userRegisterValidator = z.object({
   confirmPassword: z
     .string({ required_error: "Confirm password is required type string" })
     .min(1, { message: "Confirm password is required" }),
-});
+}); */
 
 // userLoginValidator schema
-const userLoginValidator = z.object({
+/* const userLoginValidator = z.object({
   phone: z
     .string({ required_error: "Phone is required type string" })
     .trim()
@@ -156,10 +158,10 @@ const userLoginValidator = z.object({
   password: z
     .string({ required_error: "Password is required type string" })
     .min(1, { message: "Password is required" }),
-});
+}); */
 
 // userChangePassValidator schema
-const userChangePassValidator = z.object({
+/* const userChangePassValidator = z.object({
   phone: z
     .string({ required_error: "Phone is required type string" })
     .trim()
@@ -172,12 +174,12 @@ const userChangePassValidator = z.object({
   confirmPassword: z
     .string({ required_error: "Confirm password is required type string" })
     .min(1, { message: "Confirm password is required" }),
-});
+}); */
 
 // userProfiles validations
 
 // userNewProfileValidators schema
-const userNewProfileValidators = z
+/* const userNewProfileValidators = z
   .object({
     full_name: z
       .string({ required_error: "User name is required type string" })
@@ -211,10 +213,10 @@ const userNewProfileValidators = z
   .refine((data) => !!data.avatar, {
     message: "Avatar file are not required",
     path: ["avatar"],
-  });
+  }); */
 
 // userProfileImageValidator schema
-const userProfileImageValidator = z
+/* const userProfileImageValidator = z
   .object({
     avatar: z
       .object({
@@ -228,10 +230,10 @@ const userProfileImageValidator = z
   .refine((data) => !!data.avatar, {
     message: "Avatar file are not required",
     path: ["avatar"],
-  });
+  }); */
 
 // userProfileUpdateValidator schema
-const userProfileUpdateValidator = z.object({
+/* const userProfileUpdateValidator = z.object({
   full_name: z
     .string({ required_error: "User name is required type string" })
     .trim()
@@ -251,12 +253,12 @@ const userProfileUpdateValidator = z.object({
     .string({ required_error: "Abouts is required type string" })
     .trim()
     .min(1, { message: "Abouts is required" }),
-});
+}); */
 
 // contact validations
 
 // constactAddValidator schema
-const contactAddValidator = z.object({
+/* const contactAddValidator = z.object({
   contact_phone: z
     .string({ required_error: "Contact phone is required type string" })
     .trim()
@@ -266,10 +268,10 @@ const contactAddValidator = z.object({
     .string({ required_error: "Contact name is required type string" })
     .trim()
     .min(1, { message: "Contact name is required" }),
-});
+}); */
 
 // contactUpdateValidator schema
-const contactUpdateValidator = z.object({
+/* const contactUpdateValidator = z.object({
   contact_phone: z
     .string({ required_error: "Contact phone is required type string" })
     .trim()
@@ -279,10 +281,10 @@ const contactUpdateValidator = z.object({
     .string({ required_error: "Contact name is required type string" })
     .trim()
     .min(1, { message: "Contact name is required type string" }),
-});
+}); */
 
 // here export all validation schema
-export {
+/* export {
   adminRegisterValidator,
   adminLoginValidator,
   adminChangePassValidator,
@@ -297,4 +299,4 @@ export {
   userProfileUpdateValidator,
   contactAddValidator,
   contactUpdateValidator,
-};
+}; */

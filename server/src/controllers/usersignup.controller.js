@@ -1,3 +1,8 @@
+// Consuming to the importing some module & lib for usersignup controllers
+import { jwt, bcryptjs } from "../config/app.js";
+import { usersignupModel } from "../models/usersignup.model.js";
+import { badRequestError, notfoundError } from "../utils/utility.js";
+
 // there import libraries and modules
 // import jwt from "jsonwebtoken";
 // import bcyptjs from "bcryptjs";
@@ -354,3 +359,36 @@
     return next(errorHandler("Request are not found", 400));
   }
 }); */
+
+// here define for handle all usersignup controller functions with exporting
+// usersignupRegister controller function handle
+export const usersignupRegister = async (req) => {
+  // declare variable of payload in body
+  const { phone, password, confirmPassword } = req.body;
+
+  // check password and confirmPassword matched or not
+  if (password !== confirmPassword) {
+    throw notfoundError("Password and confirm password are not matched");
+  } else {
+    // querying for existing user with phone are check into the database
+    const existUser = await usersignupModel.findOne({ phone: phone }).exec();
+
+    if (existUser) {
+      throw badRequestError("This account has already exist");
+    } else {
+      // here vas declare variable for hashing password
+      let salt = bcryptjs.genSaltSync(10);
+      let hashPassword = bcryptjs.hashSync(password, salt);
+
+      // querying for new data can insert into the database
+      let savedUser = new usersignupModel({
+        phone: phone,
+        password: hashPassword,
+      });
+
+      let result = await savedUser.save();
+
+      return result;
+    }
+  }
+};

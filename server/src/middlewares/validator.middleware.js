@@ -37,10 +37,10 @@ export const validateHandler = (schema) =>
     const result = await schema.safeParseAsync(data);
 
     if (!result.success) {
-      const errors = result.error.errors.map((e) => e.message);
-      return next(validationError(errors.join(", ")));
+      const errors = result.error.errors.map((e) => e.message).join(", ");
+      return next(validationError(errors));
     }
 
-    req.validateData = result.data;
+    req.body = result.data;
     next();
   });
