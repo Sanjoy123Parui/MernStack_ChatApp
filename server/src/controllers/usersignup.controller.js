@@ -1,21 +1,21 @@
 // there import libraries and modules
-import jwt from "jsonwebtoken";
-import bcyptjs from "bcryptjs";
-import { cache } from "../connections/socketconnection.js";
-import { userSignupModel } from "../models/userSignup.model.js";
-import { userProfileModel } from "../models/userProfile.model.js";
-import { asyncHandler } from "../helpers/try-catch.helper.js";
-import { errorHandler } from "../utils/utility.js";
-import {
-  sendUserToken,
-  sendUserTokenAuth,
-  cookieOptions,
-} from "../utils/features.js";
+// import jwt from "jsonwebtoken";
+// import bcyptjs from "bcryptjs";
+// import { cache } from "../connections/socketconnection.js";
+// import { userSignupModel } from "../models/usersignup.model.js";
+// import { userProfileModel } from "../models/userProfile.model.js";
+// import { asyncHandler } from "../helpers/try-catch.helper.js";
+// import { errorHandler } from "../utils/utility.js";
+// import {
+//   sendUserToken,
+//   sendUserTokenAuth,
+//   cookieOptions,
+// } from "../utils/features.js";
 
 // there are define user signup controllers
 
 // userRegister controller
-export const userRegister = asyncHandler(async (req, res, next) => {
+/* export const userRegister = asyncHandler(async (req, res, next) => {
   // there are declare payload
   let { phone, password, confirmPassword } = req.body;
 
@@ -69,10 +69,44 @@ export const userRegister = asyncHandler(async (req, res, next) => {
       }
     }
   }
-});
+}); */
+
+// part-2
+/* export const userRegister = async (req) => {
+  const { phone, password, confirmPassword } = req.body;
+
+  // password match
+  if (password !== confirmPassword) {
+    throw errorHandler("Password are not matched", 404);
+  }
+
+  // check existing user
+  const existUser = await userSignupModel.findOne({ phone }).exec();
+  if (existUser) {
+    throw errorHandler("This Account has been already exist", 400);
+  }
+
+  // hashing
+  const salt = bcyptjs.genSaltSync(10);
+  const hashPassword = bcyptjs.hashSync(password, salt);
+
+  // create document
+  const newUser = new userSignupModel({
+    phone: phone,
+    password: hashPassword,
+  });
+
+  const savedUser = await newUser.save();
+
+  // if (!savedUser) {
+  //   throw "Occured user registered";
+  // }
+
+  return savedUser; // Return data to router
+}; */
 
 // user login controller
-export const userLogin = asyncHandler(async (req, res, next) => {
+/* export const userLogin = asyncHandler(async (req, res, next) => {
   // there are declare payload
   let { phone, password } = req.body;
 
@@ -126,10 +160,10 @@ export const userLogin = asyncHandler(async (req, res, next) => {
       );
     }
   }
-});
+}); */
 
 // user refresh token to access token recover controller
-export const userRecover = asyncHandler(async (req, res, next) => {
+/* export const userRecover = asyncHandler(async (req, res, next) => {
   // there generate user refresh token from cookie and another
   let userRefresh = req.cookies.refresh_userToken || req.body.refresh_userToken;
 
@@ -178,10 +212,10 @@ export const userRecover = asyncHandler(async (req, res, next) => {
       }
     }
   }
-});
+}); */
 
 // user logout controller
-export const userLogout = asyncHandler(async (req, res, next) => {
+/* export const userLogout = asyncHandler(async (req, res, next) => {
   // here is declare userSignupId
   let userSignup = req.user;
 
@@ -221,10 +255,10 @@ export const userLogout = asyncHandler(async (req, res, next) => {
       .clearCookie("refresh_userToken", cookieOptions)
       .json({ msg: "Logged out successfully" });
   }
-});
+}); */
 
 // user accout delete controller
-export const userAccountdelete = asyncHandler(async (req, res, next) => {
+/* export const userAccountdelete = asyncHandler(async (req, res, next) => {
   // declare payload
   let { user_Id } = req.params;
 
@@ -254,10 +288,10 @@ export const userAccountdelete = asyncHandler(async (req, res, next) => {
   } else {
     return res.status(200).json({ msg: "Account are deleted successfully" });
   }
-});
+}); */
 
 // user change password controller
-export const userChangePassword = asyncHandler(async (req, res, next) => {
+/* export const userChangePassword = asyncHandler(async (req, res, next) => {
   // here check condition for request method
   if (req.method === "PUT" || req.method === "PATCH") {
     // here declare payload
@@ -319,4 +353,4 @@ export const userChangePassword = asyncHandler(async (req, res, next) => {
   } else {
     return next(errorHandler("Request are not found", 400));
   }
-});
+}); */

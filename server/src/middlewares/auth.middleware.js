@@ -1,5 +1,7 @@
+// Consuming the importing modules
+import { jwt } from "../config/app.js";
 // import library and modules
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 import { asyncHandler } from "../helpers/try-catch.helper.js";
 import { errorHandler } from "../utils/utility.js";
 

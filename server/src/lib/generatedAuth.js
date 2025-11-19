@@ -1,5 +1,8 @@
+// Consuming to the importing generatedAuth modules & lib
+import { jwt } from "../config/app.js";
+
 // there import jwt library packages
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 
 // there are define user access token functionality
 export const accessUserToken = (user) => {
@@ -22,17 +25,17 @@ export const refreshUserToken = (user) => {
 };
 
 // there are define admin access token functionality
-export const accessAdminToken = (admin) => {
+/* export const accessAdminToken = (admin) => {
   // there are declare jwt accessToken for admin
   let accessAdmin = jwt.sign({ _id: admin._id }, process.env.JWT_ACCESS_SCKEY, {
     expiresIn: process.env.EXP_ACCESS_TOKEN,
   });
 
   return accessAdmin;
-};
+}; */
 
 // there are define admin refresh token functionality
-export const refreshAdminToken = (admin) => {
+/* export const refreshAdminToken = (admin) => {
   // there are declare jwt refreshtoken for admin
   let refreshAdmin = jwt.sign(
     { _id: admin._id },
@@ -41,4 +44,4 @@ export const refreshAdminToken = (admin) => {
   );
 
   return refreshAdmin;
-};
+}; */

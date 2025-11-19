@@ -1,18 +1,22 @@
+// Consuming to the importing in fetures modules and lib
+import { cookieOptions } from "../lib/optionconfig.js";
+import { forbiddenError } from "./utility.js";
+import { trycatchWrapper } from "../helpers/try-catch.helper.js";
 import {
   accessUserToken,
   refreshUserToken,
-  accessAdminToken,
-  refreshAdminToken,
-} from "../lib/generatedAuth.js";
+  // accessAdminToken,
+  // refreshAdminToken,
+} from "../lib/generatedauth.js";
 
 // declare options of cookie expiration
-export const cookieOptions = {
-  httpOnly: true,
-  secure: true,
-};
+// export const cookieOptions = {
+//   httpOnly: true,
+//   secure: true,
+// };
 
 // define amd export there sendUserToken features function
-export const sendUserToken = async (res, userSignup, statusCode, message) => {
+/* export const sendUserToken = async (res, userSignup, statusCode, message) => {
   // use normal try-catch
   try {
     // there are declare user_id
@@ -39,10 +43,10 @@ export const sendUserToken = async (res, userSignup, statusCode, message) => {
   } catch (error) {
     return res.status(500).json({ error });
   }
-};
+}; */
 
 // define amd export there sendUserToken features function
-export const sendUserTokenAuth = async (
+/* export const sendUserTokenAuth = async (
   res,
   userSignup,
   userProfile,
@@ -76,10 +80,10 @@ export const sendUserTokenAuth = async (
   } catch (error) {
     return res.status(500).json({ error });
   }
-};
+}; */
 
 // define and export there sendAdminToken features function
-export const sendAdminToken = async (res, adminSignup, statusCode, message) => {
+/* export const sendAdminToken = async (res, adminSignup, statusCode, message) => {
   // user normal try-catch
   try {
     // there declare admin_id
@@ -107,10 +111,10 @@ export const sendAdminToken = async (res, adminSignup, statusCode, message) => {
   } catch (error) {
     return res.status(500).json({ error });
   }
-};
+}; */
 
 // define and export there sendAdminToken features function
-export const sendAdminTokenAuth = async (
+/* export const sendAdminTokenAuth = async (
   res,
   adminSignup,
   adminProfile,
@@ -146,4 +150,68 @@ export const sendAdminTokenAuth = async (
   } catch (error) {
     return res.status(500).json({ error });
   }
-};
+}; */
+
+// define and exporting for authenticate features function where as send token with usersignupId
+export const sendUserToken = trycatchWrapper(
+  async (res, userSignup, statusCode, message) => {
+    // here declare variable for stored usersignupId
+    const userSignupId = userSignup._id;
+
+    // declare variables for stored access_token and refresh_token
+    let access_userToken = accessUserToken(userSignupId);
+    let refresh_userToken = refreshUserToken(userSignupId);
+
+    if (userSignupId && access_userToken && refresh_userToken) {
+      // here stored refreshtoken into the database
+      userSignup.refresh_userToken = refresh_userToken;
+      await userSignup.save({ validateBeforeSave: false });
+
+      return res
+        .status(statusCode)
+        .cookie("access_userToken", access_userToken, cookieOptions)
+        .cookie("refresh_userToken", refresh_userToken, cookieOptions)
+        .json({
+          msg: message,
+          access_userToken: accessUserToken,
+          refresh_userToken: refresh_userToken,
+          userSignup_id: userSignupId,
+        });
+    } else {
+      throw forbiddenError("User can't able to access");
+    }
+  }
+);
+
+// define and exporting for authenticate features function where as send token with usersignupId & userprofileId
+export const sendUserTokenAuth = trycatchWrapper(
+  async (res, userSignup, userProfile, statusCode, message) => {
+    // here declare variable for stored usersignupId & userprofileId
+    const userSignupId = userSignup._id;
+    const userProfileId = userProfile._id;
+
+    // declare variables for stored access_token and refresh_token
+    let access_userToken = accessUserToken(userSignupId);
+    let refresh_userToken = refreshUserToken(userSignupId);
+
+    if (userSignupId && access_userToken && refresh_userToken) {
+      // here stored refreshtoken into the database
+      userSignup.refresh_userToken = refresh_userToken;
+      await userSignup.save({ validateBeforeSave: false });
+
+      return res
+        .status(statusCode)
+        .cookie("access_userToken", access_userToken, cookieOptions)
+        .cookie("refresh_userToken", refresh_userToken, cookieOptions)
+        .json({
+          msg: message,
+          access_userToken: accessUserToken,
+          refresh_userToken: refresh_userToken,
+          userSignup_id: userSignupId,
+          userProfile_id: userProfileId,
+        });
+    } else {
+      throw forbiddenError("User can't able to access");
+    }
+  }
+);
