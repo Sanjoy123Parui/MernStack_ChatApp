@@ -154,7 +154,7 @@ import {
 
 // define and exporting for authenticate features function where as send token with usersignupId
 export const sendUserToken = trycatchWrapper(
-  async (res, userSignup, statusCode, message) => {
+  async (res, next, userSignup, statusCode, message) => {
     // here declare variable for stored usersignupId
     const userSignupId = userSignup._id;
 
@@ -178,14 +178,14 @@ export const sendUserToken = trycatchWrapper(
           userSignup_id: userSignupId,
         });
     } else {
-      throw forbiddenError("User can't able to access");
+      return next(forbiddenError("User can't able to access"));
     }
   }
 );
 
 // define and exporting for authenticate features function where as send token with usersignupId & userprofileId
 export const sendUserTokenAuth = trycatchWrapper(
-  async (res, userSignup, userProfile, statusCode, message) => {
+  async (res, next, userSignup, userProfile, statusCode, message) => {
     // here declare variable for stored usersignupId & userprofileId
     const userSignupId = userSignup._id;
     const userProfileId = userProfile._id;
@@ -211,7 +211,7 @@ export const sendUserTokenAuth = trycatchWrapper(
           userProfile_id: userProfileId,
         });
     } else {
-      throw forbiddenError("User can't able to access");
+      return next(forbiddenError("User can't able to access"));
     }
   }
 );

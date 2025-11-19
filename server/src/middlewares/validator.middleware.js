@@ -1,5 +1,5 @@
 // Consuming to the importing some modules and lib for validate middleware
-import { trycatchWrapper } from "../helpers/try-catch.helper";
+import { trycatchWrapper } from "../helpers/try-catch.helper.js";
 import { validationError } from "../utils/utility.js";
 
 // here was define validator middleware functionality
