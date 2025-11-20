@@ -1,14 +1,8 @@
 // Consuming to the importing in fetures modules and lib
+import { accessUserToken, refreshUserToken } from "../lib/generatedauth.js";
 import { cookieOptions } from "../lib/optionconfig.js";
-import { forbiddenError } from "./utility.js";
 import { trycatchWrapper } from "../helpers/try-catch.helper.js";
-import {
-  accessUserToken,
-  refreshUserToken,
-  // accessAdminToken,
-  // refreshAdminToken,
-} from "../lib/generatedauth.js";
-
+import { forbiddenError, unauthorizedError } from "../utils/utility.js";
 // declare options of cookie expiration
 // export const cookieOptions = {
 //   httpOnly: true,
@@ -153,65 +147,46 @@ import {
 }; */
 
 // define and exporting for authenticate features function where as send token when user register
-export const sendUserToken = trycatchWrapper(
-  async (res, next, userSignup, statusCode, message) => {
-    // here declare variable for stored usersignupId
-    const userSignupId = userSignup._id;
+export const sendUserToken = trycatchWrapper(async (req, res, next) => {
+  // declare payload variable of user send token
+  const { usersignupId, statusCode, message } = req.tokenPayload;
+  const userSignupId = usersignupId._id;
+  const access_userToken = accessUserToken(userSignupId);
+  const refresh_userToken = refreshUserToken(usersignupId);
 
-    // declare variables for stored access_token and refresh_token
-    let access_userToken = accessUserToken(userSignupId);
-    let refresh_userToken = refreshUserToken(userSignupId);
-
-    if (userSignupId && access_userToken && refresh_userToken) {
-      // here stored refreshtoken into the database
-      userSignup.refresh_userToken = refresh_userToken;
-      await userSignup.save({ validateBeforeSave: false });
-
-      return res
-        .status(statusCode)
-        .cookie("access_userToken", access_userToken, cookieOptions)
-        .cookie("refresh_userToken", refresh_userToken, cookieOptions)
-        .json({
-          msg: message,
-          access_userToken: accessUserToken,
-          refresh_userToken: refresh_userToken,
-          userSignup_id: userSignupId,
-        });
-    } else {
-      return next(forbiddenError("User can't able to access"));
-    }
+  if (!(userSignupId && access_userToken && refresh_userToken)) {
+    return next(forbiddenError("User can't able to access"));
   }
-);
+  usersignupId.refresh_userToken = refresh_userToken;
+  await usersignupId.save({ validateBeforeSave: false });
 
-// define and exporting for authenticate features function where as send token when user login
-export const sendUserTokenAuth = trycatchWrapper(
-  async (res, next, userSignup, userProfile, statusCode, message) => {
-    // here declare variable for stored usersignupId & userprofileId
-    const userSignupId = userSignup._id;
-    const userProfileId = userProfile._id;
+  return res
+    .status(statusCode)
+    .cookie("access_userToken", access_userToken, cookieOptions)
+    .cookie("refresh_userToken", refresh_userToken, cookieOptions)
+    .send({
+      usersignup_id: userSignupId,
+      msg: message,
+      access_userToken: access_userToken,
+      refresh_userToken: refresh_userToken,
+    });
+});
 
-    // declare variables for stored access_token and refresh_token
-    let access_userToken = accessUserToken(userSignupId);
-    let refresh_userToken = refreshUserToken(userSignupId);
+// define and exporting for authenticate features function where as user remove token
+export const removeUserToken = trycatchWrapper(async (req, res, next) => {
+  // declare payload for remove token user
+  const { usersignupId, statusCode, message } = req.tokenRemovePayload;
+  let userSignupId = usersignupId._id;
 
-    if (userSignupId && access_userToken && refresh_userToken) {
-      // here stored refreshtoken into the database
-      userSignup.refresh_userToken = refresh_userToken;
-      await userSignup.save({ validateBeforeSave: false });
-
-      return res
-        .status(statusCode)
-        .cookie("access_userToken", access_userToken, cookieOptions)
-        .cookie("refresh_userToken", refresh_userToken, cookieOptions)
-        .json({
-          msg: message,
-          access_userToken: accessUserToken,
-          refresh_userToken: refresh_userToken,
-          userSignup_id: userSignupId,
-          userProfile_id: userProfileId,
-        });
-    } else {
-      return next(forbiddenError("User can't able to access"));
-    }
+  if (!userSignupId) {
+    return next(
+      unauthorizedError(`User are not authenticate, please login again`)
+    );
   }
-);
+
+  return res
+    .status(statusCode)
+    .clearCookie("access_userToken", cookieOptions)
+    .clearCookie("refresh_userToken", cookieOptions)
+    .json({ msg: message });
+});

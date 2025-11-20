@@ -374,7 +374,7 @@ export const usersignupRegister = async (req) => {
     const existUser = await usersignupModel.findOne({ phone: phone }).exec();
 
     if (existUser) {
-      throw badRequestError("This account has already exist");
+      throw badRequestError("This account was already exist");
     } else {
       // here vas declare variable for hashing password
       let salt = bcryptjs.genSaltSync(10);
@@ -391,4 +391,44 @@ export const usersignupRegister = async (req) => {
       return result;
     }
   }
+};
+
+// usersignupLogin controller function handle
+export const usersignupLogin = async (req) => {
+  // declare payload for body
+  const { phone, password } = req.body;
+
+  // querying the specific data of user with phone are find into the database
+  let usersignupId = await usersignupModel.findOne({ phone: phone }).exec();
+
+  if (!usersignupId) {
+    throw badRequestError("Please required the valid phone number");
+  } else {
+    // password synchronise for comparison of match condition
+    let isMatchPassword = bcryptjs.compareSync(password, usersignupId.password);
+
+    if (!isMatchPassword) throw badRequestError("Invalid password");
+
+    return usersignupId;
+  }
+};
+
+// usersignupLogout controller function handle
+export const usersignupLogout = async (req) => {
+  let usersignupId = req.user;
+
+  if (!usersignupId) throw notfoundError("This user are not found");
+
+  // querying the find existUser refresh_token
+  const existUser = await usersignupModel.findByIdAndUpdate(
+    usersignupId,
+    {
+      $set: {
+        refresh_userToken: undefined,
+      },
+    },
+    { new: true }
+  );
+
+  return existUser;
 };

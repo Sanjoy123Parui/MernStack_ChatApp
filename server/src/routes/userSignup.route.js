@@ -2,11 +2,14 @@
 import { express } from "../config/app.js";
 import { trycatchWrapper } from "../helpers/try-catch.helper.js";
 import { badRequestError } from "../utils/utility.js";
-import { usersignupRegister } from "../controllers/usersignup.controller.js";
 import {
-  userRegisterValidator,
-  userLoginValidator,
-} from "../validators/usersignup.validator.js";
+  usersignupRegister,
+  usersignupLogin,
+  usersignupLogout,
+} from "../controllers/usersignup.controller.js";
+import { sendUserToken, removeUserToken } from "../utils/features.js";
+import { userRegisterValidator } from "../validators/usersignup.validator.js";
+import { userCheckAuth } from "../middlewares/auth.middleware.js";
 import { validateHandler } from "../middlewares/validator.middleware.js";
 
 // declare the variables instance object of usersignupRouter
@@ -83,19 +86,52 @@ const usersignupRouter = express.Router();
 
 // here define all are the usersignup routes endpoints methods
 
-// usersignup registration account routes with post method
+// usersignup register routes with post method
 usersignupRouter.route("/register").post(
   validateHandler(userRegisterValidator),
   trycatchWrapper(async (req, res, next) => {
     // declare variables for accessing the controller function data
     let userInfo = await usersignupRegister(req);
-
     // check the condition for existing user
     if (!userInfo) {
       return next(badRequestError("Failed to create new account"));
     } else {
-      return res.status(201).send({ msg: "Account created successfully" });
+      return res.status(201).send({ msg: "Account has created successfully" });
     }
+  })
+);
+
+// usersignup login routes with post method
+usersignupRouter.route("/login").post(
+  trycatchWrapper(async (req, res, next) => {
+    // declare variables for accessing login controller data
+    let loginAccess = await usersignupLogin(req);
+
+    // declare payload for token
+    req.tokenPayload = {
+      usersignupId: loginAccess,
+      statusCode: 201,
+      message: "Login Successfully",
+    };
+
+    return sendUserToken(req, res, next);
+  })
+);
+
+// usersignup logout routes with post method
+usersignupRouter.route("/logout").post(
+  userCheckAuth,
+  trycatchWrapper(async (req, res, next) => {
+    let signOutUser = await usersignupLogout(req);
+
+    // declare for paylod of remove token
+    req.tokenRemovePayload = {
+      usersignupId: signOutUser,
+      statusCode: 200,
+      message: "Logout Successfully",
+    };
+
+    return removeUserToken(req, res, next);
   })
 );
 

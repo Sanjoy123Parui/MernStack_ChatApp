@@ -50,20 +50,19 @@ import { unauthorizedError } from "../utils/utility.js";
 
 // here define and exporting also user authentication middleware function for handle auth
 export const userCheckAuth = trycatchWrapper(async (req, res, next) => {
-  // declare variables for access token and stored in cookie or headers
+  // here was user token store into the cookie or header
   const userToken =
     req.cookies?.access_userToken ||
     req.header("Authorization")?.replace("Bearer ", "");
 
-  // check condition for token exist
   if (!userToken) {
     return next(
-      unauthorizedError("Unauthorized users token please login to access")
+      unauthorizedError(`Unauthorized users token please login to access`)
     );
-  } else {
-    // declare variables for decoded data
-    let decodeData = jwt.verify(userToken, process.env.JWT_ACCESS_SCKEY);
-    req.user = await decodeData.id;
-    next();
   }
+
+  // declare variables for verifying decodeData
+  let decodeData = jwt.verify(userToken, process.env.JWT_ACCESS_SCKEY);
+  req.user = await decodeData._id;
+  next();
 });
