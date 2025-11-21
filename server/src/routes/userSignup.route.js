@@ -91,7 +91,6 @@ const usersignupRouter = express.Router();
 // export { userSignupRouter };
 
 // here define all are the usersignup routes endpoints methods
-
 // usersignup register routes with post method
 usersignupRouter.route("/register").post(
   validateHandler(userRegisterValidator),

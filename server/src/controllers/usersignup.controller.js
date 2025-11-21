@@ -365,17 +365,18 @@ import {
 }); */
 
 // here define for handle all usersignup controller functions with exporting
+
 // usersignupRegister controller function handle
 export const usersignupRegister = async (req) => {
   // declare variable of payload in body
-  const { phone, password, confirmPassword } = req.body;
+  const { email, password, confirmPassword } = req.body;
 
   // check password and confirmPassword matched or not
   if (password !== confirmPassword) {
     throw notfoundError("Password and confirm password are not matched");
   } else {
-    // querying for existing user with phone are check into the database
-    const existUser = await usersignupModel.findOne({ phone: phone }).exec();
+    // querying for existing user with email are check into the database
+    const existUser = await usersignupModel.findOne({ email: email }).exec();
 
     if (existUser) {
       throw badRequestError("This account was already exist");
@@ -386,7 +387,7 @@ export const usersignupRegister = async (req) => {
 
       // querying for new data can insert into the database
       let savedUser = new usersignupModel({
-        phone: phone,
+        email: email,
         password: hashPassword,
       });
 
@@ -400,13 +401,13 @@ export const usersignupRegister = async (req) => {
 // usersignupLogin controller function handle
 export const usersignupLogin = async (req) => {
   // declare payload for body
-  const { phone, password } = req.body;
+  const { email, password } = req.body;
 
-  // querying the specific data of user with phone are find into the database
-  let usersignupId = await usersignupModel.findOne({ phone: phone }).exec();
+  // querying the specific data of user with email are find into the database
+  let usersignupId = await usersignupModel.findOne({ email: email }).exec();
 
   if (!usersignupId) {
-    throw badRequestError("Please required the valid phone number");
+    throw badRequestError("Please required the valid email address");
   } else {
     // password synchronise for comparison of match condition
     let isMatchPassword = bcryptjs.compareSync(password, usersignupId.password);
@@ -465,13 +466,13 @@ export const usersignupAuthToken = async (req) => {
 export const usersignupChangePass = async (req) => {
   // declare varibales for payload in params & body
   const { usersignup_id } = req.params;
-  const { phone, password, confirmPassword } = req.body;
+  const { email, password, confirmPassword } = req.body;
 
   if (password !== confirmPassword) {
     throw notfoundError("Password and confirm password are not matched");
   } else {
-    // querying to the retrieve data for existing user can signup with phone from database
-    let existUser = await usersignupModel.findOne({ phone: phone }).exec();
+    // querying to the retrieve data for existing user can signup with email from database
+    let existUser = await usersignupModel.findOne({ email: email }).exec();
 
     if (!existUser) {
       throw badRequestError("User are not exist");
@@ -485,7 +486,7 @@ export const usersignupChangePass = async (req) => {
         { _id: usersignup_id },
         {
           $set: {
-            phone: phone,
+            email: email,
             password: hashPassword,
           },
         }

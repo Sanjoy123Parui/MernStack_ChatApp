@@ -30,15 +30,15 @@ export const validateHandler = (schema) =>
     // declare variable for passing the payload values
     const data = {
       ...req.body,
-      avatar: req.file,
+      avatar: req.file ?? null,
     };
 
     // here was handle safe validation
     const result = await schema.safeParseAsync(data);
 
     if (!result.success) {
-      const errors = result.error.errors.map((e) => e.message).join(", ");
-      return next(validationError(errors));
+      const errorMsg = result.error.errors.map((e) => e.message).join(", ");
+      return next(validationError(errorMsg));
     }
 
     req.body = result.data;
