@@ -1,7 +1,11 @@
 // Consuming to the importing some module & lib for usersignup controllers
 import { jwt, bcryptjs } from "../config/app.js";
 import { usersignupModel } from "../models/usersignup.model.js";
-import { badRequestError, notfoundError } from "../utils/utility.js";
+import {
+  badRequestError,
+  notfoundError,
+  unauthorizedError,
+} from "../utils/utility.js";
 
 // there import libraries and modules
 // import jwt from "jsonwebtoken";
@@ -388,7 +392,7 @@ export const usersignupRegister = async (req) => {
 
       let result = await savedUser.save();
 
-      return result;
+      return { result };
     }
   }
 };
@@ -409,7 +413,7 @@ export const usersignupLogin = async (req) => {
 
     if (!isMatchPassword) throw badRequestError("Invalid password");
 
-    return usersignupId;
+    return { usersignupId };
   }
 };
 
@@ -430,5 +434,64 @@ export const usersignupLogout = async (req) => {
     { new: true }
   );
 
-  return existUser;
+  return { existUser };
+};
+
+// usersignupAuthToken controller function handle
+export const usersignupAuthToken = async (req) => {
+  // here declare payload for token which are from cookies or header
+  const userRefreshToken =
+    req.cookies.refresh_userToken || req.body.refresh_userToken;
+
+  // check conditon for user token are exist or not
+  if (!userRefreshToken) {
+    throw unauthorizedError("Unauthorized user please login to access");
+  } else {
+    // here jwt verified from decode user
+    let decode = jwt.verify(userRefreshToken, process.env.JWT_REFRESH_SCKEY);
+
+    // querying for retrieve the data of specific user _id from database
+    let usersignupId = await usersignupModel.findById(decode._id).exec();
+
+    if (!usersignupId) throw badRequestError("Invalid user");
+
+    let usersignupRefreshToken = usersignupId.refresh_userToken;
+
+    return { userRefreshToken, usersignupRefreshToken, usersignupId };
+  }
+};
+
+// usersignupChangePass controller function handle
+export const usersignupChangePass = async (req) => {
+  // declare varibales for payload in params & body
+  const { usersignup_id } = req.params;
+  const { phone, password, confirmPassword } = req.body;
+
+  if (password !== confirmPassword) {
+    throw notfoundError("Password and confirm password are not matched");
+  } else {
+    // querying to the retrieve data for existing user can signup with phone from database
+    let existUser = await usersignupModel.findOne({ phone: phone }).exec();
+
+    if (!existUser) {
+      throw badRequestError("User are not exist");
+    } else {
+      // declare variables for hashing password
+      let salt = bcryptjs.genSaltSync(10);
+      let hashPassword = bcryptjs.hashSync(password, salt);
+
+      // querying the update password with specific id of usersignup into the database
+      let userPassword = await usersignupModel.updateOne(
+        { _id: usersignup_id },
+        {
+          $set: {
+            phone: phone,
+            password: hashPassword,
+          },
+        }
+      );
+
+      return { userPassword };
+    }
+  }
 };

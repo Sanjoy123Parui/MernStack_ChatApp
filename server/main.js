@@ -56,10 +56,15 @@ if (cluster.isPrimary) {
   app.use(express.json());
   app.use(cookieParser());
 
-  // declare base endpoints middleware which are testing for api can work at started
+  // declare base endpoints middleware which are testing get method for webserver can work with template are reloading at started
   app.get("/", (req, res) => {
     let filePath = path.join(import.meta.dirname, "./src/public/index.html");
     res.send(filePath);
+  });
+
+  // declare base endpoints middleware which are testing get for api can work at started
+  app.get("/api", (req, res) => {
+    res.send("<h1>Chat API can work</h1>");
   });
 
   // use all endpoints middlewares of routes

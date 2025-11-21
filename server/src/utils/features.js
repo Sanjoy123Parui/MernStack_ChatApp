@@ -146,7 +146,7 @@ import { forbiddenError, unauthorizedError } from "../utils/utility.js";
   }
 }; */
 
-// define and exporting for authenticate features function where as send token when user register
+// define and exporting for authenticate features function where as send token when user register or login
 export const sendUserToken = trycatchWrapper(async (req, res, next) => {
   // declare payload variable of user send token
   const { usersignupId, statusCode, message } = req.tokenPayload;
