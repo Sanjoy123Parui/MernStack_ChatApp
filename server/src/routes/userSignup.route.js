@@ -189,7 +189,7 @@ usersignupRouter.route("/changepass/:usersignup_id").all(
       } else {
         return res
           .status(200)
-          .json({ msg: "Password has changed successfully" });
+          .json({ success: true, msg: "Password has changed successfully" });
       }
     } else {
       return next(badRequestError("Wrong Cridential"));

@@ -166,6 +166,7 @@ export const sendUserToken = trycatchWrapper(async (req, res, next) => {
     .cookie("refresh_userToken", refresh_userToken, cookieOptions)
     .send({
       usersignup_id: userSignupId,
+      success: true,
       msg: message,
       access_userToken: access_userToken,
       refresh_userToken: refresh_userToken,
@@ -188,5 +189,5 @@ export const removeUserToken = trycatchWrapper(async (req, res, next) => {
     .status(statusCode)
     .clearCookie("access_userToken", cookieOptions)
     .clearCookie("refresh_userToken", cookieOptions)
-    .json({ msg: message });
+    .json({ success: true, msg: message });
 });

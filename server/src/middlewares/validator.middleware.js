@@ -37,7 +37,9 @@ export const validateHandler = (schema) =>
     const result = await schema.safeParseAsync(data);
 
     if (!result.success) {
-      const errorMsg = result.error.errors.map((e) => e.message).join(", ");
+      const errorMsg = result.error.errors.map((err) => ({
+        message: err.message,
+      }));
       return next(validationError(errorMsg));
     }
 

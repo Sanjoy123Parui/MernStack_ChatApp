@@ -7,7 +7,7 @@ export const userRegisterValidator = z.object({
   email: z
     .string({ required_error: "Email is required type string" })
     .trim()
-    .email({ message: "Email is required" })
+    .min(1, { message: "Email is required" })
     .pipe(
       z.string().regex(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, {
         message: `Invalid email pattern, please required the correct email`,
@@ -36,7 +36,7 @@ export const userChangePassValidator = z.object({
   email: z
     .string({ required_error: "Email is required type string" })
     .trim()
-    .email({ message: "Email is required" })
+    .min(1, { message: "Email is required" })
     .pipe(
       z.string().regex(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, {
         message: `Invalid email pattern, please required the correct email`,
@@ -65,7 +65,7 @@ export const userLoginValidator = z.object({
   email: z
     .string({ required_error: "Email is required type string" })
     .trim()
-    .email({ message: "Email is required" })
+    .min(1, { message: "Email is required" })
     .pipe(
       z.string().regex(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, {
         message: `Invalid email pattern, please required the correct email`,

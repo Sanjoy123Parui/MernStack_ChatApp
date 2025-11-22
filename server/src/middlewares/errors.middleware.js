@@ -35,10 +35,10 @@ const handleJWTExpiredError = () => {
 // here define with exporting error middleware function for use globally errors handle
 export const checkErrors = (err, req, res, next) => {
   // declare variables for access globall error
-  // let error = { ...err };
-  err.message ||= "Internal server error as something went wrong";
+  err.message ||= "Internal server error";
   err.status ||= "error";
   err.statusCode ||= 500;
+  err.details ||= "Something went wrong in server";
 
   // check the condition for specific errors
   if (err.code === 11000) err = handleDuplicateError(err);
@@ -50,7 +50,8 @@ export const checkErrors = (err, req, res, next) => {
   return res.status(err.statusCode).json({
     success: false,
     status: err.status,
-    message: err.message,
+    errors: err.message,
+    msg: err.details,
   });
 };
 

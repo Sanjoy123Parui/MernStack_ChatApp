@@ -15,37 +15,43 @@ export const baseAppError = (message, statusCode) => {
 };
 
 // define and exporting badRequestError handling function
-export const badRequestError = (message = "Bad Request") => {
-  let errorObj = baseAppError(message, 400);
+export const badRequestError = (details) => {
+  let errorObj = baseAppError("Bad Request", 400);
+  errorObj.details = details;
   return errorObj;
 };
 
 // define and exporting notfoundError handling function
-export const notfoundError = (message = "Resource not found") => {
-  let errorObj = baseAppError(message, 404);
+export const notfoundError = (details) => {
+  let errorObj = baseAppError("Resource not found", 404);
+  errorObj.details = details;
   return errorObj;
 };
 
 // define and exporting validationError handling function
-export const validationError = (message = "Validation failed") => {
-  let errorObj = baseAppError(message, 422);
+export const validationError = (details) => {
+  let errorObj = baseAppError("Validation failed", 422);
+  errorObj.details = Array.isArray(details) ? details : [{ error: details }];
   return errorObj;
 };
 
 // define and exporting unauthorizedError handling function
-export const unauthorizedError = (message = "Unauthorized access") => {
-  let errorObj = baseAppError(message, 401);
+export const unauthorizedError = (details) => {
+  let errorObj = baseAppError("Unauthorized access", 401);
+  errorObj.details = details;
   return errorObj;
 };
 
 // define and exporting forbiddenError handling function
-export const forbiddenError = (message = "Forbidden access") => {
-  let errorObj = baseAppError(message, 403);
+export const forbiddenError = (details) => {
+  let errorObj = baseAppError("Forbidden access", 403);
+  errorObj.details = details;
   return errorObj;
 };
 
 // define and exporting databaseError handling function
-export const databaseError = (message = "Database Error") => {
-  let errorObj = baseAppError(message, 500);
+export const databaseError = (details) => {
+  let errorObj = baseAppError("Database Error", 500);
+  errorObj.details = details;
   return errorObj;
 };
