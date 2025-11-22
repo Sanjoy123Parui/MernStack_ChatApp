@@ -51,7 +51,8 @@ if (cluster.isPrimary) {
   // here can declare middleware are use
   app.use(cors(corsOption));
   app.use(morgan("dev"));
-  app.use(express.static("./src/public"));
+  // app.use(express.static("./src/public"));
+  app.use(express.static(path.join(import.meta.dirname, "./src/public")));
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(cookieParser());
