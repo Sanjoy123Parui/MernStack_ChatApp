@@ -1,7 +1,9 @@
-import { mongoose } from "../connections/socketconnection.js";
+// Consuming to the importing some modules & lib of userprofile model schema
+
+// import { mongoose } from "../connections/socketconnection.js";
 
 // create user profile schema model
-const userProfileSchema = new mongoose.Schema(
+/* const userProfileSchema = new mongoose.Schema(
   {
     full_name: {
       type: String,
@@ -38,10 +40,10 @@ const userProfileSchema = new mongoose.Schema(
     timestamps: true,
     versionKey: false,
   }
-);
+); */
 
 // export userProfile model schema
-export const userProfileModel = mongoose.model(
+/* export const userProfileModel = mongoose.model(
   "userprofiles",
   userProfileSchema
-);
+); */

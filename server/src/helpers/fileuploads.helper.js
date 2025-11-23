@@ -31,7 +31,7 @@
 } */
 
 // localserver filepath upload functionality
-export const uploadFiles = async () => {
+/* export const uploadFiles = async () => {
   // there was declare file path
   let filePath = `http://localhost:${process.env.PORT}/`;
 
@@ -41,4 +41,10 @@ export const uploadFiles = async () => {
   } catch (error) {
     return null;
   }
+}; */
+
+// define fileuploads baseUrl function handle with exporting
+export const uploadFiles = () => {
+  let baseUrl = `http://localhost:3000/${process.env.PORT}`;
+  return baseUrl;
 };

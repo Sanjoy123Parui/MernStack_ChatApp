@@ -1,13 +1,15 @@
-import { cache } from "../connections/socketconnection.js";
-import { userProfileModel } from "../models/userProfile.model.js";
-import { asyncHandler } from "../helpers/try-catch.helper.js";
-import { errorHandler } from "../utils/utility.js";
-import { uploadFiles } from "../helpers/fileuploads.helper.js";
+// Consuming to the importing some modules & lib for userprofile controllers
+
+// import { cache } from "../connections/socketconnection.js";
+// import { userProfileModel } from "../models/userProfile.model.js";
+// import { asyncHandler } from "../helpers/try-catch.helper.js";
+// import { errorHandler } from "../utils/utility.js";
+// import { uploadFiles } from "../helpers/fileuploads.helper.js";
 
 // create user Profile all controllers operation perform
 
 // create new user profile
-export const userNewProfile = asyncHandler(async (req, res, next) => {
+/* export const userNewProfile = asyncHandler(async (req, res, next) => {
   // declare userSignupId variables
   let userSignup;
 
@@ -82,10 +84,10 @@ export const userNewProfile = asyncHandler(async (req, res, next) => {
       }
     }
   }
-});
+}); */
 
 // view profile data controller
-export const userProfileview = asyncHandler(async (req, res, next) => {
+/* export const userProfileview = asyncHandler(async (req, res, next) => {
   // declare userSignupId variables
   let userSignup;
 
@@ -138,10 +140,10 @@ export const userProfileview = asyncHandler(async (req, res, next) => {
       });
     }
   }
-});
+}); */
 
 // update profile image controller
-export const userProfileImageupdate = asyncHandler(async (req, res, next) => {
+/* export const userProfileImageupdate = asyncHandler(async (req, res, next) => {
   // declare userSignupId variables
   let userSignup;
 
@@ -217,10 +219,10 @@ export const userProfileImageupdate = asyncHandler(async (req, res, next) => {
       }
     }
   }
-});
+}); */
 
 // delete profile controller
-export const userProfiledelete = asyncHandler(async (req, res, next) => {
+/* export const userProfiledelete = asyncHandler(async (req, res, next) => {
   // declare userSignupId variables
   let userSignup;
 
@@ -257,10 +259,10 @@ export const userProfiledelete = asyncHandler(async (req, res, next) => {
       return res.status(200).json({ msg: "Profile are deleted successfully" });
     }
   }
-});
+}); */
 
 // update profile data controller
-export const userProfileupdate = asyncHandler(async (req, res, next) => {
+/* export const userProfileupdate = asyncHandler(async (req, res, next) => {
   // there have check the request method of condition
   if (req.method === "PUT" || req.method === "PATCH") {
     // declare userSignupId variables
@@ -330,4 +332,4 @@ export const userProfileupdate = asyncHandler(async (req, res, next) => {
   } else {
     return next(errorHandler("Wrong Cridential", 400));
   }
-});
+}); */
