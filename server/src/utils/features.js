@@ -154,7 +154,7 @@ export const sendUserToken = trycatchWrapper(async (req, res, next) => {
   const access_userToken = accessUserToken(userSignupId);
   const refresh_userToken = refreshUserToken(usersignupId);
 
-  if (!(userSignupId && access_userToken && refresh_userToken)) {
+  if (!(access_userToken && refresh_userToken)) {
     return next(forbiddenError("User can't able to access"));
   }
   usersignupId.refresh_userToken = refresh_userToken;

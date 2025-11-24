@@ -6,6 +6,7 @@ import {
   notfoundError,
   unauthorizedError,
 } from "../utils/utility.js";
+import { selectCountryCode } from "../lib/optionconfig.js";
 
 // there import libraries and modules
 // import jwt from "jsonwebtoken";
@@ -364,19 +365,31 @@ import {
   }
 }); */
 
-// here define for handle all usersignup controller functions with exporting
+// here define and exporting for handle all usersignup controller functions
 
 // usersignupRegister controller function handle
 export const usersignupRegister = async (req) => {
   // declare variable of payload in body
-  const { email, password, confirmPassword } = req.body;
+  const { phone, password, confirmPassword, country_code } = req.body;
+  // here declare destruct list of data
+  const { countryLists } = selectCountryCode();
 
   // check password and confirmPassword matched or not
   if (password !== confirmPassword) {
     throw notfoundError("Password and confirm password are not matched");
   } else {
-    // querying for existing user with email are check into the database
-    const existUser = await usersignupModel.findOne({ email: email }).exec();
+    // here was declare to check country code are matched or not
+    let userInfo = countryLists.find((country) => country.iso === country_code);
+
+    if (!userInfo) throw badRequestError("Invalid country code");
+
+    // here declare append phone number with country code
+    const userPhone = `${userInfo.dial_code}-${phone}`;
+
+    // querying for existing user with phone are check into the database
+    const existUser = await usersignupModel
+      .findOne({ phone: userPhone })
+      .exec();
 
     if (existUser) {
       throw badRequestError("This account was already exist");
@@ -387,8 +400,10 @@ export const usersignupRegister = async (req) => {
 
       // querying for new data can insert into the database
       let savedUser = new usersignupModel({
-        email: email,
+        phone: userPhone,
         password: hashPassword,
+        country_code: userInfo.iso,
+        country_name: userInfo.name,
       });
 
       let result = await savedUser.save();
@@ -401,13 +416,22 @@ export const usersignupRegister = async (req) => {
 // usersignupLogin controller function handle
 export const usersignupLogin = async (req) => {
   // declare payload for body
-  const { email, password } = req.body;
+  const { phone, password, country_code } = req.body;
+  // here declare destruct list of data
+  const { countryLists } = selectCountryCode();
 
-  // querying the specific data of user with email are find into the database
-  let usersignupId = await usersignupModel.findOne({ email: email }).exec();
+  // check specific data
+  let userInfo = countryLists.find((country) => country.iso === country_code);
+
+  if (!userInfo) throw badRequestError("Invalida country code");
+
+  let userPhone = `${userInfo.dial_code}-${phone}`;
+
+  // querying the specific data of user with phone are find into the database
+  let usersignupId = await usersignupModel.findOne({ phone: userPhone }).exec();
 
   if (!usersignupId) {
-    throw badRequestError("Please required the valid email address");
+    throw badRequestError("Please required the valid phone number");
   } else {
     // password synchronise for comparison of match condition
     let isMatchPassword = bcryptjs.compareSync(password, usersignupId.password);
@@ -466,13 +490,23 @@ export const usersignupAuthToken = async (req) => {
 export const usersignupChangePass = async (req) => {
   // declare varibales for payload in params & body
   const { usersignup_id } = req.params;
-  const { email, password, confirmPassword } = req.body;
+  const { phone, password, confirmPassword, country_code } = req.body;
+  // here declare destruct list of data
+  const { countryLists } = selectCountryCode();
 
   if (password !== confirmPassword) {
     throw notfoundError("Password and confirm password are not matched");
   } else {
-    // querying to the retrieve data for existing user can signup with email from database
-    let existUser = await usersignupModel.findOne({ email: email }).exec();
+    // here was declare to check country code are matched or not
+    let userInfo = countryLists.find((country) => country.iso === country_code);
+
+    if (!userInfo) throw badRequestError("Invalid country code");
+
+    // here declare append phone number with country code
+    const userPhone = `${userInfo.dial_code}-${phone}`;
+
+    // querying to the retrieve data for existing user can signup with phone from database
+    let existUser = await usersignupModel.findOne({ phone: userPhone }).exec();
 
     if (!existUser) {
       throw badRequestError("User are not exist");
@@ -486,8 +520,9 @@ export const usersignupChangePass = async (req) => {
         { _id: usersignup_id },
         {
           $set: {
-            email: email,
+            phone: userPhone,
             password: hashPassword,
+            country_code: userInfo.iso,
           },
         }
       );

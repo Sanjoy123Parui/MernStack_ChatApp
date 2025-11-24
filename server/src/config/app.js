@@ -13,11 +13,16 @@ import NodeCache from "node-cache";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import { z } from "zod";
+import { fileURLToPath } from "url";
 import { Server } from "socket.io";
 import { corsOption } from "../lib/optionconfig.js";
 
 // here was declare server Mode
 const envMode = process.env.NODE_ENV.trim() || "PRODUCTION";
+
+// declare fix for fileurlpath dir name
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // declare object of socketIds
 const userSocketIds = new Map();
@@ -42,6 +47,7 @@ export {
   express,
   cors,
   mongoose,
+  fs,
   app,
   path,
   cluster,
@@ -49,6 +55,7 @@ export {
   z,
   io,
   jwt,
+  __dirname,
   bcryptjs,
   morgan,
   userSocketIds,

@@ -4,7 +4,7 @@ import { z } from "../config/app.js";
 // here define and exporting also all user signup validation schema
 // userRegister form validator schema
 export const userRegisterValidator = z.object({
-  email: z
+  /* email: z
     .string({ required_error: "Email is required type string" })
     .trim()
     .min(1, { message: "Email is required" })
@@ -12,7 +12,18 @@ export const userRegisterValidator = z.object({
       z.string().regex(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, {
         message: `Invalid email pattern, please required the correct email`,
       })
+    ), */
+
+  phone: z
+    .string({ required_error: "Phone is required type string" })
+    .trim()
+    .min(1, { message: "Phone number is required" })
+    .pipe(
+      z.string().regex(/^\+?[1-9]\d{1,14}$/, {
+        message: `Invalid phone number, please enter the correct phone number`,
+      })
     ),
+
   password: z
     .string({ required_error: "Password is required type string" })
     .trim()
@@ -29,17 +40,32 @@ export const userRegisterValidator = z.object({
     .string({ required_error: "Confirm Password is required type string" })
     .trim()
     .min(1, { message: "Confirm password is required" }),
+
+  country_code: z
+    .string({ required_error: "Country code is required type string" })
+    .trim()
+    .min(1, { message: "Please select your country" }),
 });
 
 // userChangePass form validator schema
 export const userChangePassValidator = z.object({
-  email: z
+  /* email: z
     .string({ required_error: "Email is required type string" })
     .trim()
     .min(1, { message: "Email is required" })
     .pipe(
       z.string().regex(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, {
         message: `Invalid email pattern, please required the correct email`,
+      })
+    ), */
+
+  phone: z
+    .string({ required_error: "Phone number is required type string" })
+    .trim()
+    .min(1, { message: "Phone number is required" })
+    .pipe(
+      z.string().regex(/^\+?[1-9]\d{1,14}$/, {
+        message: `Invalid phone number, please enter the correct phone number`,
       })
     ),
 
@@ -57,18 +83,34 @@ export const userChangePassValidator = z.object({
 
   confirmPassword: z
     .string({ required_error: "Confirm password is required type string" })
+    .trim()
     .min(1, { message: "Confirm password is required" }),
+
+  country_code: z
+    .string({ required_error: "Country code is required type string" })
+    .trim()
+    .min(1, { message: "Please select your country" }),
 });
 
 // userLogin form validator schema
 export const userLoginValidator = z.object({
-  email: z
+  /* email: z
     .string({ required_error: "Email is required type string" })
     .trim()
     .min(1, { message: "Email is required" })
     .pipe(
       z.string().regex(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, {
         message: `Invalid email pattern, please required the correct email`,
+      })
+    ), */
+
+  phone: z
+    .string({ required_error: "Phone number is required type string" })
+    .trim()
+    .min(1, { message: "Phone number is required" })
+    .pipe(
+      z.string().regex(/^\+?[1-9]\d{1,14}$/, {
+        message: `Invalid phone number, please enter the correct phone number`,
       })
     ),
 
@@ -83,4 +125,9 @@ export const userLoginValidator = z.object({
           message: `Password must be 8 to 15 chars, include upper, lower, number, and special character`,
         })
     ),
+
+  country_code: z
+    .string({ required_error: "Country code is required type string" })
+    .trim()
+    .min(1, { message: "Please select your country" }),
 });

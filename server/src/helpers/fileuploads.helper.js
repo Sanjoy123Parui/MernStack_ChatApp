@@ -43,8 +43,8 @@
   }
 }; */
 
-// define fileuploads baseUrl function handle with exporting
-export const uploadFiles = () => {
-  let baseUrl = `http://localhost:3000/${process.env.PORT}`;
-  return baseUrl;
+// here define function for handling baseurl path & also exporting
+export const baseUrlPath = () => {
+  let baseUrl = `http://localhost:${process.env.PORT}/`;
+  return { baseUrl };
 };

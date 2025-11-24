@@ -47,3 +47,7 @@
   "userprofiles",
   userProfileSchema
 ); */
+
+// define userprofile model schema for mapping table or collections records into the database
+
+// exporting the userprofile model schema

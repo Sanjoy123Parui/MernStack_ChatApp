@@ -333,3 +333,7 @@
     return next(errorHandler("Wrong Cridential", 400));
   }
 }); */
+
+// here define and exporting for handlle all userprofile controller functions
+
+// userNewprofile controller function handle

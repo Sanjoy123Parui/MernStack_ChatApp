@@ -23,10 +23,10 @@ import { path } from "../config/app.js";
 
 // here declare avatarfileStorage path set and instance object of storage and also exporting
 const avatarfileStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./src/public/uploads");
+  destination: (req, file, cb) => {
+    cb(null, "src/public/uploads/");
   },
-  filename: function (req, file, cb) {
+  filename: (req, file, cb) => {
     crypto.randomBytes(12, function (err, bytesName) {
       const fn = bytesName.toString("hex") + path.extname(file.originalname);
       cb(null, fn);

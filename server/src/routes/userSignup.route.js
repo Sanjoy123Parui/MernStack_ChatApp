@@ -91,6 +91,7 @@ const usersignupRouter = express.Router();
 // export { userSignupRouter };
 
 // here define all are the usersignup routes endpoints methods
+
 // usersignup register routes with post method
 usersignupRouter.route("/register").post(
   validateHandler(userRegisterValidator),
@@ -108,7 +109,7 @@ usersignupRouter.route("/register").post(
         message: "Account has created successfully",
       };
 
-      // return res.status(201).send({ msg: "Account has created successfully" });
+      // return res.status(201).send({ success: true, result });
       return sendUserToken(req, res, next);
     }
   })
@@ -121,14 +122,18 @@ usersignupRouter.route("/login").post(
     // declare variables for accessing login controller data
     const { usersignupId } = await usersignupLogin(req);
 
-    // declare payload for token
-    req.tokenPayload = {
-      usersignupId: usersignupId,
-      statusCode: 200,
-      message: "Login Successfully",
-    };
+    if (!usersignupId) {
+      next(badRequestError("No more user logged in"));
+    } else {
+      // declare payload for token
+      req.tokenPayload = {
+        usersignupId: usersignupId,
+        statusCode: 200,
+        message: "Login Successfully",
+      };
 
-    return sendUserToken(req, res, next);
+      return sendUserToken(req, res, next);
+    }
   })
 );
 
@@ -150,7 +155,7 @@ usersignupRouter.route("/logout").post(
 );
 
 // usersignup auth token routes with post method
-usersignupRouter.route("/accept").post(
+usersignupRouter.route("/accept-auth").post(
   userCheckAuth,
   trycatchWrapper(async (req, res, next) => {
     // declare for variable as controllers
@@ -176,7 +181,7 @@ usersignupRouter.route("/accept").post(
 );
 
 // usersignup change password routes with all method like PUT || PATCH
-usersignupRouter.route("/changepass/:usersignup_id").all(
+usersignupRouter.route("/change-pass/:usersignup_id").all(
   validateHandler(userChangePassValidator),
   trycatchWrapper(async (req, res, next) => {
     if (req.method === "PUT" || req.method === "PATCH") {

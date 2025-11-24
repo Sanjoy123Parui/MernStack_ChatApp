@@ -8,6 +8,7 @@ import {
   cors,
   app,
   path,
+  __dirname,
   cluster,
   os,
   morgan,
@@ -52,20 +53,20 @@ if (cluster.isPrimary) {
   app.use(cors(corsOption));
   app.use(morgan("dev"));
   // app.use(express.static("./src/public"));
-  app.use(express.static(path.join(import.meta.dirname, "./src/public")));
+  app.use(express.static(path.join(__dirname, "src/public")));
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(cookieParser());
 
   // declare base endpoints middleware which are testing get method for webserver can work with template are reloading at started
   app.get("/", (req, res) => {
-    let filePath = path.join(import.meta.dirname, "./src/public/index.html");
+    let filePath = path.join(__dirname, "src/public/index.html");
     res.send(filePath);
   });
 
   // declare base endpoints middleware which are testing get for api can work at started
   app.get("/api", (req, res) => {
-    res.send("<h1>Chat API can work</h1>");
+    res.send(`<h1>Chat API can work</h1>`);
   });
 
   // use all endpoints middlewares of routes
