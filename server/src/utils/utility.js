@@ -1,10 +1,3 @@
-// here are define errorHandler utility function
-// export const errorHandler = (message, statusCode) => {
-//   let error = new Error(message);
-//   error.statusCode = statusCode;
-//   return error;
-// };
-
 // define and exporting baseAppError handling function
 export const baseAppError = (message, statusCode) => {
   let errorObj = new Error(message);

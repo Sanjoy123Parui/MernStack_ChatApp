@@ -27,7 +27,7 @@ export const userNewProfileValidators = z
           ),
       })
       .optional(),
-    //   .required({ message: "Avatar file is required" }),
+    // .required({ message: "Avatar file is required" }),
 
     gender: z
       .string({ required_error: "Gender is required type string" })

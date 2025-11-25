@@ -2,28 +2,6 @@
 import { trycatchWrapper } from "../helpers/try-catch.helper.js";
 import { validationError } from "../utils/utility.js";
 
-// here was define validator middleware functionality
-/* export const validateHandler = (schema) => async (req, res, next) => {
-  // use try-catch
-  try {
-    // here declare payload
-    const data = {
-      ...req.body,
-      avatar: req.file,
-    };
-
-    await schema.parseAsync(data);
-    next();
-  } catch (error) {
-    // here was declare error message
-    // const erroMessage = error.errors[0].message;
-    const erroMessage = error.errors.map((err) => ({
-      message: err.message,
-    }));
-    res.status(400).json({ message: erroMessage });
-  }
-}; */
-
 // define validation handler function with exporting
 export const validateHandler = (schema) =>
   trycatchWrapper(async (req, res, next) => {

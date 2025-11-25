@@ -9,7 +9,11 @@ import {
   usersignupChangePass,
   usersignupAuthToken,
 } from "../controllers/usersignup.controller.js";
-import { sendUserToken, removeUserToken } from "../utils/features.js";
+import {
+  sendUserToken,
+  sendUserTokenAuth,
+  removeUserToken,
+} from "../utils/features.js";
 import {
   userRegisterValidator,
   userLoginValidator,
@@ -120,12 +124,10 @@ usersignupRouter.route("/login").post(
   validateHandler(userLoginValidator),
   trycatchWrapper(async (req, res, next) => {
     // declare variables for accessing login controller data
-    const { usersignupId } = await usersignupLogin(req);
+    const { usersignupId, userprofileId } = await usersignupLogin(req);
 
-    if (!usersignupId) {
-      next(badRequestError("No more user logged in"));
-    } else {
-      // declare payload for token
+    if (!userprofileId) {
+      // declare payload for token signupId
       req.tokenPayload = {
         usersignupId: usersignupId,
         statusCode: 200,
@@ -133,6 +135,16 @@ usersignupRouter.route("/login").post(
       };
 
       return sendUserToken(req, res, next);
+    } else {
+      // declare payload for token signupId & also profileId
+      req.tokenPayloadAuth = {
+        usersignupId: usersignupId,
+        userprofileId: userprofileId,
+        statusCode: 200,
+        message: "Login Successfully",
+      };
+
+      return sendUserTokenAuth(req, res, next);
     }
   })
 );
@@ -181,7 +193,7 @@ usersignupRouter.route("/accept-auth").post(
 );
 
 // usersignup change password routes with all method like PUT || PATCH
-usersignupRouter.route("/change-pass/:usersignup_id").all(
+usersignupRouter.route("/change-pass/:_id").all(
   validateHandler(userChangePassValidator),
   trycatchWrapper(async (req, res, next) => {
     if (req.method === "PUT" || req.method === "PATCH") {

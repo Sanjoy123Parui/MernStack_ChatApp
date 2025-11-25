@@ -8,7 +8,6 @@ import {
   cors,
   app,
   path,
-  __dirname,
   cluster,
   os,
   morgan,
@@ -19,19 +18,11 @@ import {
 import { corsOption } from "./src/lib/optionconfig.js";
 import { conn } from "./src/config/dbc.js";
 
-// here import all routes
-// import { userSignupRouter } from "./src/routes/usersignup.route.js";
-// import { userprofileRouter } from "./src/routes/userProfile.route.js";
-// import { contactRouter } from "./src/routes/contact.route.js";
-// import { adminSignupRouter } from "./src/routes/adminSignup.route.js";
-// import { adminProfileRouter } from "./src/routes/adminProfile.route.js";
-// import { adminDashboardRouter } from "./src/routes/adminDashboard.route.js";
-
-// here importing the all routes of endpoints for rest api
+//Consuming to the importing  all routes of endpoints for rest api
 import { usersignupRouter } from "./src/routes/usersignup.route.js";
+import { userprofileRouter } from "./src/routes/userprofile.route.js";
 
 // Consuming the errorMiddlware importing here for globally error handle
-// import { checkError } from "./src/middlewares/errors.middleware.js";
 import { checkErrors } from "./src/middlewares/errors.middleware.js";
 
 // here was declare variables of some specific configuration
@@ -52,15 +43,15 @@ if (cluster.isPrimary) {
   // here can declare middleware are use
   app.use(cors(corsOption));
   app.use(morgan("dev"));
-  // app.use(express.static("./src/public"));
-  app.use(express.static(path.join(__dirname, "src/public")));
+  app.use(express.static("src/public"));
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(cookieParser());
 
   // declare base endpoints middleware which are testing get method for webserver can work with template are reloading at started
   app.get("/", (req, res) => {
-    let filePath = path.join(__dirname, "src/public/index.html");
+    // let filePath = path.join(__dirname, "src/public/index.html");
+    let filePath = path.join(import.meta.dirname, "public/index.html");
     res.send(filePath);
   });
 
@@ -69,19 +60,11 @@ if (cluster.isPrimary) {
     res.send(`<h1>Chat API can work</h1>`);
   });
 
-  // use all endpoints middlewares of routes
-  // app.use("/user/api", userSignupRouter);
-  // app.use("/user/api", userprofileRouter);
-  // app.use("/contact/api", contactRouter);
-  // app.use("/admin/api", adminSignupRouter);
-  // app.use("/admin/api", adminProfileRouter);
-  // app.use("/admin/dashboard/api", adminDashboardRouter);
-
   //here was handle middlewares are use of routes
   app.use("/usersignup/api", usersignupRouter);
+  app.use("/userprofile/api", userprofileRouter);
 
   // here was handle error for use middleware
-  // app.use(checkError);
   app.use(checkErrors);
 
   // server was restarting here
