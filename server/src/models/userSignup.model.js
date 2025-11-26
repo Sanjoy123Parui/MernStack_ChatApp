@@ -4,11 +4,6 @@ import { mongoose } from "../config/app.js";
 // define usersignup model schema for mapping table or collections records into the database
 const usersignupSchema = new mongoose.Schema(
   {
-    /* email: {
-      type: String,
-      unique: true,
-      require: true,
-    }, */
     phone: {
       type: String,
       require: true,
