@@ -1,6 +1,7 @@
 // Consuming to the importing some modules & lib for using in userprofile routes
 import { express } from "../config/app.js";
 import {
+  userprofilefetchAll,
   userprofileView,
   userNewprofile,
   userprofileChangeImage,
@@ -21,81 +22,27 @@ import { removeUserAccount } from "../utils/features.js";
 // delare instance object of userprofile routes
 const userprofileRouter = express.Router();
 
-// here import all modules and libraies of packages
-// import { express } from "../connections/socketconnection.js";
-
-// import {
-//   userNewProfile,
-//   userProfileview,
-//   userProfileImageupdate,
-//   userProfiledelete,
-//   userProfileupdate,
-// } from "../controllers/userProfile.controller.js";
-
-// import {
-//   userNewProfileValidators,
-//   userProfileImageValidator,
-//   userProfileUpdateValidator,
-// } from "../validators/validator.js";
-
-// import { userCheckAuth } from "../middlewares/auth.middleware.js";
-// import { validateHandler } from "../middlewares/validator.middleware.js";
-// import { uploadObj } from "../middlewares/fileuploads.middleware.js";
-
-// there are define userProfile router
-// const userprofileRouter = express.Router();
-
-// there are define all routes of end points in user profile
-
-// create new user profile router end-point with post
-/* userprofileRouter
-  .route("/profile/creates")
-  .post(
-    userCheckAuth,
-    uploadObj.single("avatar"),
-    validateHandler(userNewProfileValidators),
-    userNewProfile
-  ); */
-
-// view user profile router end-point with get
-/* userprofileRouter
-  .route("/profile/read/details")
-  .get(userCheckAuth, userProfileview); */
-
-// update  user profile image end-point router with put
-/* userprofileRouter
-  .route("/profile/image/update/:userProfileId")
-  .put(
-    userCheckAuth,
-    uploadObj.single("avatar"),
-    validateHandler(userProfileImageValidator),
-    userProfileImageupdate
-  ); */
-
-// delete user profile end-point router with delete
-/* userprofileRouter
-  .route("/profile/remove")
-  .delete(userCheckAuth, userProfiledelete); */
-
-// updated profile end-point router with all
-/* userprofileRouter
-  .route("/profile/updates/:userProfileId")
-  .all(
-    userCheckAuth,
-    validateHandler(userProfileUpdateValidator),
-    userProfileupdate
-  ); */
-
-// export there user profile router
-// export { userprofileRouter };
-
 // here define all are the userprofile routes endpoints methods
+// here define  user profile fetch all data routes with get method
+userprofileRouter.route("/").get(
+  userCheckAuth,
+  trycatchWrapper(async (req, res, next) => {
+    //  destruct data for userprofile controller
+    const { userprofileInfo, data } = await userprofilefetchAll(req);
+    if (userprofileInfo.length > 0) {
+      return res.status(200).json({ success: true, data });
+    } else {
+      return next(notfoundError("No more data has found"));
+    }
+  })
+);
+
 // here define specific user profile _id data routes who was authenticate with get method
 userprofileRouter.route("/view-profile").get(
   userCheckAuth,
   trycatchWrapper(async (req, res, next) => {
     // here destructing userprofile controller
-    const { userprofileInfo, data } = await userprofileView(req);
+    const { userprofileInfo, data } = await userprofileView();
 
     if (!userprofileInfo) {
       return next(notfoundError("No more user are found"));

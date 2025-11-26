@@ -6,6 +6,49 @@ import { badRequestError, notfoundError } from "../utils/utility.js";
 import { baseUrlPath, uploadfilesPath } from "../helpers/fileuploads.helper.js";
 
 // here define and exporting for handlle all userprofile controller functions
+// declare userprofile fetch all controller function handle
+export const userprofilefetchAll = async (req) => {
+  const usersignupId = req.user;
+
+  if (!usersignupId) {
+    throw notfoundError("User not found, please login access");
+  } else {
+    // declare variables for handling caching key and get caching data
+    const cacheKey = `usersignupId:${usersignupId}`;
+    const cachedData = cache.get(cacheKey);
+
+    // check condition for cahcing data
+    if (cachedData) {
+      return {
+        userprofileInfo: cachedData.userprofileInfo,
+        data: cachedData.data,
+      };
+    } else {
+      // querying to the database are retrieve all data from database
+      let userprofileInfo = await userprofileModel
+        .find({})
+        .populate({ path: "usersignup_id" })
+        .exec();
+
+      let data = userprofileInfo.map((result) => ({
+        userprofile_id: result._id,
+        first_name: result.first_name,
+        last_name: result.last_name,
+        userprofileimage: result.userprofileimage,
+        gender: result.gender,
+        dob: result.dob,
+        abouts: result.abouts,
+        usersignup_id: result.usersignup_id._id,
+        phone: result.usersignup_id.phone,
+        country_name: result.usersignup_id.country_name,
+      }));
+
+      // here will store data in cache
+      cache.set(cacheKey, { userprofileInfo, data });
+      return { userprofileInfo, data };
+    }
+  }
+};
 
 // userprofileView controller function for specific data retrieve
 export const userprofileView = async (req) => {
@@ -22,7 +65,7 @@ export const userprofileView = async (req) => {
     // check condition for cahcing data
     if (cachedData) {
       return {
-        userprofileInfo: cachedData.userprofileInfo,
+        userprofileInfo: cachedData.userProfiledata,
         data: cachedData.data,
       };
     } else {
