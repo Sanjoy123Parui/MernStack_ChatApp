@@ -145,8 +145,8 @@ userprofileRouter.route("/change-pic/:_id").post(
   })
 );
 
-// here define new user profile change pic routes with delete method
-userprofileRouter.route("/remove-profile").delete(
+// here define remove user accounts routes with delete method
+userprofileRouter.route("/remove-user").delete(
   userCheckAuth,
   trycatchWrapper(async (req, res, next) => {
     // destruct data
