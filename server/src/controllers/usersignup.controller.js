@@ -92,7 +92,7 @@ export const usersignupLogin = async (req) => {
 
 // usersignupLogout controller function handle
 export const usersignupLogout = async (req) => {
-  let usersignupId = req.user;
+  const usersignupId = req.user;
 
   if (!usersignupId) throw notfoundError("This user are not found");
 

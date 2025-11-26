@@ -6,6 +6,7 @@ import { badRequestError, notfoundError } from "../utils/utility.js";
 import { baseUrlPath, uploadfilesPath } from "../helpers/fileuploads.helper.js";
 
 // here define and exporting for handlle all userprofile controller functions
+
 // userprofileView controller function for specific data retrieve
 export const userprofileView = async (req) => {
   // declare variables for specific user signup_id
@@ -151,7 +152,7 @@ export const userprofileChangeImage = async (req) => {
 // userprofileDelete controller function handle
 export const userprofileDelete = async (req) => {
   // declare payload for auth user
-  let usersignupId = req.user;
+  const usersignupId = req.user;
 
   // check condition for usersignupId
   if (!usersignupId) {
@@ -173,7 +174,7 @@ export const userprofileDelete = async (req) => {
 // userprofileUpdate controller function handle
 export const userprofileUpdate = async (req) => {
   // declare payload for data
-  let usersignupId = req.user;
+  const usersignupId = req.user;
   const { _id } = req.params;
   const { first_name, last_name, gender, dob, abouts } = req.body;
 
