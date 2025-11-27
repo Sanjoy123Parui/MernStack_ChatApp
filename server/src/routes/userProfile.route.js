@@ -42,7 +42,7 @@ userprofileRouter.route("/view-profile").get(
   userCheckAuth,
   trycatchWrapper(async (req, res, next) => {
     // here destructing userprofile controller
-    const { userprofileInfo, data } = await userprofileView();
+    const { userprofileInfo, data } = await userprofileView(req);
 
     if (!userprofileInfo) {
       return next(notfoundError("No more user are found"));

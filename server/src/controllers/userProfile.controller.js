@@ -13,40 +13,39 @@ export const userprofilefetchAll = async (req) => {
   if (!usersignupId) {
     throw notfoundError("User not found, please login access");
   } else {
-    // declare variables for handling caching key and get caching data
-    const cacheKey = `usersignupId:${usersignupId}`;
-    const cachedData = cache.get(cacheKey);
+    // declare userprofileInfo caching data variables
+    const cacheKey = `userprofileInfo:${usersignupId}`;
+    let userprofileInfo = [];
 
-    // check condition for cahcing data
-    if (cachedData) {
-      return {
-        userprofileInfo: cachedData.userprofileInfo,
-        data: cachedData.data,
-      };
+    // check condition for cache data or not
+    if (cache.has(cacheKey)) {
+      // caching get for all user profile data
+      userprofileInfo = JSON.parse(cache.get(cacheKey));
     } else {
-      // querying to the database are retrieve all data from database
-      let userprofileInfo = await userprofileModel
+      // querying to the retrieve of all user data from database
+      userprofileInfo = await userprofileModel
         .find({})
         .populate({ path: "usersignup_id" })
         .exec();
-
-      let data = userprofileInfo.map((result) => ({
-        userprofile_id: result._id,
-        first_name: result.first_name,
-        last_name: result.last_name,
-        userprofileimage: result.userprofileimage,
-        gender: result.gender,
-        dob: result.dob,
-        abouts: result.abouts,
-        usersignup_id: result.usersignup_id._id,
-        phone: result.usersignup_id.phone,
-        country_name: result.usersignup_id.country_name,
-      }));
-
-      // here will store data in cache
-      cache.set(cacheKey, { userprofileInfo, data });
-      return { userprofileInfo, data };
+      // caching set for all user profile data
+      cache.set(cacheKey, JSON.stringify(userprofileInfo));
     }
+
+    let data = userprofileInfo.map((result) => ({
+      userprofile_id: result._id,
+      first_name: result.first_name,
+      last_name: result.last_name,
+      userprofileimage: result.userprofileimage,
+      gender: result.gender,
+      dob: result.dob,
+      abouts: result.abouts,
+      usersignup_id: result.usersignup_id._id,
+      phone: result.usersignup_id.phone,
+      country_name: result.usersignup_id.country_name,
+      country_code: result.usersignup_id.country_code,
+    }));
+
+    return { userprofileInfo, data };
   }
 };
 
@@ -58,40 +57,38 @@ export const userprofileView = async (req) => {
   if (!usersignupId) {
     throw notfoundError("User not found, please login access");
   } else {
-    // declare variables for handling caching key and get caching data
-    const cacheKey = `usersignupId:${usersignupId}`;
-    const cachedData = cache.get(cacheKey);
+    // declare userprofileInfo caching data variables
+    const cacheKey = `userprofileInfo:all`;
+    let userprofileInfo = [];
 
-    // check condition for cahcing data
-    if (cachedData) {
-      return {
-        userprofileInfo: cachedData.userProfiledata,
-        data: cachedData.data,
-      };
+    // check condition for cache data or not
+    if (cache.has(cacheKey)) {
+      // get cache data
+      userprofileInfo = JSON.parse(cache.get(cacheKey));
     } else {
-      // querying to the database are retrieve specific data from database
-      let userprofileInfo = await userprofileModel
+      // querying to the retrieve of specific user data from database
+      userprofileInfo = await userprofileModel
         .findOne({ usersignup_id: usersignupId })
         .populate({ path: "usersignup_id" })
         .exec();
-
-      let data = {
-        userprofile_id: userprofileInfo._id,
-        first_name: userprofileInfo.first_name,
-        last_name: userprofileInfo.last_name,
-        userprofileimage: userprofileInfo.userprofileimage,
-        gender: userprofileInfo.gender,
-        dob: userprofileInfo.dob,
-        abouts: userprofileInfo.abouts,
-        usersignup_id: userprofileInfo.usersignup_id._id,
-        phone: userprofileInfo.usersignup_id.phone,
-        country_name: userprofileInfo.usersignup_id.country_name,
-      };
-
-      // here will store data in cache
-      cache.set(cacheKey, { userprofileInfo, data });
-      return { userprofileInfo, data };
+      // set cache data
+      cache.set(cacheKey, JSON.stringify(userprofileInfo));
     }
+
+    let data = {
+      userprofile_id: userprofileInfo._id,
+      first_name: userprofileInfo.first_name,
+      last_name: userprofileInfo.last_name,
+      userprofileimage: userprofileInfo.userprofileimage,
+      gender: userprofileInfo.gender,
+      dob: userprofileInfo.dob,
+      abouts: userprofileInfo.abouts,
+      usersignup_id: userprofileInfo.usersignup_id._id,
+      phone: userprofileInfo.usersignup_id.phone,
+      country_name: userprofileInfo.country_name,
+    };
+
+    return { userprofileInfo, data };
   }
 };
 
@@ -142,8 +139,12 @@ export const userNewprofile = async (req) => {
 
       let userProfiledata = await savedUserProfile.save();
 
-      // clear cache data
-      cache.del(`usersignupId:${usersignupId}`);
+      // declare cacheKeys & clear cache data
+      const cacheKeys = [
+        `userprofileInfo:${usersignupId}`,
+        "userprofileInfo:all",
+      ];
+      cache.del(cacheKeys);
 
       return { userProfiledata, fileSize };
     }
@@ -185,8 +186,12 @@ export const userprofileChangeImage = async (req) => {
       }
     );
 
-    // clear cache data
-    cache.del(`usersignupId:${usersignupId}`);
+    // declare cacheKeys & clear cache data
+    const cacheKeys = [
+      `userprofileInfo:${usersignupId}`,
+      "userprofileInfo:all",
+    ];
+    cache.del(cacheKeys);
 
     return { profileChangePic };
   }
@@ -207,8 +212,12 @@ export const userprofileDelete = async (req) => {
       userprofileModel.findOneAndDelete({ usersignup_id: usersignupId }),
     ]);
 
-    // clear cache data
-    cache.del(`usersignupId:${usersignupId}`);
+    // declare cacheKeys & clear cache data
+    const cacheKeys = [
+      `userprofileInfo:${usersignupId}`,
+      "userprofileInfo:all",
+    ];
+    cache.del(cacheKeys);
 
     return true;
   }
@@ -239,8 +248,12 @@ export const userprofileUpdate = async (req) => {
       }
     );
 
-    // here also clear cache data
-    cache.del(`usersignupId:${usersignupId}`);
+    // declare cacheKeys & clear cache data
+    const cacheKeys = [
+      `userprofileInfo:${usersignupId}`,
+      "userprofileInfo:all",
+    ];
+    cache.del(cacheKeys);
 
     return { userInfo };
   }

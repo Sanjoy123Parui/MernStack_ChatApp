@@ -107,8 +107,9 @@ export const usersignupLogout = async (req) => {
     { new: true }
   );
 
-  // clear cache data
-  cache.del(`usersignupId:${usersignupId}`);
+  // declare cacheKeys & clear cache data
+  const cacheKeys = [`userprofileInfo:${usersignupId}`, "userprofileInfo:all"];
+  cache.del(cacheKeys);
 
   return { existUser };
 };
@@ -133,8 +134,12 @@ export const usersignupAuthToken = async (req) => {
 
     let usersignupRefreshToken = usersignupId.refresh_userToken;
 
-    // clear cache data
-    cache.del(`usersignupId:${usersignupId}`);
+    // declare cacheKeys & clear cache data
+    const cacheKeys = [
+      `userprofileInfo:${usersignupId}`,
+      "userprofileInfo:all",
+    ];
+    cache.del(cacheKeys);
 
     return { userRefreshToken, usersignupRefreshToken, usersignupId };
   }
