@@ -98,7 +98,7 @@ export const selectCountryCode = () => {
     { name: "Thailand", dial_code: "+66", iso: "TH" },
     { name: "Turkey", dial_code: "+90", iso: "TR" },
     { name: "United Arab Emirates", dial_code: "+971", iso: "AE" },
-    { name: "United Kingdom", dial_code: "+44", iso: "GB" },
+    { name: "United Kingdom", dial_code: "+44", iso: "UK" },
     { name: "United States", dial_code: "+1", iso: "US" },
     { name: "Vietnam", dial_code: "+84", iso: "VN" },
   ];

@@ -85,7 +85,7 @@ export const userprofileView = async (req) => {
       abouts: userprofileInfo.abouts,
       usersignup_id: userprofileInfo.usersignup_id._id,
       phone: userprofileInfo.usersignup_id.phone,
-      country_name: userprofileInfo.country_name,
+      country_name: userprofileInfo.usersignup_id.country_name,
     };
 
     return { userprofileInfo, data };
@@ -154,7 +154,7 @@ export const userNewprofile = async (req) => {
 // userprofileChangeImage controller function handle
 export const userprofileChangeImage = async (req) => {
   // declare payload for file uploading
-  const { _id } = req.params;
+  const { userprofile_Id } = req.params;
   const usersignupId = req.user;
   const filename = req.file.filename;
 
@@ -180,7 +180,7 @@ export const userprofileChangeImage = async (req) => {
 
     // query for update profile picture for specific user id into the database
     let profileChangePic = await userprofileModel.updateOne(
-      { _id: _id },
+      { _id: userprofile_Id },
       {
         $set: { userprofileimage: filePath },
       }
@@ -227,7 +227,7 @@ export const userprofileDelete = async (req) => {
 export const userprofileUpdate = async (req) => {
   // declare payload for data
   const usersignupId = req.user;
-  const { _id } = req.params;
+  const { userprofile_Id } = req.params;
   const { first_name, last_name, gender, dob, abouts } = req.body;
 
   // check condition for exist user
@@ -236,7 +236,7 @@ export const userprofileUpdate = async (req) => {
   } else {
     // querying for update data of specific authenticate user into the database
     let userInfo = await userprofileModel.updateOne(
-      { _id: _id },
+      { _id: userprofile_Id, usersignup_id: usersignupId },
       {
         $set: {
           first_name: first_name,

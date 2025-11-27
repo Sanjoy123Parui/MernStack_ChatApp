@@ -75,7 +75,7 @@ userprofileRouter.route("/create-profile").post(
 );
 
 // here define new user profile change pic routes with post method
-userprofileRouter.route("/change-pic/:_id").post(
+userprofileRouter.route("/change-pic/:userprofile_Id").post(
   userCheckAuth,
   uploadAvatarobj.single("avatar"),
   trycatchWrapper(async (req, res, next) => {
@@ -109,11 +109,11 @@ userprofileRouter.route("/remove-user").delete(
 );
 
 // here define new user profile update routes with all method like PUT || PATCH
-userprofileRouter.route("/change-profile/:_id").all(
+userprofileRouter.route("/change-profile/:userprofile_Id").all(
   userCheckAuth,
   validateHandler(userprofileUpdateValidators),
   trycatchWrapper(async (req, res, next) => {
-    if (req.method === "PUT" || req.method === "PATHC") {
+    if (req.method === "PUT" || req.method === "PATCH") {
       // destructing data
       const { userInfo } = await userprofileUpdate(req);
       // check condition for update data of user profile

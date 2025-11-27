@@ -148,7 +148,7 @@ export const usersignupAuthToken = async (req) => {
 // usersignupChangePass controller function handle
 export const usersignupChangePass = async (req) => {
   // declare varibales for payload in params & body
-  const { _id } = req.params;
+  const { usersignup_Id } = req.params;
   const { phone, password, confirmPassword, country_code } = req.body;
   // here declare destruct list of data
   const { countryLists } = selectCountryCode();
@@ -176,7 +176,7 @@ export const usersignupChangePass = async (req) => {
 
       // querying the update password with specific id of usersignup into the database
       let userPassword = await usersignupModel.updateOne(
-        { _id: _id },
+        { _id: usersignup_Id },
         {
           $set: {
             phone: userPhone,

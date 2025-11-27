@@ -124,7 +124,7 @@ usersignupRouter.route("/accept-auth").post(
 );
 
 // usersignup change password routes with all method like PUT || PATCH
-usersignupRouter.route("/change-pass/:_id").all(
+usersignupRouter.route("/change-pass/:usersignup_Id").all(
   validateHandler(userChangePassValidator),
   trycatchWrapper(async (req, res, next) => {
     if (req.method === "PUT" || req.method === "PATCH") {
