@@ -28,7 +28,7 @@ export const userprofilefetchAll = async (req) => {
         .populate({ path: "usersignup_id" })
         .exec();
       // caching set for all user profile data
-      cache.set(cacheKey, JSON.stringify(userprofileInfo));
+      cache.set(cacheKey, JSON.stringify(userprofileInfo), 300);
     }
 
     let data = userprofileInfo.map((result) => ({
@@ -72,7 +72,7 @@ export const userprofileView = async (req) => {
         .populate({ path: "usersignup_id" })
         .exec();
       // set cache data
-      cache.set(cacheKey, JSON.stringify(userprofileInfo));
+      cache.set(cacheKey, JSON.stringify(userprofileInfo), 300);
     }
 
     let data = {
