@@ -111,7 +111,9 @@ export const usersignupLogout = async (req) => {
     // declare cacheKeys & clear cache data
     const cacheKeys = [
       `userprofileInfo:${usersignupId}`,
-      "userprofileInfo:all",
+      "userprofileInfoAll:all",
+      "contactlistview:contactall",
+      `contactprofile:${usersignupId}`,
     ];
     cache.del(cacheKeys);
 
@@ -142,7 +144,9 @@ export const usersignupAuthToken = async (req) => {
     // declare cacheKeys & clear cache data
     const cacheKeys = [
       `userprofileInfo:${usersignupId}`,
-      "userprofileInfo:all",
+      "userprofileInfoAll:all",
+      "contactlistview:contactall",
+      `contactprofile:${usersignupId}`,
     ];
     cache.del(cacheKeys);
 

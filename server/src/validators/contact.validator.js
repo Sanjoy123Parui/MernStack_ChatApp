@@ -19,7 +19,7 @@ export const saveContactValidator = z.object({
     .trim()
     .min(1, { message: "User name is required" }),
 
-  country_code: z
+  contact_countrycode: z
     .string({ required_error: "Country code is required type string" })
     .trim()
     .min(1, { message: "Please select your country" }),

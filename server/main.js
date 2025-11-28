@@ -21,6 +21,7 @@ import { conn } from "./src/config/dbc.js";
 //Consuming to the importing  all routes of endpoints for rest api
 import { usersignupRouter } from "./src/routes/usersignup.route.js";
 import { userprofileRouter } from "./src/routes/userprofile.route.js";
+import { contactRouter } from "./src/routes/contact.route.js";
 
 // Consuming the errorMiddlware importing here for globally error handle
 import { checkErrors } from "./src/middlewares/errors.middleware.js";
@@ -63,6 +64,7 @@ if (cluster.isPrimary) {
   //here was handle middlewares are use of routes
   app.use("/usersignup/api", usersignupRouter);
   app.use("/userprofile/api", userprofileRouter);
+  app.use("/usercontact/api", contactRouter);
 
   // here was handle error for use middleware
   app.use(checkErrors);

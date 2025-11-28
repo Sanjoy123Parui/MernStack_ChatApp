@@ -2,7 +2,7 @@
 import { path, cache } from "../config/app.js";
 import { userprofileModel } from "../models/userprofile.model.js";
 import { usersignupModel } from "../models/usersignup.model.js";
-import { badRequestError, notfoundError } from "../utils/utility.js";
+import { badRequestError } from "../utils/utility.js";
 import { baseUrlPath, uploadfilesPath } from "../helpers/fileuploads.helper.js";
 
 // here define and exporting for handlle all userprofile controller functions
@@ -14,7 +14,7 @@ export const userprofilefetchAll = async (req) => {
     throw badRequestError("No more user access to login");
   } else {
     // declare userprofileInfo caching data variables
-    const cacheKey = `userprofileInfo:${usersignupId}`;
+    const cacheKey = "userprofileInfoAll:all";
     let userprofileInfo = [];
 
     // check condition for cache data or not
@@ -58,7 +58,7 @@ export const userprofileView = async (req) => {
     throw badRequestError("No more user access to login");
   } else {
     // declare userprofileInfo caching data variables
-    const cacheKey = `userprofileInfo:all`;
+    const cacheKey = `userprofileInfo:${usersignupId}`;
     let userprofileInfo = [];
 
     // check condition for cache data or not
@@ -142,7 +142,9 @@ export const userNewprofile = async (req) => {
       // declare cacheKeys & clear cache data
       const cacheKeys = [
         `userprofileInfo:${usersignupId}`,
-        "userprofileInfo:all",
+        "userprofileInfoAll:all",
+        "contactlistview:contactall",
+        `contactprofile:${usersignupId}`,
       ];
       cache.del(cacheKeys);
 
@@ -189,7 +191,9 @@ export const userprofileChangeImage = async (req) => {
     // declare cacheKeys & clear cache data
     const cacheKeys = [
       `userprofileInfo:${usersignupId}`,
-      "userprofileInfo:all",
+      "userprofileInfoAll:all",
+      "contactlistview:contactall",
+      `contactprofile:${usersignupId}`,
     ];
     cache.del(cacheKeys);
 
@@ -215,7 +219,9 @@ export const userprofileDelete = async (req) => {
     // declare cacheKeys & clear cache data
     const cacheKeys = [
       `userprofileInfo:${usersignupId}`,
-      "userprofileInfo:all",
+      "userprofileInfoAll:all",
+      "contactlistview:contactall",
+      `contactprofile:${usersignupId}`,
     ];
     cache.del(cacheKeys);
 
@@ -251,7 +257,9 @@ export const userprofileUpdate = async (req) => {
     // declare cacheKeys & clear cache data
     const cacheKeys = [
       `userprofileInfo:${usersignupId}`,
-      "userprofileInfo:all",
+      "userprofileInfoAll:all",
+      "contactlistview:contactall",
+      `contactprofile:${usersignupId}`,
     ];
     cache.del(cacheKeys);
 
