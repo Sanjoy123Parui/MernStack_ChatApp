@@ -94,24 +94,29 @@ export const usersignupLogin = async (req) => {
 export const usersignupLogout = async (req) => {
   const usersignupId = req.user;
 
-  if (!usersignupId) throw notfoundError("This user are not found");
-
-  // querying the find existUser refresh_token
-  const existUser = await usersignupModel.findByIdAndUpdate(
-    usersignupId,
-    {
-      $set: {
-        refresh_userToken: undefined,
+  if (!usersignupId) {
+    throw badRequestError("No more user access to login");
+  } else {
+    // querying the find existUser refresh_token
+    const existUser = await usersignupModel.findByIdAndUpdate(
+      usersignupId,
+      {
+        $set: {
+          refresh_userToken: undefined,
+        },
       },
-    },
-    { new: true }
-  );
+      { new: true }
+    );
 
-  // declare cacheKeys & clear cache data
-  const cacheKeys = [`userprofileInfo:${usersignupId}`, "userprofileInfo:all"];
-  cache.del(cacheKeys);
+    // declare cacheKeys & clear cache data
+    const cacheKeys = [
+      `userprofileInfo:${usersignupId}`,
+      "userprofileInfo:all",
+    ];
+    cache.del(cacheKeys);
 
-  return { existUser };
+    return { existUser };
+  }
 };
 
 // usersignupAuthToken controller function handle

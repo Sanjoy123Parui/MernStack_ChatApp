@@ -11,7 +11,7 @@ export const userprofilefetchAll = async (req) => {
   const usersignupId = req.user;
 
   if (!usersignupId) {
-    throw notfoundError("User not found, please login access");
+    throw badRequestError("No more user access to login");
   } else {
     // declare userprofileInfo caching data variables
     const cacheKey = `userprofileInfo:${usersignupId}`;
@@ -55,7 +55,7 @@ export const userprofileView = async (req) => {
   const usersignupId = req.user;
 
   if (!usersignupId) {
-    throw notfoundError("User not found, please login access");
+    throw badRequestError("No more user access to login");
   } else {
     // declare userprofileInfo caching data variables
     const cacheKey = `userprofileInfo:all`;
@@ -103,7 +103,7 @@ export const userNewprofile = async (req) => {
   const { baseUrl } = await baseUrlPath();
 
   if (!usersignupId) {
-    throw notfoundError("User not found, please login access");
+    throw badRequestError("No more user access to login");
   } else {
     // querying to the database for read the specific data
     let userInfo = await userprofileModel
@@ -163,7 +163,7 @@ export const userprofileChangeImage = async (req) => {
 
   // check condition for user signup
   if (!usersignupId) {
-    throw notfoundError("User not found, please login access");
+    throw badRequestError("No more user access to login");
   } else {
     // check condition for filename
     if (!filename) throw badRequestError("Avatar image is required");
@@ -204,7 +204,7 @@ export const userprofileDelete = async (req) => {
 
   // check condition for usersignupId
   if (!usersignupId) {
-    throw notfoundError("User not found, please login access");
+    throw badRequestError("No more user access to login");
   } else {
     // querying for deleted account parallel of authenticate user in database
     await Promise.all([
@@ -232,7 +232,7 @@ export const userprofileUpdate = async (req) => {
 
   // check condition for exist user
   if (!usersignupId) {
-    throw notfoundError("User not found, please login access");
+    throw badRequestError("No more user access to login");
   } else {
     // querying for update data of specific authenticate user into the database
     let userInfo = await userprofileModel.updateOne(

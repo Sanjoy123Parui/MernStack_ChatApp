@@ -1,7 +1,7 @@
 // Consuming to the importing some modules & lib of here usersignup model schema
 import { mongoose } from "../config/app.js";
 
-// define usersignup model schema for mapping table or collections records into the database
+// define usersignup model schema for mapping table or collections records of database
 const usersignupSchema = new mongoose.Schema(
   {
     phone: {
