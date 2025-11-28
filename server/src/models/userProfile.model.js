@@ -1,7 +1,7 @@
 // Consuming to the importing some modules & lib of userprofile model schema
 import { mongoose } from "../config/app.js";
 
-// define userprofile model schema for mapping table or collections records of database
+// define userprofile model schema for mapping table or collections records into the database
 const userprofileSchema = new mongoose.Schema(
   {
     first_name: {
