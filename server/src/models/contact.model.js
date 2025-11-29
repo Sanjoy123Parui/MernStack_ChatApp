@@ -25,6 +25,11 @@ const contactSchema = new mongoose.Schema(
       require: true,
     },
 
+    contact_blockuser: {
+      type: Boolean,
+      default: false,
+    },
+
     contact_userid: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "userprofiles",

@@ -1,5 +1,5 @@
 // Consuming to the importing some modules & lib of contact controller
-import { cache, path } from "../config/app.js";
+import { cache } from "../config/app.js";
 import { badRequestError, notfoundError } from "../utils/utility.js";
 import { contactModel } from "../models/contact.model.js";
 import { userprofileModel } from "../models/userprofile.model.js";
@@ -87,6 +87,7 @@ export const contactProfile = async (req) => {
       contact_userphone: contactInfo.contact_userphone,
       contact_countrycode: contactInfo.contact_countrycode,
       contact_countryname: contactInfo.contact_countryname,
+      contact_blockuser: contactInfo.contact_blockuser,
       contact_userid: contactInfo.contact_userid._id,
       contact_image: contactInfo.contact_userid.userprofileimage,
       contact_gender: contactInfo.contact_userid.gender,
@@ -187,8 +188,98 @@ export const contactSave = async (req) => {
   }
 };
 
+// here define for handle contactBlock controller function
+export const contactBlock = async (req) => {
+  // declare payload of data
+  const usersignupId = req.user;
+  const { contact_id } = req.params;
+  const { contact_blockuser } = req.body;
+
+  if (!usersignupId) {
+    throw badRequestError("No more user access to login");
+  } else {
+    // declare blockdata
+    let existContact = contact_blockuser !== false ? true : false;
+
+    // querying to the block contact for specific _id of contact model into the database
+    let contactInfo = await contactModel.updateOne(
+      { _id: contact_id },
+      {
+        $set: {
+          contact_blockuser: existContact,
+        },
+      }
+    );
+
+    // here declare caching clear
+    const cacheKeys = [
+      `userprofileInfo:${usersignupId}`,
+      "userprofileInfoAll:all",
+      "contactlistview:contactall",
+      `contactprofile:${usersignupId}`,
+    ];
+    cache.del(cacheKeys);
+
+    return { contactInfo };
+  }
+};
+
 // here define for handle contactRemove controller function
-export const contactRemove = async (req) => {};
+export const contactRemove = async (req) => {
+  // here declare payload for params
+  const usersignupId = req.user;
+  const { contact_id } = req.params;
+
+  if (!usersignupId) {
+    throw badRequestError("No more user access to login");
+  } else {
+    // querying for delete contact from contact model specific _id into the database
+    let contactInfo = await contactModel.deleteOne({ _id: contact_id });
+
+    // here declare caching clear
+    const cacheKeys = [
+      `userprofileInfo:${usersignupId}`,
+      "userprofileInfoAll:all",
+      "contactlistview:contactall",
+      `contactprofile:${usersignupId}`,
+    ];
+    cache.del(cacheKeys);
+
+    return { contactInfo };
+  }
+};
 
 // here define for handle contactEdit controller function
-export const contactEdit = async (req) => {};
+export const contactEdit = async (req) => {
+  // declare payload of body and params
+  const usersignupId = req.user;
+  const { contact_id } = req.params;
+  const { contact_username, contact_userphone, contact_countrycode } = req.body;
+
+  if (!usersignupId) {
+    throw badRequestError("No more user access to login");
+  } else {
+    // querying to the update contact user name for specific _id of contact model into the database
+    let contactInfo = await contactModel.updateOne(
+      { _id: contact_id },
+      {
+        $set: {
+          contact_username: contact_username,
+          contact_userphone: contact_userphone,
+          contact_countrycode: contact_countrycode,
+        },
+      }
+    );
+
+    // here declare caching clear
+    const cacheKeys = [
+      `userprofileInfo:${usersignupId}`,
+      "userprofileInfoAll:all",
+      "contactlistview:contactall",
+      `contactprofile:${usersignupId}`,
+    ];
+    cache.del(cacheKeys);
+
+    return { contactInfo };
+  }
+};
