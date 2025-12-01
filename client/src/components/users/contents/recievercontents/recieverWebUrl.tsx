@@ -1,5 +1,10 @@
 import { FaUser } from "react-icons/fa";
-import { AiFillLike } from "react-icons/ai";
+import {
+  AiFillLike,
+  // AiFillHeart
+} from "react-icons/ai";
+// import { FaLaughSquint, FaSmileBeam } from "react-icons/fa";
+// import { FaRegFaceKissWinkHeart, FaFaceAngry } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { recieverChatdropDownMenuItems } from "../../../models/recieverModel.ts";
 import { useRecieverMenu } from "../../../hooks/recieverhooks.ts";
@@ -73,8 +78,13 @@ const RecieverWebUrl: React.FC<recieverChatdropDownMenuItems> = ({
           </div>
 
           {/* reciever like content */}
-          <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-slate-300 ring-2 shadow-md ring-black/5">
-            <AiFillLike className="w-4 h-4 text-blue-700  mx-auto" />
+          <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-slate-50 ring-2 shadow-md ring-slate-50">
+            <AiFillLike className="w-4 h-4 text-blue-700 my-[2px]  mx-auto" />
+            {/* <AiFillHeart className="w-4 h-4 text-pink-700 my-[2px] mx-auto" /> */}
+            {/* <FaLaughSquint className="w-4 h-4 text-yellow-300 bg-black rounded-full my-[2px] mx-auto" /> */}
+            {/* <FaSmileBeam className="w-4 h-4 text-yellow-300 bg-black rounded-full my-[2px] mx-auto" /> */}
+            {/* <FaRegFaceKissWinkHeart className="w-4 h-4 text-red-600 bg-yellow-300 rounded-full my-[2px] mx-auto" /> */}
+            {/* <FaFaceAngry className="w-4 h-4 text-red-600 bg-black rounded-full my-[2px] mx-auto" /> */}
           </span>
         </div>
         {/* end div */}

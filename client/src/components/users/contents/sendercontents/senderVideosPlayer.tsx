@@ -5,7 +5,12 @@ import {
 import { FaUser } from "react-icons/fa";
 import { FaRegCirclePlay } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { AiFillLike } from "react-icons/ai";
+import {
+  AiFillLike,
+  // AiFillHeart
+} from "react-icons/ai";
+// import { FaLaughSquint, FaSmileBeam } from "react-icons/fa";
+// import { FaRegFaceKissWinkHeart, FaFaceAngry } from "react-icons/fa6";
 import { senderChatdropDownMenuItems } from "../../../models/senderModel.ts";
 import { useSenderMenu } from "../../../hooks/senderhooks.ts";
 
@@ -112,9 +117,14 @@ const SenderVideosPlayer: React.FC<senderChatdropDownMenuItems> = ({
           </div>
           {/* end sender video player content */}
 
-          {/* sender like content */}
-          <span className="absolute -bottom-0.5 -left-0.5 w-5 h-5 rounded-full bg-white ring-2 shadow-md ring-white">
-            <AiFillLike className="w-4 h-4 text-blue-700  mx-auto" />
+          {/* sender likes content */}
+          <span className="absolute -bottom-0.5 -left-0.5 w-5 h-5 rounded-full bg-slate-50 ring-2 shadow-md ring-slate-50">
+            <AiFillLike className="w-4 h-4 text-blue-700 my-[2px] mx-auto" />
+            {/* <AiFillHeart className="w-4 h-4 text-pink-700 my-[2px] mx-auto" /> */}
+            {/* <FaLaughSquint className="w-4 h-4 text-yellow-300 bg-black rounded-full my-[2px] mx-auto" /> */}
+            {/* <FaSmileBeam className="w-4 h-4 text-yellow-300 bg-black rounded-full my-[2px] mx-auto" /> */}
+            {/* <FaRegFaceKissWinkHeart className="w-4 h-4 text-red-600 bg-yellow-300 rounded-full my-[2px] mx-auto" /> */}
+            {/* <FaFaceAngry className="w-4 h-4 text-red-600 bg-black rounded-full my-[2px] mx-auto" /> */}
           </span>
         </div>
         {/* end div */}
