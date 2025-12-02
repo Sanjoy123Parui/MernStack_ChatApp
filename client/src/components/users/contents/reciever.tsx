@@ -21,6 +21,7 @@ const Reciever: React.FC = () => {
     "Paste",
     "Delete",
     "Like",
+    "Close",
   ];
 
   return (

@@ -37,6 +37,7 @@ const Chats: React.FC = () => {
     "Report",
     "Mute",
     "Clear All",
+    "Close chat",
   ];
 
   // here was declare custom hooks

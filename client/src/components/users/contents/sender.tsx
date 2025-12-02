@@ -23,6 +23,7 @@ const Sender: React.FC = () => {
     "Edit",
     "Delete",
     "Like",
+    "Close",
   ];
 
   return (

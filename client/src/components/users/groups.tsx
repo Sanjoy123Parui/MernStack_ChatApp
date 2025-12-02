@@ -36,6 +36,7 @@ const Groups: React.FC = () => {
     "Create Admin",
     "Add members",
     "Clear All",
+    "Close chat",
   ];
 
   // here was declare some custom hooks
