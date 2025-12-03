@@ -37,7 +37,7 @@ const UserActionNav: React.FC = () => {
       handleAction: handleAccouts,
     },
     {
-      actionItemsName: "Logout",
+      actionItemsName: "Signout",
       actionIcon: <FiLogOut className="mx-1" />,
       handleAction: handleLogout,
     },
@@ -73,19 +73,19 @@ const UserNav: React.FC = () => {
 
   // here declare nav list content
   const chatNavItem: userNavListItem[] = [
-    // {
-    //   listIcon: <MdOutlineChatBubble />,
-    //   listItem: "Chat",
-    //   itemPath: "/user/content/chat",
-    // itemActions: handleNavMenuClose,
-    // },
-
     {
+      listIcon: <MdOutlineChatBubble />,
+      listItem: "Chat",
+      itemPath: "/user/content/chat",
+      itemActions: handleNavMenuClose,
+    },
+
+    /* {
       listIcon: <MdOutlineChatBubble />,
       listItem: "Chat",
       itemPath: "/",
       itemActions: handleNavMenuClose,
-    },
+    }, */
 
     {
       listIcon: <MdGroups />,

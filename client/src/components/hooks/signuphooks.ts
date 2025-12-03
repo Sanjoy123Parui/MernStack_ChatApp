@@ -27,10 +27,12 @@ export const useUserLogoutModal = (): userLogoutModalProps => {
 
   // here declare useState hooks
   const [isLogoutModal, setIsLogoutModal] = useState<boolean>(false);
+
   // define function for logout modal open
   const openLogoutModal = () => setIsLogoutModal(true);
   // define function for logout modal close
   const closeLogoutModal = () => setIsLogoutModal(false);
+
   return {
     userLogoutAlertMessage,
     isLogoutModal,

@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Userlayout from "./userlayout.tsx";
 
 // here was define and import all children components
-/* const UserLogin: any = lazy(() => import("../users/signup/userLogin.tsx"));
+const UserLogin: any = lazy(() => import("../users/signup/userLogin.tsx"));
 const UserRegister: any = lazy(
   () => import("../users/signup/userRegister.tsx")
 );
@@ -12,7 +12,7 @@ const UserChangePassword: any = lazy(
 );
 const UserCreateProfile: any = lazy(
   () => import("../users/profiles/userCreateProfile.tsx")
-); */
+);
 
 const Chat: any = lazy(() => import("../users/chats.tsx"));
 const Stories: any = lazy(() => import("../users/stories.tsx"));
@@ -31,7 +31,7 @@ const Routerlayout: React.FC = () => {
       path: "/",
       element: <Userlayout />,
       children: [
-        /* {
+        {
           path: "/",
           element: <UserLogin />,
         },
@@ -54,12 +54,12 @@ const Routerlayout: React.FC = () => {
         {
           path: "/user/content/chat",
           element: <Chat />,
-        }, */
+        },
 
-        {
+        /* {
           path: "/",
           element: <Chat />,
-        },
+        }, */
 
         {
           path: "/user/content/story",

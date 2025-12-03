@@ -163,10 +163,9 @@ const ProfileCreateForm: React.FC<createProfilesFormprops> = ({
                         <FiUpload className="w-10 h-10 mb-3 text-gray-400" />
                         <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                           <span className="font-semibold">Click to upload</span>{" "}
-                          or drag and drop
                         </p>
                         <p className="text-xs text-gray-500 dark:text-gray-400">
-                          SVG, PNG, JPG or GIF (MAX. 800x400px)
+                          PNG, JPG or JPEG (MAX. 800x400px)
                         </p>
                         {fileName && (
                           <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">

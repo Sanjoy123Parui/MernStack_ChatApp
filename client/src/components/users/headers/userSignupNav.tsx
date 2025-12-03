@@ -11,13 +11,13 @@ const UserSignupNav: React.FC = () => {
   // here declare nav list items
   const signupList: userSignupListItem[] = [
     {
-      listItem: "Login",
+      listItem: "Signin",
       itemPath: "/",
       itemActions: handleNavMenuClose,
     },
     {
-      listItem: "Register",
-      itemPath: "/user/Register",
+      listItem: "Signup",
+      itemPath: "/user/register",
       itemActions: handleNavMenuClose,
     },
   ];

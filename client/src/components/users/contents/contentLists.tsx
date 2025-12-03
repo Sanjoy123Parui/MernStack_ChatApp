@@ -5,7 +5,6 @@ import { IoMdPersonAdd } from "react-icons/io";
 import { MdGroupAdd } from "react-icons/md";
 import { Button } from "../../ui/button.tsx";
 import { useUserSettingToggleContext } from "../../hooks/contexts/userSettingContexts.ts";
-
 import { useUserContactActionContext } from "../../hooks/contexts/userContactContext.ts";
 
 // here was ContentLists functional components
@@ -14,7 +13,8 @@ const ContentLists: React.FC = () => {
   let messages: string = `Hii`;
 
   // declare useMatch hooks for check url path are matched or not
-  const chatsPathMatch: any = useMatch("/");
+  // const chatsPathMatch: any = useMatch("/");
+  const chatsPathMatch: any = useMatch("/user/content/chat");
   const groupsPathMatch: any = useMatch("/user/content/groups");
   const storiesPathMatch: any = useMatch("/user/content/story");
 

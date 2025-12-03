@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 import { CiCircleAlert } from "react-icons/ci";
 import { useUserLogoutModalContext } from "../hooks/contexts/userSignupContext.ts";
@@ -6,6 +7,15 @@ const UserLogout: React.FC = () => {
   // here was declare custom hooks for destruct data
   const { userLogoutAlertMessage, closeLogoutModal }: any =
     useUserLogoutModalContext();
+  const navigate: any = useNavigate();
+
+  const handleLogout = () => {
+    setTimeout(() => {
+      localStorage.clear();
+      navigate("/");
+      closeLogoutModal();
+    }, 3000);
+  };
 
   return (
     <>
@@ -34,6 +44,7 @@ const UserLogout: React.FC = () => {
             <div className="flex flex-col sm:flex-row justify-center sm:justify-end px-6 space-y-4 sm:space-y-0 sm:space-x-4">
               <button
                 type="button"
+                onClick={handleLogout}
                 className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 h-10 md:h-12 w-full sm:w-auto"
               >
                 Yes, I'am sure

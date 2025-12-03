@@ -1,10 +1,13 @@
 import ProfileCreateForm from "../../forms/profileCreateForm.tsx";
 import { useUserCreateProfile } from "../../hooks/usersAccounthooks.ts";
+import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
+import UserLogout from "../../modals/userLogout.tsx";
 
 // define userCreate functional component
 const UserCreateProfile: React.FC = () => {
   const createProfileHeading: string = "Create Your Profile";
   // here destruct datat form user create profile context
+  const { isLogoutModal }: any = useUserLogoutModalContext();
   const {
     createProfileStateValues,
     createProfileFormAction,
@@ -44,6 +47,8 @@ const UserCreateProfile: React.FC = () => {
           </section>
           {/* end section */}
         </div>
+
+        <div>{isLogoutModal && <UserLogout />}</div>
       </div>
     </>
   );

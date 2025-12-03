@@ -72,13 +72,13 @@ const UserLogin: React.FC = () => {
                     >
                       <span className="text-base text-gray-700 font-medium">
                         {listItem.desc}
+                        <Link
+                          to={listItem.links}
+                          className="text-indigo-600 font-semibold px-3 py-1 rounded focus:outline-none focus:underline hover:text-indigo-800 transition-all duration-200"
+                        >
+                          {listItem.linkName}
+                        </Link>
                       </span>
-                      <Link
-                        to={listItem.links}
-                        className="text-indigo-600 font-semibold px-3 py-1 rounded focus:outline-none focus:underline hover:text-indigo-800 transition-all duration-200"
-                      >
-                        {listItem.linkName}
-                      </Link>
                     </div>
                   ))}
                 </div>
