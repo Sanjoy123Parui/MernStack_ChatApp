@@ -2,14 +2,14 @@
 import { Link } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import RegisterForm from "../../forms/registerForm.tsx";
-import { useUserRegister } from "../../hooks/usersAccounthooks.ts";
+import { useUserRegister } from "../../hooks/signuphooks.ts";
 
 const UserRegister: React.FC = () => {
   // here was declare register heading
   const registerHeading: string = "Register";
 
   // here destruct data from custom hooks
-  const { signupStateValues, singupFormAction, signupIsPending }: any =
+  const { signupStateValues, signupFormAction, signupIsPending }: any =
     useUserRegister();
 
   return (
@@ -44,7 +44,7 @@ const UserRegister: React.FC = () => {
 
                 <RegisterForm
                   signupStateValues={signupStateValues}
-                  singupFormAction={singupFormAction}
+                  signupFormAction={signupFormAction}
                   signupIsPending={signupIsPending}
                 />
 

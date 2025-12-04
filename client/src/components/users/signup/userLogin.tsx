@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import LoginForm from "../../forms/loginForm.tsx";
 import { routeSignupNavigateList } from "../../models/contentModel.ts";
-import { useUserLogin } from "../../hooks/usersAccounthooks.ts";
+import { useUserLogin } from "../../hooks/signuphooks.ts";
 
 // here define UserLogin component
 const UserLogin: React.FC = () => {
@@ -25,7 +25,7 @@ const UserLogin: React.FC = () => {
   const loginHeading: string = " Login";
 
   // destruct data from custom hook
-  const { signinStateValues, singinFormAction, signinIsPending }: any =
+  const { signinStateValues, signinFormAction, signinIsPending }: any =
     useUserLogin();
 
   return (
@@ -59,7 +59,7 @@ const UserLogin: React.FC = () => {
                 {/* here login  Form component */}
                 <LoginForm
                   signinStateValues={signinStateValues}
-                  singinFormAction={singinFormAction}
+                  signinFormAction={signinFormAction}
                   signinIsPending={signinIsPending}
                 />
 
