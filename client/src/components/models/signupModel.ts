@@ -46,6 +46,16 @@
   isPending: boolean;
 } */
 
+// here was declare with exporting togglePassword interface model
+export interface togglePasswordprops {
+  isRegisterPassword: boolean;
+  isLoginPassword: boolean;
+  isForgotPassword: boolean;
+  toggleRegisterPassword: () => void;
+  toggleLoginPassword: () => void;
+  toggleForgotPassword: () => void;
+}
+
 // here userLogout modal popup modal props
 export interface userLogoutModalProps {
   userLogoutAlertMessage: string;
@@ -93,4 +103,26 @@ export interface signinFormprops {
   signinStateValues: any;
   signinFormAction: (formData: FormData) => unknown;
   signinIsPending: boolean;
+}
+
+// here declare and also exporting forgotPassword related interface model
+export interface forgotPasswordFormValues {
+  old_password: string;
+  new_password: string;
+  confirmPassword: string;
+}
+
+export interface forgotPasswordFormdata {
+  old_password: string;
+  new_password: string;
+  confirmPassword: string;
+  errors?: forgotPasswordFormValues;
+  success: boolean;
+  message: string;
+}
+
+export interface forgotPasswordFormprops {
+  forgotPasswordStateValues: any;
+  forgotPasswordFormAction: (formData: FormData) => unknown;
+  forgotPasswordIsPending: boolean;
 }

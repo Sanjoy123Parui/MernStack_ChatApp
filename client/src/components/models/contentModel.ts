@@ -5,12 +5,6 @@ export interface routeSignupNavigateList {
   linkName: string;
 }
 
-// here declare togglePasswordprops with export
-export interface togglePasswordprops {
-  isTogglePassword: boolean;
-  togglePasswordVisiblity: () => void;
-}
-
 // here declare profileImagesCrop model
 export interface profileImagesCropItems {
   imageSrc: any;

@@ -1,18 +1,8 @@
 import { useState, useCallback } from "react";
 import {
-  togglePasswordprops,
   profileImagesCropItems,
   userChatsHeadingToggle,
 } from "../models/contentModel.ts";
-
-// declare custom hook of useTogglePassword with export
-export const useTogglePassword = (defaultValue: any): togglePasswordprops => {
-  const [isTogglePassword, setIsTogglePassword] =
-    useState<boolean>(defaultValue);
-  // define function was togglePassword
-  const togglePasswordVisiblity = () => setIsTogglePassword(!isTogglePassword);
-  return { isTogglePassword, togglePasswordVisiblity };
-};
 
 // declare custom hook of useProfileAvtar with export
 export const useProfileAvtar = (): profileImagesCropItems => {

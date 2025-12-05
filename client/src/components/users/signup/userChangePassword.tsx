@@ -1,16 +1,23 @@
 import { Link } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
+// import PasswordChangeForm from "../../forms/passwordChangeForm.tsx";
+// import { useUserforgetPassword } from "../../hooks/usersAccounthooks.ts";
 import PasswordChangeForm from "../../forms/passwordChangeForm.tsx";
-import { useUserforgetPassword } from "../../hooks/usersAccounthooks.ts";
+import { useUserForgotPassword } from "../../hooks/signuphooks.ts";
 
 // here define use changepassword functional component
 const UserChangePassword: React.FC = () => {
   // here was declare heading
-  const changeHeading: string = "Change Password";
+  const changeHeading: string = "Forgot User";
 
   // here destruct custom hooks data
-  const { forgetStateValues, forgetFormAction, forgetIsPending }: any =
-    useUserforgetPassword();
+  /*  const { forgetStateValues, forgetFormAction, forgetIsPending }: any =
+    useUserforgetPassword(); */
+  const {
+    forgotPasswordStateValues,
+    forgotPasswordFormAction,
+    forgotPasswordIsPending,
+  }: any = useUserForgotPassword();
 
   return (
     <>
@@ -41,10 +48,15 @@ const UserChangePassword: React.FC = () => {
                 </h1>
 
                 {/*  here define password change functional component */}
-                <PasswordChangeForm
+                {/* <PasswordChangeForm
                   forgetStateValues={forgetStateValues}
                   forgetFormAction={forgetFormAction}
                   forgetIsPending={forgetIsPending}
+                /> */}
+                <PasswordChangeForm
+                  forgotPasswordStateValues={forgotPasswordStateValues}
+                  forgotPasswordFormAction={forgotPasswordFormAction}
+                  forgotPasswordIsPending={forgotPasswordIsPending}
                 />
 
                 {/* start div for links route */}

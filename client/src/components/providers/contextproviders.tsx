@@ -1,6 +1,5 @@
 // here import some children Context Provider component
 import {
-  TogglePasswordProvider,
   AvatarProvider,
   UserToggleContentOptionProvider,
 } from "./usercontentproviders.tsx";
@@ -11,7 +10,10 @@ import {
   UserSettingsProvider,
 } from "./usersettingproviders.tsx";
 
-import { UserLogoutModalContextProvider } from "./usersignupprovider.tsx";
+import {
+  UserTogglePasswordContextProvider,
+  UserLogoutModalContextProvider,
+} from "./usersignupprovider.tsx";
 
 import {
   UserProfileProvider,
@@ -27,25 +29,25 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <>
       <UserNavMenuProviders>
-        <TogglePasswordProvider>
-          <UserAccessoriesProvider>
-            <UserLogoutModalContextProvider>
-              <UserProfileProvider>
-                <UpdateProfileUserProvider>
-                  <AvatarProvider>
-                    <UserSettingsProvider>
-                      <UserToggleContentOptionProvider>
-                        <UserContactActionProvider>
+        <UserAccessoriesProvider>
+          <UserLogoutModalContextProvider>
+            <UserProfileProvider>
+              <UpdateProfileUserProvider>
+                <AvatarProvider>
+                  <UserSettingsProvider>
+                    <UserToggleContentOptionProvider>
+                      <UserContactActionProvider>
+                        <UserTogglePasswordContextProvider>
                           {children}
-                        </UserContactActionProvider>
-                      </UserToggleContentOptionProvider>
-                    </UserSettingsProvider>
-                  </AvatarProvider>
-                </UpdateProfileUserProvider>
-              </UserProfileProvider>
-            </UserLogoutModalContextProvider>
-          </UserAccessoriesProvider>
-        </TogglePasswordProvider>
+                        </UserTogglePasswordContextProvider>
+                      </UserContactActionProvider>
+                    </UserToggleContentOptionProvider>
+                  </UserSettingsProvider>
+                </AvatarProvider>
+              </UpdateProfileUserProvider>
+            </UserProfileProvider>
+          </UserLogoutModalContextProvider>
+        </UserAccessoriesProvider>
       </UserNavMenuProviders>
     </>
   );

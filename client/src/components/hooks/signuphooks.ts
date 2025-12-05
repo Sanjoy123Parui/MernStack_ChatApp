@@ -1,15 +1,19 @@
 import { useState, useActionState } from "react";
 
 import {
+  togglePasswordprops,
   userLogoutModalProps,
   signupFormdata,
   signupFormprops,
   signinFormdata,
   signinFormprops,
+  forgotPasswordFormdata,
+  forgotPasswordFormprops,
 } from "../models/signupModel.ts";
 import {
   userRegisterValidation,
   userLoginValidation,
+  userForgotPasswordValidation,
 } from "../validations/signupValidator.ts";
 /* import {
   userValidateSignup,
@@ -297,11 +301,26 @@ import {
 // define and exporting custom hook of userSignup related all operations
 
 // define custom hook for user forms show-hide password
-export const useUserTogglePassword = (defaultValue: any): any => {
-  const [isTogglePassword, setIsTogglePassword] =
-    useState<boolean>(defaultValue);
-  const togglePasswordVisiblity = () => setIsTogglePassword(!isTogglePassword);
-  return { isTogglePassword, togglePasswordVisiblity };
+export const useUserTogglePassword = (): togglePasswordprops => {
+  // declare hooks for manage states variables
+  const [isRegisterPassword, setIsRegisterPassword] = useState<boolean>(false);
+  const [isLoginPassword, setIsLoginPassword] = useState<boolean>(false);
+  const [isForgotPassword, setIsForgotPassword] = useState<boolean>(false);
+
+  // define function for handle states
+  const toggleRegisterPassword = () =>
+    setIsRegisterPassword((prev: any) => !prev);
+  const toggleLoginPassword = () => setIsLoginPassword((prev: any) => !prev);
+  const toggleForgotPassword = () => setIsForgotPassword((prev: any) => !prev);
+
+  return {
+    isRegisterPassword,
+    isLoginPassword,
+    isForgotPassword,
+    toggleRegisterPassword,
+    toggleLoginPassword,
+    toggleForgotPassword,
+  };
 };
 
 // define custom hook for user logout popup modal open and close
@@ -342,7 +361,7 @@ export const useUserRegister = (): signupFormprops => {
       };
 
       // declare instance Object of errors
-      let errors: any = userRegisterValidation({
+      const errors: any = userRegisterValidation({
         phone: formValues.phone,
         password: formValues.password,
         confirmPassword: formValues.confirmPassword,
@@ -413,7 +432,7 @@ export const useUserLogin = (): signinFormprops => {
       };
 
       // declare instance Object of errors
-      let errors: any = userLoginValidation({
+      const errors: any = userLoginValidation({
         phone: formValues.phone,
         password: formValues.password,
       });
@@ -466,4 +485,93 @@ export const useUserLogin = (): signinFormprops => {
   >(userSigninAction, userSigninInitial);
 
   return { signinStateValues, signinFormAction, signinIsPending };
+};
+
+// define custom hook for user forgotPassword form
+export const useUserForgotPassword = (): forgotPasswordFormprops => {
+  // define function for handle userforgotPasswordAction
+  const userforgotPasswordAction = async (
+    prevData: forgotPasswordFormdata,
+    formData: FormData
+  ): Promise<forgotPasswordFormdata> => {
+    try {
+      // declare formValues
+      const formValues: any = {
+        old_password: formData.get("old_password")?.toString()?.trim() || "",
+        new_password: formData.get("new_password")?.toString()?.trim() || "",
+        confirmPassword:
+          formData.get("confirmPassword")?.toString()?.trim() || "",
+      };
+
+      // declare error instance object of validation
+      const errors: any = userForgotPasswordValidation({
+        old_password: formValues.old_password,
+        new_password: formValues.new_password,
+        confirmPassword: formValues.confirmPassword,
+      });
+
+      // here was handle promise
+      await new Promise((resolve: any) => setTimeout(resolve, 2000));
+
+      // declare userfilterPassword of validation errors
+      const userfilteredPassword: any = Object.entries(errors).reduce(
+        (acc: any, [key, value]: any) => {
+          return value ? { ...acc, [key]: value } : acc;
+        },
+        {}
+      );
+
+      if (Object.keys(userfilteredPassword).length > 0) {
+        return {
+          ...prevData,
+          errors: { ...userfilteredPassword },
+          success: false,
+          message: "",
+        };
+      }
+
+      return {
+        ...formValues,
+        errors: {
+          old_password: "",
+          new_password: "",
+          confirmPassword: "",
+        },
+        success: true,
+        message: "Password has been changed successfully",
+      };
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  // declare userforgotPasswordInitial
+  const userforgotPasswordInitial: forgotPasswordFormdata = {
+    old_password: "",
+    new_password: "",
+    confirmPassword: "",
+    errors: {
+      old_password: "",
+      new_password: "",
+      confirmPassword: "",
+    },
+    success: false,
+    message: "",
+  };
+
+  // declare useActionState hook for handle forgotPassword form states
+  const [
+    forgotPasswordStateValues,
+    forgotPasswordFormAction,
+    forgotPasswordIsPending,
+  ] = useActionState<forgotPasswordFormdata, FormData>(
+    userforgotPasswordAction,
+    userforgotPasswordInitial
+  );
+
+  return {
+    forgotPasswordStateValues,
+    forgotPasswordFormAction,
+    forgotPasswordIsPending,
+  };
 };

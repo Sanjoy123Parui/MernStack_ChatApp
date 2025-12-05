@@ -1,5 +1,9 @@
 // Consuming to the importng some modules
-import { signupFormValues, signinFormValues } from "../models/signupModel.ts";
+import {
+  signupFormValues,
+  signinFormValues,
+  forgotPasswordFormValues,
+} from "../models/signupModel.ts";
 
 /* import {
   userSignupFormErrors,
@@ -71,13 +75,7 @@ import { signupFormValues, signinFormValues } from "../models/signupModel.ts";
 export const userRegisterValidation = (
   defaultValues: any
 ): signupFormValues => {
-  let errors: any = {
-    /* phone: !defaultValues.phone
-      ? "Phone number field is required"
-      : !/^\+?[0-9]\d{4,15}$/.test(defaultValues.phone)
-      ? "Phone number must be selected country according for 10 to 15 digit number"
-      : "", */
-
+  const errors: any = {
     phone: !defaultValues.phone
       ? "Phone number field is required"
       : !/^\+\d{7,15}$/.test(defaultValues.phone)
@@ -103,7 +101,7 @@ export const userRegisterValidation = (
 
 // here define and exporting userLogin validation function
 export const userLoginValidation = (defaultValues: any): signinFormValues => {
-  let errors: any = {
+  const errors: any = {
     phone: !defaultValues.phone
       ? "Phone number field is required"
       : !/^\+\d{7,15}$/.test(defaultValues.phone)
@@ -116,6 +114,37 @@ export const userLoginValidation = (defaultValues: any): signinFormValues => {
           defaultValues.password
         )
       ? `Password must be 8-15 chars, include upper, lower, number, and special character`
+      : "",
+  };
+
+  return { ...errors };
+};
+
+// here define and exporting userForgotPassword validation function
+export const userForgotPasswordValidation = (
+  defaultValues: any
+): forgotPasswordFormValues => {
+  const errors: any = {
+    old_password: !defaultValues.old_password
+      ? "Password field is required"
+      : !/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}$/.test(
+          defaultValues.old_password
+        )
+      ? `Password must be 8-15 chars, include upper, lower, number, and special character`
+      : "",
+
+    new_password: !defaultValues.new_password
+      ? "New Password field is required"
+      : !/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}$/.test(
+          defaultValues.new_password
+        )
+      ? `New Password must be 8-15 chars, include upper, lower, number, and special character`
+      : "",
+
+    confirmPassword: !defaultValues.confirmPassword
+      ? "Confirm password field is required"
+      : defaultValues.new_password !== defaultValues.confirmPassword
+      ? "New Password do not match of confirm password"
       : "",
   };
 
