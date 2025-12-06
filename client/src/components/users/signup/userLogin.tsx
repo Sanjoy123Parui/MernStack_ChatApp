@@ -22,7 +22,7 @@ const UserLogin: React.FC = () => {
   ]);
 
   // here declare login form headin variable
-  const loginHeading: string = " Login";
+  const loginHeading: string = "User Login";
 
   // destruct data from custom hook
   const { signinStateValues, signinFormAction, signinIsPending }: any =

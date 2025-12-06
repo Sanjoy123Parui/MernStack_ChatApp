@@ -5,7 +5,7 @@ import UserLogout from "../../modals/userLogout.tsx";
 
 // define userCreate functional component
 const UserCreateProfile: React.FC = () => {
-  const createProfileHeading: string = "Create Your Profile";
+  const createProfileHeading: string = "User Profile";
   // here destruct datat form user create profile context
   const { isLogoutModal }: any = useUserLogoutModalContext();
   const {

@@ -6,7 +6,7 @@ import { useUserRegister } from "../../hooks/signuphooks.ts";
 
 const UserRegister: React.FC = () => {
   // here was declare register heading
-  const registerHeading: string = "Register";
+  const registerHeading: string = "User Account";
 
   // here destruct data from custom hooks
   const { signupStateValues, signupFormAction, signupIsPending }: any =

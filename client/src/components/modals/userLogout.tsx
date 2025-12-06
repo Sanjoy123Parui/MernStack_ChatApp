@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 import { CiCircleAlert } from "react-icons/ci";
@@ -9,11 +10,16 @@ const UserLogout: React.FC = () => {
     useUserLogoutModalContext();
   const navigate: any = useNavigate();
 
+  // declare state for pending
+  const [isLogoutPending, setIsLogoutPending] = useState<boolean>(false);
+
   const handleLogout = () => {
+    setIsLogoutPending(true);
     setTimeout(() => {
       localStorage.clear();
       navigate("/");
       closeLogoutModal();
+      setIsLogoutPending(false);
     }, 3000);
   };
 
@@ -45,9 +51,11 @@ const UserLogout: React.FC = () => {
               <button
                 type="button"
                 onClick={handleLogout}
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 h-10 md:h-12 w-full sm:w-auto"
+                disabled={isLogoutPending}
+                className="px-4 py-2 bg-red-500 text-white rounded 
+                hover:bg-red-600 h-10 md:h-12 w-full sm:w-auto"
               >
-                Yes, I'am sure
+                {isLogoutPending ? "...Loadng" : "Logout"}
               </button>
 
               <button
@@ -56,7 +64,7 @@ const UserLogout: React.FC = () => {
                 className="px-4 py-2 bg-green-500 text-white rounded 
                             hover:bg-green-600 h-10 md:h-12 w-full sm:w-auto"
               >
-                No, cancel
+                Cancel
               </button>
             </div>
           </div>

@@ -280,7 +280,7 @@ const ProfileCreateForm: React.FC<createProfilesFormprops> = ({
             className={`w-full h-10 sm:h-11 md:h-12 bg-gradient-to-br from-sky-500 via-teal-500 to-cyan-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 text-base 
               md:text-lg font-semibold text-white py-2 px-4 rounded-full focus:outline-none transition-all duration-200`}
           >
-            {createProfileIsPending ? "Loading..." : "Create"}
+            {createProfileIsPending ? "Loading..." : "Submit"}
           </Button>
         </div>
         {/* end create button content */}
