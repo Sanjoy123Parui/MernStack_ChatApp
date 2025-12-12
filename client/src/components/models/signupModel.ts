@@ -65,10 +65,10 @@ export interface userLogoutModalProps {
 }
 
 // here declare and also exporting registration related interface model
-export interface signupFormValues {
-  phone: string;
-  password: string;
-  confirmPassword: string;
+interface signupFormValues {
+  phone?: string;
+  password?: string;
+  confirmPassword?: string;
 }
 
 export interface signupFormdata {
@@ -87,9 +87,9 @@ export interface signupFormprops {
 }
 
 // here declare and also exporting login related interface model
-export interface signinFormValues {
-  phone: string;
-  password: string;
+interface signinFormValues {
+  phone?: string;
+  password?: string;
 }
 
 export interface signinFormdata {
@@ -106,10 +106,10 @@ export interface signinFormprops {
 }
 
 // here declare and also exporting forgotPassword related interface model
-export interface forgotPasswordFormValues {
-  old_password: string;
-  new_password: string;
-  confirmPassword: string;
+interface forgotPasswordFormValues {
+  old_password?: string;
+  new_password?: string;
+  confirmPassword?: string;
 }
 
 export interface forgotPasswordFormdata {

@@ -346,6 +346,16 @@ export const useUserLogoutModal = (): userLogoutModalProps => {
 
 // define custom hook for user registration form
 export const useUserRegister = (): signupFormprops => {
+  // declare userSignupInitial
+  const userSignupInitial: signupFormdata = {
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    errors: {},
+    success: false,
+    message: "",
+  };
+
   // define function for handle userSignupActions
   const userSignupAction = async (
     prevData: signupFormdata,
@@ -360,52 +370,33 @@ export const useUserRegister = (): signupFormprops => {
           formData.get("confirmPassword")?.toString()?.trim() || "",
       };
 
-      // declare instance Object of errors
-      const errors: any = userRegisterValidation({
-        phone: formValues.phone,
-        password: formValues.password,
-        confirmPassword: formValues.confirmPassword,
-      });
+      // declare instance Object of errors zod validations
+      const result: any = userRegisterValidation.safeParse(formValues);
 
       // here was manage promis
       await new Promise((resolve: any) => setTimeout(resolve, 2000));
 
-      // here was userfilteredRegister for validations
-      const userfilteredRegister: any = Object.entries(errors).reduce(
-        (acc: any, [key, value]: any) => {
-          return value ? { ...acc, [key]: value } : acc;
-        },
-        {}
-      );
+      // here was check field errors validation
+      if (!result.success) {
+        const fieldErrors: any = {};
+        result.error.errors.forEach((err: any) => {
+          if (err.path.length > 0) {
+            fieldErrors[err.path[0]] = err.message;
+          }
+        });
 
-      if (Object.keys(userfilteredRegister).length > 0) {
-        return {
-          ...prevData,
-          errors: { ...userfilteredRegister },
-          success: false,
-          message: "",
-        };
+        return { ...prevData, errors: fieldErrors, success: false };
       }
 
       return {
         ...formValues,
-        errors: { phone: "", password: "", confirmPassword: "" },
+        errors: {},
         success: true,
         message: "Account has been created succesfully",
       };
     } catch (error: any) {
       throw error;
     }
-  };
-
-  // declare userSignupInitial
-  const userSignupInitial: signupFormdata = {
-    phone: "",
-    password: "",
-    confirmPassword: "",
-    errors: { phone: "", password: "", confirmPassword: "" },
-    success: false,
-    message: "",
   };
 
   // declare useActionState hooks for handle userRegistration form.
@@ -419,6 +410,14 @@ export const useUserRegister = (): signupFormprops => {
 
 // define custom hook for user login form
 export const useUserLogin = (): signinFormprops => {
+  // declare userSigninInitial
+  const userSigninInitial: signinFormdata = {
+    phone: "",
+    password: "",
+    errors: {},
+    success: false,
+  };
+
   // define function for handle userSigninAction
   const userSigninAction = async (
     prevData: signinFormdata,
@@ -431,51 +430,34 @@ export const useUserLogin = (): signinFormprops => {
         password: formData.get("password")?.toString()?.trim() || "",
       };
 
-      // declare instance Object of errors
-      const errors: any = userLoginValidation({
-        phone: formValues.phone,
-        password: formValues.password,
-      });
+      // declare instance Object of errors validation
+      const result: any = userLoginValidation.safeParse(formValues);
 
       // here was handle Promise
       await new Promise((resolve: any) => setTimeout(resolve, 2000));
 
       // here was handle validation errors are filteredError
-      const userfilteredLogin: any = Object.entries(errors).reduce(
-        (acc: any, [key, value]: any) => {
-          return value ? { ...acc, [key]: value } : acc;
-        },
-        {}
-      );
-
-      if (Object.keys(userfilteredLogin).length > 0) {
-        return {
-          ...prevData,
-          errors: { ...userfilteredLogin },
-          success: false,
-        };
+      if (!result.success) {
+        const fieldErrors: any = {};
+        result.error.errors.forEach((err: any) => {
+          if (err.path.length > 0) {
+            fieldErrors[err.path[0]] = err.message;
+          }
+        });
+        return { ...prevData, errors: fieldErrors, success: false };
       }
-
       // here was stored token or Id on localstorage
       const userSignup: any = "jifpoefief54657dwegqihdeifhaghgbjxj";
       localStorage.setItem("userSignup", userSignup);
 
       return {
         ...formValues,
-        errors: { phone: "", password: "" },
+        errors: {},
         success: true,
       };
     } catch (error: any) {
       throw error;
     }
-  };
-
-  // declare userSigninInitial
-  const userSigninInitial: signinFormdata = {
-    phone: "",
-    password: "",
-    errors: { phone: "", password: "" },
-    success: false,
   };
 
   // declare useActionState hook for handle user login form
@@ -489,6 +471,16 @@ export const useUserLogin = (): signinFormprops => {
 
 // define custom hook for user forgotPassword form
 export const useUserForgotPassword = (): forgotPasswordFormprops => {
+  // declare userforgotPasswordInitial
+  const userforgotPasswordInitial: forgotPasswordFormdata = {
+    old_password: "",
+    new_password: "",
+    confirmPassword: "",
+    errors: {},
+    success: false,
+    message: "",
+  };
+
   // define function for handle userforgotPasswordAction
   const userforgotPasswordAction = async (
     prevData: forgotPasswordFormdata,
@@ -504,59 +496,32 @@ export const useUserForgotPassword = (): forgotPasswordFormprops => {
       };
 
       // declare error instance object of validation
-      const errors: any = userForgotPasswordValidation({
-        old_password: formValues.old_password,
-        new_password: formValues.new_password,
-        confirmPassword: formValues.confirmPassword,
-      });
+      const result: any = userForgotPasswordValidation.safeParse(formValues);
 
       // here was handle promise
       await new Promise((resolve: any) => setTimeout(resolve, 2000));
 
       // declare userfilterPassword of validation errors
-      const userfilteredPassword: any = Object.entries(errors).reduce(
-        (acc: any, [key, value]: any) => {
-          return value ? { ...acc, [key]: value } : acc;
-        },
-        {}
-      );
+      if (!result.success) {
+        const fieldErrors: any = {};
+        result.error.errors.forEach((err: any) => {
+          if (err.path.length > 0) {
+            fieldErrors[err.path[0]] = err.message;
+          }
+        });
 
-      if (Object.keys(userfilteredPassword).length > 0) {
-        return {
-          ...prevData,
-          errors: { ...userfilteredPassword },
-          success: false,
-          message: "",
-        };
+        return { ...prevData, errors: fieldErrors, success: false };
       }
 
       return {
         ...formValues,
-        errors: {
-          old_password: "",
-          new_password: "",
-          confirmPassword: "",
-        },
+        errors: {},
         success: true,
         message: "Password has been changed successfully",
       };
     } catch (error) {
       throw error;
     }
-  };
-
-  // declare userforgotPasswordInitial
-  const userforgotPasswordInitial: forgotPasswordFormdata = {
-    old_password: "",
-    new_password: "",
-    confirmPassword: "",
-    errors: {
-      old_password: "",
-      new_password: "",
-      confirmPassword: "",
-    },
-    success: false,
-    message: "",
   };
 
   // declare useActionState hook for handle forgotPassword form states
