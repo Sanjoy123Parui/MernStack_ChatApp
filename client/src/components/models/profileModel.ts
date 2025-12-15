@@ -77,7 +77,7 @@ export interface profilesContents {
 }
 
 // here was declare and exporting createprofile related interface model with exporting
-interface createProfileFormvalues {
+interface createProfileFormValues {
   first_name?: string;
   last_name?: string;
   avatar?: string;
@@ -86,19 +86,24 @@ interface createProfileFormvalues {
   abouts?: string;
 }
 
-export interface createProfileFormdata {
-  first_name: string;
-  last_name: string;
-  avatar: string;
-  dob: string;
-  gender: string;
-  abouts: string;
-  errors?: createProfileFormvalues;
+interface createProfileFormErrors {
+  first_name?: string;
+  last_name?: string;
+  avatar?: string;
+  dob?: string;
+  gender?: string;
+  abouts?: string;
+}
+
+export interface createProfileFormState {
+  stepper: number;
+  data: createProfileFormValues;
+  errors?: createProfileFormErrors;
   success: boolean;
 }
 
-export interface createProfileFormprops {
-  createState: any;
+export interface createProfileFormProps {
+  createState: createProfileFormState;
   createFormAction: (formData: FormData) => void;
   createIsPending: boolean;
 }

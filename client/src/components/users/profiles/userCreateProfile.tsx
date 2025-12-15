@@ -1,11 +1,15 @@
 import UserLogout from "../../modals/userLogout.tsx";
 import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
+import ProfileCreateForm from "../../forms/profileCreateForm.tsx";
+import { useNewUserProfile } from "../../hooks/profilehooks.ts";
 
 // define userCreate functional component
 const UserCreateProfile: React.FC = () => {
   const createProfileHeading: string = "User Profile";
   // here destruct datat form user create profile context
   const { isLogoutModal }: any = useUserLogoutModalContext();
+  const { createState, createFormAction, createIsPending }: any =
+    useNewUserProfile();
 
   return (
     <>
@@ -22,7 +26,8 @@ const UserCreateProfile: React.FC = () => {
             md:min-h-[70vh]"
             >
               <div
-                className="w-full max-w-md md:max-w-4xl bg-white rounded-2xl shadow-lg p-6 md:p-12 flex flex-col 
+                className="w-full max-w-md md:max-w-4xl bg-white rounded-2xl 
+                shadow-lg p-6 md:p-12 flex flex-col 
               justify-center mx-auto"
               >
                 {/* heading of create profile form */}
@@ -31,6 +36,11 @@ const UserCreateProfile: React.FC = () => {
                 </h1>
 
                 {/* here create profile Form component */}
+                <ProfileCreateForm
+                  createState={createState}
+                  createFormAction={createFormAction}
+                  createIsPending={createIsPending}
+                />
               </div>
             </div>
           </section>

@@ -53,29 +53,24 @@ export const updateProfileUserValidator = (
 };
 
 // define and exporting function of userCreateProfileValidation
-export const createProfileUserValidation = z
-  .object({
-    first_name: z.string().trim().min(1, `First name field is required`),
-    last_name: z.string().trim().min(1, "Last name field is required"),
-    avatar: z
-      .string()
-      .refine(
-        (values: any) =>
-          ["image/jpeg", "image/png", "image/jpg"].includes(values),
-        {
-          message: `Profile picture image must be JPEG, JPG or PNG`,
-        }
-      )
-      .optional(),
-    dob: z.string().trim().min(1, `Date of birth field is required`),
-    gender: z
-      .string()
-      .refine((values: any) => ["Male", "Female", "Other"].includes(values), {
-        message: `Please choose your gender`,
-      }),
-    abouts: z.string().trim().min(1, `Abouts field is required`),
-  })
-  .refine((data: any) => !!data.avatar, {
-    message: `Profile pic is required`,
-    path: ["avatar"],
-  });
+export const createProfileuserValidation = z.object({
+  first_name: z.string().trim().min(1, `First name field is required`),
+  last_name: z.string().trim().min(1, `Last name field is required`),
+  avatar: z
+    .any()
+    .refine((file: any) => file instanceof File, {
+      message: `Profile image field is required`,
+    })
+    .refine(
+      (fileType: any) =>
+        ["image/jpeg", "image/jpg", "image/png"].includes(fileType?.type),
+      { message: `Profile image must be JPEG, JPG or PNG File` }
+    ),
+  dob: z.string().trim().min(1, `Please select your date of birth`),
+  gender: z.enum(["Male", "Female", "Other"], {
+    errorMap: () => ({
+      message: `Select to the gender`,
+    }),
+  }),
+  abouts: z.string().trim().min(1, `Abouts field is required`),
+});

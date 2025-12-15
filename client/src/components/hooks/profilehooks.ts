@@ -4,8 +4,13 @@ import {
   profilesContents,
   editProfileFormdata,
   editProfileFormprops,
+  createProfileFormState,
+  createProfileFormProps,
 } from "../models/profileModel.ts";
-import { updateProfileUserValidator } from "../validations/profileValidator.ts";
+import {
+  updateProfileUserValidator,
+  createProfileuserValidation,
+} from "../validations/profileValidator.ts";
 
 // here was declare custom hooks with export of display profiles contents
 export const useUserProfileContents = (): profilesContents => {
@@ -256,3 +261,105 @@ export const useEditUserProfile = (): editProfileFormprops => {
 };
 
 /* define and exporting user create profile custom hook */
+export const useNewUserProfile = (): createProfileFormProps => {
+  // declare userProfileInitial
+  const userProfileInitial: createProfileFormState = {
+    stepper: 1,
+    data: {},
+    errors: {},
+    success: false,
+  };
+
+  // define function for userProfileAction form
+  const userProfileAction = async (
+    prevState: createProfileFormState,
+    formData: FormData
+  ): Promise<createProfileFormState> => {
+    try {
+      // Simulate for API delay
+      await new Promise((resolve: any) => setTimeout(resolve, 3000));
+      // first step field records of user profile form
+      if (prevState.stepper === 1) {
+        // declare firstStepValues
+        const firstStepValues: any = {
+          first_name: formData.get("first_name")?.toString()?.trim() || "",
+          last_name: formData.get("last_name")?.toString()?.trim() || "",
+          avatar: (formData.get("avatar") as File) || "",
+        };
+
+        // firstValidator declaration
+        const firstValidator = createProfileuserValidation
+          .pick({
+            first_name: true,
+            last_name: true,
+            avatar: true,
+          })
+          .safeParse(firstStepValues);
+
+        if (!firstValidator.success) {
+          const fieldErrors: any = {};
+          firstValidator.error.errors.forEach((err: any) => {
+            fieldErrors[err.path[0]] = err.message;
+          });
+          return { ...prevState, errors: fieldErrors };
+        }
+        return {
+          stepper: 2,
+          data: { ...prevState.data, ...firstStepValues },
+          errors: {},
+          success: false,
+        };
+      }
+
+      // second step field records of user profile form
+      if (prevState.stepper === 2) {
+        // declare secondStepValues
+        const secondStepValues: any = {
+          dob: formData.get("dob")?.toString()?.trim() || "",
+          gender: formData.get("gender")?.toString()?.trim() || "",
+          abouts: formData.get("abouts")?.toString()?.trim() || "",
+        };
+
+        // secondValidator declaration
+        const secondValidator = createProfileuserValidation
+          .pick({
+            dob: true,
+            gender: true,
+            abouts: true,
+          })
+          .safeParse(secondStepValues);
+
+        if (!secondValidator.success) {
+          const fieldErrors: any = {};
+          secondValidator.error.errors.forEach((err: any) => {
+            fieldErrors[err.path[0]] = err.message;
+          });
+          return { ...prevState, errors: fieldErrors };
+        }
+
+        // here declare userProfile dummy id
+        const userProfile: any = "fhgepweporiuf448866332ifuhwipefie";
+        localStorage.setItem("userProfile", userProfile);
+
+        return {
+          stepper: 2,
+          data: { ...prevState.data, ...secondStepValues },
+          errors: {},
+          success: true,
+        };
+      }
+
+      return prevState;
+    } catch (error: any) {
+      throw error;
+    }
+  };
+
+  // declare useActionState hook
+  const [createState, createFormAction, createIsPending] = useActionState<
+    createProfileFormState,
+    FormData
+  >(userProfileAction, userProfileInitial);
+
+  return { createState, createFormAction, createIsPending };
+};
