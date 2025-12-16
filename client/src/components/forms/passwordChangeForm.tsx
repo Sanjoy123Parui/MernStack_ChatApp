@@ -1,10 +1,11 @@
 // Consuming to the importing for all module in this component use
+import { useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
 import { useToggleUserPasswordContext } from "../hooks/contexts/userSignupContext.ts";
-import { forgotPasswordFormprops } from "../models/signupModel.ts";
+import { forgotPasswordFormProps } from "../models/signupModel.ts";
 
 // here import all libraries and functional components
 // import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -128,8 +129,8 @@ import { forgotPasswordFormprops } from "../models/signupModel.ts";
 // export default PasswordChangeForm;
 
 // here define change password form functional component
-const PasswordChangeForm: React.FC<forgotPasswordFormprops> = ({
-  forgotPasswordStateValues,
+const PasswordChangeForm: React.FC<forgotPasswordFormProps> = ({
+  forgotPasswordState,
   forgotPasswordFormAction,
   forgotPasswordIsPending,
 }) => {
@@ -137,15 +138,10 @@ const PasswordChangeForm: React.FC<forgotPasswordFormprops> = ({
   const { isForgotPassword, toggleForgotPassword }: any =
     useToggleUserPasswordContext();
 
-  const { old_password, new_password, confirmPassword, errors }: any =
-    forgotPasswordStateValues;
+  const { success, errors }: any = forgotPasswordState;
 
   // defined here function was handled getErrorsfield
-  const getUserforgotPassword = (fieldName: any) => errors[fieldName] || "";
-
-  if (old_password !== "" && new_password !== "" && confirmPassword !== "") {
-    console.log(forgotPasswordStateValues);
-  }
+  const getUserforgotPassword = (fieldName: any) => errors?.[fieldName] || "";
 
   // declare forgotPasswordFormfield as dynamic input field
   const forgotPasswordFormfield: any = [
@@ -167,6 +163,10 @@ const PasswordChangeForm: React.FC<forgotPasswordFormprops> = ({
       fieldName: "confirmPassword",
     },
   ];
+
+  useEffect(() => {
+    if (success) console.log(forgotPasswordState);
+  }, [success, forgotPasswordState]);
 
   return (
     <>
@@ -190,7 +190,7 @@ const PasswordChangeForm: React.FC<forgotPasswordFormprops> = ({
                   type={fieldType}
                   name={fieldName}
                   className={`appearance-none border-[1.5px] w-full h-10 sm:h-11 md:h-12 py-2 px-3 md:px-4 rounded-lg ${
-                    errors?.[fieldName]
+                    getUserforgotPassword(fieldName)
                       ? `border-red-300 focus:ring-red-700`
                       : `border-indigo-300 focus:ring-indigo-400`
                   } text-gray-900 leading-tight focus:outline-none focus:ring transition-all duration-200 bg-white text-base md:text-lg pr-10`}
@@ -211,7 +211,7 @@ const PasswordChangeForm: React.FC<forgotPasswordFormprops> = ({
               </div>
               {getUserforgotPassword(fieldName) && (
                 <p className="text-red-500 text-xs sm:text-sm md:text-base mt-1">
-                  {errors?.[fieldName]}
+                  {getUserforgotPassword(fieldName)}
                 </p>
               )}
             </div>

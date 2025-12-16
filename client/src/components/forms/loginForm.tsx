@@ -5,14 +5,14 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
-import { signinFormprops } from "../models/signupModel.ts";
+import { signinFormProps } from "../models/signupModel.ts";
 import { useToggleUserPasswordContext } from "../hooks/contexts/userSignupContext.ts";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
 // here define LoginForm functional component
-const LoginForm: React.FC<signinFormprops> = ({
-  signinStateValues,
+const LoginForm: React.FC<signinFormProps> = ({
+  signinState,
   signinFormAction,
   signinIsPending,
 }) => {
@@ -24,22 +24,14 @@ const LoginForm: React.FC<signinFormprops> = ({
     useToggleUserPasswordContext();
 
   // const { phone, password, errors }: any = stateValues;
-  const { password, errors }: any = signinStateValues;
+  const { success, errors }: any = signinState;
 
   // declare state manage of phone number with country code
-  const [phone, setPhone] = useState<any>(signinStateValues.phone || "");
+  const [phone, setPhone] = useState<any>(signinState.data.phone || "");
   const [countryCode, setCountryCode] = useState<string>("us");
 
   // define function for getLoginValidateError
-  const getUserLogin = (fieldName: any) => errors[fieldName] || "";
-
-  // here declare useEffect hook
-  useEffect(() => {
-    if (phone !== "" && password !== "") {
-      console.log(signinStateValues);
-      navigate("/user/create-profile");
-    }
-  }, [phone, password, navigate, signinStateValues]);
+  const getUserLogin = (fieldName: any) => errors?.[fieldName] || "";
 
   // declare login form input field as dynamic
   const loginFormfield: any = [
@@ -54,6 +46,14 @@ const LoginForm: React.FC<signinFormprops> = ({
       fieldName: "password",
     },
   ];
+
+  // here declare useEffect hook
+  useEffect(() => {
+    if (success) {
+      console.log(signinState);
+      navigate("/user/create-profile");
+    }
+  }, [success, navigate, signinState]);
 
   return (
     <>
@@ -94,7 +94,7 @@ const LoginForm: React.FC<signinFormprops> = ({
                     inputClass={`!w-full !h-10 !sm:h-11 !md:h-12 !pl-12 !pr-4 !rounded-lg
                       !text-gray-900 !text-base !md:text-lg
                       !appearance-none !border-[1.5px] ${
-                        errors?.[fieldName]
+                        getUserLogin(fieldName)
                           ? "!border-red-300 !focus:ring-red-700"
                           : "!border-indigo-300 !focus:ring-indigo-400"
                       } !bg-white !focus:outline-none !focus:ring !transition-all !duration-200`}
@@ -105,7 +105,7 @@ const LoginForm: React.FC<signinFormprops> = ({
                     name={fieldName}
                     className={`appearance-none border-[1.5px] w-full h-10 sm:h-11 md:h-12 py-2 px-3 md:px-4 rounded-lg 
                   ${
-                    errors?.[fieldName]
+                    getUserLogin(fieldName)
                       ? `border-red-300 focus:ring-red-700`
                       : `border-indigo-300 focus:ring-indigo-400`
                   } text-gray-900 leading-tight focus:outline-none focus:ring transition-all duration-200 bg-white text-base md:text-lg pr-10`}
@@ -129,7 +129,7 @@ const LoginForm: React.FC<signinFormprops> = ({
               </div>
               {getUserLogin(fieldName) && (
                 <p className="text-red-500 text-xs sm:text-sm md:text-base mt-1">
-                  {errors?.[fieldName]}
+                  {getUserLogin(fieldName)}
                 </p>
               )}
             </div>

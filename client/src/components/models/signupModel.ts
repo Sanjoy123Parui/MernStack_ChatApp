@@ -1,51 +1,3 @@
-// here was declare and export instance of signupFormErrors interface model
-/* export interface signupFormErrors {
-  phone: string;
-  password: string;
-  confirmPassword: string;
-} */
-
-// here was declare and export instance of  signupFormdata interface model
-/* export interface signupFormdata {
-  phone: string;
-  password: string;
-  confirmPassword: string;
-  errors?: signupFormErrors;
-  success?: boolean;
-  error?: string;
-  message?: string;
-} */
-
-// here was declare and export instance of signupFormprops interface model
-/* export interface signupFormprops {
-  stateValues: any;
-  formAction: (formData: FormData) => unknown;
-  isPending: boolean;
-} */
-
-// here was declare and export instance of signinFormErrors interface model
-/* export interface signinFormErrors {
-  phone: string;
-  password: string;
-} */
-
-// here was declare and export instance of  signinFormdata interface model
-/* export interface signinFormdata {
-  phone: string;
-  password: string;
-  errors?: signinFormErrors;
-  success?: boolean;
-  error: string;
-  message?: string;
-} */
-
-// here was declare and export instance of signinFormprops interface model
-/* export interface signinFormprops {
-  stateValues: any;
-  formAction: (formData: FormData) => unknown;
-  isPending: boolean;
-} */
-
 // here was declare with exporting togglePassword interface model
 export interface togglePasswordprops {
   isRegisterPassword: boolean;
@@ -71,17 +23,21 @@ interface signupFormValues {
   confirmPassword?: string;
 }
 
-export interface signupFormdata {
-  phone: string;
-  password: string;
-  confirmPassword: string;
-  errors?: signupFormValues;
+interface signupFormErrors {
+  phone?: string;
+  password?: string;
+  confirmPassword?: string;
+}
+
+export interface signupFormState {
+  data: signupFormValues;
+  errors?: signupFormErrors;
   success: boolean;
   message: string;
 }
 
-export interface signupFormprops {
-  signupStateValues: any;
+export interface signupFormProps {
+  signupState: signupFormState;
   signupFormAction: (formData: FormData) => unknown;
   signupIsPending: boolean;
 }
@@ -92,15 +48,19 @@ interface signinFormValues {
   password?: string;
 }
 
-export interface signinFormdata {
-  phone: string;
-  password: string;
-  errors?: signinFormValues;
+interface signinFormErrors {
+  phone?: string;
+  password?: string;
+}
+
+export interface signinFormState {
+  data: signinFormValues;
+  errors?: signinFormErrors;
   success: boolean;
 }
 
-export interface signinFormprops {
-  signinStateValues: any;
+export interface signinFormProps {
+  signinState: signinFormState;
   signinFormAction: (formData: FormData) => unknown;
   signinIsPending: boolean;
 }
@@ -112,17 +72,21 @@ interface forgotPasswordFormValues {
   confirmPassword?: string;
 }
 
-export interface forgotPasswordFormdata {
-  old_password: string;
-  new_password: string;
-  confirmPassword: string;
-  errors?: forgotPasswordFormValues;
+interface forgotPasswordFormErrors {
+  old_password?: string;
+  new_password?: string;
+  confirmPassword?: string;
+}
+
+export interface forgotPasswordFormState {
+  data: forgotPasswordFormValues;
+  errors?: forgotPasswordFormErrors;
   success: boolean;
   message: string;
 }
 
-export interface forgotPasswordFormprops {
-  forgotPasswordStateValues: any;
+export interface forgotPasswordFormProps {
+  forgotPasswordState: forgotPasswordFormState;
   forgotPasswordFormAction: (formData: FormData) => unknown;
   forgotPasswordIsPending: boolean;
 }

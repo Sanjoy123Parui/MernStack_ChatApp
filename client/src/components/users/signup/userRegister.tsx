@@ -9,7 +9,7 @@ const UserRegister: React.FC = () => {
   const registerHeading: string = "User Account";
 
   // here destruct data from custom hooks
-  const { signupStateValues, signupFormAction, signupIsPending }: any =
+  const { signupState, signupFormAction, signupIsPending }: any =
     useUserRegister();
 
   return (
@@ -43,7 +43,7 @@ const UserRegister: React.FC = () => {
                 {/* here register  Form component */}
 
                 <RegisterForm
-                  signupStateValues={signupStateValues}
+                  signupState={signupState}
                   signupFormAction={signupFormAction}
                   signupIsPending={signupIsPending}
                 />

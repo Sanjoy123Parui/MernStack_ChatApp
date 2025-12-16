@@ -15,10 +15,7 @@ import {
   UserLogoutModalContextProvider,
 } from "./usersignupprovider.tsx";
 
-import {
-  UserProfileProvider,
-  UpdateProfileUserProvider,
-} from "./userprofileproviders.tsx";
+import { UserProfileProvider } from "./userprofileproviders.tsx";
 
 import { UserContactActionProvider } from "./usercontactprovider.tsx";
 
@@ -32,19 +29,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
         <UserAccessoriesProvider>
           <UserLogoutModalContextProvider>
             <UserProfileProvider>
-              <UpdateProfileUserProvider>
-                <AvatarProvider>
-                  <UserSettingsProvider>
-                    <UserToggleContentOptionProvider>
-                      <UserContactActionProvider>
-                        <UserTogglePasswordContextProvider>
-                          {children}
-                        </UserTogglePasswordContextProvider>
-                      </UserContactActionProvider>
-                    </UserToggleContentOptionProvider>
-                  </UserSettingsProvider>
-                </AvatarProvider>
-              </UpdateProfileUserProvider>
+              <AvatarProvider>
+                <UserSettingsProvider>
+                  <UserToggleContentOptionProvider>
+                    <UserContactActionProvider>
+                      <UserTogglePasswordContextProvider>
+                        {children}
+                      </UserTogglePasswordContextProvider>
+                    </UserContactActionProvider>
+                  </UserToggleContentOptionProvider>
+                </UserSettingsProvider>
+              </AvatarProvider>
             </UserProfileProvider>
           </UserLogoutModalContextProvider>
         </UserAccessoriesProvider>

@@ -1,35 +1,31 @@
 // Consume to the importing some modules
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
-import { signupFormprops } from "../models/signupModel.ts";
+import { signupFormProps } from "../models/signupModel.ts";
 import { useToggleUserPasswordContext } from "../hooks/contexts/userSignupContext.ts";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
 // define registrationform component
-const RegisterForm: React.FC<signupFormprops> = ({
-  signupStateValues,
+const RegisterForm: React.FC<signupFormProps> = ({
+  signupState,
   signupFormAction,
   signupIsPending,
 }) => {
   // here destruct custom hooks values
   const { isRegisterPassword, toggleRegisterPassword }: any =
     useToggleUserPasswordContext();
-  const { password, confirmPassword, errors }: any = signupStateValues;
+  const { success, errors }: any = signupState;
 
   // declare state manage of phone number with country code
-  const [phone, setPhone] = useState<any>(signupStateValues.phone || "");
+  const [phone, setPhone] = useState<any>(signupState.data.phone || "");
   const [countryCode, setCountryCode] = useState<string>("us");
 
   // destructure validations error
-  const getRegisterValidation = (fieldName: any) => errors[fieldName] || "";
-
-  if (phone !== "" && password !== "" && confirmPassword !== "") {
-    console.log(signupStateValues);
-  }
+  const getRegisterValidation = (fieldName: any) => errors?.[fieldName] || "";
 
   // declare registration form field array
   const registerFormfield: any = [
@@ -51,6 +47,10 @@ const RegisterForm: React.FC<signupFormprops> = ({
       fieldName: "confirmPassword",
     },
   ];
+
+  useEffect(() => {
+    if (success) console.log(signupState);
+  }, [success, signupState]);
 
   return (
     <>
@@ -94,7 +94,7 @@ const RegisterForm: React.FC<signupFormprops> = ({
                     inputClass={`!w-full !h-10 !sm:h-11 !md:h-12 !pl-12 !pr-4 !rounded-lg
                       !text-gray-900 !text-base !md:text-lg
                       !appearance-none !border-[1.5px] ${
-                        errors?.[fieldName]
+                        getRegisterValidation(fieldName)
                           ? "!border-red-300 !focus:ring-red-700"
                           : "!border-indigo-300 !focus:ring-indigo-400"
                       } !bg-white !focus:outline-none !focus:ring !transition-all !duration-200`}
@@ -105,7 +105,7 @@ const RegisterForm: React.FC<signupFormprops> = ({
                     name={fieldName}
                     placeholder={fieldLabel}
                     className={`appearance-none border-[1.5px] w-full h-10 sm:h-11 md:h-12 py-2 px-3 md:px-4 rounded-lg ${
-                      errors?.[fieldName]
+                      getRegisterValidation(fieldName)
                         ? "border-red-300 focus:ring-red-700"
                         : "border-indigo-300 focus:ring-indigo-400"
                     } text-gray-900 leading-tight focus:outline-none focus:ring transition-all duration-200 bg-white text-base md:text-lg pr-10`}
@@ -131,7 +131,7 @@ const RegisterForm: React.FC<signupFormprops> = ({
               {/* error message */}
               {getRegisterValidation(fieldName) && (
                 <p className="text-red-500 text-xs sm:text-sm md:text-base mt-1">
-                  {errors?.[fieldName]}
+                  {getRegisterValidation(fieldName)}
                 </p>
               )}
             </div>

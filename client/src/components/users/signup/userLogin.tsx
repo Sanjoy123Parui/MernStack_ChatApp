@@ -25,7 +25,7 @@ const UserLogin: React.FC = () => {
   const loginHeading: string = "User Login";
 
   // destruct data from custom hook
-  const { signinStateValues, signinFormAction, signinIsPending }: any =
+  const { signinState, signinFormAction, signinIsPending }: any =
     useUserLogin();
 
   return (
@@ -58,7 +58,7 @@ const UserLogin: React.FC = () => {
 
                 {/* here login  Form component */}
                 <LoginForm
-                  signinStateValues={signinStateValues}
+                  signinState={signinState}
                   signinFormAction={signinFormAction}
                   signinIsPending={signinIsPending}
                 />

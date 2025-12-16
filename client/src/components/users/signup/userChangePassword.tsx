@@ -14,7 +14,7 @@ const UserChangePassword: React.FC = () => {
   /*  const { forgetStateValues, forgetFormAction, forgetIsPending }: any =
     useUserforgetPassword(); */
   const {
-    forgotPasswordStateValues,
+    forgotPasswordState,
     forgotPasswordFormAction,
     forgotPasswordIsPending,
   }: any = useUserForgotPassword();
@@ -54,7 +54,7 @@ const UserChangePassword: React.FC = () => {
                   forgetIsPending={forgetIsPending}
                 /> */}
                 <PasswordChangeForm
-                  forgotPasswordStateValues={forgotPasswordStateValues}
+                  forgotPasswordState={forgotPasswordState}
                   forgotPasswordFormAction={forgotPasswordFormAction}
                   forgotPasswordIsPending={forgotPasswordIsPending}
                 />
