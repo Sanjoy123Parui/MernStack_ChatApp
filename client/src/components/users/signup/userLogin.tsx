@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import LoginForm from "../../forms/loginForm.tsx";
@@ -7,8 +6,8 @@ import { useUserLogin } from "../../hooks/signuphooks.ts";
 
 // here define UserLogin component
 const UserLogin: React.FC = () => {
-  // here was declare useState hooks
-  const [routeList] = useState<routeSignupNavigateList[]>([
+  // here was declare  list of routes array
+  const routeList: routeSignupNavigateList[] = [
     {
       desc: "Please click here to?",
       links: "/user/change-password",
@@ -19,7 +18,7 @@ const UserLogin: React.FC = () => {
       links: "/user/register",
       linkName: "Register",
     },
-  ]);
+  ];
 
   // here declare login form headin variable
   const loginHeading: string = "User Login";
