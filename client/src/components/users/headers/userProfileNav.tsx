@@ -12,6 +12,7 @@ const UserProfileNav: React.FC = () => {
     openLogoutModal();
     handleNavMenuClose();
   };
+
   return (
     <>
       <ul className="flex flex-col lg:flex-row items-stretch lg:items-center gap-2 lg:gap-4 p-2 rounded-2xl shadow-xl bg-white/80 lg:bg-transparent backdrop-blur-md transition-all duration-500">

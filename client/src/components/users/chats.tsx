@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Headings from "./contents/headings.tsx";
 import SearchBars from "./contents/searchBars.tsx";
 import ContentLists from "./contents/contentLists.tsx";
@@ -19,15 +21,16 @@ import UserLogout from "../modals/userLogout.tsx";
 import UserRemoveModal from "../modals/userRemoveModal.tsx";
 import UserEditProfile from "../modals/userEditProfile.tsx";
 import Contentoptions from "./contents/contentoptions.tsx";
-import Contactheadings from "./contacts/contactheadings.tsx";
 import Contactlists from "./contacts/contactlists.tsx";
 // import EmptyContent from "./contents/emptyContent.tsx";
 
 // here define Chats functional components
 const Chats: React.FC = () => {
+  // declare useLocation hook
+  const location: any = useLocation();
+
   // here was declare heading variables of Chats
   const headingTitle: string = "Chats";
-  const userContactHeading: string = "Contacts";
   const chatHeading = "Neil Sims";
 
   // declare list of options are messageheadingOptions
@@ -49,6 +52,15 @@ const Chats: React.FC = () => {
   const { isChatOptions, showChatContentOptions, hideChatContentOptions }: any =
     useUserChatContentToggleContext();
   const { isContactsAction }: any = useUserContactActionContext();
+
+  // here will be appear component loading
+  useEffect(() => {
+    // here was component mount
+    setInterval(() => location, 300);
+
+    // here was component will unmount with cleanup function
+    return () => clearInterval(location);
+  }, [location]);
 
   return (
     <>
@@ -76,13 +88,7 @@ const Chats: React.FC = () => {
                 </div>
               ) : (
                 <div>
-                  <div>
-                    <Contactheadings userContactHeading={userContactHeading} />
-                  </div>
-                  <div>
-                    <SearchBars />
-                    <Contactlists />
-                  </div>
+                  <Contactlists />
                 </div>
               )}
             </div>

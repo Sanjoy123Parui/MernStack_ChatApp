@@ -14,9 +14,9 @@ const ContentLists: React.FC = () => {
 
   // declare useMatch hooks for check url path are matched or not
   // const chatsPathMatch: any = useMatch("/");
-  const chatsPathMatch: any = useMatch("/user/content/chat");
+  const chatsPathMatch: any = useMatch("/user/content/chats");
   const groupsPathMatch: any = useMatch("/user/content/groups");
-  const storiesPathMatch: any = useMatch("/user/content/story");
+  const storiesPathMatch: any = useMatch("/user/content/stories");
 
   // declare custom hooks for manage some states in this component
   const { isThemes }: any = useUserSettingToggleContext();

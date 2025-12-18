@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Headings from "./contents/headings.tsx";
 import ContentLists from "./contents/contentLists.tsx";
 import SearchBars from "./contents/searchBars.tsx";
@@ -16,6 +18,9 @@ import EmptyContent from "./contents/emptyContent.tsx";
 
 // define Stories functional component
 const Stories: React.FC = () => {
+  // declare useLocation hook
+  const location: any = useLocation();
+
   // here was declare heading variables of Stories
   const headingTitle: string = "Stories";
 
@@ -25,6 +30,15 @@ const Stories: React.FC = () => {
   const { isLogoutModal }: any = useUserLogoutModalContext();
   const { isUserProfileView, isUserProfileEdit, isUserRemove }: any =
     useUserProfileContexts();
+
+  // here will be appear component loading
+  useEffect(() => {
+    // here was component mount
+    setInterval(() => location, 300);
+
+    // here was component will unmount with cleanup function
+    return () => clearInterval(location);
+  }, [location]);
 
   return (
     <>

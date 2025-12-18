@@ -1,16 +1,29 @@
 // import many more functional components and libraries of packages
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import RegisterForm from "../../forms/registerForm.tsx";
 import { useUserRegister } from "../../hooks/signuphooks.ts";
 
 const UserRegister: React.FC = () => {
+  // here declare useLocation hook
+  const location: any = useLocation();
+
   // here was declare register heading
   const registerHeading: string = "User Account";
 
   // here destruct data from custom hooks
   const { signupState, signupFormAction, signupIsPending }: any =
     useUserRegister();
+
+  // here will be appear component loading
+  useEffect(() => {
+    // here was component mount
+    setInterval(() => location, 300);
+
+    // here was component will unmount with cleanup function
+    return () => clearInterval(location);
+  }, [location]);
 
   return (
     <>

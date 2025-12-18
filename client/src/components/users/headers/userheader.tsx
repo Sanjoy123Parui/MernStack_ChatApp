@@ -28,7 +28,6 @@ const Userheader: React.FC = () => {
 
   return (
     <>
-      {/* start nav */}
       <nav className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 sticky shadow-lg font-sans top-0 z-10 p-4 transition-all duration-500">
         {/* start div container */}
         <div className="container mx-auto relative flex justify-between px-2 md:px-8 items-center">
@@ -86,7 +85,6 @@ const Userheader: React.FC = () => {
         </div>
         {/* end div container */}
       </nav>
-      {/* end nav */}
     </>
   );
 };

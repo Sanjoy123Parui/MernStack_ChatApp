@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { RiDonutChartFill } from "react-icons/ri";
 import { MdOutlineChatBubble, MdGroups } from "react-icons/md";
@@ -76,16 +75,9 @@ const UserNav: React.FC = () => {
     {
       listIcon: <MdOutlineChatBubble />,
       listItem: "Chat",
-      itemPath: "/user/content/chat",
+      itemPath: "/user/content/chats",
       itemActions: handleNavMenuClose,
     },
-
-    /* {
-      listIcon: <MdOutlineChatBubble />,
-      listItem: "Chat",
-      itemPath: "/",
-      itemActions: handleNavMenuClose,
-    }, */
 
     {
       listIcon: <MdGroups />,
@@ -97,7 +89,7 @@ const UserNav: React.FC = () => {
     {
       listIcon: <RiDonutChartFill />,
       listItem: "Stories",
-      itemPath: "/user/content/story",
+      itemPath: "/user/content/stories",
       itemActions: handleNavMenuClose,
     },
 

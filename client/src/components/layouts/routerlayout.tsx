@@ -14,13 +14,10 @@ const UserCreateProfile: any = lazy(
   () => import("../users/profiles/userCreateProfile.tsx")
 );
 
-const Chat: any = lazy(() => import("../users/chats.tsx"));
+const Chats: any = lazy(() => import("../users/chats.tsx"));
 const Stories: any = lazy(() => import("../users/stories.tsx"));
 const Groups: any = lazy(() => import("../users/groups.tsx"));
-const UserViewProfile: any = lazy(
-  () => import("../users/profiles/userViewProfile.tsx")
-);
-const Supports: any = lazy(() => import("../users/supports.tsx"));
+// const Supports: any = lazy(() => import("../users/supports.tsx"));
 const Notfound: any = lazy(() => import("../layouts/notfound.tsx"));
 
 // here was create routerlayout functional component
@@ -52,17 +49,12 @@ const Routerlayout: React.FC = () => {
         },
 
         {
-          path: "/user/content/chat",
-          element: <Chat />,
+          path: "/user/content/chats",
+          element: <Chats />,
         },
 
-        /* {
-          path: "/",
-          element: <Chat />,
-        }, */
-
         {
-          path: "/user/content/story",
+          path: "/user/content/stories",
           element: <Stories />,
         },
 
@@ -70,16 +62,10 @@ const Routerlayout: React.FC = () => {
           path: "/user/content/groups",
           element: <Groups />,
         },
-
-        {
-          path: "/user/content/profile",
-          element: <UserViewProfile />,
-        },
-
-        {
+        /* {
           path: "/user/customer/support",
           element: <Supports />,
-        },
+        }, */
       ],
     },
 

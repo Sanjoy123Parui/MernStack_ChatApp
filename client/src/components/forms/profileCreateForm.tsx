@@ -79,7 +79,7 @@ const ProfileCreateForm: React.FC<createProfileFormProps> = ({
   useEffect(() => {
     if (success) {
       console.log(createState);
-      navigate("/user/content/chat");
+      navigate("/user/content/chats");
     }
   }, [success, createState, navigate]);
 
