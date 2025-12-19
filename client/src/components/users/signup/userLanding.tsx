@@ -4,6 +4,7 @@ import HiChatLogo from "../../../assets/hichat_brand_logo.svg";
 const UserLanding: React.FC = () => {
   const headingTitle: string = `HiChat is a chat web application`;
   const desc: string = `Here is you can messages on your friends and join the group of communities`;
+
   return (
     <>
       {/* Enhanced landing card for brand and logo */}

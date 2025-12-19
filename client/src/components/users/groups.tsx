@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import Headings from "./contents/headings.tsx";
 import ContentLists from "./contents/contentLists.tsx";
 import {
@@ -24,9 +22,6 @@ import Contentoptions from "./contents/contentoptions.tsx";
 
 // Groups component of user groups chat
 const Groups: React.FC = () => {
-  // declare useLocation hook
-  const location: any = useLocation();
-
   // here was declare heading variables of Groups
   const headingTitle: string = "Groups";
   const groupsHeading: string = "Coder gang";
@@ -55,15 +50,6 @@ const Groups: React.FC = () => {
     showGroupsContentOptions,
     hideGroupsContentOptions,
   }: any = useUserChatContentToggleContext();
-
-  // here will be appear component loading
-  useEffect(() => {
-    // here was component mount
-    setInterval(() => location, 300);
-
-    // here was component will unmount with cleanup function
-    return () => clearInterval(location);
-  }, [location]);
 
   return (
     <>

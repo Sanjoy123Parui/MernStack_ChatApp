@@ -1,16 +1,10 @@
-import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
-// import PasswordChangeForm from "../../forms/passwordChangeForm.tsx";
-// import { useUserforgetPassword } from "../../hooks/usersAccounthooks.ts";
 import PasswordChangeForm from "../../forms/passwordChangeForm.tsx";
 import { useUserForgotPassword } from "../../hooks/signuphooks.ts";
 
 // here define use changepassword functional component
 const UserChangePassword: React.FC = () => {
-  // declare useLocation hook to handle route location
-  const location: any = useLocation();
-
   // here was declare heading
   const changeHeading: string = "Forgot User";
 
@@ -22,14 +16,6 @@ const UserChangePassword: React.FC = () => {
     forgotPasswordFormAction,
     forgotPasswordIsPending,
   }: any = useUserForgotPassword();
-
-  // here will be appear component loading
-  useEffect(() => {
-    // here was component mount
-    setInterval(() => location, 300);
-    // here was component will unmount with cleanup function
-    return () => clearInterval(location);
-  }, [location]);
 
   return (
     <>
