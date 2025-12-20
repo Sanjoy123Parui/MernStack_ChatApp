@@ -1,3 +1,5 @@
+// Consuming to the importing some libraries methods and components
+import { useEffect } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
 import { useUserNavMenuContext } from "../../hooks/contexts/userSettingContexts.ts";
@@ -12,6 +14,15 @@ const UserProfileNav: React.FC = () => {
     openLogoutModal();
     handleNavMenuClose();
   };
+
+  useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {}, 1000);
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <>

@@ -1,10 +1,20 @@
 // Consuming to the importing some modules
+import { useEffect } from "react";
 import HiChatLogo from "../../../assets/hichat_brand_logo.svg";
 
 // here define UserLanding component
 const UserLanding: React.FC = () => {
   const headingTitle: string = `HiChat is a chat web application`;
   const desc: string = `Here is you can messages on your friends and join the group of communities`;
+
+  useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {}, 1000);
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <>

@@ -1,3 +1,6 @@
+// Consuming to import some modules of this component
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Headings from "./contents/headings.tsx";
 import ContentLists from "./contents/contentLists.tsx";
 import {
@@ -50,6 +53,20 @@ const Groups: React.FC = () => {
     showGroupsContentOptions,
     hideGroupsContentOptions,
   }: any = useUserChatContentToggleContext();
+
+  const location: any = useLocation();
+
+  useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {
+      location;
+    }, 1000);
+
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [location]);
 
   return (
     <>

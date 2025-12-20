@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+// Consuiming to import some modules of coomponents
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import PasswordChangeForm from "../../forms/passwordChangeForm.tsx";
 import { useUserForgotPassword } from "../../hooks/signuphooks.ts";
@@ -16,6 +18,20 @@ const UserChangePassword: React.FC = () => {
     forgotPasswordFormAction,
     forgotPasswordIsPending,
   }: any = useUserForgotPassword();
+
+  const location: any = useLocation();
+
+  useEffect(() => {
+    // here was component mounting
+    const intervalId: any = setInterval(() => {
+      location;
+    }, 1000);
+
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [location]);
 
   return (
     <>

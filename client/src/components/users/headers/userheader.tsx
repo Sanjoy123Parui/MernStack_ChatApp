@@ -1,3 +1,4 @@
+// Consuming to the importing some libraries methods and components
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -22,8 +23,14 @@ const Userheader: React.FC = () => {
   const userProfile = localStorage.getItem("userProfile");
 
   useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {}, 1000);
     setHasUserSignup(userSignup);
     setHasUserProfile(userProfile);
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   return (

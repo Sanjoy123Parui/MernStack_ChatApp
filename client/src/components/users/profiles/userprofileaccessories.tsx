@@ -1,3 +1,5 @@
+// Cosume to importing some modules of this components
+import { useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import {
@@ -17,6 +19,15 @@ const Userprofileaccessories = () => {
   const { hideUserAccessories }: any = useSettingUserContext();
   const { isThemes }: any = useUserSettingToggleContext();
   const { openUserProfile }: any = useUserProfileContexts();
+
+  useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {}, 1000);
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <>

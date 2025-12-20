@@ -1,5 +1,6 @@
-// import many more functional components and libraries of packages
-import { Link } from "react-router-dom";
+//Consume to importing many more functional components and libraries of packages
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import RegisterForm from "../../forms/registerForm.tsx";
 import { useUserRegister } from "../../hooks/signuphooks.ts";
@@ -11,6 +12,20 @@ const UserRegister: React.FC = () => {
   // here destruct data from custom hooks
   const { signupState, signupFormAction, signupIsPending }: any =
     useUserRegister();
+
+  const location: any = useLocation();
+
+  useEffect(() => {
+    // here was component mount
+    const intervalId: any = setTimeout(() => {
+      location;
+    }, 1000);
+
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [location]);
 
   return (
     <>
