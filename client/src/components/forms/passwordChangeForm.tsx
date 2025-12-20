@@ -1,4 +1,5 @@
 // Consuming to the importing for all module in this component use
+import { useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
@@ -16,7 +17,7 @@ const PasswordChangeForm: React.FC<forgotPasswordFormProps> = ({
   const { isForgotPassword, toggleForgotPassword }: any =
     useToggleUserPasswordContext();
 
-  const { errors }: any = forgotPasswordState;
+  const { success, errors }: any = forgotPasswordState;
 
   // defined here function was handled getErrorsfield
   const getUserforgotPassword = (fieldName: any) => errors?.[fieldName] || "";
@@ -41,6 +42,10 @@ const PasswordChangeForm: React.FC<forgotPasswordFormProps> = ({
       fieldName: "confirmPassword",
     },
   ];
+
+  useEffect(() => {
+    if (success) console.log(forgotPasswordState);
+  }, [success, forgotPasswordState]);
 
   return (
     <>

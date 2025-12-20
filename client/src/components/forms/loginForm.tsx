@@ -1,5 +1,6 @@
 // here import all library or packeges which are using in login form
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
@@ -20,7 +21,7 @@ const LoginForm: React.FC<signinFormProps> = ({
     useToggleUserPasswordContext();
 
   // const { phone, password, errors }: any = stateValues;
-  const { errors }: any = signinState;
+  const { success, errors }: any = signinState;
 
   // declare state manage of phone number with country code
   const [phone, setPhone] = useState<any>(signinState.data.phone || "");
@@ -42,6 +43,15 @@ const LoginForm: React.FC<signinFormProps> = ({
       fieldName: "password",
     },
   ];
+
+  const navigate: any = useNavigate;
+
+  useEffect(() => {
+    if (success) {
+      console.log(signinState);
+      navigate("/user/create-profile");
+    }
+  }, [success, signinState, navigate]);
 
   return (
     <>

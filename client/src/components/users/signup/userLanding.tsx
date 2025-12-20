@@ -1,3 +1,4 @@
+// Consuming to the importing some modules
 import HiChatLogo from "../../../assets/hichat_brand_logo.svg";
 
 // here define UserLanding component

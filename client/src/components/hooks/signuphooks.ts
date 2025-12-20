@@ -1,5 +1,4 @@
-import { useState, useActionState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useActionState } from "react";
 import {
   togglePasswordprops,
   userLogoutModalProps,
@@ -117,21 +116,6 @@ export const useUserRegister = (): signupFormProps => {
     FormData
   >(userSignupAction, userSignupInitial);
 
-  // declare variable for destructure data
-  const { success }: any = signupState;
-  // declare some specific hooks of react-router-dom
-  const location: any = useLocation();
-  // here will be appear logic where component mount or unmount with cleanup in useEffect hook
-  useEffect(() => {
-    // here was component mount
-    setInterval(() => location, 300);
-    if (success) console.log(signupState);
-    // here was component will unmount with cleanup function
-    return () => {
-      clearInterval(location);
-    };
-  }, [success, signupState, location]);
-
   return { signupState, signupFormAction, signupIsPending };
 };
 
@@ -189,25 +173,6 @@ export const useUserLogin = (): signinFormProps => {
     signinFormState,
     FormData
   >(userSigninAction, userSigninInitial);
-
-  // declare variable for destructure data
-  const { success }: any = signinState;
-  // declare some specific hooks of react-router-dom
-  const location: any = useLocation();
-  const navigate: any = useNavigate();
-  // here will be appear logic where component mount or unmount with cleanup in useEffect hook
-  useEffect(() => {
-    // here was component mount
-    setInterval(() => location, 300);
-    if (success) {
-      console.log(signinState);
-      navigate("/user/create-profile");
-    }
-    // here was component will unmount with cleanup function
-    return () => {
-      clearInterval(location);
-    };
-  }, [success, signinState, navigate, location]);
 
   return { signinState, signinFormAction, signinIsPending };
 };
@@ -275,21 +240,6 @@ export const useUserForgotPassword = (): forgotPasswordFormProps => {
     userforgotPasswordAction,
     userforgotPasswordInitial
   );
-
-  // declare variables for destructure data
-  const { success }: any = forgotPasswordState;
-  // declare some specific hooks of react-router-dom
-  const location: any = useLocation();
-  // here will be appear logic where component mount or unmount with cleanup in useEffect hook
-  useEffect(() => {
-    // here was component mount
-    setInterval(() => location, 300);
-    if (success) console.log(forgotPasswordState);
-    // here was component will unmount with cleanup function
-    return () => {
-      clearInterval(location);
-    };
-  }, [success, forgotPasswordState, location]);
 
   return {
     forgotPasswordState,
