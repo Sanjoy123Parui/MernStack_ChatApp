@@ -1,5 +1,5 @@
 // Consume to the importing some modules
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
@@ -18,7 +18,7 @@ const RegisterForm: React.FC<signupFormProps> = ({
   // here destruct custom hooks values
   const { isRegisterPassword, toggleRegisterPassword }: any =
     useToggleUserPasswordContext();
-  const { success, errors }: any = signupState;
+  const { errors }: any = signupState;
 
   // declare state manage of phone number with country code
   const [phone, setPhone] = useState<any>(signupState.data.phone || "");
@@ -47,10 +47,6 @@ const RegisterForm: React.FC<signupFormProps> = ({
       fieldName: "confirmPassword",
     },
   ];
-
-  useEffect(() => {
-    if (success) console.log(signupState);
-  }, [success, signupState]);
 
   return (
     <>

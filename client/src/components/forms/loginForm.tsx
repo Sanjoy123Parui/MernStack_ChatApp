@@ -1,6 +1,5 @@
 // here import all library or packeges which are using in login form
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
@@ -16,15 +15,12 @@ const LoginForm: React.FC<signinFormProps> = ({
   signinFormAction,
   signinIsPending,
 }) => {
-  // here declare useNavigate hook
-  const navigate: any = useNavigate();
-
   // here was declare custom hooks of toggle password
   const { isLoginPassword, toggleLoginPassword }: any =
     useToggleUserPasswordContext();
 
   // const { phone, password, errors }: any = stateValues;
-  const { success, errors }: any = signinState;
+  const { errors }: any = signinState;
 
   // declare state manage of phone number with country code
   const [phone, setPhone] = useState<any>(signinState.data.phone || "");
@@ -46,14 +42,6 @@ const LoginForm: React.FC<signinFormProps> = ({
       fieldName: "password",
     },
   ];
-
-  // here declare useEffect hook
-  useEffect(() => {
-    if (success) {
-      console.log(signinState);
-      navigate("/user/create-profile");
-    }
-  }, [success, navigate, signinState]);
 
   return (
     <>
