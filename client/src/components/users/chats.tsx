@@ -1,6 +1,3 @@
-// Consuming to import some modules of this component
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import Headings from "./contents/headings.tsx";
 import SearchBars from "./contents/searchBars.tsx";
 import ContentLists from "./contents/contentLists.tsx";
@@ -50,20 +47,6 @@ const Chats: React.FC = () => {
   const { isChatOptions, showChatContentOptions, hideChatContentOptions }: any =
     useUserChatContentToggleContext();
   const { isContactsAction }: any = useUserContactActionContext();
-
-  const location: any = useLocation();
-
-  useEffect(() => {
-    // here was component mount
-    const intervalId: any = setInterval(() => {
-      location;
-    }, 1000);
-
-    // here was component will unmount with cleanup function
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [location]);
 
   return (
     <>

@@ -1,23 +1,8 @@
-import { useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import UserHeader from "../users/headers/userheader.tsx";
 
 // here define userLayout functionality
 const Userlayout: React.FC = () => {
-  const location: any = useLocation();
-
-  useEffect(() => {
-    // here was component mount
-    const intervalId: any = setInterval(() => {
-      location;
-    }, 1000);
-
-    // here was component will unmount with cleanup function
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [location]);
-
   return (
     <>
       {/* It is a headers component */}

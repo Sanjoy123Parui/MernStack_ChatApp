@@ -29,6 +29,7 @@ const Routerlayout: React.FC = () => {
       element: <Userlayout />,
       children: [
         {
+          // path: "/",
           index: true,
           element: <UserLogin />,
         },

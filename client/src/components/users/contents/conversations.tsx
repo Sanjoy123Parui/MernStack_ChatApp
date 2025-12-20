@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { MdOutlineEmojiEmotions } from "react-icons/md";
 import { MdAttachFile } from "react-icons/md";
 import { IoSendSharp } from "react-icons/io5";
@@ -7,15 +6,6 @@ import { Button } from "../../ui/button.tsx";
 
 // define conversations component
 const Conversations: React.FC = () => {
-  useEffect(() => {
-    // here was component mount
-    const intervalId: any = setInterval(() => {}, 1000);
-    // here was component will unmount with cleanup function
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
-
   return (
     <>
       <div className="flex p-4 items-center bg-slate-100 rounded-lg shadow-md">

@@ -1,6 +1,4 @@
-// Consuming to the importing some modules and libraries of component
-import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import LoginForm from "../../forms/loginForm.tsx";
 import { routeSignupNavigateList } from "../../models/contentModel.ts";
@@ -28,20 +26,6 @@ const UserLogin: React.FC = () => {
   // destruct data from custom hook
   const { signinState, signinFormAction, signinIsPending }: any =
     useUserLogin();
-
-  const location: any = useLocation();
-
-  useEffect(() => {
-    // here was component mount
-    const intervalId: any = setInterval(() => {
-      location;
-    }, 1000);
-
-    // here was component will unmount with cleanup function
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [location]);
 
   return (
     <>

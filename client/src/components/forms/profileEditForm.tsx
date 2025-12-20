@@ -38,18 +38,10 @@ const ProfileEditForm: React.FC<updateProfileContent> = ({
 
   // here loaded to fetch component data
   useEffect(() => {
-    // here was component mount
-    const intervalId: any = setInterval(() => {}, 1000);
-
     if (success) {
       console.log(editState);
       closeUserEdit();
     }
-
-    // here was component will unmount with cleanup function
-    return () => {
-      clearInterval(intervalId);
-    };
   }, [success, editState, closeUserEdit]);
 
   return (

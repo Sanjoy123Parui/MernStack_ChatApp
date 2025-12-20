@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import { CiCircleAlert } from "react-icons/ci";
 import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
@@ -8,15 +7,6 @@ const UserRemoveModal: React.FC = () => {
   // declare some custom hooks which are destruct data
   const { userRemoveAlertMessage, isUserRemove, closeUserRemove }: any =
     useUserProfileContexts();
-
-  useEffect(() => {
-    // here was component mount
-    const intervalId: any = setInterval(() => {}, 1000);
-    // here was component will unmount with cleanup function
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
 
   return (
     <>

@@ -14,17 +14,9 @@ const SearchBars: React.FC = () => {
   };
 
   useEffect(() => {
-    // here was component mount
-    const intervalId: any = setInterval(() => {}, 1000);
-
     if (searchInfo.length >= 3) {
       console.log(searchInfo);
     }
-
-    // here was component will unmount with cleanup function
-    return () => {
-      clearInterval(intervalId);
-    };
   }, [searchInfo]);
 
   // const handleSearched = (e: any) => {

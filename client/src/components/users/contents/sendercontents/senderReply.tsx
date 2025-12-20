@@ -2,7 +2,6 @@ import {
   // BiCheck,
   BiCheckDouble,
 } from "react-icons/bi";
-import { useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import {
@@ -29,15 +28,6 @@ const SenderReply: React.FC<senderChatdropDownMenuItems> = ({
   };
 
   const replyText: string = `Thanks — I've reviewed the doc and left a few comments. Looks good overall.`;
-
-  useEffect(() => {
-    // here was component mount
-    const intervalId: any = setInterval(() => {}, 1000);
-    // here was component will unmount with cleanup function
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
 
   return (
     <>

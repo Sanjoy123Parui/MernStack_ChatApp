@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   // BiCheck,
   BiCheckDouble,
@@ -34,15 +33,6 @@ const SenderFilesUpload: React.FC<senderChatdropDownMenuItems> = ({
   // declare custom hooks for manage this component state variables
   const { senderFilesMenu, showSenderFilesMenu, hideSenderFilesMenu }: any =
     useSenderMenu();
-
-  useEffect(() => {
-    // here was component mount
-    const intervalId: any = setInterval(() => {}, 1000);
-    // here was component will unmount with cleanup function
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
 
   return (
     <>

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   // BiCheck,
   BiCheckDouble,
@@ -27,15 +26,6 @@ const SenderGeolocations: React.FC<senderChatdropDownMenuItems> = ({
   const locationUrl: string = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3673.570070406127!2d88.09444907429992!3d22.966055518436782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f861004bc3a8eb%3A0xdaff3c39e52cdf6c!2sDhaniakhali%20bus%20stand!5e0!3m2!1sen!2sin!4v1762235974012!5m2!1sen!2sin`;
 
   const locationAddress: string = `X38W+CRC, Dhaniakhali, West Bengal 712302`;
-
-  useEffect(() => {
-    // here was component mount
-    const intervalId: any = setInterval(() => {}, 1000);
-    // here was component will unmount with cleanup function
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
 
   return (
     <>
