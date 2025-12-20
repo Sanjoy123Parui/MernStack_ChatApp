@@ -51,14 +51,7 @@ const LoginForm: React.FC<signinFormProps> = ({
       console.log(signinState);
       navigate("/user/create-profile");
     }
-
-    // here was component mount
-    const intervalId: any = setInterval(() => {}, 1000);
-    // here was component will unmount with cleanup function
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [success, signinState, navigate]);
+  }, [success, signinState]);
 
   return (
     <>

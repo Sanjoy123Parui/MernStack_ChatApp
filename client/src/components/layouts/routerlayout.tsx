@@ -29,28 +29,27 @@ const Routerlayout: React.FC = () => {
       element: <Userlayout />,
       children: [
         {
-          // path: "/",
-          index: true,
+          path: "/",
           element: <UserLogin />,
         },
 
         {
-          path: "user/register",
+          path: "/user/register",
           element: <UserRegister />,
         },
 
         {
-          path: "user/change-password",
+          path: "/user/change-password",
           element: <UserChangePassword />,
         },
 
         {
-          path: "user/create-profile",
+          path: "/user/create-profile",
           element: <UserCreateProfile />,
         },
 
         {
-          path: "user/content/chats",
+          path: "/user/content/chats",
           element: <Chats />,
         },
 
@@ -78,7 +77,7 @@ const Routerlayout: React.FC = () => {
 
   return (
     <>
-      <Suspense fallback={null}>
+      <Suspense>
         <RouterProvider router={routerPath} />
       </Suspense>
     </>
