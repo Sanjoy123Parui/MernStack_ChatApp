@@ -44,7 +44,7 @@ const LoginForm: React.FC<signinFormProps> = ({
     },
   ];
 
-  const navigate: any = useNavigate;
+  const navigate: any = useNavigate();
 
   useEffect(() => {
     if (success) {
