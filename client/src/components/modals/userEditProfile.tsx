@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
 import ProfileEditForm from "../forms/profileEditForm.tsx";
@@ -9,6 +10,15 @@ const UserEditProfile: React.FC = () => {
   const { userProfileHeading, closeUserEdit }: any = useUserProfileContexts();
   const { editState, editFormAction, editIsPending }: any =
     useUpdateUserProfile();
+
+  useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {}, 1000);
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <>

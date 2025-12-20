@@ -1,7 +1,11 @@
+import { useEffect } from "react";
 import { FaUser } from "react-icons/fa";
-import { AiFillLike, AiFillHeart } from "react-icons/ai";
-import { FaLaughSquint, FaSmileBeam } from "react-icons/fa";
-import { FaRegFaceKissWinkHeart, FaFaceAngry } from "react-icons/fa6";
+// import { AiFillLike, AiFillHeart } from "react-icons/ai";
+// import { FaLaughSquint, FaSmileBeam } from "react-icons/fa";
+import {
+  // FaRegFaceKissWinkHeart,
+  FaFaceAngry,
+} from "react-icons/fa6";
 import { FaRegCirclePlay } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { recieverChatdropDownMenuItems } from "../../../models/recieverModel.ts";
@@ -26,6 +30,15 @@ const RecieverVideosGallery: React.FC<recieverChatdropDownMenuItems> = ({
     { id: 3, src: "../../../src/assets/videos/nature.mp4" },
     { id: 4, src: "../../../src/assets/videos/nature.mp4" },
   ];
+
+  useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {}, 1000);
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <>
