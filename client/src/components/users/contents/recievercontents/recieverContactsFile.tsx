@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { FaUser, FaUserPlus } from "react-icons/fa";
 import {
   AiFillLike,
@@ -24,6 +25,16 @@ const RecieverContactsFile: React.FC<recieverChatdropDownMenuItems> = ({
     showRecieverContactfileMenu,
     hideRecieverContactfileMenu,
   }: any = useRecieverMenu();
+
+  // here will be appear useEffect hook
+  useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {}, 1000);
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <>

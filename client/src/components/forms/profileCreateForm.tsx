@@ -76,11 +76,18 @@ const ProfileCreateForm: React.FC<createProfileFormProps> = ({
   // declare genderOptions of array
   const genderOptions: any = ["Male", "Female", "Other"];
 
+  // here will be appear useEffect hook
   useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {}, 1000);
     if (success) {
       console.log(createState);
       navigate("/user/content/chats");
     }
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [success, createState]);
 
   return (

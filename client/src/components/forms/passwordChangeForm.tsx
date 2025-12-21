@@ -43,8 +43,15 @@ const PasswordChangeForm: React.FC<forgotPasswordFormProps> = ({
     },
   ];
 
+  // here will be appear useEffect hook
   useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {}, 1000);
     if (success) console.log(forgotPasswordState);
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [success, forgotPasswordState]);
 
   return (

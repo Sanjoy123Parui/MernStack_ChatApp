@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import { FaUser, FaUpload } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
@@ -29,6 +30,16 @@ const UserViewProfile: React.FC = () => {
       content: `07-08-1999`,
     },
   ];
+
+  // here will be appear useEffect hook
+  useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {}, 1000);
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <>

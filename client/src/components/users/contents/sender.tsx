@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import SenderTextMessage from "./sendercontents/senderTextMessage.tsx";
 // import SenderVoiceMessage from "./sendercontents/SenderVoiceMessage.tsx";
 // import SenderImages from "./sendercontents/senderImages.tsx";
@@ -25,6 +26,16 @@ const Sender: React.FC = () => {
     "Like",
     "Close",
   ];
+
+  // here will be appear useEffect hook
+  useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {}, 1000);
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <>

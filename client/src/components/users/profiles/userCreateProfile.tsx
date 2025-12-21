@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import UserLogout from "../../modals/userLogout.tsx";
 import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
 import ProfileCreateForm from "../../forms/profileCreateForm.tsx";
@@ -10,6 +12,22 @@ const UserCreateProfile: React.FC = () => {
   const { isLogoutModal }: any = useUserLogoutModalContext();
   const { createState, createFormAction, createIsPending }: any =
     useNewUserProfile();
+
+  // declare some specific hooks of routes regarding
+  const location: any = useLocation();
+
+  // here will be appear useEffect hook
+  useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {
+      location;
+    }, 1000);
+
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [location]);
 
   return (
     <>

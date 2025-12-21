@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { contentMessagesHeading } from "../../models/contentModel.ts";
 
 // define Contentoptions functional component
@@ -5,6 +6,16 @@ const Contentoptions: React.FC<contentMessagesHeading> = ({
   messagesheadingOptions,
   hideOptionAction,
 }) => {
+  // here will be appear useEffect hook
+  useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {}, 1000);
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
   return (
     <>
       <div className="absolute top-32 right-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">

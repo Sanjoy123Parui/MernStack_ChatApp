@@ -20,10 +20,18 @@ const Userheader: React.FC = () => {
 
   const userSignup = localStorage.getItem("userSignup");
   const userProfile = localStorage.getItem("userProfile");
-
+  // here will be appear useEffect hook
   useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {}, 1000);
+
     setHasUserSignup(userSignup);
     setHasUserProfile(userProfile);
+
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   return (

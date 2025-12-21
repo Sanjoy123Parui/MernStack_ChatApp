@@ -1,4 +1,5 @@
 // here import some libraries methods and components
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { userSignupListItem } from "../../models/userModel.tsx";
 import { useUserNavMenuContext } from "../../hooks/contexts/userSettingContexts.ts";
@@ -21,6 +22,17 @@ const UserSignupNav: React.FC = () => {
       itemActions: handleNavMenuClose,
     },
   ];
+
+  // here will be appear useEffect hook
+  useEffect(() => {
+    // here was component mount
+    const intervalId: any = setInterval(() => {}, 1000);
+
+    // here was component will unmount with cleanup function
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <>
