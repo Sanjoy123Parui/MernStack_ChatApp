@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Userlayout from "./userlayout.tsx";
+import AppRouterlayout from "./appRouterlayout.tsx";
 
 // here was define and import all children components
 const UserLogin: any = lazy(() => import("../users/signup/userLogin.tsx"));
@@ -26,10 +26,9 @@ const Routerlayout: React.FC = () => {
   const routerPath: any = createBrowserRouter([
     {
       path: "/",
-      element: <Userlayout />,
+      element: <AppRouterlayout />,
       children: [
         {
-          // path: "/",
           index: true,
           element: <UserLogin />,
         },

@@ -1,10 +1,9 @@
-// Consume to importing some modules and lib of this component
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import UserHeader from "../users/headers/userheader.tsx";
+import Userheader from "../users/headers/userheader.tsx";
 
-// here define userLayout functionality
-const Userlayout: React.FC = () => {
+// here was AppRouterlayout functional component where are render all component of this application
+const AppRouterlayout: React.FC = () => {
   // here will be appear useEffect hook
   useEffect(() => {
     // here was component mount
@@ -18,11 +17,12 @@ const Userlayout: React.FC = () => {
 
   return (
     <>
-      {/* It is a headers component */}
-      <UserHeader />
+      {/* here was loaded Headers component */}
+      <Userheader />
 
       {/* start main */}
       <main>
+        {/* here can loaded all main components */}
         <Outlet />
       </main>
       {/* end main */}
@@ -30,5 +30,5 @@ const Userlayout: React.FC = () => {
   );
 };
 
-// export user layout
-export default Userlayout;
+// exporting AppRouterlayout component
+export default AppRouterlayout;
