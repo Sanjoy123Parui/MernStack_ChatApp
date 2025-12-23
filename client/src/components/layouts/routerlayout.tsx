@@ -53,17 +53,17 @@ const Routerlayout: React.FC = () => {
         },
 
         {
-          path: "user/content/stories",
-          element: <Stories />,
-        },
-
-        {
           path: "user/content/groups",
           element: <Groups />,
         },
 
         {
-          path: "user/content/help/supports",
+          path: "user/content/stories",
+          element: <Stories />,
+        },
+
+        {
+          path: "user/content/supports-feedback/help",
           element: <Supports />,
         },
       ],

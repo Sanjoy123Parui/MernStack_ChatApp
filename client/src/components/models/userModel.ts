@@ -1,6 +1,6 @@
 // here define userSignupListItem content interface model
 export interface userSignupListItem {
-  listItem: string;
+  itemName: string;
   itemPath: string;
   itemActions: any;
 }

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import Userheader from "../users/headers/userheader.tsx";
+import Headers from "./Headers.tsx";
 
 // here was AppRouterlayout functional component where are render all component of this application
 const AppRouterlayout: React.FC = () => {
@@ -18,7 +18,7 @@ const AppRouterlayout: React.FC = () => {
   return (
     <>
       {/* here was loaded Headers component */}
-      <Userheader />
+      <Headers />
 
       {/* start main */}
       <main>
