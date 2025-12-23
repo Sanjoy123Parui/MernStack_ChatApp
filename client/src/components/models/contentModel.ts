@@ -46,3 +46,31 @@ export interface userChatsHeadingToggle {
   showGroupsContentOptions: () => void;
   hideGroupsContentOptions: () => void;
 }
+
+// here declare and also exporting user feedback & help related interface model
+interface supportFormValues {
+  first_name?: string;
+  last_name?: string;
+  phone?: string;
+  messages?: string;
+}
+
+interface supportFormErrors {
+  first_name?: string;
+  last_name?: string;
+  phone?: string;
+  messages?: string;
+}
+
+export interface supportFormState {
+  data: supportFormValues;
+  errors?: supportFormErrors;
+  success: boolean;
+  message: string;
+}
+
+export interface supportFormProps {
+  supportState: supportFormState;
+  supportFormAction: (formData: FormData) => void;
+  supportIsPending: boolean;
+}

@@ -1,8 +1,11 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useActionState } from "react";
 import {
   profileImagesCropItems,
   userChatsHeadingToggle,
+  supportFormState,
+  supportFormProps,
 } from "../models/contentModel.ts";
+import { userSupportValidation } from "../validations/supportValidator.ts";
 
 // declare custom hook of useProfileAvtar with export
 export const useProfileAvtar = (): profileImagesCropItems => {
@@ -83,4 +86,64 @@ export const useUserContentHeadingOption = (): userChatsHeadingToggle => {
     showGroupsContentOptions,
     hideGroupsContentOptions,
   };
+};
+
+// define custom hook for user registration form with exporting
+export const useSupportUser = (): supportFormProps => {
+  // declare userSupportInitial
+  const userSupportInitial: supportFormState = {
+    data: {},
+    errors: {},
+    success: false,
+    message: "",
+  };
+
+  // define function for handle userSupportAction
+  const userSupportAction = async (
+    prevState: supportFormState,
+    formData: FormData
+  ): Promise<supportFormState> => {
+    try {
+      // declare formValues getting formData
+      const formValues: any = {
+        first_name: formData.get("first_name")?.toString()?.trim() || "",
+        last_name: formData.get("last_name")?.toString()?.trim() || "",
+        phone: formData.get("phone")?.toString()?.trim() || "",
+        messages: formData.get("messages")?.toString()?.trim() || "",
+      };
+
+      // declare instance object of handle zod validation
+      const supportValidate: any = userSupportValidation.safeParse(formValues);
+
+      // here was manage promise to delay simulate api calls
+      await new Promise((resolve: any) => setTimeout(resolve, 2000));
+
+      // here was check validation errors
+      if (!supportValidate.success) {
+        const fieldErrors: any = {};
+        supportValidate.error.errors.forEach((err: any) => {
+          fieldErrors[err.path[0]] = err.message;
+        });
+
+        return { ...prevState, errors: fieldErrors };
+      }
+
+      return {
+        data: { ...prevState, ...formValues },
+        errors: {},
+        success: true,
+        message: "Thanks to your feedback",
+      };
+    } catch (error: any) {
+      throw error;
+    }
+  };
+
+  // declare useActionState hook to the manage support form
+  const [supportState, supportFormAction, supportIsPending] = useActionState<
+    supportFormState,
+    FormData
+  >(userSupportAction, userSupportInitial);
+
+  return { supportState, supportFormAction, supportIsPending };
 };

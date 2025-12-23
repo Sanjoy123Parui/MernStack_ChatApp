@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { RiDonutChartFill } from "react-icons/ri";
 import { MdOutlineChatBubble, MdGroups } from "react-icons/md";
-// import { BiSupport } from "react-icons/bi";
+import { BiSupport } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { userNavListItem, actionListItems } from "../../models/userModel.ts";
@@ -111,6 +111,13 @@ const UserNav: React.FC = () => {
       itemPath: "/user/customer/support",
       itemActions:handleNavMenuClose
     }, */
+
+    {
+      listIcon: <BiSupport />,
+      listItem: "Help & Feedback",
+      itemPath: "/user/content/help/supports",
+      itemActions: handleNavMenuClose,
+    },
   ];
 
   useEffect(() => {

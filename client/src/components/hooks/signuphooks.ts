@@ -86,7 +86,7 @@ export const useUserRegister = (): signupFormProps => {
       // declare instance Object of errors zod validations
       const signupValidator: any = userRegisterValidation.safeParse(formValues);
 
-      // here was manage promis
+      // here was manage promise
       await new Promise((resolve: any) => setTimeout(resolve, 2000));
 
       // here was check field errors validation
