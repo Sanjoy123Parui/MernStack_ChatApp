@@ -7,8 +7,11 @@ import {
 // import { FaLaughSquint, FaSmileBeam } from "react-icons/fa";
 // import { FaRegFaceKissWinkHeart, FaFaceAngry } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { recieverChatdropDownMenuItems } from "../../../models/recieverModel.ts";
-import { useRecieverMenu } from "../../../hooks/recieverhooks.ts";
+
+// import { recieverChatdropDownMenuItems } from "../../../models/recieverModel.ts";
+// import { useRecieverMenu } from "../../../hooks/recieverhooks.ts";
+import { recieverChatdropDownMenuItems } from "../../../../models/recieverModel.ts";
+import { useRecieverMenu } from "../../../../hooks/recieverhooks.ts";
 
 // defining RecieverWebUrl functional component
 const RecieverWebUrl: React.FC<recieverChatdropDownMenuItems> = ({

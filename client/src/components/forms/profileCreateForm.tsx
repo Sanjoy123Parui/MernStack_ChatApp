@@ -8,8 +8,10 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group.tsx";
 import { Textarea } from "../ui/textarea.tsx";
 import { Button } from "../ui/button.tsx";
 import ImageCrop from "./imageCrop.tsx";
-import { useProfileImageContext } from "../hooks/contexts/userContentContext.ts";
-import { createProfileFormProps } from "../models/profileModel.ts";
+// import { useProfileImageContext } from "../hooks/contexts/userContentContext.ts";
+// import { createProfileFormProps } from "../models/profileModel.ts";
+import { useProfileImageContext } from "../../hooks/contexts/userContentContext.ts";
+import { createProfileFormProps } from "../../models/profileModel.ts";
 
 // here define ProfileCreateForm functional component
 const ProfileCreateForm: React.FC<createProfileFormProps> = ({

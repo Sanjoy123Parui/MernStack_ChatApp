@@ -9,8 +9,11 @@ import {
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { BsPlayFill } from "react-icons/bs";
 import { LuAudioLines } from "react-icons/lu";
-import { recieverChatdropDownMenuItems } from "../../../models/recieverModel.ts";
-import { useRecieverMenu } from "../../../hooks/recieverhooks.ts";
+
+// import { recieverChatdropDownMenuItems } from "../../../models/recieverModel.ts";
+// import { useRecieverMenu } from "../../../hooks/recieverhooks.ts";
+import { recieverChatdropDownMenuItems } from "../../../../models/recieverModel.ts";
+import { useRecieverMenu } from "../../../../hooks/recieverhooks.ts";
 
 // defining RecieverVoiceMessage functional component
 const RecieverVoiceMessage: React.FC<recieverChatdropDownMenuItems> = ({

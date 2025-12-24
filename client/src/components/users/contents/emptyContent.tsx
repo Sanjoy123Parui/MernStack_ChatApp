@@ -1,7 +1,8 @@
 // here was define emptyContent
 import { useEffect } from "react";
 import HiChatLogo from "../../../assets/hichat_brand_logo.svg";
-import { useUserSettingToggleContext } from "../../hooks/contexts/userSettingContexts.ts";
+// import { useUserSettingToggleContext } from "../../hooks/contexts/userSettingContexts.ts";
+import { useUserSettingToggleContext } from "../../../hooks/contexts/userSettingContexts.ts";
 
 const EmptyContent: React.FC = () => {
   // declare variable for title and descriptions

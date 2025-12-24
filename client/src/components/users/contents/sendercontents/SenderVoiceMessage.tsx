@@ -13,8 +13,11 @@ import {
 // import { FaRegFaceKissWinkHeart, FaFaceAngry } from "react-icons/fa6";
 import { BsPlayFill } from "react-icons/bs";
 import { LuAudioLines } from "react-icons/lu";
-import { senderChatdropDownMenuItems } from "../../../models/senderModel.ts";
-import { useSenderMenu } from "../../../hooks/senderhooks.ts";
+
+// import { senderChatdropDownMenuItems } from "../../../models/senderModel.ts";
+// import { useSenderMenu } from "../../../hooks/senderhooks.ts";
+import { senderChatdropDownMenuItems } from "../../../../models/senderModel.ts";
+import { useSenderMenu } from "../../../../hooks/senderhooks.ts";
 
 // defining SenderVoiceMessage functional component
 const SenderVoiceMessage: React.FC<senderChatdropDownMenuItems> = ({

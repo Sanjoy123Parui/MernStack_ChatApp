@@ -1,13 +1,15 @@
 // Consume to the importing some modules
 import { useState, useEffect } from "react";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
-import { signupFormProps } from "../models/signupModel.ts";
-import { useToggleUserPasswordContext } from "../hooks/contexts/userSignupContext.ts";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
+// import { signupFormProps } from "../models/signupModel.ts";
+// import { useToggleUserPasswordContext } from "../hooks/contexts/userSignupContext.ts";
+import { signupFormProps } from "../../models/signupModel.ts";
+import { useToggleUserPasswordContext } from "../../hooks/contexts/userSignupContext.ts";
 
 // define registrationform component
 const RegisterForm: React.FC<signupFormProps> = ({

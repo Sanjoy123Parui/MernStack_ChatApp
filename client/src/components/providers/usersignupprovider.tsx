@@ -1,12 +1,21 @@
+// import {
+//   UserTogglepasswordContext,
+//   UserLogoutContext,
+// } from "../hooks/contexts/userSignupContext.ts";
 import {
   UserTogglepasswordContext,
   UserLogoutContext,
-} from "../hooks/contexts/userSignupContext.ts";
+} from "../../hooks/contexts/userSignupContext.ts";
+
+// import {
+//   useUserTogglePassword,
+//   useUserLogoutModal,
+// } from "../hooks/signuphooks.ts";
 
 import {
   useUserTogglePassword,
   useUserLogoutModal,
-} from "../hooks/signuphooks.ts";
+} from "../../hooks/signuphooks.ts";
 
 // here was define and export user toggle password context provider component
 export const UserTogglePasswordContextProvider: React.FC<{

@@ -12,8 +12,11 @@ import {
 } from "react-icons/ai";
 // import { FaLaughSquint, FaSmileBeam } from "react-icons/fa";
 // import { FaRegFaceKissWinkHeart, FaFaceAngry } from "react-icons/fa6";
-import { senderChatdropDownMenuItems } from "../../../models/senderModel.ts";
-import { useSenderMenu } from "../../../hooks/senderhooks.ts";
+
+// import { senderChatdropDownMenuItems } from "../../../models/senderModel.ts";
+// import { useSenderMenu } from "../../../hooks/senderhooks.ts";
+import { senderChatdropDownMenuItems } from "../../../../models/senderModel.ts";
+import { useSenderMenu } from "../../../../hooks/senderhooks.ts";
 
 // defining SenderVideosPlayer functional component
 const SenderVideosPlayer: React.FC<senderChatdropDownMenuItems> = ({

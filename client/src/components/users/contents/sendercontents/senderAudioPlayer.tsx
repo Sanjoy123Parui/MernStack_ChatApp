@@ -14,8 +14,11 @@ import {
 import { MdAudioFile } from "react-icons/md";
 import { BsPlayFill } from "react-icons/bs";
 import { LuAudioLines } from "react-icons/lu";
-import { senderChatdropDownMenuItems } from "../../../models/senderModel.ts";
-import { useSenderMenu } from "../../../hooks/senderhooks.ts";
+
+// import { senderChatdropDownMenuItems } from "../../../models/senderModel.ts";
+// import { useSenderMenu } from "../../../hooks/senderhooks.ts";
+import { senderChatdropDownMenuItems } from "../../../../models/senderModel.ts";
+import { useSenderMenu } from "../../../../hooks/senderhooks.ts";
 
 // defining SenderAudioPlayer functional component
 const SenderAudioPlayer: React.FC<senderChatdropDownMenuItems> = ({

@@ -8,8 +8,11 @@ import {
 } from "react-icons/fa6";
 import { FaRegCirclePlay } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { recieverChatdropDownMenuItems } from "../../../models/recieverModel.ts";
-import { useRecieverMenu } from "../../../hooks/recieverhooks.ts";
+
+// import { recieverChatdropDownMenuItems } from "../../../models/recieverModel.ts";
+// import { useRecieverMenu } from "../../../hooks/recieverhooks.ts";
+import { recieverChatdropDownMenuItems } from "../../../../models/recieverModel.ts";
+import { useRecieverMenu } from "../../../../hooks/recieverhooks.ts";
 
 // defining RecieverVideosGallery functional component
 const RecieverVideosGallery: React.FC<recieverChatdropDownMenuItems> = ({

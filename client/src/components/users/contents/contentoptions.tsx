@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { contentMessagesHeading } from "../../models/contentModel.ts";
+// import { contentMessagesHeading } from "../../models/contentModel.ts";
+import { contentMessagesHeading } from "../../../models/contentModel.ts";
 
 // define Contentoptions functional component
 const Contentoptions: React.FC<contentMessagesHeading> = ({

@@ -1,8 +1,10 @@
 // Consuming some modules and libraries
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { userSignupListItem } from "../../models/userModel.ts";
-import { useUserNavMenuContext } from "../../hooks/contexts/userSettingContexts.ts";
+// import { userSignupListItem } from "../../models/userModel.ts";
+// import { useUserNavMenuContext } from "../../hooks/contexts/userSettingContexts.ts";
+import { userSignupListItem } from "../../../models/userModel.ts";
+import { useUserNavMenuContext } from "../../../hooks/contexts/userSettingContexts.ts";
 
 // here define UserSignupNav component
 const UserSignupNav: React.FC = () => {

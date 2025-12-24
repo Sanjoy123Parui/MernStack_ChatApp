@@ -10,8 +10,11 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdAudioFile } from "react-icons/md";
 import { BsPlayFill } from "react-icons/bs";
 import { LuAudioLines } from "react-icons/lu";
-import { recieverChatdropDownMenuItems } from "../../../models/recieverModel.ts";
-import { useRecieverMenu } from "../../../hooks/recieverhooks.ts";
+
+// import { recieverChatdropDownMenuItems } from "../../../models/recieverModel.ts";
+// import { useRecieverMenu } from "../../../hooks/recieverhooks.ts";
+import { recieverChatdropDownMenuItems } from "../../../../models/recieverModel.ts";
+import { useRecieverMenu } from "../../../../hooks/recieverhooks.ts";
 
 // defining RecieverAudioPlayer functional component
 const RecieverAudioPlayer: React.FC<recieverChatdropDownMenuItems> = ({

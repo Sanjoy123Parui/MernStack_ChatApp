@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
-import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
 import ProfileEditForm from "../forms/profileEditForm.tsx";
-import { useUpdateUserProfile } from "../hooks/profilehooks.ts";
+// import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
+// import { useUpdateUserProfile } from "../hooks/profilehooks.ts";
+import { useUserProfileContexts } from "../../hooks/contexts/userProfileContext.ts";
+import { useUpdateUserProfile } from "../../hooks/profilehooks.ts";
 
 // It is UserEditProfile component
 const UserEditProfile: React.FC = () => {

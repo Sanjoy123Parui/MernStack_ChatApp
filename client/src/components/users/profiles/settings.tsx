@@ -4,8 +4,10 @@ import { IoMdNotifications } from "react-icons/io";
 import { BiSolidConversation } from "react-icons/bi";
 import { AiFillSound } from "react-icons/ai";
 import { Switch } from "../../ui/switch.tsx";
-import { userAccessoriesItems } from "../../models/settingsModel.ts";
-import { useUserSettingToggleContext } from "../../hooks/contexts/userSettingContexts.ts";
+// import { userAccessoriesItems } from "../../models/settingsModel.ts";
+// import { useUserSettingToggleContext } from "../../hooks/contexts/userSettingContexts.ts";
+import { userAccessoriesItems } from "../../../models/settingsModel.ts";
+import { useUserSettingToggleContext } from "../../../hooks/contexts/userSettingContexts.ts";
 
 // here was define user Settings functional component
 const Settings: React.FC = () => {

@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import UserLogout from "../../modals/userLogout.tsx";
-import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
 import ProfileCreateForm from "../../forms/profileCreateForm.tsx";
-import { useNewUserProfile } from "../../hooks/profilehooks.ts";
+import UserLogout from "../../modals/userLogout.tsx";
+// import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
+// import { useNewUserProfile } from "../../hooks/profilehooks.ts";
+import { useUserLogoutModalContext } from "../../../hooks/contexts/userSignupContext.ts";
+import { useNewUserProfile } from "../../../hooks/profilehooks.ts";
 
 // define userCreate functional component
 const UserCreateProfile: React.FC = () => {

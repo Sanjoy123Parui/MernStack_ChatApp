@@ -1,5 +1,7 @@
-import { useUserProfileContents } from "../hooks/profilehooks.ts";
-import { UserProfileContext } from "../hooks/contexts/userProfileContext.ts";
+// import { useUserProfileContents } from "../hooks/profilehooks.ts";
+// import { UserProfileContext } from "../hooks/contexts/userProfileContext.ts";
+import { useUserProfileContents } from "../../hooks/profilehooks.ts";
+import { UserProfileContext } from "../../hooks/contexts/userProfileContext.ts";
 
 // here was declare UserProfile context provider component with export
 export const UserProfileProvider: React.FC<{ children: React.ReactNode }> = ({

@@ -1,11 +1,20 @@
+// import {
+//   ImageProfileCropContext,
+//   UserContentToggleContext,
+// } from "../hooks/contexts/userContentContext.ts";
+// import {
+//   useProfileAvtar,
+//   useUserContentHeadingOption,
+// } from "../hooks/contentshooks.ts";
+
 import {
   ImageProfileCropContext,
   UserContentToggleContext,
-} from "../hooks/contexts/userContentContext.ts";
+} from "../../hooks/contexts/userContentContext.ts";
 import {
   useProfileAvtar,
   useUserContentHeadingOption,
-} from "../hooks/contentshooks.ts";
+} from "../../hooks/contentshooks.ts";
 
 export const AvatarProvider: React.FC<{ children: React.ReactNode }> = ({
   children,

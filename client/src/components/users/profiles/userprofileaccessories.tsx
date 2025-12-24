@@ -1,12 +1,17 @@
 import { useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import Settings from "./settings.tsx";
+// import {
+//   useSettingUserContext,
+//   useUserSettingToggleContext,
+// } from "../../hooks/contexts/userSettingContexts.ts";
+// import { useUserProfileContexts } from "../../hooks/contexts/userProfileContext.ts";
 import {
   useSettingUserContext,
   useUserSettingToggleContext,
-} from "../../hooks/contexts/userSettingContexts.ts";
-import { useUserProfileContexts } from "../../hooks/contexts/userProfileContext.ts";
-import Settings from "./settings.tsx";
+} from "../../../hooks/contexts/userSettingContexts.ts";
+import { useUserProfileContexts } from "../../../hooks/contexts/userProfileContext.ts";
 
 // declare Userprofileaccessories component
 const Userprofileaccessories = () => {
