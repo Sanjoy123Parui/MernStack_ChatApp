@@ -1,16 +1,7 @@
-// import {
-//   UserTogglepasswordContext,
-//   UserLogoutContext,
-// } from "../hooks/contexts/userSignupContext.ts";
 import {
   UserTogglepasswordContext,
   UserLogoutContext,
 } from "../../hooks/contexts/userSignupContext.ts";
-
-// import {
-//   useUserTogglePassword,
-//   useUserLogoutModal,
-// } from "../hooks/signuphooks.ts";
 
 import {
   useUserTogglePassword,

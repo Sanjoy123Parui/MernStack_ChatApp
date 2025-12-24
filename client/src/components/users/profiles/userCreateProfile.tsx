@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ProfileCreateForm from "../../forms/profileCreateForm.tsx";
 import UserLogout from "../../modals/userLogout.tsx";
-// import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
-// import { useNewUserProfile } from "../../hooks/profilehooks.ts";
 import { useUserLogoutModalContext } from "../../../hooks/contexts/userSignupContext.ts";
 import { useNewUserProfile } from "../../../hooks/profilehooks.ts";
 

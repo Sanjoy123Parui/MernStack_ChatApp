@@ -3,8 +3,6 @@ import { IoMdClose } from "react-icons/io";
 import { FaUser, FaUpload } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Button } from "../../ui/button.tsx";
-// import { useUserProfileContexts } from "../../hooks/contexts/userProfileContext.ts";
-// import { useUserSettingToggleContext } from "../../hooks/contexts/userSettingContexts.ts";
 import { useUserProfileContexts } from "../../../hooks/contexts/userProfileContext.ts";
 import { useUserSettingToggleContext } from "../../../hooks/contexts/userSettingContexts.ts";
 

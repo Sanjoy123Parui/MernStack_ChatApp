@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import SupportForm from "../forms/supportForm.tsx";
 import UserLogout from "../modals/userLogout.tsx";
-// import { useSupportUser } from "../hooks/contentshooks.ts";
-// import { useUserLogoutModalContext } from "../hooks/contexts/userSignupContext.ts";
 import { useSupportUser } from "../../hooks/contentshooks.ts";
 import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
 

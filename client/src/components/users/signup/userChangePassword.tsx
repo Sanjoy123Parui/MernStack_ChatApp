@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import PasswordChangeForm from "../../forms/passwordChangeForm.tsx";
-// import { useUserForgotPassword } from "../../hooks/signuphooks.ts";
 import { useUserForgotPassword } from "../../../hooks/signuphooks.ts";
 
 // here define use changepassword functional component
@@ -11,8 +10,6 @@ const UserChangePassword: React.FC = () => {
   const changeHeading: string = "Forgot User";
 
   // here destruct custom hooks data
-  /*  const { forgetStateValues, forgetFormAction, forgetIsPending }: any =
-    useUserforgetPassword(); */
   const {
     forgotPasswordState,
     forgotPasswordFormAction,

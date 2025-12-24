@@ -1,8 +1,6 @@
 // Consuming some modules and libraries
 import { useEffect } from "react";
 import { FiLogOut } from "react-icons/fi";
-// import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
-// import { useUserNavMenuContext } from "../../hooks/contexts/userSettingContexts.ts";
 import { useUserLogoutModalContext } from "../../../hooks/contexts/userSignupContext.ts";
 import { useUserNavMenuContext } from "../../../hooks/contexts/userSettingContexts.ts";
 

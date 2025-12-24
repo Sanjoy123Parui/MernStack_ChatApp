@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import RegisterForm from "../../forms/registerForm.tsx";
-// import { useUserRegister } from "../../hooks/signuphooks.ts";
 import { useUserRegister } from "../../../hooks/signuphooks.ts";
 
 const UserRegister: React.FC = () => {

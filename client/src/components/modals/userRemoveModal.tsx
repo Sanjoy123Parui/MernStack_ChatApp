@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import { CiCircleAlert } from "react-icons/ci";
-// import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
 import { useUserProfileContexts } from "../../hooks/contexts/userProfileContext.ts";
 
 // define UserRemoveModal component

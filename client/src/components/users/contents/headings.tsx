@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-// import { contentHeading } from "../../models/contentModel.ts";
 import { contentHeading } from "../../../models/contentModel.ts";
 
 // here define heading functional component

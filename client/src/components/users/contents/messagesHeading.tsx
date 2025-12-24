@@ -1,9 +1,7 @@
 import { useEffect } from "react";
-// import { Avatar, AvatarImage } from "../../ui/avatar.tsx";
 import { FaUser } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
-// import { contentMessagesShowOption } from "../../models/contentModel.ts";
 import { contentMessagesShowOption } from "../../../models/contentModel.ts";
 
 // define MessageHeading component

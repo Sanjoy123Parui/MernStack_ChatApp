@@ -5,7 +5,6 @@ import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Textarea } from "../ui/textarea.tsx";
 import { Button } from "../ui/button.tsx";
-// import { supportFormProps } from "../models/contentModel.ts";
 import { supportFormProps } from "../../models/contentModel.ts";
 
 // define Support Form component

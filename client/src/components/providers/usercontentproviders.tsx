@@ -1,12 +1,3 @@
-// import {
-//   ImageProfileCropContext,
-//   UserContentToggleContext,
-// } from "../hooks/contexts/userContentContext.ts";
-// import {
-//   useProfileAvtar,
-//   useUserContentHeadingOption,
-// } from "../hooks/contentshooks.ts";
-
 import {
   ImageProfileCropContext,
   UserContentToggleContext,

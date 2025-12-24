@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import UserLanding from "./userLanding.tsx";
 import LoginForm from "../../forms/loginForm.tsx";
-// import { routeSignupNavigateList } from "../../models/contentModel.ts";
-// import { useUserLogin } from "../../hooks/signuphooks.ts";
 import { routeSignupNavigateList } from "../../../models/contentModel.ts";
 import { useUserLogin } from "../../../hooks/signuphooks.ts";
 

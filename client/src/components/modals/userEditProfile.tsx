@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import ProfileEditForm from "../forms/profileEditForm.tsx";
-// import { useUserProfileContexts } from "../hooks/contexts/userProfileContext.ts";
-// import { useUpdateUserProfile } from "../hooks/profilehooks.ts";
 import { useUserProfileContexts } from "../../hooks/contexts/userProfileContext.ts";
 import { useUpdateUserProfile } from "../../hooks/profilehooks.ts";
 

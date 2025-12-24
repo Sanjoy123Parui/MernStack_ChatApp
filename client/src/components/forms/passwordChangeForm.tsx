@@ -4,8 +4,6 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Label } from "../ui/label.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
-// import { useToggleUserPasswordContext } from "../hooks/contexts/userSignupContext.ts";
-// import { forgotPasswordFormProps } from "../models/signupModel.ts";
 import { useToggleUserPasswordContext } from "../../hooks/contexts/userSignupContext.ts";
 import { forgotPasswordFormProps } from "../../models/signupModel.ts";
 

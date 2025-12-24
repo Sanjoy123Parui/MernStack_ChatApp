@@ -12,7 +12,6 @@ import {
 } from "../ui/dialog.tsx";
 import { Button } from "../ui/button.tsx";
 import { Input } from "../ui/input.tsx";
-// import { useProfileImageContext } from "../hooks/contexts/userContentContext.ts";
 import { useProfileImageContext } from "../../hooks/contexts/userContentContext.ts";
 
 // define ImageCrop functional component

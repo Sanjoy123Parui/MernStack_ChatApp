@@ -5,12 +5,6 @@ import { MdOutlineChatBubble, MdGroups } from "react-icons/md";
 import { BiSupport } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
-// import { userNavListItem, actionListItems } from "../../models/userModel.ts";
-// import {
-//   useSettingUserContext,
-//   useUserNavMenuContext,
-// } from "../../hooks/contexts/userSettingContexts.ts";
-// import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
 import { userNavListItem, actionListItems } from "../../../models/userModel.ts";
 import {
   useSettingUserContext,

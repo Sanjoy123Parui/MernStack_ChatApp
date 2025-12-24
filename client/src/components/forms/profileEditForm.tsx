@@ -5,7 +5,6 @@ import { Input } from "../ui/input.tsx";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group.tsx";
 import { Textarea } from "../ui/textarea.tsx";
 import { Button } from "../ui/button.tsx";
-// import { editProfileFormProps } from "../models/profileModel.ts";
 import { editProfileFormProps } from "../../models/profileModel.ts";
 
 interface updateProfileContent extends editProfileFormProps {

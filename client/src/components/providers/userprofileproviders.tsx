@@ -1,5 +1,3 @@
-// import { useUserProfileContents } from "../hooks/profilehooks.ts";
-// import { UserProfileContext } from "../hooks/contexts/userProfileContext.ts";
 import { useUserProfileContents } from "../../hooks/profilehooks.ts";
 import { UserProfileContext } from "../../hooks/contexts/userProfileContext.ts";
 
