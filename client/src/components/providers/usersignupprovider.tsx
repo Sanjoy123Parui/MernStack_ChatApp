@@ -39,3 +39,18 @@ export const UserLogoutModalContextProvider: React.FC<{
     </>
   );
 };
+
+// here define and exporting main context provider component of usersignupprovider component
+export const UserSignupContextProvider: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
+  return (
+    <>
+      <UserTogglePasswordContextProvider>
+        <UserLogoutModalContextProvider>
+          {children}
+        </UserLogoutModalContextProvider>
+      </UserTogglePasswordContextProvider>
+    </>
+  );
+};

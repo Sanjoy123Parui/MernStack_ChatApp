@@ -16,3 +16,14 @@ export const UserProfileProvider: React.FC<{ children: React.ReactNode }> = ({
     </>
   );
 };
+
+// here define and exporting main context provider component of userprofileproviders component
+export const UserProfileContextProviders: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
+  return (
+    <>
+      <UserProfileProvider>{children}</UserProfileProvider>
+    </>
+  );
+};

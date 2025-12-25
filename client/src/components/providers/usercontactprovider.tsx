@@ -15,3 +15,15 @@ export const UserContactActionProvider: React.FC<{
     </>
   );
 };
+
+// here define and exporting main context provider component of usercontacttproviders component
+
+export const UserContactProviderContext: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
+  return (
+    <>
+      <UserContactActionProvider>{children}</UserContactActionProvider>
+    </>
+  );
+};

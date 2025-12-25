@@ -1,23 +1,9 @@
 // here import some children Context Provider component
-import {
-  AvatarProvider,
-  UserToggleContentOptionProvider,
-} from "./usercontentproviders.tsx";
-
-import {
-  UserNavMenuProviders,
-  UserAccessoriesProvider,
-  UserSettingsProvider,
-} from "./usersettingproviders.tsx";
-
-import {
-  UserTogglePasswordContextProvider,
-  UserLogoutModalContextProvider,
-} from "./usersignupprovider.tsx";
-
-import { UserProfileProvider } from "./userprofileproviders.tsx";
-
-import { UserContactActionProvider } from "./usercontactprovider.tsx";
+import { UserSignupContextProvider } from "./usersignupprovider.tsx";
+import { UserSettingContextProvider } from "./usersettingproviders.tsx";
+import { UserProfileContextProviders } from "./userprofileproviders.tsx";
+import { UserContentProviderContext } from "./usercontentproviders.tsx";
+import { UserContactProviderContext } from "./usercontactprovider.tsx";
 
 // define and export AppProvider component
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -25,25 +11,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   return (
     <>
-      <UserNavMenuProviders>
-        <UserAccessoriesProvider>
-          <UserLogoutModalContextProvider>
-            <UserProfileProvider>
-              <AvatarProvider>
-                <UserSettingsProvider>
-                  <UserToggleContentOptionProvider>
-                    <UserContactActionProvider>
-                      <UserTogglePasswordContextProvider>
-                        {children}
-                      </UserTogglePasswordContextProvider>
-                    </UserContactActionProvider>
-                  </UserToggleContentOptionProvider>
-                </UserSettingsProvider>
-              </AvatarProvider>
-            </UserProfileProvider>
-          </UserLogoutModalContextProvider>
-        </UserAccessoriesProvider>
-      </UserNavMenuProviders>
+      <UserSignupContextProvider>
+        <UserSettingContextProvider>
+          <UserProfileContextProviders>
+            <UserContentProviderContext>
+              <UserContactProviderContext>
+                {children}
+              </UserContactProviderContext>
+            </UserContentProviderContext>
+          </UserProfileContextProviders>
+        </UserSettingContextProvider>
+      </UserSignupContextProvider>
     </>
   );
 };

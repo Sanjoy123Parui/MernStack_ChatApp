@@ -88,7 +88,7 @@ export const useUserContentHeadingOption = (): userChatsHeadingToggle => {
   };
 };
 
-// define custom hook for user registration form with exporting
+// define custom hook for user support form with exporting
 export const useSupportUser = (): supportFormProps => {
   // declare userSupportInitial
   const userSupportInitial: supportFormState = {

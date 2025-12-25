@@ -51,3 +51,18 @@ export const UserSettingsProvider: React.FC<{ children: React.ReactNode }> = ({
     </>
   );
 };
+
+// here define and exporting main context provider component of usersettingproviders component
+export const UserSettingContextProvider: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
+  return (
+    <>
+      <UserNavMenuProviders>
+        <UserAccessoriesProvider>
+          <UserSettingsProvider>{children}</UserSettingsProvider>
+        </UserAccessoriesProvider>
+      </UserNavMenuProviders>
+    </>
+  );
+};
