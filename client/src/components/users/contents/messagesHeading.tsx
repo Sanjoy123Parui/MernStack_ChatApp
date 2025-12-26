@@ -8,6 +8,7 @@ import { contentMessagesShowOption } from "../../../models/contentModel.ts";
 const MessagesHeading: React.FC<contentMessagesShowOption> = ({
   headingTitle,
   showOptionAction,
+  showContactProfileAction,
 }) => {
   // here will be appear useEffect hook
   useEffect(() => {
@@ -54,7 +55,10 @@ const MessagesHeading: React.FC<contentMessagesShowOption> = ({
 
             {/* start div flex from show which user profile are open */}
             <div className="flex-1 min-w-0">
-              <a className="text-base md:text-lg font-medium truncate text-white">
+              <a
+                onClick={showContactProfileAction}
+                className="text-base md:text-lg font-medium truncate text-white"
+              >
                 {headingTitle}
               </a>
             </div>

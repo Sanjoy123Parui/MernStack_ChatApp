@@ -5,8 +5,18 @@ import { userContactActionProps } from "../models/userModel.ts";
 
 export const useUserContactActions = (): userContactActionProps => {
   const [isContactsAction, setIsContactsAction] = useState<boolean>(false);
+  const [isContactProfile, setIsContactProfile] = useState<boolean>(false);
   const showContacts = () => setIsContactsAction(true);
   const hideContacts = () => setIsContactsAction(false);
+  const showContactProfile = () => setIsContactProfile(true);
+  const hideContactProfile = () => setIsContactProfile(false);
 
-  return { isContactsAction, showContacts, hideContacts };
+  return {
+    isContactsAction,
+    isContactProfile,
+    showContacts,
+    hideContacts,
+    showContactProfile,
+    hideContactProfile,
+  };
 };

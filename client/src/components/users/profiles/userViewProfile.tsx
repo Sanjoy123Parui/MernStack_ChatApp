@@ -14,7 +14,7 @@ const UserViewProfile: React.FC = () => {
   const { isThemes }: any = useUserSettingToggleContext();
 
   let full_Name: string = `Sanjoy Parui`;
-  let phone: any = `8927219178`;
+  let phone: any = `8766652431`;
 
   let userProfiledetails: any = [
     {
@@ -120,9 +120,9 @@ const UserViewProfile: React.FC = () => {
           >
             {userProfiledetails.map((items: any, i: any) => (
               <li key={i} className="py-2">
-                <strong className="font-bold text-sm lg:text-lg">
+                <h4 className="font-bold text-sm lg:text-lg">
                   {items.profileHeading}
-                </strong>
+                </h4>
                 <p className="mt-1 font-medium text-sm md:text-base">
                   {items.content}
                 </p>

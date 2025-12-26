@@ -34,6 +34,7 @@ export interface contentMessagesHeading {
 export interface contentMessagesShowOption {
   headingTitle: string;
   showOptionAction: () => void;
+  showContactProfileAction: () => void;
 }
 
 // here declare and exporting user chats heading options toggle content

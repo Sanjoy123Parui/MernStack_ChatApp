@@ -28,6 +28,9 @@ export interface userContactHeadingItems {
 // here declare and exporting userContactActionProps interface model
 export interface userContactActionProps {
   isContactsAction: boolean;
+  isContactProfile: boolean;
   showContacts: () => void;
   hideContacts: () => void;
+  showContactProfile: () => void;
+  hideContactProfile: () => void;
 }

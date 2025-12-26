@@ -22,6 +22,7 @@ import UserRemoveModal from "../modals/userRemoveModal.tsx";
 import UserEditProfile from "../modals/userEditProfile.tsx";
 import Contentoptions from "./contents/contentoptions.tsx";
 import Contactlists from "./contacts/contactlists.tsx";
+import Contactprofile from "./profiles/contactprofile.tsx";
 // import EmptyContent from "./contents/emptyContent.tsx";
 
 // here define Chats functional components
@@ -48,7 +49,8 @@ const Chats: React.FC = () => {
     useUserProfileContexts();
   const { isChatOptions, showChatContentOptions, hideChatContentOptions }: any =
     useUserChatContentToggleContext();
-  const { isContactsAction }: any = useUserContactActionContext();
+  const { isContactsAction, isContactProfile, showContactProfile }: any =
+    useUserContactActionContext();
 
   // declare some specific hooks of routes regarding
   const location: any = useLocation();
@@ -82,13 +84,21 @@ const Chats: React.FC = () => {
             <div>
               {!isContactsAction ? (
                 <div>
-                  <div>
-                    <Headings headingTitle={headingTitle} />
-                  </div>
-                  <div>
-                    <SearchBars />
-                    <ContentLists />
-                  </div>
+                  {!isContactProfile ? (
+                    <div>
+                      <div>
+                        <Headings headingTitle={headingTitle} />
+                      </div>
+                      <div>
+                        <SearchBars />
+                        <ContentLists />
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <Contactprofile />
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div>
@@ -123,6 +133,7 @@ const Chats: React.FC = () => {
               <MessagesHeading
                 headingTitle={chatHeading}
                 showOptionAction={showChatContentOptions}
+                showContactProfileAction={showContactProfile}
               />
             </div>
             {/* start div for sender and reciever messages content of personal chat */}
