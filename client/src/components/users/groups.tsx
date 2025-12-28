@@ -6,7 +6,10 @@ import {
   useSettingUserContext,
   useUserSettingToggleContext,
 } from "../../hooks/contexts/userSettingContexts.ts";
-import { useUserChatContentToggleContext } from "../../hooks/contexts/userContentContext.ts";
+import {
+  useUserChatContentToggleContext,
+  useGroupsContext,
+} from "../../hooks/contexts/userContentContext.ts";
 import { useUserLogoutModalContext } from "../../hooks/contexts/userSignupContext.ts";
 import { useUserProfileContexts } from "../../hooks/contexts/userProfileContext.ts";
 import Userprofileaccessories from "./profiles/userprofileaccessories.tsx";
@@ -20,6 +23,7 @@ import UserEditProfile from "../modals/userEditProfile.tsx";
 import UserRemoveModal from "../modals/userRemoveModal.tsx";
 import SearchBars from "./contents/searchBars.tsx";
 import Contentoptions from "./contents/contentoptions.tsx";
+import Groupsprofile from "./profiles/groupsprofile.tsx";
 // import EmptyContent from "./contents/emptyContent.tsx";
 
 // Groups component of user groups chat
@@ -52,6 +56,7 @@ const Groups: React.FC = () => {
     showGroupsContentOptions,
     hideGroupsContentOptions,
   }: any = useUserChatContentToggleContext();
+  const { isGroupsProfile, showGroupsProfile }: any = useGroupsContext();
 
   // declare some specific hooks of routes regarding
   const location: any = useLocation();
@@ -81,13 +86,21 @@ const Groups: React.FC = () => {
         >
           {!isAccounts ? (
             <div>
-              <div>
-                <Headings headingTitle={headingTitle} />
-              </div>
-              <div>
-                <SearchBars />
-                <ContentLists />
-              </div>
+              {!isGroupsProfile ? (
+                <div>
+                  <div>
+                    <Headings headingTitle={headingTitle} />
+                  </div>
+                  <div>
+                    <SearchBars />
+                    <ContentLists />
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <Groupsprofile />
+                </div>
+              )}
             </div>
           ) : (
             <div>
@@ -116,6 +129,7 @@ const Groups: React.FC = () => {
               <MessagesHeading
                 headingTitle={groupsHeading}
                 showOptionAction={showGroupsContentOptions}
+                showProfileAction={showGroupsProfile}
               />
             </div>
 

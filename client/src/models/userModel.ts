@@ -34,3 +34,10 @@ export interface userContactActionProps {
   showContactProfile: () => void;
   hideContactProfile: () => void;
 }
+
+// here declare and exporting groupsInfo interface model
+export interface groupsInfo {
+  isGroupsProfile: boolean;
+  showGroupsProfile: () => void;
+  hideGroupsProfile: () => void;
+}

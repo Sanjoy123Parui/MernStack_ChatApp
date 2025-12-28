@@ -5,6 +5,7 @@ import {
   supportFormState,
   supportFormProps,
 } from "../models/contentModel.ts";
+import { groupsInfo } from "../models/userModel.ts";
 import { userSupportValidation } from "../validations/supportValidator.ts";
 
 // declare custom hook of useProfileAvtar with export
@@ -146,4 +147,13 @@ export const useSupportUser = (): supportFormProps => {
   >(userSupportAction, userSupportInitial);
 
   return { supportState, supportFormAction, supportIsPending };
+};
+
+// define custom hook for groups with exporting
+export const useGroups = (): groupsInfo => {
+  const [isGroupsProfile, setIsGroupsProfile] = useState<boolean>(false);
+  const showGroupsProfile = () => setIsGroupsProfile(true);
+  const hideGroupsProfile = () => setIsGroupsProfile(false);
+
+  return { isGroupsProfile, showGroupsProfile, hideGroupsProfile };
 };

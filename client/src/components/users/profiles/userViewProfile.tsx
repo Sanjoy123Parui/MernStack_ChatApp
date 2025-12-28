@@ -14,7 +14,7 @@ const UserViewProfile: React.FC = () => {
   const { isThemes }: any = useUserSettingToggleContext();
 
   let full_Name: string = `Sanjoy Parui`;
-  let phone: any = `8766652431`;
+  let phone: any = `+91-8766652431`;
 
   let userProfiledetails: any = [
     {
@@ -111,7 +111,7 @@ const UserViewProfile: React.FC = () => {
         {/* end userprofile main content */}
 
         {/* start div for user profile additional content */}
-        <div className="mt-2">
+        <div className="border-t mt-2">
           {/* <ul className="p-4 text-gray-700 space-y-4"> */}
           <ul
             className={`p-4 ${

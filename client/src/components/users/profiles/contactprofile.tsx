@@ -79,7 +79,7 @@ const Contactprofile: React.FC = () => {
         {/* end div */}
 
         {/* start div for contact profile additional content */}
-        <div className="mt-2">
+        <div className="border-t mt-2">
           <Contactprofileadditional />
         </div>
         {/* end div */}

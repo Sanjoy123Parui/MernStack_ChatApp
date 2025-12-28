@@ -3,6 +3,7 @@ import {
   profileImagesCropItems,
   userChatsHeadingToggle,
 } from "../../models/contentModel.ts";
+import { groupsInfo } from "../../models/userModel.ts";
 
 // declare createContext hook object with exporting
 
@@ -13,6 +14,8 @@ export const ImageProfileCropContext = createContext<
 export const UserContentToggleContext = createContext<
   userChatsHeadingToggle | undefined
 >(undefined);
+
+export const GroupsContext = createContext<groupsInfo | undefined>(undefined);
 
 // declare context custom hooks with exporting
 
@@ -30,4 +33,13 @@ export const useUserChatContentToggleContext = (): any => {
     throw new Error("In this context are not found");
   }
   return isToggleOptioncontent;
+};
+
+export const useGroupsContext = (): any => {
+  let isGroupscontent: any = use(GroupsContext);
+  if (!isGroupscontent) {
+    throw new Error("Groups context are not exist");
+  }
+
+  return isGroupscontent;
 };

@@ -1,10 +1,12 @@
 import {
   ImageProfileCropContext,
   UserContentToggleContext,
+  GroupsContext,
 } from "../../hooks/contexts/userContentContext.ts";
 import {
   useProfileAvtar,
   useUserContentHeadingOption,
+  useGroups,
 } from "../../hooks/contentshooks.ts";
 
 export const AvatarProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -35,6 +37,20 @@ export const UserToggleContentOptionProvider: React.FC<{
   );
 };
 
+export const GroupsContextProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const groupsInfo: any = useGroups();
+
+  return (
+    <>
+      <GroupsContext.Provider value={groupsInfo}>
+        {children}
+      </GroupsContext.Provider>
+    </>
+  );
+};
+
 // here define and exporting main context provider component of usercontentproviders component
 export const UserContentProviderContext: React.FC<{
   children: React.ReactNode;
@@ -43,7 +59,7 @@ export const UserContentProviderContext: React.FC<{
     <>
       <AvatarProvider>
         <UserToggleContentOptionProvider>
-          {children}
+          <GroupsContextProvider>{children}</GroupsContextProvider>
         </UserToggleContentOptionProvider>
       </AvatarProvider>
     </>

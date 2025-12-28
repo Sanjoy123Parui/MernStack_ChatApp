@@ -133,7 +133,7 @@ const Chats: React.FC = () => {
               <MessagesHeading
                 headingTitle={chatHeading}
                 showOptionAction={showChatContentOptions}
-                showContactProfileAction={showContactProfile}
+                showProfileAction={showContactProfile}
               />
             </div>
             {/* start div for sender and reciever messages content of personal chat */}
